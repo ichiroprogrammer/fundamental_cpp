@@ -2,7 +2,7 @@
 	path = deep
 	url = git@github:ichiroprogrammer/deep_cpp.git
 [submodule "gitgoogletest"]
-	path = gitgoogletest
+	path = googletest
 	url = git@github.com:google/googletest
 [submodule "md_gen"]
 	path = md_gen
