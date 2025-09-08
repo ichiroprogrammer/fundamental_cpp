@@ -7,3 +7,6 @@
 [submodule "md_gen"]
 	path = md_gen
 	url = git@github.com:ichiroprogrammer/md_gen
+[submodule "comprehensive"]
+	path = comprehensive
+	url = git@github:ichiroprogrammer/comprehensive_cpp.git
