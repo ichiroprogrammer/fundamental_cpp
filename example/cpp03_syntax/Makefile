@@ -1,5 +1,5 @@
 SRCS:=\
-   c_syle_ut.cpp
+   c_syle_ut.cpp class_ut.cpp
 
 OBJDIR:=
 SHARED:=../../deep/
