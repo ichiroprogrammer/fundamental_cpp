@@ -123,7 +123,11 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 エクセプション送出については後述する
 (この例では、コンストラクタの不正な引数のチェックに`assert()`を用いている)。
 
-次の例では前出のPersonにget_first_name()を追加する。
+次の例では前出のPersonに以下の仕様を満たすget_first_name()を追加する。
+
+* ヒープから適切なサイズのメモリを取得して、そのポインタをfull_nameに保存する
+* 取得したメモリに、family_nameとfirst_nameを適切にコピーしてフルネームを生成する
+* full_nameに保存したポインタを返す
 
 ```cpp
     // @@@ example/cpp03_syntax/class_ut.cpp #3:0 begin
@@ -144,6 +148,12 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 以下の例では前節で指摘したメモリーリークのバグをデストラクタを用いて対処する。
 
 
+```cpp
+    // @@@ example/cpp03_syntax/class_ut.cpp #4:0 begin
+```
+```cpp
+    // @@@ example/cpp03_syntax/class_ut.cpp #4:1 begin -1
+```
 
 
 #### コピーコンストラクタ/コピー代入演算子
