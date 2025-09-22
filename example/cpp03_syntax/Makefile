@@ -1,6 +1,7 @@
 SRCS:=\
    c_syle_ut.cpp class_ut.cpp
 
+CPP_VER = c++20
 OBJDIR:=
 SHARED:=../../deep/
 include $(SHARED)make/env.mk
