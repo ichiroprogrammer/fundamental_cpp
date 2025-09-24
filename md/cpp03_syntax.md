@@ -73,27 +73,27 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 まずは、以下の構造体と関数の組み合わせのコード例について見ていこう。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_0.cpp #0:0 begin
 ```
 
 上記のcalc_bmiはPersonインスタンスからBMIを導き出す関数である。
 以下にPersonとcalc_bmiの使用例を示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_0.cpp #0:1 begin -1
 ```
 
 C++では、上記のような場合、メンバ関数を使用して、下記のように記述する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #1:0 begin
+    // @@@ example/cpp03_syntax/class_ut_1.cpp #0:0 begin
 ```
 
 なお、Person::calc_bmiは、 calc_bmiがPersonのメンバであることを表す。
 Person::calc_bmi()の使用方法は、以下のとおりである。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #1:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_1.cpp #0:1 begin -1
 ```
 
 上記例でのPersonのインスタンスpersonは適切に初期化されているが、
@@ -117,13 +117,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 以下のコードでは、前例のPersonにコンストラクタを定義する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #2:0 begin
+    // @@@ example/cpp03_syntax/class_ut_2.cpp #0:0 begin
 ```
 
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #2:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_2.cpp #0:1 begin -1
 ```
 
 コンストラクタは戻り値を持つことはできないため、引数がクラスの制限に収まらない場合、
@@ -140,13 +140,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 * full_nameに保存したポインタを返す
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #3:0 begin
+    // @@@ example/cpp03_syntax/class_ut_3.cpp #0:0 begin
 ```
 
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut.cpp #3:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_3.cpp #0:1 begin -1
 ```
 
 単体テストで示したようにこの関数は想定通り動作するが、メモリーリークを引き起こす。
@@ -222,6 +222,31 @@ C++では以下の3種類のアクセス指定子が存在する。
     - インスタンスに依存せずに呼び出せる関数。
     - [this](---)ポインタを持たないため、非静的メンバ変数や非静的メンバ関数に直接アクセスできない。
     - クラスのユーティリティ的な操作や、静的メンバ変数の操作に利用される。
+
+
+前出のPerson::get_full_name()の実装に使用したmake_full_nameは、
+以下の例のようにstaticなprivateと関数にすることができる。
+上記したようにPerson::get_full_name()はメンバ変数に直接アクセスできないため、
+通用のメンバ関数に比べて制限が多い分、可読性が向上する。
+
+```cpp
+    // @@@ example/cpp03_syntax/class_ut.cpp #6:0 begin
+```
+
+さらに、staticメンバ変数を使用し、Personに以下のような変更を加える。
+
+* Personのインスタンスの数を数えるstaticなpublicメンバ変数の追加
+* Personのコンストラクタ呼び出し時にPerson::full_nameの初期化
+
+```cpp
+    // @@@ example/cpp03_syntax/class_ut.cpp #7:0 begin
+```
+
+コードの修正した場合、それに合わせて単体テストも修正する必要がある。
+
+```cpp
+    // @@@ example/cpp03_syntax/class_ut.cpp #7:1 begin -1
+```
 
 ### コピーコンストラクタ/コピー代入演算子
 オブジェクトのコピー動作を制御する。

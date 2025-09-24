@@ -102,7 +102,7 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 まずは、以下の構造体と関数の組み合わせのコード例について見ていこう。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 13
+    //  example/cpp03_syntax/class_ut_0.cpp 9
 
     struct Person {
         char const* family_name;
@@ -132,7 +132,7 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 以下にPersonとcalc_bmiの使用例を示す。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 40
+    //  example/cpp03_syntax/class_ut_0.cpp 36
 
     struct Person person = {
         "yamada",  // 姓
@@ -147,7 +147,7 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 C++では、上記のような場合、メンバ関数を使用して、下記のように記述する。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 98
+    //  example/cpp03_syntax/class_ut_1.cpp 9
 
     struct Person {
         char const* family_name;
@@ -174,7 +174,7 @@ C++では、上記のような場合、メンバ関数を使用して、下記�
 Person::calc_bmi()の使用方法は、以下のとおりである。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 124
+    //  example/cpp03_syntax/class_ut_1.cpp 35
 
     Person person = { // Cとは異なり、インスタンスの宣言にはstructの記述は不要
         "yamada",  // 姓
@@ -207,7 +207,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 以下のコードでは、前例のPersonにコンストラクタを定義する。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 142
+    //  example/cpp03_syntax/class_ut_2.cpp 9
 
     struct Person {
         Person(char const* family_name, char const* first_name, uint32_t height_cm,
@@ -238,7 +238,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 172
+    //  example/cpp03_syntax/class_ut_2.cpp 39
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -262,7 +262,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 * full_nameに保存したポインタを返す
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 197
+    //  example/cpp03_syntax/class_ut_3.cpp 10
 
     struct Person {
         // コンストラクタ
@@ -291,7 +291,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
         ...
     }
 
-    char* make_first_name(char const* family_name, char const* first_name)
+    char* make_full_name(char const* family_name, char const* first_name)
     {
         if (!family_name || !first_name) {
             return NULL;
@@ -320,14 +320,14 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
             return full_name;
         }
 
-        return full_name = make_first_name(family_name, first_name);
+        return full_name = make_full_name(family_name, first_name);
     }
 ```
 
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 267
+    //  example/cpp03_syntax/class_ut_3.cpp 80
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -346,7 +346,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 297
+    //  example/cpp03_syntax/class_ut.cpp 12
 
     struct Person {
         Person(char const* family_name, char const* first_name, uint32_t height_cm,
@@ -367,14 +367,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 
     Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
                    uint32_t weight_kg)
-        : family_name(family_name), first_name(first_name),
-          full_name(NULL),          // 新規に追加されたメンバをNULLで初期化
+        : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
         ...
     }
 
-    char* make_first_name(char const* family_name, char const* first_name)
+    char* make_full_name(char const* family_name, char const* first_name)
     {
         if (!family_name || !first_name) {
             return NULL;
@@ -402,7 +401,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
             return full_name;
         }
 
-        return full_name = make_first_name(family_name, first_name);
+        return full_name = make_full_name(family_name, first_name);
     }
 
     Person::~Person()  // デストラクタの定義。
@@ -413,7 +412,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 384
+    //  example/cpp03_syntax/class_ut.cpp 98
 
     {
         Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -466,7 +465,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 [アクセス指定子](#SS_2_1_4)と`class`を使用し、以下のようにPersonのリファクタリングを行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 404
+    //  example/cpp03_syntax/class_ut.cpp 118
 
     class Person {
     public:
@@ -489,14 +488,13 @@ C++では以下の3種類のアクセス指定子が存在する。
 
     Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
                    uint32_t weight_kg)
-        : family_name(family_name), first_name(first_name),
-          full_name(NULL),          // 新規に追加されたメンバをNULLで初期化
+        : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
         ...
     }
 
-    char* make_first_name(char const* family_name, char const* first_name)
+    char* make_full_name(char const* family_name, char const* first_name)
     {
         // 関数の中身は変わっていないので省略
         ...
@@ -508,7 +506,7 @@ C++では以下の3種類のアクセス指定子が存在する。
             return full_name;
         }
 
-        return full_name = make_first_name(family_name, first_name);
+        return full_name = make_full_name(family_name, first_name);
     }
 
     Person::~Person()  // デストラクタの定義。
@@ -532,6 +530,158 @@ C++では以下の3種類のアクセス指定子が存在する。
     - インスタンスに依存せずに呼び出せる関数。
     - [this](#SS_2_1_10)ポインタを持たないため、非静的メンバ変数や非静的メンバ関数に直接アクセスできない。
     - クラスのユーティリティ的な操作や、静的メンバ変数の操作に利用される。
+
+
+前出のPerson::get_full_name()の実装に使用したmake_full_nameは、
+以下の例のようにstaticなprivateと関数にすることができる。
+上記したようにPerson::get_full_name()はメンバ変数に直接アクセスできないため、
+通用のメンバ関数に比べて制限が多い分、可読性が向上する。
+
+```cpp
+    //  example/cpp03_syntax/class_ut.cpp 224
+
+    class Person {
+    public:
+        Person(char const* family_name, char const* first_name, uint32_t height_cm,
+               uint32_t weight_kg);  // コンストラクタ
+
+        uint32_t    calc_bmi();  // メンバ関数
+        char const* get_full_name();
+
+        ~Person();  // デストラクタ
+
+    private:  // メンバ変数への外部からのアクセスを禁止する。
+        // make_full_nameをPerson内のstatic関数に変更した
+        static char* make_full_name(char const* family_name, char const* first_name);
+
+        char const* family_name;
+        char const* first_name;
+        char*       full_name;  // 新規メンバ
+
+        uint32_t height_cm;  // 身長 (cm単位と仮定)
+        uint32_t weight_kg;  // 体重 (kg単位と仮定)
+    };
+
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
+                   uint32_t weight_kg)
+        : family_name(family_name), first_name(first_name), full_name(NULL),
+    {
+        // コンストラクタの中身は省略
+        ...
+    }
+
+    char* Person::make_full_name(char const* family_name, char const* first_name)
+    {
+        // 関数の中身は変わっていないので省略
+        ...
+    }
+
+    char const* Person::get_full_name()
+    {
+        if (full_name) {  // すでにfull_nameの生成済
+            return full_name;
+        }
+
+        // return full_name = make_full_name(family_name, first_name);
+
+        // 上記でも問題なくmake_full_nameを呼び出せるが、Personのメンバ関数であることを強調したい場合、
+        // 以下のように書いてもよい
+        return full_name = Person::make_full_name(family_name, first_name);
+    }
+
+    Person::~Person()  // デストラクタの定義。
+    {
+        if (full_name) {
+            free((void*)full_name);
+        }
+    }
+```
+
+さらに、staticメンバ変数を使用し、Personに以下のような変更を加える。
+
+* Personのインスタンスの数を数えるstaticなpublicメンバ変数の追加
+* Personのコンストラクタ呼び出し時にPerson::full_nameの初期化
+
+```cpp
+    //  example/cpp03_syntax/class_ut.cpp 338
+
+    class Person {
+    public:
+        static int instance_counter;
+
+        Person(char const* family_name, char const* first_name, uint32_t height_cm,
+               uint32_t weight_kg);  // コンストラクタ
+
+        uint32_t    calc_bmi();  // メンバ関数
+        char const* get_full_name();
+
+        ~Person();  // デストラクタ
+
+    private:  // メンバ変数への外部からのアクセスを禁止する。
+        // make_full_nameをPerson内のstatic関数に変更した
+        static char* make_full_name(char const* family_name, char const* first_name);
+
+        char const* family_name;
+        char const* first_name;
+        char*       full_name;  // 新規メンバ
+
+        uint32_t height_cm;  // 身長 (cm単位と仮定)
+        uint32_t weight_kg;  // 体重 (kg単位と仮定)
+    };
+
+    int Person::instance_counter = 0;  // これが無いとリンクエラーになる
+                                       // ここでは0に初期化するが、デフォルト初期でも問題ない
+
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
+                   uint32_t weight_kg)
+        : family_name(family_name), first_name(first_name),
+          full_name(make_full_name(family_name, first_name)),
+    {
+        // コンストラクタの中身は省略
+        ...
+    }
+
+    char* Person::make_full_name(char const* family_name, char const* first_name)
+    {
+        // 関数の中身は変わっていないので省略
+        ...
+    }
+
+    char const* Person::get_full_name() { return full_name; }
+
+    Person::~Person()  // デストラクタの定義。
+    {
+        if (full_name) {
+            free((void*)full_name);
+        }
+
+        --instance_counter;  // デストラクタが呼ばれたのでインスタンスの数が一つ減った
+    }
+```
+
+コードの修正した場合、それに合わせて単体テストも修正する必要がある。
+
+```cpp
+    //  example/cpp03_syntax/class_ut.cpp 435
+
+    ASSERT_EQ(Person::instance_counter, 0);  // staticな変数はデフォルト初期化される
+
+    Person taro("yamada", "taro", 173, 75);             // オブジェクトの生成
+    ASSERT_STREQ(taro.get_full_name(), "yamada taro");  // 文字列として同値
+    ASSERT_EQ(Person::instance_counter, 1);
+
+    {
+        Person jiro("yamada", "jiro", 170, 70);  // オブジェクトの生成
+        {
+            Person saburo("yamada", "saburo", 183, 80);  // オブジェクトの生成
+            ASSERT_EQ(Person::instance_counter, 3);
+        }  // この行でsaburoは解放される
+
+        ASSERT_EQ(Person::instance_counter, 2);
+    }  // この行でjiroは解放される
+
+    ASSERT_EQ(Person::instance_counter, 1);  // jiro、saburoが解放された
+```
 
 ### コピーコンストラクタ/コピー代入演算子 <a id="SS_2_1_7"></a>
 オブジェクトのコピー動作を制御する。
