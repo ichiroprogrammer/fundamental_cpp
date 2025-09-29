@@ -5,8 +5,9 @@
 
 #include "suppress_warning.h"
 
-namespace {
-// clang-formant off
+namespace cpp_style_4 {
+SUPPRESS_WARN_BEGIN
+SUPPRESS_WARN_GCC_NOT_EFF_CPP;
 // @@@ sample begin 0:0
 
 struct Person {
@@ -22,15 +23,14 @@ struct Person {
     uint32_t calc_bmi();  // メンバ関数
 
     char const* get_full_name();
+
+    ~Person();  // デストラクタ
 };
 
-// コンストラクタの定義
 Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
-    : family_name(family_name),
-      first_name(first_name),
-      full_name(NULL),  // 新規に追加されたメンバをNULLで初期化
-      height_cm(height_cm),
-      weight_kg(weight_kg)  // clang-format on
+    // clang-format off
+    : family_name(family_name), first_name(first_name), full_name(NULL),
+      height_cm(height_cm), weight_kg(weight_kg)  // clang-format on
 {
     // コンストラクタの中身は省略
     // @@@ ignore begin
@@ -62,7 +62,6 @@ char* make_full_name(char const* family_name, char const* first_name)
     return full_name;
 }
 
-// 新規関数
 char const* Person::get_full_name()
 {
     if (full_name) {  // すでにfull_nameの生成済
@@ -71,24 +70,14 @@ char const* Person::get_full_name()
 
     return full_name = make_full_name(family_name, first_name);
 }
-// @@@ sample end
 
-TEST(cpp03, class_exp3)
+Person::~Person()  // デストラクタの定義。
 {
-#if !defined(__clang_analyzer__)
-    // @@@ sample begin 0:1
-
-    Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
-
-    char const* full_name = person.get_full_name();
-
-    ASSERT_STREQ(full_name, "yamada taro");  // 文字列として同値
-    // @@@ sample end
-
-    free((char*)full_name);
-    person.calc_bmi();
-#endif
+    if (full_name) {
+        free((void*)full_name);
+    }
 }
+// @@@ sample end
 
 uint32_t Person::calc_bmi()  // Personのcalc_bmi()の定義
 {
@@ -101,4 +90,21 @@ uint32_t Person::calc_bmi()  // Personのcalc_bmi()の定義
 
     return bmi;
 }
-}  // namespace
+TEST(cpp03, class_exp4)
+{
+#if !defined(__clang_analyzer__)
+    // @@@ sample begin 0:1
+
+    {
+        Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
+
+        char const* full_name = person.get_full_name();
+
+        ASSERT_STREQ(full_name, "yamada taro");  // 文字列として同値
+    }  // この行でpersonがスコープアウトするためpersonのデストラクタが呼ばれ、
+       // personのfull_nameがfreeされる。
+    // @@@ sample end
+#endif
+}
+SUPPRESS_WARN_END;
+}  // namespace cpp_style_4

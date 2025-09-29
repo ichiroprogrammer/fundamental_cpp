@@ -31,7 +31,7 @@ uint32_t calc_bmi(struct Person const* person)
     return bmi;
 }
 // @@@ sample end
-TEST(cpp03, class_exp)
+TEST(cpp03, class_exp0)
 {
     // @@@ sample begin 0:1
 

@@ -20,8 +20,7 @@ struct Person {
 };
 
 // コンストラクタの定義
-Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
-               uint32_t weight_kg)
+Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
     : family_name(family_name),
       first_name(first_name),
       height_cm(height_cm),

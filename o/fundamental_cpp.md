@@ -56,7 +56,6 @@ __この章の構成__
 &emsp;&emsp;&emsp; [メンバ変数の初期化](#SS_2_1_9)  
 &emsp;&emsp;&emsp; [this](#SS_2_1_10)  
 &emsp;&emsp;&emsp; [継承](#SS_2_1_11)  
-&emsp;&emsp;&emsp; [クラスの使用例](#SS_2_1_12)  
 
 &emsp;&emsp; [エクセプション](#SS_2_2)  
 &emsp;&emsp; [リファレンス](#SS_2_3)  
@@ -221,8 +220,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     };
 
     // コンストラクタの定義
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
-                   uint32_t weight_kg)
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
         : family_name(family_name),
           first_name(first_name),
           height_cm(height_cm),
@@ -238,7 +236,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_2.cpp 39
+    //  example/cpp03_syntax/class_ut_2.cpp 38
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -280,8 +278,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     };
 
     // コンストラクタの定義
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
-                   uint32_t weight_kg)
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
         : family_name(family_name),
           first_name(first_name),
           full_name(NULL),  // 新規に追加されたメンバをNULLで初期化
@@ -327,7 +324,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_3.cpp 80
+    //  example/cpp03_syntax/class_ut_3.cpp 79
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -346,11 +343,11 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 12
+    //  example/cpp03_syntax/class_ut_4.cpp 11
 
     struct Person {
-        Person(char const* family_name, char const* first_name, uint32_t height_cm,
-               uint32_t weight_kg);  // コンストラクタ
+        // コンストラクタ
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);
 
         char const* family_name;
         char const* first_name;
@@ -365,8 +362,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
         ~Person();  // デストラクタ
     };
 
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
-                   uint32_t weight_kg)
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
         : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
@@ -412,7 +408,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 98
+    //  example/cpp03_syntax/class_ut_4.cpp 96
 
     {
         Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -423,7 +419,6 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     }  // この行でpersonがスコープアウトするためpersonのデストラクタが呼ばれ、
        // personのfull_nameがfreeされる。
 ```
-
 
 ### アクセス指定子 <a id="SS_2_1_4"></a>
 
@@ -465,7 +460,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 [アクセス指定子](#SS_2_1_4)と`class`を使用し、以下のようにPersonのリファクタリングを行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 118
+    //  example/cpp03_syntax/class_ut_5.cpp 11
 
     class Person {
     public:
@@ -486,8 +481,7 @@ C++では以下の3種類のアクセス指定子が存在する。
         uint32_t weight_kg;  // 体重 (kg単位と仮定)
     };
 
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
-                   uint32_t weight_kg)
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
         : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
@@ -519,7 +513,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 
 ### staticメンバ <a id="SS_2_1_6"></a>
 `static`メンバは、クラスの各インスタンスに属するのではなく、
-クラス全体で共有されるメンバ を定義するために使用される。
+クラス全体で共有されるメンバを定義するために使用される。
 
 * staticメンバ変数
     - すべてのインスタンスで共通のデータを保持する。
@@ -533,12 +527,12 @@ C++では以下の3種類のアクセス指定子が存在する。
 
 
 前出のPerson::get_full_name()の実装に使用したmake_full_nameは、
-以下の例のようにstaticなprivateと関数にすることができる。
+以下の例のようにstaticな関数にすることができる。
 上記したようにPerson::get_full_name()はメンバ変数に直接アクセスできないため、
 通用のメンバ関数に比べて制限が多い分、可読性が向上する。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 224
+    //  example/cpp03_syntax/class_ut_6.cpp 11
 
     class Person {
     public:
@@ -550,20 +544,19 @@ C++では以下の3種類のアクセス指定子が存在する。
 
         ~Person();  // デストラクタ
 
-    private:  // メンバ変数への外部からのアクセスを禁止する。
         // make_full_nameをPerson内のstatic関数に変更した
         static char* make_full_name(char const* family_name, char const* first_name);
 
+    private:  // メンバ変数への外部からのアクセスを禁止する
         char const* family_name;
         char const* first_name;
-        char*       full_name;  // 新規メンバ
+        char*       full_name;
 
         uint32_t height_cm;  // 身長 (cm単位と仮定)
         uint32_t weight_kg;  // 体重 (kg単位と仮定)
     };
 
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
-                   uint32_t weight_kg)
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
         : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
@@ -597,28 +590,40 @@ C++では以下の3種類のアクセス指定子が存在する。
     }
 ```
 
-さらに、staticメンバ変数を使用し、Personに以下のような変更を加える。
+publicなstaitcメンバへのクラス外でのアクセスには、
+下記コードの例のようにクラス名修飾(任意のクラス名Tに対してT::member)がに必要になる。
+
+```cpp
+    //  example/cpp03_syntax/class_ut_6.cpp 110
+
+    char* full_name = Person::make_full_name("yamada", "taro");
+    //                      ^^^^^ static関数の呼び出しはクラス名修飾が必要
+
+    ASSERT_STREQ(full_name, "yamada taro");  // 文字列として同値
+    free((void*)full_name);
+```
+
+
+staticメンバ変数を使用し、さらにPersonに以下のような変更を加える。
 
 * Personのインスタンスの数を数えるstaticなpublicメンバ変数の追加
 * Personのコンストラクタ呼び出し時にPerson::full_nameの初期化
+* Person::make_full_nameをクラス内部での使用専用にするためにprivate化
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 338
+    //  example/cpp03_syntax/class_ut_6.cpp 135
 
     class Person {
     public:
         static int instance_counter;
 
-        Person(char const* family_name, char const* first_name, uint32_t height_cm,
-               uint32_t weight_kg);  // コンストラクタ
-
-        uint32_t    calc_bmi();  // メンバ関数
-        char const* get_full_name();
-
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
         ~Person();  // デストラクタ
 
-    private:  // メンバ変数への外部からのアクセスを禁止する。
-        // make_full_nameをPerson内のstatic関数に変更した
+        uint32_t    calc_bmi();                            // メンバ関数
+        char const* get_full_name() { return full_name; }  // クラス内部でのメンバ関数定義
+
+    private:  // メンバ変数への外部からのアクセスを禁止する
         static char* make_full_name(char const* family_name, char const* first_name);
 
         char const* family_name;
@@ -632,8 +637,7 @@ C++では以下の3種類のアクセス指定子が存在する。
     int Person::instance_counter = 0;  // これが無いとリンクエラーになる
                                        // ここでは0に初期化するが、デフォルト初期でも問題ない
 
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm,
-                   uint32_t weight_kg)
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
         : family_name(family_name), first_name(first_name),
           full_name(make_full_name(family_name, first_name)),
     {
@@ -646,8 +650,6 @@ C++では以下の3種類のアクセス指定子が存在する。
         // 関数の中身は変わっていないので省略
         ...
     }
-
-    char const* Person::get_full_name() { return full_name; }
 
     Person::~Person()  // デストラクタの定義。
     {
@@ -662,7 +664,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 コードの修正した場合、それに合わせて単体テストも修正する必要がある。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut.cpp 435
+    //  example/cpp03_syntax/class_ut_6.cpp 226
 
     ASSERT_EQ(Person::instance_counter, 0);  // staticな変数はデフォルト初期化される
 
@@ -684,7 +686,134 @@ C++では以下の3種類のアクセス指定子が存在する。
 ```
 
 ### コピーコンストラクタ/コピー代入演算子 <a id="SS_2_1_7"></a>
-オブジェクトのコピー動作を制御する。
+
+コピーコンストラクタとは、
+
+* 型Tに対して、`T(T const&)`のようなシグネチャのコンストラクタの一種である。
+* オブジェクトのコピー初期化を制御するためのメンバ関数である。
+* コピーコンストラクタをユーザが定義しない場合、自動的に暗黙定義される。
+
+コピー代入演算子とは、
+
+* 型Tに対して、`operator =(T const&)`のようなシグネチャの[特殊メンバ関数](#SS_3_3_1)である。
+* Tオブジェクトに別のTオブジェクトを代入するための[特殊メンバ関数](#SS_3_3_1)である。
+* コピー代入演算子をユーザが定義しない場合、自動的に暗黙定義される。
+
+
+```cpp
+    //  example/cpp03_syntax/c_syle_ut.cpp 7
+
+    struct C_Struct {  // Cの構造体
+        int         x;
+        int         y;
+        char const* str;
+    };
+```
+```cpp
+    //  example/cpp03_syntax/c_syle_ut.cpp 18
+
+    struct C_Struct a = {
+        1,
+        2,
+        "a",
+    };
+
+    struct C_Struct b = {
+        3,
+        4,
+        "b",
+    };
+
+    b = a;  // bはaの値をコピーされる
+    ASSERT_EQ(a.x, b.x);
+    ASSERT_EQ(a.y, b.y);
+    ASSERT_EQ(a.str, b.str);  // 通常の基本型と同様に、ポインタもコピーされる
+
+    struct C_Struct c = a;  // cはaの値で初期化される
+    ASSERT_EQ(a.x, c.x);
+    ASSERT_EQ(a.y, c.y);
+    ASSERT_EQ(a.str, c.str);  // 通常の基本型と同様に、ポインタもコピーされる
+
+```
+
+上記のコードは「Cの構造体インスタンスの`=`による代入は、
+メンバの逐次コピーによって全体の代入や初期化が行われる」ことを示している。
+
+C++では、この挙動がそのまま「暗黙定義されたコピーコンストラクタ／コピー代入演算子」
+として取り込まれている。
+
+
+すなわち、Cの構造体のコピーと同様に、C++のクラスでもユーザが特別に定義しなければ、
+すべてのメンバが逐次コピーされる。
+
+ただし、この方法ではポインタ型のメンバも単純にアドレスがコピーされるため、
+リソースの二重解放や参照の共有によるバグの原因となる可能性がある。
+
+以下は二重解放バグの典型的なコード例である([staticメンバ](#SS_2_1_6)の例からメンバ変数を除いている)。
+
+```cpp
+    //  example/cpp03_syntax/class_ut_7.cpp 15
+
+    class Person {
+    public:
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
+        ~Person();  // デストラクタ
+
+        uint32_t    calc_bmi();                            // メンバ関数
+        char const* get_full_name() { return full_name; }  // クラス内部でのメンバ関数定義
+
+    private:  // メンバ変数への外部からのアクセスを禁止する
+        static char* make_full_name(char const* family_name, char const* first_name);
+
+        char const* family_name;
+        char const* first_name;
+        char*       full_name;  // 新規メンバ
+
+        uint32_t height_cm;  // 身長 (cm単位と仮定)
+        uint32_t weight_kg;  // 体重 (kg単位と仮定)
+    };
+
+    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
+        : family_name(family_name), first_name(first_name),
+          full_name(make_full_name(family_name, first_name)),
+    {
+        // コンストラクタの中身は省略
+        ...
+    }
+
+    char* Person::make_full_name(char const* family_name, char const* first_name)
+    {
+        // 関数の中身は変わっていないので省略
+        ...
+    }
+
+    Person::~Person()  // デストラクタの定義
+    {
+        if (full_name) {
+            free((void*)full_name);
+        }
+    }
+```
+```cpp
+    //  example/cpp03_syntax/class_ut_7.cpp 101
+
+    {
+        Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
+
+        ASSERT_STREQ(person0.get_full_name(), "yamada taro");  // 文字列として同値
+        Person person1 = person0; // person0.full_nameがperson1.full_nameに単純コピー
+
+        ASSERT_EQ(person0.calc_bmi(), person1.calc_bmi());
+        ASSERT_STREQ(person0.get_full_name(), person1.get_full_name());
+    }   // この行でperson1.~Person()が呼び出され、free(person1.full_name)が実行され、
+        // 一つ上の行でperson0.~Person()が呼び出され、free(person0.full_name)が実行される
+        // このため、full_nameは二重解放される
+```
+
+
+そのため、C++では動的メモリや外部リソースを扱うクラスでは、コピーコンストラクタやコピー代入演算子を明示的に定義し、
+必要に応じて[ディープコピー](#SS_3_5_9_2)を実装することが重要である。
+
 
 ### ムーブコンストラクタ/ムーブ代入演算子 <a id="SS_2_1_8"></a>
 一時オブジェクトやリソースの所有権を効率的に移動させるため、
@@ -697,106 +826,6 @@ C++では以下の3種類のアクセス指定子が存在する。
 ### 継承 <a id="SS_2_1_11"></a>
 
 --- 
-
-### クラスの使用例 <a id="SS_2_1_12"></a>
-まずは、C言語で文字列を接続する下記の関数をより使いやすく修正してくことで、クラスを説明する。
-
-```cpp
-    //  example/cpp03_syntax/c_syle_ut.cpp 10
-
-    void c_str_add(char const* first, char const* second, char** result)
-    {
-        assert(first && second && result);
-
-        size_t len1 = strlen(first);
-        size_t len2 = strlen(second);
-        *result     = (char*)malloc(len1 + len2 + 1);  // +1 for null terminator
-
-        if (!*result) {
-            return;
-        }
-
-        strcpy(*result, first);
-        strcat(*result, second);
-    }
-```
-
-上記c_str_addのテストは以下のように行うことができる。
-
-
-```cpp
-
-    //  example/cpp03_syntax/c_syle_ut.cpp 31
-
-    char const* first  = "first";
-    char const* second = ":second";
-    char*       result = NULL;
-
-    c_str_add(first, second, &result);
-
-    assert(strcmp("first:second", result) == 0);  // 戻り値の確認
-
-    free((void*)result);  // この行を実行しないとメモリーリーク
-```
-
-一般に単体テストを実施することの意義は、以下の2つである。
-
-1. 対象の関数の動作確認を局所的に行うことができる。
-2. 対象の関数の使用方法の不備を発見することができる。
-
-
-単体テストの意義2によりc_str_addの問題点は以下のようにまとめることができる。
-
-* メモリリークの危険性: 呼び出し側がfreeし忘れるとリークする。
-* ヌルポインタ操作の脆弱性: NULLチェック漏れ・NULLへのfreeで未定義動作。
-* 二重解放・ダングリングポインタ: 同じポインタを2回free、またはfree後にアクセスの可能性。
-* 関数の戻り値を解放責務の所在がはっきりしないため、発見、修正困難なバグにつながりやすい。
-
-そもそも、これらの問題はc_str_addの問題というよりも、
-Cのプログラミングパラダイムのの限界であると考えられる。
-C++ではこのような問題をクラスとその[デストラクタ](#SS_2_1_3)を用いて下記のように解決する。
-
-```cpp
-    //  example/cpp03_syntax/c_syle_ut.cpp 47
-
-    struct String {
-        char const* str;
-        bool        str_allocated;
-
-        ~String()
-        {  // デストラクタ
-            if (str_allocated) {
-                free((void*)str);
-            }
-        }
-    };
-```
-
-```cpp
-    //  example/cpp03_syntax/c_syle_ut.cpp 61
-
-    void String_add(String const* first, String const* second, String* result)
-    {
-        assert(first && second && result);
-
-        result->str           = NULL;
-        result->str_allocated = false;
-
-        size_t len1    = strlen(first->str);
-        size_t len2    = strlen(second->str);
-        char*  str_buf = (char*)malloc(len1 + len2 + 1);  // +1 for null terminator
-
-        if (!str_buf) {
-            return;
-        }
-
-        strcpy(str_buf, first->str);
-        strcat(str_buf, second->str);
-
-        result->str           = str_buf;
-        result->str_allocated = true;
-    }
-```
 
 ## エクセプション <a id="SS_2_2"></a>
 
