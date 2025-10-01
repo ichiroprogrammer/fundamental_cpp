@@ -12,13 +12,12 @@ SUPPRESS_WARN_GCC_NOT_EFF_CPP;
 
 class Person {
 public:
-    Person(char const* family_name, char const* first_name, uint32_t height_cm,
-           uint32_t weight_kg);  // コンストラクタ
+    Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
 
-    uint32_t    calc_bmi();  // メンバ関数
-    char const* get_full_name();
+    uint32_t    calc_bmi(void);  // メンバ関数
+    char const* get_full_name(void);
 
-    ~Person();  // デストラクタ
+    ~Person(void);  // デストラクタ
 
 private:  // メンバ変数への外部からのアクセスを禁止する。
     char const* family_name;
@@ -67,7 +66,7 @@ char* make_full_name(char const* family_name, char const* first_name)
     // @@@ ignore end
 }
 
-char const* Person::get_full_name()
+char const* Person::get_full_name(void)
 {
     if (full_name) {  // すでにfull_nameの生成済
         return full_name;
@@ -76,7 +75,7 @@ char const* Person::get_full_name()
     return full_name = make_full_name(family_name, first_name);
 }
 
-Person::~Person()  // デストラクタの定義。
+Person::~Person(void)  // デストラクタの定義。
 {
     if (full_name) {
         free((void*)full_name);
@@ -84,7 +83,7 @@ Person::~Person()  // デストラクタの定義。
 }
 // @@@ sample end
 
-uint32_t Person::calc_bmi()  // Personのcalc_bmi()の定義
+uint32_t Person::calc_bmi(void)  // Personのcalc_bmiの定義
 {
     // BMI = 体重(kg) / (身長(m))^2
     // 身長をcmからmに変換: height_cm / 100

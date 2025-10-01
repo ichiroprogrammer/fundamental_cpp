@@ -52,14 +52,17 @@ __この章の構成__
 &emsp;&emsp;&emsp; [アクセス指定子の使用例](#SS_2_1_5)  
 &emsp;&emsp;&emsp; [staticメンバ](#SS_2_1_6)  
 &emsp;&emsp;&emsp; [コピーコンストラクタ/コピー代入演算子](#SS_2_1_7)  
-&emsp;&emsp;&emsp; [C++のシンタックス](#SS_2_1_8)  
+&emsp;&emsp;&emsp; [Personのリファクタリング](#SS_2_1_8)  
 &emsp;&emsp;&emsp; [ムーブコンストラクタ/ムーブ代入演算子](#SS_2_1_9)  
 &emsp;&emsp;&emsp; [メンバ変数の初期化](#SS_2_1_10)  
 &emsp;&emsp;&emsp; [this](#SS_2_1_11)  
 &emsp;&emsp;&emsp; [new/delete](#SS_2_1_12)  
 &emsp;&emsp;&emsp; [継承](#SS_2_1_13)  
 
-&emsp;&emsp; [エクセプション](#SS_2_2)  
+&emsp;&emsp; [C++の慣習](#SS_2_2)  
+&emsp;&emsp; [const](#SS_2_3)  
+&emsp;&emsp; [エクセプション](#SS_2_4)  
+&emsp;&emsp; [オーバーロード](#SS_2_5)  
   
   
 
@@ -152,12 +155,12 @@ C++では、上記のような場合、メンバ関数を使用して、下記�
     struct Person {
         char const* family_name;
         char const* first_name;
-        uint32_t    height_cm;   // 身長 (cm単位と仮定)
-        uint32_t    weight_kg;   // 体重 (kg単位と仮定)
-        uint32_t    calc_bmi();  // メンバ関数
+        uint32_t    height_cm;       // 身長 (cm単位と仮定)
+        uint32_t    weight_kg;       // 体重 (kg単位と仮定)
+        uint32_t    calc_bmi(void);  // メンバ関数
     };
 
-    uint32_t Person::calc_bmi()  // Personのcalc_bmi()の定義
+    uint32_t Person::calc_bmi(void)  // Personのcalc_bmiの定義
     {
         // BMI = 体重(kg) / (身長(m))^2
         // 身長をcmからmに変換: height_cm / 100
@@ -210,14 +213,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     //  example/cpp03_syntax/class_ut_2.cpp 9
 
     struct Person {
-        Person(char const* family_name, char const* first_name, uint32_t height_cm,
-               uint32_t weight_kg);  // コンストラクタ
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
 
         char const* family_name;
         char const* first_name;
-        uint32_t    height_cm;   // 身長 (cm単位と仮定)
-        uint32_t    weight_kg;   // 体重 (kg単位と仮定)
-        uint32_t    calc_bmi();  // メンバ関数
+        uint32_t    height_cm;       // 身長 (cm単位と仮定)
+        uint32_t    weight_kg;       // 体重 (kg単位と仮定)
+        uint32_t    calc_bmi(void);  // メンバ関数
     };
 
     // コンストラクタの定義
@@ -237,7 +239,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_2.cpp 38
+    //  example/cpp03_syntax/class_ut_2.cpp 37
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -250,7 +252,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 コンストラクタは戻り値を持つことはできないため、引数がクラスの制限に収まらない場合、
 エラーを返すことができない。
 そのような場合、
-[エクセプション](#SS_2_2)を送出させることにより、呼び出し元にエラーを通知させることができるが、
+[エクセプション](#SS_2_4)を送出させることにより、呼び出し元にエラーを通知させることができるが、
 エクセプション送出については後述する
 (この例では、コンストラクタの不正な引数のチェックに`assert()`を用いている)。
 
@@ -264,18 +266,17 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     //  example/cpp03_syntax/class_ut_3.cpp 10
 
     struct Person {
-        // コンストラクタ
-        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
 
         char const* family_name;
         char const* first_name;
         char*       full_name;  // 新規メンバ
 
-        uint32_t height_cm;   // 身長 (cm単位と仮定)
-        uint32_t weight_kg;   // 体重 (kg単位と仮定)
-        uint32_t calc_bmi();  // メンバ関数
+        uint32_t height_cm;       // 身長 (cm単位と仮定)
+        uint32_t weight_kg;       // 体重 (kg単位と仮定)
+        uint32_t calc_bmi(void);  // メンバ関数
 
-        char const* get_full_name();
+        char const* get_full_name(void);
     };
 
     // コンストラクタの定義
@@ -286,7 +287,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
           height_cm(height_cm),
     {
         // コンストラクタの中身は省略
-        ...
+        // ...
     }
 
     char* make_full_name(char const* family_name, char const* first_name)
@@ -312,7 +313,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     }
 
     // 新規関数
-    char const* Person::get_full_name()
+    char const* Person::get_full_name(void)
     {
         if (full_name) {  // すでにfull_nameの生成済
             return full_name;
@@ -325,7 +326,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_3.cpp 79
+    //  example/cpp03_syntax/class_ut_3.cpp 78
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -347,27 +348,26 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     //  example/cpp03_syntax/class_ut_4.cpp 11
 
     struct Person {
-        // コンストラクタ
-        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
 
         char const* family_name;
         char const* first_name;
         char*       full_name;  // 新規メンバ
 
-        uint32_t height_cm;   // 身長 (cm単位と仮定)
-        uint32_t weight_kg;   // 体重 (kg単位と仮定)
-        uint32_t calc_bmi();  // メンバ関数
+        uint32_t height_cm;       // 身長 (cm単位と仮定)
+        uint32_t weight_kg;       // 体重 (kg単位と仮定)
+        uint32_t calc_bmi(void);  // メンバ関数
 
-        char const* get_full_name();
+        char const* get_full_name(void);
 
-        ~Person();  // デストラクタ
+        ~Person(void);  // デストラクタ
     };
 
     Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
         : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
-        ...
+        // ...
     }
 
     char* make_full_name(char const* family_name, char const* first_name)
@@ -392,7 +392,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
         return full_name;
     }
 
-    char const* Person::get_full_name()
+    char const* Person::get_full_name(void)
     {
         if (full_name) {  // すでにfull_nameの生成済
             return full_name;
@@ -401,7 +401,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
         return full_name = make_full_name(family_name, first_name);
     }
 
-    Person::~Person()  // デストラクタの定義。
+    Person::~Person(void)  // デストラクタの定義
     {
         if (full_name) {
             free((void*)full_name);
@@ -409,7 +409,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut_4.cpp 96
+    //  example/cpp03_syntax/class_ut_4.cpp 95
 
     {
         Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -465,13 +465,12 @@ C++では以下の3種類のアクセス指定子が存在する。
 
     class Person {
     public:
-        Person(char const* family_name, char const* first_name, uint32_t height_cm,
-               uint32_t weight_kg);  // コンストラクタ
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
 
-        uint32_t    calc_bmi();  // メンバ関数
-        char const* get_full_name();
+        uint32_t    calc_bmi(void);  // メンバ関数
+        char const* get_full_name(void);
 
-        ~Person();  // デストラクタ
+        ~Person(void);  // デストラクタ
 
     private:  // メンバ変数への外部からのアクセスを禁止する。
         char const* family_name;
@@ -486,16 +485,16 @@ C++では以下の3種類のアクセス指定子が存在する。
         : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
-        ...
+        // ...
     }
 
     char* make_full_name(char const* family_name, char const* first_name)
     {
         // 関数の中身は変わっていないので省略
-        ...
+        // ...
     }
 
-    char const* Person::get_full_name()
+    char const* Person::get_full_name(void)
     {
         if (full_name) {  // すでにfull_nameの生成済
             return full_name;
@@ -504,7 +503,7 @@ C++では以下の3種類のアクセス指定子が存在する。
         return full_name = make_full_name(family_name, first_name);
     }
 
-    Person::~Person()  // デストラクタの定義。
+    Person::~Person(void)  // デストラクタの定義。
     {
         if (full_name) {
             free((void*)full_name);
@@ -537,13 +536,12 @@ C++では以下の3種類のアクセス指定子が存在する。
 
     class Person {
     public:
-        Person(char const* family_name, char const* first_name, uint32_t height_cm,
-               uint32_t weight_kg);  // コンストラクタ
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
 
-        uint32_t    calc_bmi();  // メンバ関数
-        char const* get_full_name();
+        uint32_t    calc_bmi(void);  // メンバ関数
+        char const* get_full_name(void);
 
-        ~Person();  // デストラクタ
+        ~Person(void);  // デストラクタ
 
         // make_full_nameをPerson内のstatic関数に変更した
         static char* make_full_name(char const* family_name, char const* first_name);
@@ -561,16 +559,16 @@ C++では以下の3種類のアクセス指定子が存在する。
         : family_name(family_name), first_name(first_name), full_name(NULL),
     {
         // コンストラクタの中身は省略
-        ...
+        // ...
     }
 
     char* Person::make_full_name(char const* family_name, char const* first_name)
     {
         // 関数の中身は変わっていないので省略
-        ...
+        // ...
     }
 
-    char const* Person::get_full_name()
+    char const* Person::get_full_name(void)
     {
         if (full_name) {  // すでにfull_nameの生成済
             return full_name;
@@ -583,7 +581,7 @@ C++では以下の3種類のアクセス指定子が存在する。
         return full_name = Person::make_full_name(family_name, first_name);
     }
 
-    Person::~Person()  // デストラクタの定義。
+    Person::~Person(void)  // デストラクタの定義。
     {
         if (full_name) {
             free((void*)full_name);
@@ -595,7 +593,7 @@ publicなstaitcメンバへのクラス外でのアクセスには、
 下記コードの例のようにクラス名修飾(任意のクラス名Tに対してT::member)がに必要になる。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_6.cpp 110
+    //  example/cpp03_syntax/class_ut_6.cpp 109
 
     char* full_name = Person::make_full_name("yamada", "taro");
     //                      ^^^^^ static関数の呼び出しはクラス名修飾が必要
@@ -612,17 +610,17 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 * Person::make_full_nameをクラス内部での使用専用にするためにprivate化
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_6.cpp 135
+    //  example/cpp03_syntax/class_ut_6.cpp 134
 
     class Person {
     public:
         static int instance_counter;
 
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
-        ~Person();  // デストラクタ
+        ~Person(void);  // デストラクタ
 
-        uint32_t    calc_bmi();                            // メンバ関数
-        char const* get_full_name() { return full_name; }  // クラス内部でのメンバ関数定義
+        uint32_t    calc_bmi(void);                            // メンバ関数
+        char const* get_full_name(void) { return full_name; }  // クラス内部でのメンバ関数定義
 
     private:  // メンバ変数への外部からのアクセスを禁止する
         static char* make_full_name(char const* family_name, char const* first_name);
@@ -643,16 +641,16 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
           full_name(make_full_name(family_name, first_name)),
     {
         // コンストラクタの中身は省略
-        ...
+        // ...
     }
 
     char* Person::make_full_name(char const* family_name, char const* first_name)
     {
         // 関数の中身は変わっていないので省略
-        ...
+        // ...
     }
 
-    Person::~Person()  // デストラクタの定義。
+    Person::~Person(void)  // デストラクタの定義。
     {
         if (full_name) {
             free((void*)full_name);
@@ -665,7 +663,7 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 コードの修正した場合、それに合わせて単体テストも修正する必要がある。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_6.cpp 226
+    //  example/cpp03_syntax/class_ut_6.cpp 225
 
     ASSERT_EQ(Person::instance_counter, 0);  // staticな変数はデフォルト初期化される
 
@@ -755,10 +753,10 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
     class Person {
     public:
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
-        ~Person();  // デストラクタ
+        ~Person(void);  // デストラクタ
 
-        uint32_t    calc_bmi();                            // メンバ関数
-        char const* get_full_name() { return full_name; }  // クラス内部でのメンバ関数定義
+        uint32_t    calc_bmi(void);                            // メンバ関数
+        char const* get_full_name(void) { return full_name; }  // クラス内部でのメンバ関数定義
 
     private:  // メンバ変数への外部からのアクセスを禁止する
         static char* make_full_name(char const* family_name, char const* first_name);
@@ -776,16 +774,16 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
           full_name(make_full_name(family_name, first_name)),
     {
         // コンストラクタの中身は省略
-        ...
+        // ...
     }
 
     char* Person::make_full_name(char const* family_name, char const* first_name)
     {
         // 関数の中身は変わっていないので省略
-        ...
+        // ...
     }
 
-    Person::~Person()  // デストラクタの定義
+    Person::~Person(void)  // デストラクタの定義
     {
         if (full_name) {
             free((void*)full_name);
@@ -810,7 +808,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 ```
 
 三の原則(Rule of Three)に従うことで上記の問題を避けることができる
-(C++11ではこの原則は[五の原則(Rule of Five)]に拡張された)。
+(C++11ではこの原則は[五の原則(Rule of Five)](#SS_3_3_1_2)に拡張された)。
 
 * オブジェクト生成時にリソースを確保するようなクラスは、ユーザが定義したデストラクタ持つ必要がある。
 * ユーザが定義したデストラクタ持つクラスはコピーコンストラクタを持つ必要がある。
@@ -819,27 +817,23 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下にこの原則に従ったPersonを示す。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_7.cpp 122
+    //  example/cpp03_syntax/class_ut_8.cpp 9
 
     class Person {
     public:
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
-        Person(Person const& rhs);             // コピーコンストラクタ
-        Person& operator=(Person const& rhs);  // コピー代入演算子
-        ~Person();                             // デストラクタ
-
-        uint32_t    calc_bmi();                            // メンバ関数
-        char const* get_full_name() { return full_name; }  // クラス内部でのメンバ関数定義
-
+        Person(Person const& rhs);                                   // コピーコンストラクタ
+        Person& operator=(Person const& rhs);                        // コピー代入演算子
+        ~Person(void);                                               // デストラクタ
+        uint32_t    calc_bmi(void);                                  // メンバ関数
+        char const* get_full_name(void) const { return full_name; }  // クラス内部でのメンバ関数定義
     private:  // メンバ変数への外部からのアクセスを禁止する
         static char* make_full_name(char const* family_name, char const* first_name);
-
-        char const* family_name;
-        char const* first_name;
-        char*       full_name;  // 新規メンバ
-
-        uint32_t height_cm;  // 身長 (cm単位と仮定)
-        uint32_t weight_kg;  // 体重 (kg単位と仮定)
+        char const*  family_name;
+        char const*  first_name;
+        char*        full_name;  // 新規メンバ
+        uint32_t     height_cm;  // 身長 (cm単位と仮定)
+        uint32_t     weight_kg;  // 体重 (kg単位と仮定)
     };
 
     Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
@@ -847,26 +841,28 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
           full_name(make_full_name(family_name, first_name)),
     {
         // コンストラクタの中身は省略
-        ...
+        // ...
     }
 
     char* Person::make_full_name(char const* family_name, char const* first_name)
     {
         // 関数の中身は変わっていないので省略
-        ...
+        // ...
     }
 
-    Person::~Person()  // デストラクタの定義
+    Person::~Person(void)  // デストラクタの定義
     {
         if (full_name) {
-            free((void*)full_name);
+            delete[] full_name;
+            //  ^^^ free((void)full_name);
+            //      new[]で取得したメモリはdelete[]で解放する
         }
     }
 
     // コピーコンストラクタ
     Person::Person(Person const& rhs)
-        : family_name(rhs.full_name),
-          first_name(rhs.full_name),
+        : family_name(rhs.family_name),
+          first_name(rhs.first_name),
           full_name(make_full_name(rhs.family_name, rhs.first_name)),
           height_cm(rhs.height_cm),
           weight_kg(rhs.weight_kg)
@@ -880,23 +876,21 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
         if (this == &rhs) {
             return *this;
         }
-
         family_name = rhs.family_name;
         first_name  = rhs.first_name;
 
-        free((void*)full_name);
-        char* temp = (char*)malloc(strlen(rhs.full_name) + 1);
+        delete[] full_name;
+        char* temp = new char[strlen(rhs.full_name) + 1];
+
         strcpy(temp, rhs.full_name);
         full_name = temp;
-
         height_cm = rhs.height_cm;
         weight_kg = rhs.weight_kg;
-
         return *this;
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut_7.cpp 241
+    //  example/cpp03_syntax/class_ut_8.cpp 119
 
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -925,15 +919,22 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 
 ```
 
-単純なコピーを[シャローコピー](#SS_3_5_9_1)と呼び、このコード例のようなコピーを
-[ディープコピー](#SS_3_5_9_2)と呼ぶ。
+コピーコンストラクタ/コピー代入演算子を追加する前のコードが持っていた単純なコピーを[シャローコピー](#SS_3_5_9_1)と呼び、
+このコード例のようなコピーを[ディープコピー](#SS_3_5_9_2)と呼ぶ。
 
-
-### C++のシンタックス <a id="SS_2_1_8"></a>
+上記コードには、C99には存在しない以下のようなシンタックスやキーワードを含む。
 
 * [リファレンス](#SS_3_15)(型Tに対して、`T&`という形式)
 * [this](#SS_2_1_11)
 * [new/delete](#SS_2_1_12)
+* メンバ関数の後ろの[const](#SS_2_3)
+
+### Personのリファクタリング <a id="SS_2_1_8"></a>
+これまで例示してきたPersonを以下の方針でリファクタリングを行う。
+
+* 可読性向上のために、[C++の慣習](#SS_2_2)に従う。
+* [const](#SS_2_3)を正確に使用する。
+
 
 ### ムーブコンストラクタ/ムーブ代入演算子 <a id="SS_2_1_9"></a>
 一時オブジェクトやリソースの所有権を効率的に移動させるため、
@@ -950,8 +951,18 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 
 --- 
 
-## エクセプション <a id="SS_2_2"></a>
+## C++の慣習 <a id="SS_2_2"></a>
+C++でよく使われるコード上の慣習には多くのものがあるが、ここでは以下の最低限に留めて紹介する。
 
+* メンバ変数のシンボル名を`_`で終端する。
+* 引数なし関数`func(void)`と書かず、単に`func()`と書く。
+
+
+## const <a id="SS_2_3"></a>
+
+## エクセプション <a id="SS_2_4"></a>
+
+## オーバーロード <a id="SS_2_5"></a>
 
 
 
@@ -2723,8 +2734,8 @@ std::type_infoはコンパイラの実装で定義された型名を含んでい
         int status;
 
         // objに基づく型情報を取得
-        auto demangled = std::unique_ptr<char, decltype(&std::free)>{
-            abi::__cxa_demangle(typeid(obj).name(), 0, 0, &status), &std::free};
+        auto demangled = std::unique_ptr<char, decltype(&std::free)>{abi::__cxa_demangle(typeid(obj).name(), 0, 0, &status),
+                                                                     &std::free};
 
         return demangled ? demangled.get() : "unknown";
     }
@@ -2749,7 +2760,7 @@ std::type_infoはコンパイラの実装で定義された型名を含んでい
     Polymorphic_Base& b_ref_b = b;
 
     ASSERT_EQ(type2str(b_ref_d), "Polymorphic_Derived");  // b_ref_dの実際の型はPolymorphic_Derived
-    ASSERT_EQ(type2str(b_ref_b), "Polymorphic_Base");  // b_ref_bの実際の型はPolymorphic_Base
+    ASSERT_EQ(type2str(b_ref_b), "Polymorphic_Base");     // b_ref_bの実際の型はPolymorphic_Base
 ```
 
 ### Run-time Type Information <a id="SS_3_3_12"></a>
@@ -2803,16 +2814,16 @@ C++03までのコンパイラに、
     char const* c_str = str.c_str();
 
     static_assert(!is_const_v<decltype(c_str)>);
-    c_str = nullptr;  // c_strは変数としてconstではない
+    c_str = nullptr;                                                  // c_strは変数としてconstではない
     static_assert(is_const_v<remove_reference_t<decltype(*c_str)>>);  // *cは_strはconst
-    static_assert(is_same_v<char const&, decltype(*c_str)>);  // *c_strはconstリファレンス
+    static_assert(is_same_v<char const&, decltype(*c_str)>);          // *c_strはconstリファレンス
 
     char const* const cc_str = c_str;
 
     static_assert(is_const_v<decltype(cc_str)>);
     // cc_str = nullptr;  // cc_strは変数としてconstであるためコンパイルエラー
     static_assert(is_const_v<remove_reference_t<decltype(*cc_str)>>);  // *cc_strはconst
-    static_assert(is_same_v<char const&, decltype(*cc_str)>);  // *cc_strはconstリファレンス
+    static_assert(is_same_v<char const&, decltype(*cc_str)>);          // *cc_strはconstリファレンス
 
     constexpr int c_int = 1;
     static_assert(is_const_v<decltype(c_int)>);  // c_intはcons
@@ -2899,10 +2910,7 @@ for/if文や条件分岐のような処理を含むことができなかった�
 ```cpp
     //  example/term_explanation/const_xxx_ut.cpp 148
 
-    constexpr uint64_t bit_mask(uint32_t max)
-    {
-        return max == 0 ? 0 : (1ULL << (max - 1)) | bit_mask(max - 1);
-    }
+    constexpr uint64_t bit_mask(uint32_t max) { return max == 0 ? 0 : (1ULL << (max - 1)) | bit_mask(max - 1); }
     constexpr uint64_t bit_mask_0 = bit_mask(4);  // C++11ではコンパイルエラー
     static_assert(0b1111 == bit_mask_0);
 ```
@@ -2910,7 +2918,7 @@ for/if文や条件分岐のような処理を含むことができなかった�
 さらにC++17では for/if文などの一般的な制御構文も使えるようになった。
 
 ```cpp
-    //  example/term_explanation/const_xxx_ut.cpp 157
+    //  example/term_explanation/const_xxx_ut.cpp 154
 
     constexpr uint64_t bit_mask_for(uint32_t max)
     {
@@ -3028,7 +3036,7 @@ constevalはC++20 から導入されたキーワードであり、
 パフォーマンスの最適化やコンパイル時のエラー検出に特化した関数を作成する際に便利である。
 
 ```cpp
-    //  example/term_explanation/const_xxx_ut.cpp 187
+    //  example/term_explanation/const_xxx_ut.cpp 184
 
     #if __cplusplus >= 202002L  // c++20
     consteval uint64_t bit_mask(uint32_t max)  // コンパイル時、評価ができなければエラー
@@ -3046,7 +3054,7 @@ constevalはC++20 から導入されたキーワードであり、
     }
 ```
 ```cpp
-    //  example/term_explanation/const_xxx_ut.cpp 209
+    //  example/term_explanation/const_xxx_ut.cpp 206
 
     static_assert(0b1111'1111 == bit_mask(8));
 
@@ -3079,7 +3087,7 @@ constexprラムダはC++17から導入された機能であり、以下の条件
   これらの操作はコンパイル時には行えないため、constexprラムダでは使用できない。
 
 ```cpp
-    //  example/term_explanation/const_xxx_ut.cpp 226
+    //  example/term_explanation/const_xxx_ut.cpp 223
 
     constexpr auto factorial = [](int n) {  // constexpr ラムダの定義
         int result = 1;
@@ -3093,7 +3101,7 @@ constexprラムダはC++17から導入された機能であり、以下の条件
     static_assert(fact_5 == 120);
 ```
 ```cpp
-    //  example/term_explanation/const_xxx_ut.cpp 243
+    //  example/term_explanation/const_xxx_ut.cpp 240
 
     constexpr auto factorial = [](auto self, int n) -> int {  // リカーシブconstexprラムダ
         return (n <= 1) ? 1 : n * self(self, n - 1);
@@ -3230,7 +3238,7 @@ constexprラムダはC++17から導入された機能であり、以下の条件
     public:
         explicit Base(int32_t b) noexcept : b_{b} {}
         virtual ~Base() = default;
-        ...
+        // ...
     };
 
     class Derived : public Base {
@@ -3244,7 +3252,7 @@ constexprラムダはC++17から導入された機能であり、以下の条件
     void f() noexcept
     {
         Derived d{1};  // Derived::Derived(int32_t)が使える
-        ...
+        // ...
     }
 ```
 
@@ -3260,7 +3268,7 @@ A::A(uint32_t)の処理をA::A(std::string const&)へ委譲している。
     public:
         explicit A(std::string str) : str_{std::move(str)}
         {
-            ...
+            // ...
         }
 
         explicit A(uint32_t num) : A{std::to_string(num)}  // 委譲コンストラクタ
@@ -4012,8 +4020,8 @@ X::Register`、`Y::Register`を用いて、循環を作ってしまう例(メモ
 
             ASSERT_FALSE(y0->DoSomething());  // Y::DoSomethingの処理をX::DoSomethingに委譲
 
-            x0->Register(y0);  // これによりx0とy0が互いに所有し合う(循環参照)
-            y0->Register(x0);  // これによりx0とy0が互いに所有し合う(循環参照)
+            x0->Register(y0);                      // これによりx0とy0が互いに所有し合う(循環参照)
+            y0->Register(x0);                      // これによりx0とy0が互いに所有し合う(循環参照)
             ASSERT_EQ(X::constructed_counter, 1);  // 新しいオブジェクトが生成されるわけではない
             ASSERT_EQ(Y::constructed_counter, 1);  // 新しいオブジェクトが生成されるわけではない
 
@@ -4173,9 +4181,9 @@ Xと修正版Yの単体テストによりメモリーリークが修正された
 
         ASSERT_EQ(x0.use_count(), 1);  // Xオブジェクトはx0に所有されるが、y0には所有されない
         ASSERT_EQ(y0->ref_x().use_count(), 1);  // weak_ptr<X>::use_count
-        ASSERT_EQ(y0.use_count(), 2);  // Yオブジェクトはy0とx0から共有所有されるため
+        ASSERT_EQ(y0.use_count(), 2);           // Yオブジェクトはy0とx0から共有所有されるため
         ASSERT_EQ(x0->ref_y().use_count(), 2);  // Yオブジェクトはy0とx0から共有所有されるため
-    }  // この次の行で、x0、y0はスコープアウトする。
+    }                                           // この次の行で、x0、y0はスコープアウトする。
 
     ASSERT_EQ(X::constructed_counter, 0);  // Xオブジェクトは開放済み
     ASSERT_EQ(Y::constructed_counter, 0);  // Yオブジェクトは開放済み
@@ -4352,7 +4360,7 @@ copy代入演算子と同等なものを定義したが、これは問題のな�
         explicit Base(char const* name) noexcept : name0_{name} {}
         char const* Name0() const noexcept { return name0_; }
 
-        ...
+        // ...
     private:
         char const* name0_;
     };
@@ -4362,7 +4370,7 @@ copy代入演算子と同等なものを定義したが、これは問題のな�
         Derived(char const* name0, char const* name1) noexcept : Base{name0}, name1_{name1} {}
         char const* Name1() const noexcept { return name1_; }
 
-        ...
+        // ...
     private:
         char const* name1_;
     };
@@ -4456,7 +4464,7 @@ C++11から導入された導入されたリテラル。
 ```cpp
     //  example/term_explanation/literal_ut.cpp 15
 
-        std::regex raw_re{R"(\d+)"};  // 生文字リテラルで正規表現パターン。\のエスケープが不要
+        std::regex raw_re{R"(\d+)"};     // 生文字リテラルで正規表現パターン。\のエスケープが不要
         std::regex normal_re{"(\\d+)"};  // 生文字リテラルで正規表現パターン。\のエスケープが必要
 
         std::string test_str = "The year is 2024";  // テスト対象の文字列
@@ -4689,7 +4697,7 @@ std::complexリテラル以下のコードのように使用できる。
 C++20以降より、`=default`により==演算子を自動生成させることができるようになった。
 
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 232
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 217
 
     class Integer {
     public:
@@ -4720,15 +4728,9 @@ C++20以降より、`=default`により==演算子を自動生成させること
         int get() const noexcept { return x_; }
 
         // メンバ関数の比較演算子に見えるが、非メンバ関数
-        friend bool operator==(const Integer& lhs, const Integer& rhs) noexcept
-        {
-            return lhs.x_ == rhs.x_;
-        }
+        friend bool operator==(const Integer& lhs, const Integer& rhs) noexcept { return lhs.x_ == rhs.x_; }
 
-        friend bool operator<(const Integer& lhs, const Integer& rhs) noexcept
-        {
-            return lhs.x_ < rhs.x_;
-        }
+        friend bool operator<(const Integer& lhs, const Integer& rhs) noexcept { return lhs.x_ < rhs.x_; }
 
     private:
         int x_;
@@ -4738,7 +4740,7 @@ C++20以降より、`=default`により==演算子を自動生成させること
 * [暗黙の型変換](#SS_3_13_1)を利用した以下に示すようなシンプルな記述ができる場合がある。
 
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 84
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 78
 
     auto a = Integer{5};
 
@@ -4749,7 +4751,7 @@ C++20以降より、`=default`により==演算子を自動生成させること
 C++20以降より、`=default`により==演算子を自動生成させることができるようになった。
 
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 256
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 241
 
     class Integer {
     public:
@@ -4805,25 +4807,19 @@ std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を�
 可読性、保守性の問題が発生する場合が多い。下記に示す方法はこの問題を幾分緩和する。
 
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 116
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 110
 
     struct Point {
         int x;
         int y;
 
-        bool operator==(const Point& other) const noexcept
-        {
-            return std::tie(x, y) == std::tie(other.x, other.y);
-        }
+        bool operator==(const Point& other) const noexcept { return std::tie(x, y) == std::tie(other.x, other.y); }
 
-        bool operator<(const Point& other) const noexcept
-        {
-            return std::tie(x, y) < std::tie(other.x, other.y);
-        }
+        bool operator<(const Point& other) const noexcept { return std::tie(x, y) < std::tie(other.x, other.y); }
     };
 ```
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 136
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 124
 
         auto a = Point{1, 2};
         auto b = Point{1, 3};
@@ -4844,7 +4840,7 @@ std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を�
 このためC++20から導入されたのが<=>演算子`<=>`である。
 
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 153
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 141
 
     struct Point {
         int x;
@@ -4855,7 +4851,7 @@ std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を�
     };
 ```
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 166
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 154
 
     auto p1 = Point{1, 2};
     auto p2 = Point{1, 2};
@@ -4887,7 +4883,7 @@ std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を�
 そのような場合に備えて、上記の自動生成コードの内容を敢えて実装して、以下に示す。
 
 ```cpp
-    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 197
+    //  example/term_explanation_cpp20/comparison_operator_ut.cpp 185
 
     struct Point {
         int x;
@@ -4898,10 +4894,7 @@ std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を�
             return std::tie(x, y) <=> std::tie(other.x, other.y);
         }
 
-        bool operator==(const Point& other) const noexcept
-        {
-            return std::tie(x, y) == std::tie(other.x, other.y);
-        }
+        bool operator==(const Point& other) const noexcept { return std::tie(x, y) == std::tie(other.x, other.y); }
     };
 ```
 
@@ -4977,13 +4970,13 @@ C++14から導入されたの属性構文は、[[属性名]]の形式で記述�
     void function_try_block()
     try {  // 関数tryブロック
         // 何らかの処理
-        ...
+        // ...
     }
     catch (std::length_error const& e) {  // 関数tryブロックのエクセプションハンドラ
-        ...
+        // ...
     }
     catch (std::logic_error const& e) {  // 関数tryブロックのエクセプションハンドラ
-        ...
+        // ...
     }
 ```
 
@@ -5196,7 +5189,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     void            RecoverOperation(OperationResult::ErrorCode);  // リカバリ処理
 ```
 ```cpp
-    //  example/term_explanation/if_switch_init_ut.cpp 36
+    //  example/term_explanation/if_switch_init_ut.cpp 33
 
     for (auto result = DoOperation(); result.IsError(); result = DoOperation()) {
         RecoverOperation(result.Get());  // エラー処理
@@ -5219,7 +5212,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
 以下のコード例のように従来の記法は広く知られているため、念とため紹介する。
 
 ```cpp
-    //  example/term_explanation/if_switch_init_ut.cpp 48
+    //  example/term_explanation/if_switch_init_ut.cpp 45
 
     while (auto result = DoOperation()) {  // resultはboolへの暗黙の型変換が行われる
         // エラー処理
@@ -5256,7 +5249,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     void            RecoverOperation(OperationResult::ErrorCode);  // リカバリ処理
 ```
 ```cpp
-    //  example/term_explanation/if_switch_init_ut.cpp 59
+    //  example/term_explanation/if_switch_init_ut.cpp 56
 
     if (auto result = DoOperation(); !result.IsError()) {
         // 成功処理
@@ -5270,7 +5263,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
 クラスの独自の[<=>演算子](#SS_3_6_8_3)を定義する場合、下記のように使用することができる。
 
 ```cpp
-    //  example/term_explanation/if_switch_init_ut.cpp 72
+    //  example/term_explanation/if_switch_init_ut.cpp 69
 
     struct DoubleName {
         std::string name0;
@@ -5324,7 +5317,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     void            RecoverOperation(OperationResult::ErrorCode);  // リカバリ処理
 ```
 ```cpp
-    //  example/term_explanation/if_switch_init_ut.cpp 103
+    //  example/term_explanation/if_switch_init_ut.cpp 100
 
     switch (auto result = DoOperation(); result.Get()) {
     case OperationResult::ErrorCode::ErrorPattern1:
@@ -5361,10 +5354,7 @@ co_waitとco_returnを使用したコードを以下に示す。
         struct promise_type {
             /// @brief コルーチンから Task 型のオブジェクトを返す関数
             /// @return Taskオブジェクト
-            Task get_return_object()
-            {
-                return Task{std::coroutine_handle<promise_type>::from_promise(*this)};
-            }
+            Task get_return_object() { return Task{std::coroutine_handle<promise_type>::from_promise(*this)}; }
 
             /// @brief コルーチンの最初のサスペンドポイント
             /// @return 常にサスペンドするオブジェクトを返す
@@ -5428,7 +5418,7 @@ co_waitとco_returnを使用したコードを以下に示す。
 以下単体テストコードによりに上記コルーチンの動作を示す。
 
 ```cpp
-    //  example/term_explanation_cpp20/co_await_ut.cpp 88
+    //  example/term_explanation_cpp20/co_await_ut.cpp 85
 
     Task    task  = gen_coroutine();  // gen_coroutine から Task オブジェクトを生成
     int32_t calls = 0;
@@ -5459,7 +5449,7 @@ co_waitとco_returnを使用したコードを以下に示す。
 上記のコルーチンと同じ機能を持つクラスのco_await/co_returnを使わない実装を以下に示す。
 
 ```cpp
-    //  example/term_explanation_cpp20/co_await_ut.cpp 118
+    //  example/term_explanation_cpp20/co_await_ut.cpp 115
 
     /// @enum CoroutineState
     /// @brief ManualCoroutine の状態を表す enum 型
@@ -5512,7 +5502,7 @@ co_waitとco_returnを使用したコードを以下に示す。
 このクラスは当然ながら、前記のコルーチンの単体テストコードとほぼ同じになる。
 
 ```cpp
-    //  example/term_explanation_cpp20/co_await_ut.cpp 170
+    //  example/term_explanation_cpp20/co_await_ut.cpp 167
 
     auto    manual_coroutine = ManualCoroutine{};
     int32_t calls            = 0;
@@ -5574,10 +5564,7 @@ co_yieldはコルーチンから値を返しつつ、
 
             /// @brief コルーチンから Generator 型のオブジェクトを返す関数
             /// @return Generatorオブジェクト
-            Generator get_return_object()
-            {
-                return Generator{std::coroutine_handle<promise_type>::from_promise(*this)};
-            }
+            Generator get_return_object() { return Generator{std::coroutine_handle<promise_type>::from_promise(*this)}; }
 
             /// @brief コルーチンの最初のサスペンドポイント
             /// @return 常にサスペンドするオブジェクトを返す
@@ -5669,7 +5656,7 @@ co_yieldはコルーチンから値を返しつつ、
 このテストを以下に示す。
 
 ```cpp
-    //  example/term_explanation_cpp20/co_yield_ut.cpp 130
+    //  example/term_explanation_cpp20/co_yield_ut.cpp 127
 
     // 数値を生成し、それをパイプライン処理に通す
     auto numbers         = generate_numbers(1, 10);
@@ -5695,7 +5682,7 @@ co_yieldはコルーチンから値を返しつつ、
 co_yieldを使用したコルーチンと同じ機能を持つクラスのco_yieldを使わない実装を以下に示す。
 
 ```cpp
-    //  example/term_explanation_cpp20/co_yield_ut.cpp 155
+    //  example/term_explanation_cpp20/co_yield_ut.cpp 152
 
     /// @brief コルーチンを使わずにデータを逐次的に提供するジェネレータークラス
     template <typename T>
@@ -5778,7 +5765,7 @@ co_yieldを使用したコルーチンと同じ機能を持つクラスのco_yie
 このクラスは当然ながら、前記のコルーチンの単体テストコードとほぼ同じになる。
 
 ```cpp
-    //  example/term_explanation_cpp20/co_yield_ut.cpp 237
+    //  example/term_explanation_cpp20/co_yield_ut.cpp 234
 
     // 数値を生成し、それをパイプライン処理に通す
     auto numbers         = generate_numbers(1, 10);
@@ -6012,7 +5999,7 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
 
     std::pmr::unsynchronized_pool_resource pool_resource(
         std::pmr::pool_options{
-            .max_blocks_per_chunk        = 10,  // チャンクあたりの最大ブロック数
+            .max_blocks_per_chunk        = 10,   // チャンクあたりの最大ブロック数
             .largest_required_pool_block = 1024  // 最大ブロックサイズ
         },
         std::pmr::new_delete_resource()  // フォールバックリソース
@@ -6302,8 +6289,8 @@ std::variant自身では、オブジェクトのダイナミックな生成が�
 ```cpp
     //  example/term_explanation/variant_ut.cpp 13
 
-    std::variant<int, std::string, double> var = 10;
-    auto var2 = var;  // コピーコンストラクタの呼び出し
+    std::variant<int, std::string, double> var  = 10;
+    auto                                   var2 = var;  // コピーコンストラクタの呼び出し
 
     ASSERT_EQ(std::get<int>(var), 10);  // 型intの値を取り出す
 
@@ -7320,7 +7307,7 @@ Baseインスタンスが2つ存在するため、下記に示すようなわか
     ASSERT_EQ(1, dn.get());
 
     auto ddv = DerivedDerivedVirtual{1};  // 仮想継承クラスを継承したクラス Base::Base()が呼ばれる
-    auto ddn = DerivedDerivedNormal{1};  // 通常継承クラスを継承したクラス Base::Base(1)が呼ばれる
+    auto ddn = DerivedDerivedNormal{1};   // 通常継承クラスを継承したクラス Base::Base(1)が呼ばれる
 
     ASSERT_EQ(0, ddv.get());  // ddvのBaseインスタンスはのデフォルトコンストラクタで初期化されている
     ASSERT_EQ(1, ddn.get());
@@ -7351,9 +7338,9 @@ __「仮想継承クラスを継承したクラスが、仮想継承クラスの
 ```cpp
     //  example/term_explanation/virtual_inheritance_ut.cpp 73
 
-    DerivedDerivedVirtual ddv{1};  // 仮想継承クラスを継承したクラス
+    DerivedDerivedVirtual      ddv{1};   // 仮想継承クラスを継承したクラス
     DerivedDerivedVirtualFixed ddvf{1};  // 上記クラスのコンストラクタを修正したクラス
-    DerivedDerivedNormal ddn{1};         // 通常の継承クラスを継承したクラス
+    DerivedDerivedNormal       ddn{1};   // 通常の継承クラスを継承したクラス
 
     ASSERT_EQ(0, ddv.get());  // 仮想継承独特の動作
     ASSERT_EQ(1, ddvf.get());
@@ -7407,7 +7394,7 @@ __「仮想継承クラスを継承したクラスが、仮想継承クラスの
     auto dd = DerivedDerived{2, 3};  // Base::Baseが最初に呼ばれないとassertion failする
 
     ASSERT_EQ(1, base_called);  // 「仮想継承のコンストラクタ呼び出し」仕様のため
-    ASSERT_EQ(0, dd.get());  // Baseのデフォルトコンストラクタは、x_を0にする
+    ASSERT_EQ(0, dd.get());     // Baseのデフォルトコンストラクタは、x_を0にする
 ```
 
 基底クラスのコンストラクタ呼び出しは、下記のコードのようにした場合でも、
@@ -7429,7 +7416,7 @@ __「仮想継承クラスを継承したクラスが、仮想継承クラスの
     auto dd = DerivedDerived{2, 3};  // Base::Baseが最初に呼ばれないとassertion failする
 
     ASSERT_EQ(1, base_called);  // 「仮想継承のコンストラクタ呼び出し」仕様のため
-    ASSERT_EQ(1, dd.get());  // Base{1}呼び出しの効果
+    ASSERT_EQ(1, dd.get());     // Base{1}呼び出しの効果
 ```
 
 このため、基底クラスのコンストラクタ呼び出しは下記のような順番で行うべきである。
@@ -8426,7 +8413,7 @@ AAAスタイルとは、「可能な場合、型を左辺に明示して変数�
 型を明示しないAAAスタイルは使うべきではない。
 
 ```cpp
-    //  example/term_explanation/aaa.cpp 121
+    //  example/term_explanation/aaa.cpp 118
 
     extern std::map<std::string, int> gen_map();
 
@@ -8451,7 +8438,7 @@ AAAスタイルとは、「可能な場合、型を左辺に明示して変数�
 インライン関数や関数テンプレートの宣言は、下記のように書く。
 
 ```cpp
-    //  example/term_explanation/aaa.cpp 148
+    //  example/term_explanation/aaa.cpp 145
 
     template <typename F, typename T>
     auto apply_0(F&& f, T value)
@@ -8464,7 +8451,7 @@ AAAスタイルとは、「可能な場合、型を左辺に明示して変数�
 AAAスタイルは出来る限り避けるべきである。
 
 ```cpp
-    //  example/term_explanation/aaa.cpp 156
+    //  example/term_explanation/aaa.cpp 153
 
     template <typename F, typename T>
     auto apply_1(F&& f, T value) -> decltype(f(std::declval<T>()))  // autoを使用しているが、AAAではない
@@ -8490,7 +8477,7 @@ AAAスタイルは出来る限り避けるべきである。
   また、下記のように縮小型変換(下記では、unsignedからsignedの変換)を防ぐこともできる。
 
 ```cpp
-    //  example/term_explanation/aaa.cpp 183
+    //  example/term_explanation/aaa.cpp 180
 
     auto v = std::vector<int>{0, 1, 2};
 
@@ -8518,7 +8505,7 @@ AAAスタイルでは、以下のような場合に注意が必要である。
   下記のような型推論は、直感に反する場合があるため、autoの使い方に対する習熟が必要である。
 
 ```cpp
-    //  example/term_explanation/aaa.cpp 197
+    //  example/term_explanation/aaa.cpp 194
 
     auto str0 = "str";
     static_assert(std::is_same_v<char const*, decltype(str0)>);  // str0はchar[4]ではない
@@ -8635,9 +8622,9 @@ decltypeは、テンプレートプログラミングに多用されるが、
         a_ptr->len  = len;
         a_ptr->data = new uint8_t[10];
 
-        ...
+        // ...
         // do something for a_ptr
-        ...
+        // ...
 
         // a_ptrによるメモリの自動解放
     }
@@ -8681,7 +8668,7 @@ auto、decltype、decltype(auto)では、以下に示す通りリファレンス
         return a + b;
     }
 
-    static_assert(std::is_same_v<decltype(add(1, 2)), int>);  // addの戻り値型はintに型推論
+    static_assert(std::is_same_v<decltype(add(1, 2)), int>);         // addの戻り値型はintに型推論
     static_assert(std::is_same_v<decltype(add(1u, 2u)), uint32_t>);  // addの戻り値型はintに型推論
     static_assert(std::is_same_v<decltype(add(std::string{"str"}, "2")),
                                  std::string>);  // addの戻り値型はstd::stringに型推論
@@ -8698,7 +8685,7 @@ auto、decltype、decltype(auto)では、以下に示す通りリファレンス
         return a + b;
     }
 
-    static_assert(std::is_same_v<decltype(add(1, 2)), int>);  // addの戻り値型はintに型推論
+    static_assert(std::is_same_v<decltype(add(1, 2)), int>);         // addの戻り値型はintに型推論
     static_assert(std::is_same_v<decltype(add(1u, 2u)), uint32_t>);  // addの戻り値型はintに型推論
     static_assert(std::is_same_v<decltype(add(std::string{"str"}, "2")),
                                  std::string>);  // addの戻り値型はstd::stringに型推論
@@ -8837,7 +8824,7 @@ explicitキーワードを付けることで、意図しない型変換を防ぎ
 
     void f(Person const& person) noexcept
     {
-        ...
+        // ...
     }
 
     void using_implicit_coversion()
@@ -8864,10 +8851,10 @@ explicitキーワードを付けることで、意図しない型変換を防ぎ
 
     auto otani = std::string{"Ohtani"};
 
-    ...
+    // ...
 
     if (otani == "Ohtani") {  // 暗黙の型変換によりコンパイルできる
-        ...
+        // ...
     }
 ```
 
@@ -8878,14 +8865,14 @@ explicitキーワードを付けることで、意図しない型変換を防ぎ
 
     auto otani = Person{"Ohtani", 26};
 
-    ...
+    // ...
 
     if (otani == "Otani") {  // このコードがコンパイルされる。
-        ...
+        // ...
     }
 
     if (otani == Person{"Otani"}) {  // 暗黙の型変換を使わない記法
-        ...
+        // ...
     }
 ```
 
@@ -8900,7 +8887,7 @@ explicitキーワードを付けることで、意図しない型変換を防ぎ
         Person(Person const&)            = default;
         Person& operator=(Person const&) = default;
 
-        ...
+        // ...
     };
 
     void prohibit_implicit_coversion()
@@ -8913,15 +8900,15 @@ explicitキーワードを付けることで、意図しない型変換を防ぎ
 
         auto otani = Person{"Ohtani", 26};
 
-        ...
+        // ...
 
     #if 0
         if (otani == "Otani") {  // このコードもコンパイルできない。
-            ...
+            // ...
         }
     #else
         if (otani == Person{"Otani", 26}) {  // この記述を強制できる。
-            ...
+            // ...
         }
     #endif
     }
@@ -9254,7 +9241,7 @@ prvalueとは、オブジェクトやビットフィールドを初期化する�
 
     // 下記のようにすればアドレスを取得できるが、このようなことはすべきではない。
     auto&& rvalue_ref = std::string{};
-    auto   sp = &rvalue_ref;  // spはrvalue_refのアドレスを指しているが、、、
+    auto   sp         = &rvalue_ref;  // spはrvalue_refのアドレスを指しているが、、、
 ```
 
 正確にはprvalueと呼ぶべき場面で、単にrvalueと呼ばれることがある。
@@ -9385,7 +9372,7 @@ rvalueリファレンスは、
     int        a      = 0;
     int const& a_ref0 = a;        // const lvalueリファレンス
     int const& a_ref1 = int(99);  // const lvalueリファレンスはrvalueをバインドできる
-    int&&      a_ref2 = int(99);  // rvalueリファレンスはテンポラリオブジェクトをバインドできる
+    int&& a_ref2 = int(99);  // rvalueリファレンスはテンポラリオブジェクトをバインドできる
 
     ASSERT_EQ(a_ref1, 99);
     ASSERT_EQ(a_ref2, 99);
@@ -9510,13 +9497,13 @@ forwardingリファレンスは一見rvalueリファレンスのように見え�
     template <typename T>
     void f(T&& t) noexcept  // tはforwardingリファレンス
     {
-        ...
+        // ...
     }
 
     template <typename T>
     void g(std::vector<T>&& t) noexcept  // tはrvalueリファレンス
     {
-        ...
+        // ...
     }
 ```
 ```cpp
@@ -9581,7 +9568,7 @@ perfect forwardingの使用例を以下に示す。
 
     class Widget {
     public:
-        explicit Widget(std::string const& name) : name_{name} {}  // lvalueによるコンストラクタ
+        explicit Widget(std::string const& name) : name_{name} {}        // lvalueによるコンストラクタ
         explicit Widget(std::string&& name) : name_{std::move(name)} {}  // rvalueによるコンストラクタ
         std::string const& GetName() const { return name_; }
 
@@ -10131,16 +10118,13 @@ C++における組み込みの==も純粋数学の等号と同じ性質を満た
         int b_;
     };
 
-    inline bool operator==(Base const& lhs, Base const& rhs) noexcept
-    {
-        return lhs.GetB() == rhs.GetB();
-    }
+    inline bool operator==(Base const& lhs, Base const& rhs) noexcept { return lhs.GetB() == rhs.GetB(); }
 ```
 
 次の単体テストが示す通り、これ自体には問題がないように見える。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 134
+    //  example/term_explanation/semantics_ut.cpp 131
 
     auto b0 = Base{0};
     auto b1 = Base{0};
@@ -10154,7 +10138,7 @@ C++における組み込みの==も純粋数学の等号と同じ性質を満た
 しかし、Baseから派生したクラスDerivedを
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 146
+    //  example/term_explanation/semantics_ut.cpp 143
 
     class Derived : public Base {
     public:
@@ -10169,7 +10153,7 @@ C++における組み込みの==も純粋数学の等号と同じ性質を満た
 のように定義すると、下記の単体テストで示す通り、等価性のセマンティクスが破壊される。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 160
+    //  example/term_explanation/semantics_ut.cpp 157
 
     {
         auto b = Base{0};
@@ -10188,7 +10172,7 @@ C++における組み込みの==も純粋数学の等号と同じ性質を満た
 Derived用のoperator==を
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 177
+    //  example/term_explanation/semantics_ut.cpp 174
 
     bool operator==(Derived const& lhs, Derived const& rhs) noexcept
     {
@@ -10199,7 +10183,7 @@ Derived用のoperator==を
 と定義しても、下記に示す通り部分的な効果しかない。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 187
+    //  example/term_explanation/semantics_ut.cpp 184
 
     auto d0 = Derived{0};
     auto d1 = Derived{1};
@@ -10214,7 +10198,7 @@ Derived用のoperator==を
 この問題は、「[RTTI](#SS_3_3_11)」使った下記のようなコードで対処できる。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 203
+    //  example/term_explanation/semantics_ut.cpp 200
 
     class Base {
     public:
@@ -10261,7 +10245,7 @@ Derived用のoperator==を
 [オープン・クローズドの原則(OCP)](#SS_11)にも対応した柔軟な構造を実現している。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 270
+    //  example/term_explanation/semantics_ut.cpp 267
 
     class DerivedDerived : public Derived {
     public:
@@ -10289,7 +10273,7 @@ Derived用のoperator==を
 等価性のセマンティクスを満たしている例である。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 320
+    //  example/term_explanation/semantics_ut.cpp 317
 
     auto abc = std::string{"abc"};
 
@@ -10318,7 +10302,7 @@ copyセマンティクスとは以下を満たすようなセマンティクス�
 下記に示す通り、std::stringはcopyセマンティクスを満たしている。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 334
+    //  example/term_explanation/semantics_ut.cpp 331
 
     auto c_str = "string";
     auto str   = std::string{};
@@ -10331,7 +10315,7 @@ copyセマンティクスとは以下を満たすようなセマンティクス�
 一方で、std::auto_ptrはcopyセマンティクスを満たしていない。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 347
+    //  example/term_explanation/semantics_ut.cpp 344
 
     std::auto_ptr<std::string> str0{new std::string{"string"}};
     std::auto_ptr<std::string> str0_pre{new std::string{"string"}};
@@ -10355,7 +10339,7 @@ copyセマンティクスとは以下を満たすようなセマンティクス�
 「[等価性のセマンティクス](#SS_3_18_1)」で示した最後の例も、copyセマンティクスを満たしていない。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 367
+    //  example/term_explanation/semantics_ut.cpp 364
 
     auto b = Base{1};
     auto d = Derived{1};
@@ -10386,7 +10370,7 @@ moveセマンティクスはcopy代入後に使用されなくなるオブジェ
 下記のようなコードは推奨されない。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 382
+    //  example/term_explanation/semantics_ut.cpp 379
 
     class NotRecommended {
     public:
@@ -10403,10 +10387,7 @@ moveセマンティクスはcopy代入後に使用されなくなるオブジェ
         std::string name_;
     };
 
-    bool operator==(NotRecommended const& lhs, NotRecommended const& rhs) noexcept
-    {
-        return lhs.Name() == rhs.Name();
-    }
+    bool operator==(NotRecommended const& lhs, NotRecommended const& rhs) noexcept { return lhs.Name() == rhs.Name(); }
 
     TEST(Semantics, move1)
     {
@@ -10429,7 +10410,7 @@ moveセマンティクスはcopy代入後に使用されなくなるオブジェ
 パフォーマンスの良い代入ができる。
 
 ```cpp
-    //  example/term_explanation/semantics_ut.cpp 420
+    //  example/term_explanation/semantics_ut.cpp 414
 
     class Recommended {
     public:
@@ -10446,10 +10427,7 @@ moveセマンティクスはcopy代入後に使用されなくなるオブジェ
         std::string name_;
     };
 
-    bool operator==(Recommended const& lhs, Recommended const& rhs) noexcept
-    {
-        return lhs.Name() == rhs.Name();
-    }
+    bool operator==(Recommended const& lhs, Recommended const& rhs) noexcept { return lhs.Name() == rhs.Name(); }
 
     TEST(Semantics, move2)
     {
@@ -10567,7 +10545,7 @@ operator& がオーバーロードされている場合には、
         explicit X(int v) : v_{v} {}
 
         X* operator&()
-        {  // `operator&` をオーバーロードしてアドレス取得の挙動を変更
+        {                    // `operator&` をオーバーロードしてアドレス取得の挙動を変更
             return nullptr;  // 意図的に nullptr を返す
         }
         operator int() const noexcept { return v_; }
@@ -10658,12 +10636,12 @@ conditionの評価結果に基づき、expr1または expr2 のどちらかが�
 
     int f0(int a, int& b) noexcept  // a, bは仮引数
     {
-        ...
+        // ...
     }
 
     void f1() noexcept
     {
-        ...
+        // ...
 
         f0(x, y);  // x, yは実引数
     }

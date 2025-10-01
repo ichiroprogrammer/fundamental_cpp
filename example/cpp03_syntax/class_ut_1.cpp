@@ -11,12 +11,12 @@ namespace {
 struct Person {
     char const* family_name;
     char const* first_name;
-    uint32_t    height_cm;   // 身長 (cm単位と仮定)
-    uint32_t    weight_kg;   // 体重 (kg単位と仮定)
-    uint32_t    calc_bmi();  // メンバ関数
+    uint32_t    height_cm;       // 身長 (cm単位と仮定)
+    uint32_t    weight_kg;       // 体重 (kg単位と仮定)
+    uint32_t    calc_bmi(void);  // メンバ関数
 };
 
-uint32_t Person::calc_bmi()  // Personのcalc_bmi()の定義
+uint32_t Person::calc_bmi(void)  // Personのcalc_bmiの定義
 {
     // BMI = 体重(kg) / (身長(m))^2
     // 身長をcmからmに変換: height_cm / 100
