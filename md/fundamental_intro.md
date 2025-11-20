@@ -4,6 +4,9 @@
 ## 改訂履歴
 * V00.00
 
+## ドキュメントの諸注意
+// @@@ essential/md/intro_notation.md #0:0 begin 0 -1
+
 ## インデックス
 ___
 

@@ -1,114 +1,115 @@
 <!-- essential/md/cpp_idioms.md -->
-# C++慣用語句 <a id="SS_29"></a>
+# C++慣用語句 <a id="SS_21"></a>
 この章では、C++慣用言句ついて解説を行う。
 
 ___
 
 __この章の構成__
 
-&emsp;&emsp; [イディオム](cpp_idioms.md#SS_29_1)  
-&emsp;&emsp;&emsp; [ガード節(Early Return)](cpp_idioms.md#SS_29_1_1)  
-&emsp;&emsp;&emsp; [RAII(scoped guard)](cpp_idioms.md#SS_29_1_2)  
-&emsp;&emsp;&emsp; [Copy-And-Swap](cpp_idioms.md#SS_29_1_3)  
-&emsp;&emsp;&emsp; [CRTP(curiously recurring template pattern)](cpp_idioms.md#SS_29_1_4)  
-&emsp;&emsp;&emsp; [Accessor](cpp_idioms.md#SS_29_1_5)  
-&emsp;&emsp;&emsp; [Immutable](cpp_idioms.md#SS_29_1_6)  
-&emsp;&emsp;&emsp; [NVI(non virtual interface)](cpp_idioms.md#SS_29_1_7)  
+&emsp;&emsp; [イディオム](cpp_idioms.md#SS_21_1)  
+&emsp;&emsp;&emsp; [ガード節(Early Return)](cpp_idioms.md#SS_21_1_1)  
+&emsp;&emsp;&emsp; [RAII(scoped guard)](cpp_idioms.md#SS_21_1_2)  
+&emsp;&emsp;&emsp; [Copy-And-Swap](cpp_idioms.md#SS_21_1_3)  
+&emsp;&emsp;&emsp; [CRTP(curiously recurring template pattern)](cpp_idioms.md#SS_21_1_4)  
+&emsp;&emsp;&emsp; [Accessor](cpp_idioms.md#SS_21_1_5)  
+&emsp;&emsp;&emsp; [Immutable](cpp_idioms.md#SS_21_1_6)  
+&emsp;&emsp;&emsp; [NVI(non virtual interface)](cpp_idioms.md#SS_21_1_7)  
 
-&emsp;&emsp; [実装パターン](cpp_idioms.md#SS_29_2)  
-&emsp;&emsp;&emsp; [Pimpl](cpp_idioms.md#SS_29_2_1)  
-&emsp;&emsp;&emsp; [lightweight Pimpl](cpp_idioms.md#SS_29_2_2)  
-&emsp;&emsp;&emsp; [BitmaskType](cpp_idioms.md#SS_29_2_3)  
-&emsp;&emsp;&emsp; [Future](cpp_idioms.md#SS_29_2_4)  
-&emsp;&emsp;&emsp; [Null Object](cpp_idioms.md#SS_29_2_5)  
-&emsp;&emsp;&emsp; [Cでのクラス表現](cpp_idioms.md#SS_29_2_6)  
+&emsp;&emsp; [実装パターン](cpp_idioms.md#SS_21_2)  
+&emsp;&emsp;&emsp; [Pimpl](cpp_idioms.md#SS_21_2_1)  
+&emsp;&emsp;&emsp; [lightweight Pimpl](cpp_idioms.md#SS_21_2_2)  
+&emsp;&emsp;&emsp; [BitmaskType](cpp_idioms.md#SS_21_2_3)  
+&emsp;&emsp;&emsp; [Future](cpp_idioms.md#SS_21_2_4)  
+&emsp;&emsp;&emsp; [Null Object](cpp_idioms.md#SS_21_2_5)  
+&emsp;&emsp;&emsp; [Cでのクラス表現](cpp_idioms.md#SS_21_2_6)  
 
-&emsp;&emsp; [オブジェクト指向](cpp_idioms.md#SS_29_3)  
-&emsp;&emsp;&emsp; [is-a](cpp_idioms.md#SS_29_3_1)  
-&emsp;&emsp;&emsp; [has-a](cpp_idioms.md#SS_29_3_2)  
-&emsp;&emsp;&emsp; [is-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3)  
-&emsp;&emsp;&emsp;&emsp; [public継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_1)  
-&emsp;&emsp;&emsp;&emsp; [private継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_2)  
-&emsp;&emsp;&emsp;&emsp; [コンポジションによる(has-a)is-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_3)  
+&emsp;&emsp; [オブジェクト指向](cpp_idioms.md#SS_21_3)  
+&emsp;&emsp;&emsp; [is-a](cpp_idioms.md#SS_21_3_1)  
+&emsp;&emsp;&emsp; [has-a](cpp_idioms.md#SS_21_3_2)  
+&emsp;&emsp;&emsp; [is-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3)  
+&emsp;&emsp;&emsp;&emsp; [public継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_1)  
+&emsp;&emsp;&emsp;&emsp; [private継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_2)  
+&emsp;&emsp;&emsp;&emsp; [コンポジションによる(has-a)is-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_3)  
 
-&emsp;&emsp; [オブジェクトの所有権](cpp_idioms.md#SS_29_4)  
-&emsp;&emsp;&emsp; [オブジェクトの排他所有](cpp_idioms.md#SS_29_4_1)  
-&emsp;&emsp;&emsp; [オブジェクトの共有所有](cpp_idioms.md#SS_29_4_2)  
-&emsp;&emsp;&emsp; [オブジェクトの循環所有](cpp_idioms.md#SS_29_4_3)  
+&emsp;&emsp; [オブジェクトの所有権](cpp_idioms.md#SS_21_4)  
+&emsp;&emsp;&emsp; [オブジェクトの排他所有](cpp_idioms.md#SS_21_4_1)  
+&emsp;&emsp;&emsp; [オブジェクトの共有所有](cpp_idioms.md#SS_21_4_2)  
+&emsp;&emsp;&emsp; [オブジェクトの循環所有](cpp_idioms.md#SS_21_4_3)  
 
-&emsp;&emsp; [copy/moveと等価性のセマンティクス](cpp_idioms.md#SS_29_5)  
-&emsp;&emsp;&emsp; [等価性のセマンティクス](cpp_idioms.md#SS_29_5_1)  
-&emsp;&emsp;&emsp; [copyセマンティクス](cpp_idioms.md#SS_29_5_2)  
-&emsp;&emsp;&emsp; [moveセマンティクス](cpp_idioms.md#SS_29_5_3)  
-&emsp;&emsp;&emsp; [MoveAssignable要件](cpp_idioms.md#SS_29_5_4)  
-&emsp;&emsp;&emsp; [CopyAssignable要件](cpp_idioms.md#SS_29_5_5)  
+&emsp;&emsp; [copy/moveと等価性のセマンティクス](cpp_idioms.md#SS_21_5)  
+&emsp;&emsp;&emsp; [等価性のセマンティクス](cpp_idioms.md#SS_21_5_1)  
+&emsp;&emsp;&emsp; [copyセマンティクス](cpp_idioms.md#SS_21_5_2)  
+&emsp;&emsp;&emsp; [moveセマンティクス](cpp_idioms.md#SS_21_5_3)  
+&emsp;&emsp;&emsp; [MoveAssignable要件](cpp_idioms.md#SS_21_5_4)  
+&emsp;&emsp;&emsp; [CopyAssignable要件](cpp_idioms.md#SS_21_5_5)  
 
-&emsp;&emsp; [関数設計のガイドライン](cpp_idioms.md#SS_29_6)  
-&emsp;&emsp;&emsp; [関数の引数と戻り値の型](cpp_idioms.md#SS_29_6_1)  
-&emsp;&emsp;&emsp; [サイクロマティック複雑度のクライテリア](cpp_idioms.md#SS_29_6_2)  
-&emsp;&emsp;&emsp; [関数の行数のクライテリア](cpp_idioms.md#SS_29_6_3)  
+&emsp;&emsp; [関数設計のガイドライン](cpp_idioms.md#SS_21_6)  
+&emsp;&emsp;&emsp; [関数の引数と戻り値の型](cpp_idioms.md#SS_21_6_1)  
+&emsp;&emsp;&emsp; [サイクロマティック複雑度のクライテリア](cpp_idioms.md#SS_21_6_2)  
+&emsp;&emsp;&emsp; [関数の行数のクライテリア](cpp_idioms.md#SS_21_6_3)  
 
-&emsp;&emsp; [クラス設計のガイドライン](cpp_idioms.md#SS_29_7)  
-&emsp;&emsp;&emsp; [ゼロの原則(Rule of Zero)](cpp_idioms.md#SS_29_7_1)  
-&emsp;&emsp;&emsp; [五の原則(Rule of Five)](cpp_idioms.md#SS_29_7_2)  
-&emsp;&emsp;&emsp; [クラス凝集性のクライテリア](cpp_idioms.md#SS_29_7_3)  
+&emsp;&emsp; [クラス設計のガイドライン](cpp_idioms.md#SS_21_7)  
+&emsp;&emsp;&emsp; [ゼロの原則(Rule of Zero)](cpp_idioms.md#SS_21_7_1)  
+&emsp;&emsp;&emsp; [五の原則(Rule of Five)](cpp_idioms.md#SS_21_7_2)  
+&emsp;&emsp;&emsp; [クラス凝集性のクライテリア](cpp_idioms.md#SS_21_7_3)  
 
-&emsp;&emsp; [Modern CMake project layout](cpp_idioms.md#SS_29_8)  
-&emsp;&emsp;&emsp; [Modern CMake project layoutのカスタマイズ](cpp_idioms.md#SS_29_8_1)  
+&emsp;&emsp; [Modern CMake project layout](cpp_idioms.md#SS_21_8)  
+&emsp;&emsp;&emsp; [Modern CMake project layoutのカスタマイズ](cpp_idioms.md#SS_21_8_1)  
 
-&emsp;&emsp; [コーディングスタイル](cpp_idioms.md#SS_29_9)  
-&emsp;&emsp;&emsp; [AAAスタイル](cpp_idioms.md#SS_29_9_1)  
-&emsp;&emsp;&emsp; [east-const](cpp_idioms.md#SS_29_9_2)  
-&emsp;&emsp;&emsp; [west-const](cpp_idioms.md#SS_29_9_3)  
+&emsp;&emsp; [コーディングスタイル](cpp_idioms.md#SS_21_9)  
+&emsp;&emsp;&emsp; [AAAスタイル](cpp_idioms.md#SS_21_9_1)  
+&emsp;&emsp;&emsp; [east-const](cpp_idioms.md#SS_21_9_2)  
+&emsp;&emsp;&emsp; [west-const](cpp_idioms.md#SS_21_9_3)  
+&emsp;&emsp;&emsp; [Trailing Underscore(末尾アンダースコア)](cpp_idioms.md#SS_21_9_4)  
 
-&emsp;&emsp; [オブジェクトのコピー](cpp_idioms.md#SS_29_10)  
-&emsp;&emsp;&emsp; [シャローコピー](cpp_idioms.md#SS_29_10_1)  
-&emsp;&emsp;&emsp; [ディープコピー](cpp_idioms.md#SS_29_10_2)  
-&emsp;&emsp;&emsp; [スライシング](cpp_idioms.md#SS_29_10_3)  
+&emsp;&emsp; [オブジェクトのコピー](cpp_idioms.md#SS_21_10)  
+&emsp;&emsp;&emsp; [シャローコピー](cpp_idioms.md#SS_21_10_1)  
+&emsp;&emsp;&emsp; [ディープコピー](cpp_idioms.md#SS_21_10_2)  
+&emsp;&emsp;&emsp; [スライシング](cpp_idioms.md#SS_21_10_3)  
 
-&emsp;&emsp; [C++注意点](cpp_idioms.md#SS_29_11)  
-&emsp;&emsp;&emsp; [オーバーライドとオーバーロードの違い](cpp_idioms.md#SS_29_11_1)  
-&emsp;&emsp;&emsp; [danglingリファレンス](cpp_idioms.md#SS_29_11_2)  
-&emsp;&emsp;&emsp; [danglingポインタ](cpp_idioms.md#SS_29_11_3)  
-&emsp;&emsp;&emsp; [Most Vexing Parse](cpp_idioms.md#SS_29_11_4)  
+&emsp;&emsp; [C++注意点](cpp_idioms.md#SS_21_11)  
+&emsp;&emsp;&emsp; [オーバーライドとオーバーロードの違い](cpp_idioms.md#SS_21_11_1)  
+&emsp;&emsp;&emsp; [danglingリファレンス](cpp_idioms.md#SS_21_11_2)  
+&emsp;&emsp;&emsp; [danglingポインタ](cpp_idioms.md#SS_21_11_3)  
+&emsp;&emsp;&emsp; [Most Vexing Parse](cpp_idioms.md#SS_21_11_4)  
 
-&emsp;&emsp; [ソフトウェア一般](cpp_idioms.md#SS_29_12)  
-&emsp;&emsp;&emsp; [ヒープ](cpp_idioms.md#SS_29_12_1)  
-&emsp;&emsp;&emsp; [スレッドセーフ](cpp_idioms.md#SS_29_12_2)  
-&emsp;&emsp;&emsp; [リエントラント](cpp_idioms.md#SS_29_12_3)  
-&emsp;&emsp;&emsp; [クリティカルセクション](cpp_idioms.md#SS_29_12_4)  
-&emsp;&emsp;&emsp; [スピンロック](cpp_idioms.md#SS_29_12_5)  
-&emsp;&emsp;&emsp; [ミックスイン](cpp_idioms.md#SS_29_12_6)  
-&emsp;&emsp;&emsp; [ハンドル](cpp_idioms.md#SS_29_12_7)  
-&emsp;&emsp;&emsp; [フリースタンディング環境](cpp_idioms.md#SS_29_12_8)  
-&emsp;&emsp;&emsp; [サイクロマティック複雑度](cpp_idioms.md#SS_29_12_9)  
-&emsp;&emsp;&emsp; [凝集性](cpp_idioms.md#SS_29_12_10)  
-&emsp;&emsp;&emsp;&emsp; [凝集性の欠如](cpp_idioms.md#SS_29_12_10_1)  
-&emsp;&emsp;&emsp;&emsp; [LCOM](cpp_idioms.md#SS_29_12_10_2)  
+&emsp;&emsp; [ソフトウェア一般](cpp_idioms.md#SS_21_12)  
+&emsp;&emsp;&emsp; [ヒープ](cpp_idioms.md#SS_21_12_1)  
+&emsp;&emsp;&emsp; [スレッドセーフ](cpp_idioms.md#SS_21_12_2)  
+&emsp;&emsp;&emsp; [リエントラント](cpp_idioms.md#SS_21_12_3)  
+&emsp;&emsp;&emsp; [クリティカルセクション](cpp_idioms.md#SS_21_12_4)  
+&emsp;&emsp;&emsp; [スピンロック](cpp_idioms.md#SS_21_12_5)  
+&emsp;&emsp;&emsp; [ミックスイン](cpp_idioms.md#SS_21_12_6)  
+&emsp;&emsp;&emsp; [ハンドル](cpp_idioms.md#SS_21_12_7)  
+&emsp;&emsp;&emsp; [フリースタンディング環境](cpp_idioms.md#SS_21_12_8)  
+&emsp;&emsp;&emsp; [サイクロマティック複雑度](cpp_idioms.md#SS_21_12_9)  
+&emsp;&emsp;&emsp; [凝集性](cpp_idioms.md#SS_21_12_10)  
+&emsp;&emsp;&emsp;&emsp; [凝集性の欠如](cpp_idioms.md#SS_21_12_10_1)  
+&emsp;&emsp;&emsp;&emsp; [LCOM](cpp_idioms.md#SS_21_12_10_2)  
 
-&emsp;&emsp;&emsp; [Spurious Wakeup](cpp_idioms.md#SS_29_12_11)  
-&emsp;&emsp;&emsp; [Static Initialization Order Fiasco(静的初期化順序問題)](cpp_idioms.md#SS_29_12_12)  
-&emsp;&emsp;&emsp; [副作用](cpp_idioms.md#SS_29_12_13)  
-&emsp;&emsp;&emsp; [Itanium C++ ABI](cpp_idioms.md#SS_29_12_14)  
+&emsp;&emsp;&emsp; [Spurious Wakeup](cpp_idioms.md#SS_21_12_11)  
+&emsp;&emsp;&emsp; [Static Initialization Order Fiasco(静的初期化順序問題)](cpp_idioms.md#SS_21_12_12)  
+&emsp;&emsp;&emsp; [副作用](cpp_idioms.md#SS_21_12_13)  
+&emsp;&emsp;&emsp; [Itanium C++ ABI](cpp_idioms.md#SS_21_12_14)  
 
-&emsp;&emsp; [C++コンパイラ](cpp_idioms.md#SS_29_13)  
-&emsp;&emsp;&emsp; [g++](cpp_idioms.md#SS_29_13_1)  
-&emsp;&emsp;&emsp; [clang++](cpp_idioms.md#SS_29_13_2)  
+&emsp;&emsp; [C++コンパイラ](cpp_idioms.md#SS_21_13)  
+&emsp;&emsp;&emsp; [g++](cpp_idioms.md#SS_21_13_1)  
+&emsp;&emsp;&emsp; [clang++](cpp_idioms.md#SS_21_13_2)  
 
-&emsp;&emsp; [非ソフトウェア用語](cpp_idioms.md#SS_29_14)  
-&emsp;&emsp;&emsp; [セマンティクス](cpp_idioms.md#SS_29_14_1)  
-&emsp;&emsp;&emsp; [割れ窓理論](cpp_idioms.md#SS_29_14_2)  
-&emsp;&emsp;&emsp; [車輪の再発明](cpp_idioms.md#SS_29_14_3)  
+&emsp;&emsp; [非ソフトウェア用語](cpp_idioms.md#SS_21_14)  
+&emsp;&emsp;&emsp; [セマンティクス](cpp_idioms.md#SS_21_14_1)  
+&emsp;&emsp;&emsp; [割れ窓理論](cpp_idioms.md#SS_21_14_2)  
+&emsp;&emsp;&emsp; [車輪の再発明](cpp_idioms.md#SS_21_14_3)  
   
   
 
-[インデックス](fundamental_intro.md#SS_1_2)に戻る。  
+[インデックス](fundamental_intro.md#SS_1_3)に戻る。  
 
 ___
 
-## イディオム <a id="SS_29_1"></a>
+## イディオム <a id="SS_21_1"></a>
 
-### ガード節(Early Return) <a id="SS_29_1_1"></a>
+### ガード節(Early Return) <a id="SS_21_1_1"></a>
 ガード節とは、
 「可能な場合、処理を早期に打ち切るために関数やループの先頭に配置される短い条件文(通常はif文)」
 であり、以下のような利点がある。
@@ -236,7 +237,7 @@ ___
 この少しのレベルアップが数か月後、数年後に大きな差を生み出すことを忘れてはならない。
 
 
-### RAII(scoped guard) <a id="SS_29_1_2"></a>
+### RAII(scoped guard) <a id="SS_21_1_2"></a>
 RAIIとは、「Resource Acquisition Is Initialization」の略語であり、
 リソースの確保と解放をオブジェクトの初期化と破棄処理に結びつけるパターンもしくはイデオムである。
 特にダイナミックにオブジェクトを生成する場合、
@@ -415,7 +416,7 @@ RAIIのテクニックはメモリ管理のみでなく、ファイルディス�
 std::lock_guard<>によってunlockを行うことで、同様の効果が得られる。
 
 
-### Copy-And-Swap <a id="SS_29_1_3"></a>
+### Copy-And-Swap <a id="SS_21_1_3"></a>
 メンバ変数にポインタやスマートポインタを持つクラスに
 
 * copyコンストラクタ
@@ -567,7 +568,7 @@ move代入演算子が各コンストラクタとSwap関数により実装され
 これにより[エクセプション安全性の保証](core_lang_spec.md#SS_27_13)を持つ4関数をコードクローンすることなく実装できる。
 
 
-### CRTP(curiously recurring template pattern) <a id="SS_29_1_4"></a>
+### CRTP(curiously recurring template pattern) <a id="SS_21_1_4"></a>
 CRTPとは、
 
 ```cpp
@@ -584,7 +585,7 @@ CRTPとは、
 ```
 
 のようなテンプレートによる再帰構造を用いて、静的ポリモーフィズムを実現するためのパターンである。
-以下にこのパターンを使用した[ミックスイン](cpp_idioms.md#SS_29_12_6)の例を示す。
+以下にこのパターンを使用した[ミックスイン](cpp_idioms.md#SS_21_12_6)の例を示す。
 
 ```cpp
     //  example/cpp_idioms/crtp_ut.cpp 25
@@ -626,7 +627,7 @@ CRTPとは、
 
 なお、このパターンは、[std::enable_shared_from_this](stdlib_and_concepts.md#SS_28_5_2_2)の使用において前提知識となっている。
 
-### Accessor <a id="SS_29_1_5"></a>
+### Accessor <a id="SS_21_1_5"></a>
 publicメンバ変数とそれにアクセスするソースコードは典型的なアンチパターンであるため、
 このようなコードを禁じるのが一般的なプラクティスである。
 
@@ -801,7 +802,7 @@ a.DoSomething()の実行においても、それが必要かどうかはオブ�
 setterを使用する場合、上記のように処理の隠蔽化には特に気を付ける必要がある。
 
 
-### Immutable <a id="SS_29_1_6"></a>
+### Immutable <a id="SS_21_1_6"></a>
 クラスに対するimmutable、immutabilityの定義を以下のように定める。
 
 * immutable(不変な)なクラスとは、初期化後、状態の変更ができないクラスを指す。
@@ -813,7 +814,7 @@ immutabilityが高いほど、そのクラスの使用方法は制限される�
 また、クラスがimmutableでなくても、そのクラスのオブジェクトをconstハンドル経由でアクセスすることで、
 immutableとして扱うことができる。
 
-一方で、「[Accessor](cpp_idioms.md#SS_29_1_5)」で紹介したsetterは、クラスのimmutabilityを下げる。
+一方で、「[Accessor](cpp_idioms.md#SS_21_1_5)」で紹介したsetterは、クラスのimmutabilityを下げる。
 いつでも状態が変更できるため、ソースコードの可読性やデバッグ容易性が低下する。
 また、マルチスレッド環境においてはこのことが競合問題や、
 それを回避するためのロックがパフォーマンス問題やデッドロックを引き起こしてしまう。
@@ -823,7 +824,7 @@ immutableとして扱うことができる。
 可能な限りimmutableオブジェクト(constオブジェクト)として扱うべきである。
 
 
-### NVI(non virtual interface) <a id="SS_29_1_7"></a>
+### NVI(non virtual interface) <a id="SS_21_1_7"></a>
 NVIとは、「virtualなメンバ関数をpublicにしない」という実装上の制約である。
 
 下記のようにクラスBaseが定義されているとする。
@@ -992,8 +993,8 @@ NVIとは、「virtualなメンバ関数をpublicにしない」という実装�
 privateなメンバ関数はデフォルト引数を持つべきではない。
 
 
-## 実装パターン <a id="SS_29_2"></a>
-### Pimpl <a id="SS_29_2_1"></a>
+## 実装パターン <a id="SS_21_2"></a>
+### Pimpl <a id="SS_21_2_1"></a>
 このパターンは、「クラスA(a.cpp、a.hで宣言、定義)を使用するクラスにAの実装の詳細を伝搬させたくない」
 ような場合に使用する。
 そのため[オープン・クローズドの原則(OCP)](temp.md#SS_4_3)の実装方法としても有用である。
@@ -1255,8 +1256,8 @@ std::stringに依存していないこと、
 
 <!-- pu:essential/plant_uml/widget_ok.pu--><p><img src="data:image/png;base64,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" /></p>
 
-### lightweight Pimpl <a id="SS_29_2_2"></a>
-[Pimpl](cpp_idioms.md#SS_29_2_1)の解説で示したように依存関係をシンプルに保つには極めて有効なパターンではあるが、
+### lightweight Pimpl <a id="SS_21_2_2"></a>
+[Pimpl](cpp_idioms.md#SS_21_2_1)の解説で示したように依存関係をシンプルに保つには極めて有効なパターンではあるが、
 このパターンで実装されたクラスのインスタンス化のたびに一回以上のヒープからのアロケーションが必要になるため、
 このオーバーヘッドが気になるような場合に備えて、アロケーションを少なくするテクニックを以下に示す
 (なお、lightweight Pimplとは筆者の造語であり、ここで紹介するパターンはPimplの一種である)。
@@ -1378,7 +1379,7 @@ deleteを使わずにプレースメントnewで構築したオブジェクト�
 | 実装の複雑さ         | シンプル                      | やや複雑(プレースメントnew) |
 | メモリサイズの柔軟性 | 高い                          | 低い(コンパイル時に固定)    |
 
-### BitmaskType <a id="SS_29_2_3"></a>
+### BitmaskType <a id="SS_21_2_3"></a>
 下記のようなビットマスク表現は誤用しやすいインターフェースである。
 修正や拡張等に関しても脆弱であるため、避けるべきである。
 
@@ -1477,7 +1478,7 @@ enumによるビットマスク表現を使用して型チェックを強化し�
 この修正の延長で、Animal::GetPhisicalAbility()の戻り値もenumになり、これも誤用が難しくなった。
 
 
-### Future <a id="SS_29_2_4"></a>
+### Future <a id="SS_21_2_4"></a>
 [Future](https://ja.wikipedia.org/wiki/Future_%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3)とは、
 並行処理のためのデザインパターンであり、別スレッドに何らかの処理をさせる際、
 その結果の取得を、必要になるまで後回しにする手法である。
@@ -1585,7 +1586,7 @@ C++11では、std::future, std::promise, std::asyncによって実現できる�
 
 
 
-### Null Object <a id="SS_29_2_5"></a>
+### Null Object <a id="SS_21_2_5"></a>
 オブジェクトへのポインタを受け取った関数が
 「そのポインタがnullptrでない場合、そのポインタが指すオブジェクトに何かをさせる」
 というような典型的な条件文を削減するためのパターンである。
@@ -1658,7 +1659,7 @@ C++11では、std::future, std::promise, std::asyncによって実現できる�
 クラスではソースコードの単純化やnullptrチェック漏れの防止に非常に有効である。
 
 
-### Cでのクラス表現 <a id="SS_29_2_6"></a>
+### Cでのクラス表現 <a id="SS_21_2_6"></a>
 このドキュメントは、C++でのソフトウェア開発を前提としているため、
 ここで示したコードもC++で書いているが、
 
@@ -1938,8 +1939,8 @@ Pointから派生したクラスPoint3DのC++での実装を以下に示す。
 [モダンC言語プログラミング](https://www.amazon.co.jp/%E3%83%A2%E3%83%80%E3%83%B3C%E8%A8%80%E8%AA%9E%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0-%E3%82%A2%E3%82%B9%E3%82%AD%E3%83%BC%E6%9B%B8%E7%B1%8D-%E8%8A%B1%E4%BA%95-%E5%BF%97%E7%94%9F-ebook/dp/B00HWLJEKW)
 が役に立つだろう。
 
-## オブジェクト指向 <a id="SS_29_3"></a>
-### is-a <a id="SS_29_3_1"></a>
+## オブジェクト指向 <a id="SS_21_3"></a>
+### is-a <a id="SS_21_3_1"></a>
 「is-a」の関係は、オブジェクト指向プログラミング（OOP）
 においてクラス間の継承関係を説明する際に使われる概念である。
 クラスDerivedとBaseが「is-a」の関係である場合、
@@ -2091,10 +2092,10 @@ penguinとbirdの関係はis-aの関係ではあるが、
 ```
 
 修正されたKyukancho はstd::string インスタンスをメンバ変数として持ち、
-kyukanchoとstd::stringの関係を[has-a](cpp_idioms.md#SS_29_3_2)の関係と呼ぶ。
+kyukanchoとstd::stringの関係を[has-a](cpp_idioms.md#SS_21_3_2)の関係と呼ぶ。
 
 
-### has-a <a id="SS_29_3_2"></a>
+### has-a <a id="SS_21_3_2"></a>
 「has-a」の関係は、
 あるクラスのインスタンスが別のクラスのインスタンスを構成要素として含む関係を指す。
 つまり、あるクラスのオブジェクトが別のクラスのオブジェクトを保持している関係である。
@@ -2127,19 +2128,19 @@ Carクラスの例ではCarクラスにはEngine型のメンバ変数が存在�
     };
 ```
 
-### is-implemented-in-terms-of <a id="SS_29_3_3"></a>
+### is-implemented-in-terms-of <a id="SS_21_3_3"></a>
 「is-implemented-in-terms-of」の関係は、
 オブジェクト指向プログラミング（OOP）において、
 あるクラスが別のクラスの機能を内部的に利用して実装されていることを示す概念である。
 これは、あるクラスが他のクラスのインターフェースやメンバ関数を用いて、
 自身の機能を提供する場合に使われる。
-[has-a](cpp_idioms.md#SS_29_3_2)の関係は、is-implemented-in-terms-of の関係の一種である。
+[has-a](cpp_idioms.md#SS_21_3_2)の関係は、is-implemented-in-terms-of の関係の一種である。
 
 is-implemented-in-terms-ofは下記の手段1-3に示した方法がある。
 
-* 手段1.[public継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_1)  
-* 手段2.[private継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_2)  
-* 手段3.[コンポジションによる(has-a)is-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_3)  
+* 手段1.[public継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_1)  
+* 手段2.[private継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_2)  
+* 手段3.[コンポジションによる(has-a)is-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_3)  
 
 手段1-3にはそれぞれ、長所、短所があるため、必要に応じて手段を選択する必要がある。
 以下の議論を単純にするため、下記のようにクラスS、C、CCを定める。
@@ -2152,7 +2153,7 @@ is-implemented-in-terms-ofは下記の手段1-3に示した方法がある。
 依存関係の複雑さから考えた場合、CはSに強く依存する。
 場合によっては、この依存はCCからSへの依存間にも影響をあたえる。
 従って、手段3が依存関係を単純にしやすい。
-手段1は[is-a](cpp_idioms.md#SS_29_3_1)に見え、以下に示すような問題も考慮する必要があるため、
+手段1は[is-a](cpp_idioms.md#SS_21_3_1)に見え、以下に示すような問題も考慮する必要があるため、
 可読性、保守性を劣化させる可能性がある。
 
 ```cpp
@@ -2175,7 +2176,7 @@ is-implemented-in-terms-ofは下記の手段1-3に示した方法がある。
 の実現手段でもあるため、一概にコーディング規約などで排除することもできない。
 
 
-#### public継承によるis-implemented-in-terms-of <a id="SS_29_3_3_1"></a>
+#### public継承によるis-implemented-in-terms-of <a id="SS_21_3_3_1"></a>
 public継承によるis-implemented-in-terms-ofの実装例を以下に示す。
 
 ```cpp
@@ -2194,11 +2195,11 @@ public継承によるis-implemented-in-terms-ofの実装例を以下に示す。
 ```
 
 すでに述べたようにこの方法は、
-[private継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_2)や、
-[コンポジションによる(has-a)is-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_3)
+[private継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_2)や、
+[コンポジションによる(has-a)is-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_3)
 と比べコードがシンプルになる。 
 
-#### private継承によるis-implemented-in-terms-of <a id="SS_29_3_3_2"></a>
+#### private継承によるis-implemented-in-terms-of <a id="SS_21_3_3_2"></a>
 private継承によるis-implemented-in-terms-ofの実装例を以下に示す。
 
 ```cpp
@@ -2223,11 +2224,11 @@ private継承によるis-implemented-in-terms-ofの実装例を以下に示す�
     ASSERT_EQ(str.size(), 0);
 ```
 
-この方法は、[public継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_29_3_3_1)が持つデストラクタ問題は発生せす、
-[is-a](cpp_idioms.md#SS_29_3_1)と誤解してしまう問題も発生しない。
+この方法は、[public継承によるis-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3_1)が持つデストラクタ問題は発生せす、
+[is-a](cpp_idioms.md#SS_21_3_1)と誤解してしまう問題も発生しない。
 
 
-#### コンポジションによる(has-a)is-implemented-in-terms-of <a id="SS_29_3_3_3"></a>
+#### コンポジションによる(has-a)is-implemented-in-terms-of <a id="SS_21_3_3_3"></a>
 コンポジションによる(has-a)is-implemented-in-terms-ofの実装例を示す。
 
 ```cpp
@@ -2278,8 +2279,8 @@ private継承によるis-implemented-in-terms-ofの実装例を以下に示す�
 この方は実装を利用するクラストの依存関係を他の2つに比べるとシンプルにできるが、
 逆に実装例から昭なとおり、コード量が増えてしまう。
 
-## オブジェクトの所有権 <a id="SS_29_4"></a>
-### オブジェクトの排他所有 <a id="SS_29_4_1"></a>
+## オブジェクトの所有権 <a id="SS_21_4"></a>
+### オブジェクトの排他所有 <a id="SS_21_4_1"></a>
 オブジェクトの排他所有や、それを容易に実現するための
 [std::unique_ptr](https://cpprefjp.github.io/reference/memory/unique_ptr.html)
 の仕様を説明するために、下記のようにクラスA、Xを定義する。
@@ -2485,7 +2486,7 @@ std::unique_ptr、std::move()、[rvalue](core_lang_spec.md#SS_27_7_1_2)の関係
 
 こういった機能によりstd::unique_ptrはオブジェクトの排他所有を実現している。
 
-### オブジェクトの共有所有 <a id="SS_29_4_2"></a>
+### オブジェクトの共有所有 <a id="SS_21_4_2"></a>
 オブジェクトの共有所有や、それを容易に実現するための
 [std::shared_ptr](https://cpprefjp.github.io/reference/memory/shared_ptr.html)
 の仕様を説明するために、下記のようにクラスA、Xを定義する。
@@ -2680,7 +2681,7 @@ std::shared_ptr、std::move()、[rvalue](core_lang_spec.md#SS_27_7_1_2)の関係
 * std::shared_ptrを他のstd::shared_ptrに、
     * moveすることことで、保持中のオブジェクトの所有権を移動できる。
     * copyすることことで、保持中のオブジェクトの所有権を共有できる。
-* 下記のようなコードはstd::shared_ptrの仕様が想定する[セマンティクス](cpp_idioms.md#SS_29_14_1)に沿っておらず、
+* 下記のようなコードはstd::shared_ptrの仕様が想定する[セマンティクス](cpp_idioms.md#SS_21_14_1)に沿っておらず、
   [未定義動作](core_lang_spec.md#SS_27_14_3)に繋がる。
 
 ```cpp
@@ -2702,7 +2703,7 @@ std::shared_ptr、std::move()、[rvalue](core_lang_spec.md#SS_27_7_1_2)の関係
 こういった機能によりstd::shared_ptrはオブジェクトの共有所有を実現している。
 
 
-### オブジェクトの循環所有 <a id="SS_29_4_3"></a>
+### オブジェクトの循環所有 <a id="SS_21_4_3"></a>
 [std::shared_ptr](https://cpprefjp.github.io/reference/memory/shared_ptr.html)の使い方を誤ると、
 以下のコード例が示すようにメモリーリークが発生する。
 
@@ -2975,10 +2976,10 @@ X、Yオブジェクトの参照カウントは0にならず、従ってこれ�
 
 <!-- pu:essential/plant_uml/shared_cyclic_3.pu--><p><img src="data:image/png;base64,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" /></p>
 
-X、Yオブジェクトへの[ハンドル](cpp_idioms.md#SS_29_12_7)を完全に失った状態であり、X、Yオブジェクトを解放する手段はない。
+X、Yオブジェクトへの[ハンドル](cpp_idioms.md#SS_21_12_7)を完全に失った状態であり、X、Yオブジェクトを解放する手段はない。
 
-## copy/moveと等価性のセマンティクス <a id="SS_29_5"></a>
-### 等価性のセマンティクス <a id="SS_29_5_1"></a>
+## copy/moveと等価性のセマンティクス <a id="SS_21_5"></a>
+### 等価性のセマンティクス <a id="SS_21_5_1"></a>
 純粋数学での実数の等号(=)は、任意の実数x、y、zに対して、
 
 | 律   |意味                     |
@@ -3279,13 +3280,13 @@ Derived用のoperator==を
 
 以上で見てきたように、等価性のセマンティクスを守ったoperator==の実装には多くの観点が必要になる。
 
-### copyセマンティクス <a id="SS_29_5_2"></a>
+### copyセマンティクス <a id="SS_21_5_2"></a>
 copyセマンティクスとは以下を満たすようなセマンティクスである。
 
 * a = bが行われた後に、aとbが等価である。
 * a = bが行われた前後でbの値が変わっていない。
 
-従って、これらのオブジェクトに対して[等価性のセマンティクス](cpp_idioms.md#SS_29_5_1)
+従って、これらのオブジェクトに対して[等価性のセマンティクス](cpp_idioms.md#SS_21_5_1)
 を満たすoperator==が定義されている場合、
 以下を満たすようなセマンティクスであると言い換えることができる。
 
@@ -3329,7 +3330,7 @@ copyセマンティクスとは以下を満たすようなセマンティクス�
 この仕様は極めて不自然であり、std::auto_ptrはC++11で非推奨となり、C++17で規格から排除された。
 
 下記の単体テストから明らかな通り、
-「[等価性のセマンティクス](cpp_idioms.md#SS_29_5_1)」で示した最後の例も、copyセマンティクスを満たしていない。
+「[等価性のセマンティクス](cpp_idioms.md#SS_21_5_1)」で示した最後の例も、copyセマンティクスを満たしていない。
 
 ```cpp
     //  example/cpp_idioms/semantics_ut.cpp 364
@@ -3342,10 +3343,10 @@ copyセマンティクスとは以下を満たすようなセマンティクス�
     ASSERT_FALSE(b == d);  // copyセマンティクスを満たしていない
 ```
 
-原因は、copy代入で[スライシング](cpp_idioms.md#SS_29_10_3)が起こるためである。
+原因は、copy代入で[スライシング](cpp_idioms.md#SS_21_10_3)が起こるためである。
 
 
-### moveセマンティクス <a id="SS_29_5_3"></a>
+### moveセマンティクス <a id="SS_21_5_3"></a>
 moveセマンティクスとは以下を満たすようなセマンティクスである(operator==が定義されていると前提)。
 
 * パフォーマンス要件  
@@ -3449,7 +3450,7 @@ moveセマンティクスの目的である「パフォーマンスの向上」�
 
 ```
 
-### MoveAssignable要件 <a id="SS_29_5_4"></a>
+### MoveAssignable要件 <a id="SS_21_5_4"></a>
 MoveAssignable要件は、C++において型がmove代入をサポートするために満たすべき条件を指す。
 move代入はリソースを効率的に転送する操作であり、以下の条件を満たす必要がある。
 
@@ -3465,14 +3466,14 @@ move代入はリソースを効率的に転送する操作であり、以下の�
 
 4. 効率性  
    move代入は通常、copy代入よりも効率的であることが求められる。
-   これは、リソースの複製を避けることで達成される(「[moveセマンティクス](cpp_idioms.md#SS_29_5_3)」参照)。
+   これは、リソースの複製を避けることで達成される(「[moveセマンティクス](cpp_idioms.md#SS_21_5_3)」参照)。
 
 5. デフォルト実装  
    move代入演算子が明示的に定義されていない場合でも、
    クラスが一定の条件(例: move不可能なメンバが存在しないこと)を満たしていれば、
    コンパイラがデフォルトの実装(「[特殊メンバ関数](core_lang_spec.md#SS_27_6_1)」参照)を生成する。
 
-### CopyAssignable要件 <a id="SS_29_5_5"></a>
+### CopyAssignable要件 <a id="SS_21_5_5"></a>
 CopyAssignable要件は、C++において型がcopy代入をサポートするために満たすべき条件を指す。
 
 1. 動作が定義されていること  
@@ -3483,7 +3484,7 @@ CopyAssignable要件は、C++において型がcopy代入をサポートする�
    代入後、代入先のオブジェクトの値は代入元のオブジェクトの値と一致していなければならない。
 
 3. 正しいセマンティクス  
-   copy代入によって代入元のオブジェクトが変更されてはならない(「[copyセマンティクス](cpp_idioms.md#SS_29_5_2)」参照)。
+   copy代入によって代入元のオブジェクトが変更されてはならない(「[copyセマンティクス](cpp_idioms.md#SS_21_5_2)」参照)。
    代入先のオブジェクトが保持していたリソース(例: メモリ)は適切に解放される必要がある。
 
 4. デフォルト実装  
@@ -3491,8 +3492,8 @@ CopyAssignable要件は、C++において型がcopy代入をサポートする�
    クラスが一定の条件(例: copy不可能なメンバが存在しないこと)を満たしていれば、
    コンパイラがデフォルトの実装(「[特殊メンバ関数](core_lang_spec.md#SS_27_6_1)」参照)を生成する。
 
-## 関数設計のガイドライン <a id="SS_29_6"></a>
-### 関数の引数と戻り値の型 <a id="SS_29_6_1"></a>
+## 関数設計のガイドライン <a id="SS_21_6"></a>
+### 関数の引数と戻り値の型 <a id="SS_21_6_1"></a>
 関数の引数型および戻り値型に関するガイドラインを以下の表で表す。
 
 <table>
@@ -3543,8 +3544,8 @@ CopyAssignable要件は、C++において型がcopy代入をサポートする�
 * `X&`
 
 
-### サイクロマティック複雑度のクライテリア <a id="SS_29_6_2"></a>
-関数構造の適・不適については、[サイクロマティック複雑度](cpp_idioms.md#SS_29_12_9)によって下記テーブルのように定義する。
+### サイクロマティック複雑度のクライテリア <a id="SS_21_6_2"></a>
+関数構造の適・不適については、[サイクロマティック複雑度](cpp_idioms.md#SS_21_12_9)によって下記テーブルのように定義する。
 
 | サイクロマティック複雑度(CC) | 複雑さの状態                                     |
 | :--------------------------: | :----------------------------------------------- |
@@ -3553,7 +3554,7 @@ CopyAssignable要件は、C++において型がcopy代入をサポートする�
 |       31 < CC <  50          | 構造的なリスクあり(場合により不適)               |
 |       51 < CC                | テスト不可能、デグレードリスクが非常に高い(不適) |
 
-### 関数の行数のクライテリア <a id="SS_29_6_3"></a>
+### 関数の行数のクライテリア <a id="SS_21_6_3"></a>
 C++の創始者であるビャーネ・ストラウストラップ氏は、
   [プログラミング言語C++ 第4版](https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EC-%E7%AC%AC4%E7%89%88-%E3%83%93%E3%83%A3%E3%83%BC%E3%83%8D%E3%83%BB%E3%82%B9%E3%83%88%E3%83%A9%E3%82%A6%E3%82%B9%E3%83%88%E3%83%A9%E3%83%83%E3%83%97-ebook/dp/B01BGEO9MS)
   の中で、下記のように述べている。
@@ -3563,11 +3564,11 @@ C++の創始者であるビャーネ・ストラウストラップ氏は、
     私自身は、もっと小さい平均 7 行程度を理想としている。 
 ```
 
-## クラス設計のガイドライン <a id="SS_29_7"></a>
-### ゼロの原則(Rule of Zero) <a id="SS_29_7_1"></a>
+## クラス設計のガイドライン <a id="SS_21_7"></a>
+### ゼロの原則(Rule of Zero) <a id="SS_21_7_1"></a>
 「ゼロの原則」は、リソース管理を直接クラスで行わず、
 リソース管理を専門とするクラス
-(例: 標準ライブラリの[RAII(scoped guard)](cpp_idioms.md#SS_29_1_2)クラス)に任せる設計ガイドラインを指す。
+(例: 標準ライブラリの[RAII(scoped guard)](cpp_idioms.md#SS_21_1_2)クラス)に任せる設計ガイドラインを指す。
 この法則に従うと、自身で特殊メンバ関数を定義する必要がなくなる。
 
 ```cpp
@@ -3601,7 +3602,7 @@ C++の創始者であるビャーネ・ストラウストラップ氏は、
 上記のように信頼性の高いクラスに特殊メンバ関数の処理を任せることにより、
 クラス自体にリソース管理の責任を持たせる必要がなくなる。
 
-### 五の原則(Rule of Five) <a id="SS_29_7_2"></a>
+### 五の原則(Rule of Five) <a id="SS_21_7_2"></a>
 「五の原則」は、
 クラスがリソース(例: 動的メモリやファイルハンドルなど)を管理する場合、
 デフォルトコンストラクタを除く[特殊メンバ関数](core_lang_spec.md#SS_27_6_1)、
@@ -3616,7 +3617,7 @@ C++の創始者であるビャーネ・ストラウストラップ氏は、
 特殊メンバ関数の挙動を正しく定義しないと、
 リソースの不適切な管理(例: メモリリーク、リソースの二重解放)を招く可能性がある。
 自動生成されるメンバ関数では、
-複雑なリソース管理の要件を満たせないことがある(「[シャローコピー](cpp_idioms.md#SS_29_10_1)」参照)。
+複雑なリソース管理の要件を満たせないことがある(「[シャローコピー](cpp_idioms.md#SS_21_10_1)」参照)。
 
 なお、「五の原則」は、「六の原則」と呼ばれることもある。
 その場合、この原則が対象とする関数は、
@@ -3624,14 +3625,14 @@ C++の創始者であるビャーネ・ストラウストラップ氏は、
 
 このガイドラインに従って、コピーやムーブを実装する場合、
 
-* [等価性のセマンティクス](cpp_idioms.md#SS_29_5_1)
-* [copyセマンティクス](cpp_idioms.md#SS_29_5_2)
-* [moveセマンティクス](cpp_idioms.md#SS_29_5_3)
+* [等価性のセマンティクス](cpp_idioms.md#SS_21_5_1)
+* [copyセマンティクス](cpp_idioms.md#SS_21_5_2)
+* [moveセマンティクス](cpp_idioms.md#SS_21_5_3)
 
 に従わなけならない。
 
-### クラス凝集性のクライテリア <a id="SS_29_7_3"></a>
-クラス構造の適・不適については、[LCOM](cpp_idioms.md#SS_29_12_10_2)によって下記テーブルのように定義する。
+### クラス凝集性のクライテリア <a id="SS_21_7_3"></a>
+クラス構造の適・不適については、[LCOM](cpp_idioms.md#SS_21_12_10_2)によって下記テーブルのように定義する。
 
 | 凝集性の欠如(LCOM)  |  クラスの状態              |
 |:-------------------:|:--------------------------:|
@@ -3654,7 +3655,7 @@ C++の創始者であるビャーネ・ストラウストラップ氏は、
   メンバ関数が異なる責務にまたがっている可能性が高いため、
   一刻も早くデザインの見直しを行うべきだろう。
 
-## Modern CMake project layout <a id="SS_29_8"></a>
+## Modern CMake project layout <a id="SS_21_8"></a>
 [Modern CMake project layout](https://cliutils.gitlab.io/modern-cmake/chapters/basics/structure.html)
 はパッケージ単位でディレクトリを分割し、各パッケージが独立したビルド単位となる構造である。
 このような構造はビルドツールに[CMake](https://cliutils.gitlab.io/modern-cmake/)を使用する場合は特に有効であるが、
@@ -3762,8 +3763,8 @@ __[トップレベルCMakeLists.txt例]__
     target_link_libraries(app PRIVATE core logger)
 ```
 
-### Modern CMake project layoutのカスタマイズ <a id="SS_29_8_1"></a>
-このドキュメントでは、以下の方針に基づいて[Modern CMake project layout](cpp_idioms.md#SS_29_8)の構成をカスタマイズすることを推奨する。
+### Modern CMake project layoutのカスタマイズ <a id="SS_21_8_1"></a>
+このドキュメントでは、以下の方針に基づいて[Modern CMake project layout](cpp_idioms.md#SS_21_8)の構成をカスタマイズすることを推奨する。
 
 - パス名が過度に長くなることを避ける。
 - `tests`（または `test`）という語は統合テストを指す場合もあるため、
@@ -3807,8 +3808,8 @@ __[置き換え後のディレクトリ構造例]__
             └── logger_ut.cpp
 ```
 
-## コーディングスタイル <a id="SS_29_9"></a>
-### AAAスタイル <a id="SS_29_9_1"></a>
+## コーディングスタイル <a id="SS_21_9"></a>
+### AAAスタイル <a id="SS_21_9_1"></a>
 このドキュメントでのAAAとは、単体テストのパターンarrange-act-assertではなく、
 almost always autoを指し、
 AAAスタイルとは、「可能な場合、型を左辺に明示して変数を宣言する代わりに、autoを使用する」
@@ -4078,11 +4079,11 @@ AAAスタイルでは、以下のような場合に注意が必要である。
     }
 ```
  
-### east-const <a id="SS_29_9_2"></a>
+### east-const <a id="SS_21_9_2"></a>
 east-constとは、`const`修飾子を修飾する型要素の右側(east＝右)に置くコーディングスタイルのこと。
 つまり「`const`はどの対象を修飾するか」を明確にするため、被修飾対象の直後に const を書くのが特徴である。
 
-このスタイルは、C言語由来の「`const`を左に置く」スタイル([west-const](cpp_idioms.md#SS_29_9_3))に比べ、
+このスタイルは、C言語由来の「`const`を左に置く」スタイル([west-const](cpp_idioms.md#SS_21_9_3))に比べ、
 テンプレート展開や型推論の際に一貫性があり、C++コミュニティではしばしば論理的・直感的と評価されている。
 
 ```cpp
@@ -4108,7 +4109,7 @@ typeid のデマングル結果や Itanium C++ ABI でもこの形式が採用�
 
 なお、このドキュメントでは、このスタイルを採用している。
 
-### west-const <a id="SS_29_9_3"></a>
+### west-const <a id="SS_21_9_3"></a>
 west-constとは、`const`修飾子を型の左側(west＝左)に置くコーディングスタイルのこと。
 C言語からの伝統的な表記法であり、多くの標準ライブラリや教科書でも依然としてこの書き方が用いられている。
 
@@ -4135,11 +4136,32 @@ C言語からの伝統的な表記法であり、多くの標準ライブラリ�
 このスタイルは「west constスタイル」または「左側const」と呼ばれ、
 C言語文化圏での可読性・慣習を重視する場合に採用されることが多い。
 
-## オブジェクトのコピー <a id="SS_29_10"></a>
-### シャローコピー <a id="SS_29_10_1"></a>
+### Trailing Underscore(末尾アンダースコア) <a id="SS_21_9_4"></a>
+Trailing underscoreとは、C++においてメンバー変数名の末尾にアンダースコア
+(\_)を付ける命名規約である。例えば、data_、count_、name_ のように記述する。
+
+__採用の背景__  
+この規約が広まった主な理由は以下の通りである：  
+
+* 予約識別子との衝突回避 - 先頭のアンダースコアは標準で予約されている(\_+大文字、\_\_など)ため使用できない
+* 可読性の向上 - プレフィックス方式(m_dataなど)と比べて、自然な語順を保てる
+* コンストラクタでの利便性 - 初期化リストで `data_{data}` のようにパラメータ名と区別しやすい
+
+__主要な採用例__
+
+* Google C++ Style Guide
+* Scott Meyers著「Effective C++」シリーズ
+* 多くのオープンソースプロジェクト
+* このドキュメント
+
+この規約により、メンバー変数とローカル変数を明確に区別でき、コードの保守性が期待できる。
+
+
+## オブジェクトのコピー <a id="SS_21_10"></a>
+### シャローコピー <a id="SS_21_10_1"></a>
 シャローコピー(浅いコピー)とは、暗黙的、
 もしくは=defaultによってコンパイラが生成するようなcopyコンストラクタ、
-copy代入演算子が行うコピーであり、[ディープコピー](cpp_idioms.md#SS_29_10_2)と対比的に使われる概念である。
+copy代入演算子が行うコピーであり、[ディープコピー](cpp_idioms.md#SS_21_10_2)と対比的に使われる概念である。
 
 以下のクラスShallowOKには、コンパイラが生成するcopyコンストラクタ、
 copy代入演算子と同等なものを定義したが、これは問題のないシャローコピーである
@@ -4208,8 +4230,8 @@ copy代入演算子と同等なものを定義したが、これは問題のな�
     //    s0、s2のスコープアウト時に、~ShallowNG()により、2重解放される。
 ```
 
-### ディープコピー <a id="SS_29_10_2"></a>
-ディープコピーとは、[シャローコピー](cpp_idioms.md#SS_29_10_1)が発生させる問題を回避したコピーである。
+### ディープコピー <a id="SS_21_10_2"></a>
+ディープコピーとは、[シャローコピー](cpp_idioms.md#SS_21_10_1)が発生させる問題を回避したコピーである。
 
 以下に例を示す。
 
@@ -4260,7 +4282,7 @@ copy代入演算子と同等なものを定義したが、これは問題のな�
 ポインタが指しているオブジェクトを複製することにより、シャローコピーの問題を防ぐ。
 
 
-### スライシング <a id="SS_29_10_3"></a>
+### スライシング <a id="SS_21_10_3"></a>
 オブジェクトのスライシングとは、
 
 * クラスBaseとその派生クラスDerived
@@ -4326,7 +4348,7 @@ copy代入演算子と同等なものを定義したが、これは問題のな�
 
 copy代入演算子(=)によりコピーが行われた場合、=の両辺のオブジェクトは等価になるべきだが
 (copy代入演算子をオーバーロードした場合も、そうなるように定義すべきである)、
-スライシングが起こった場合、そうならないことが問題である(「[等価性のセマンティクス](cpp_idioms.md#SS_29_5_1)」参照)。
+スライシングが起こった場合、そうならないことが問題である(「[等価性のセマンティクス](cpp_idioms.md#SS_21_5_1)」参照)。
 
 下記にこの現象の発生メカニズムについて解説する。
 
@@ -4379,8 +4401,8 @@ d2_refが指しているオブジェクト(d2)へコピーされた」からで�
 <!-- pu:essential/plant_uml/slicing_array.pu--><p><img src="data:image/png;base64,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" /></p>
 
 
-## C++注意点 <a id="SS_29_11"></a>
-### オーバーライドとオーバーロードの違い <a id="SS_29_11_1"></a>
+## C++注意点 <a id="SS_21_11"></a>
+### オーバーライドとオーバーロードの違い <a id="SS_21_11_1"></a>
 下記例では、Base::g()がオーバーロードで、Derived::f()がオーバーライドである
 (Derived::g()はオーバーロードでもオーバーライドでもない(「[name-hiding](core_lang_spec.md#SS_27_12_9)」参照))。
 
@@ -4474,7 +4496,7 @@ Base::g()、Derived::g()の呼び出し選択は、オブジェクトの表層�
 
 このようなメカニズムにより仮想関数呼び出しが行われる。
 
-### danglingリファレンス <a id="SS_29_11_2"></a>
+### danglingリファレンス <a id="SS_21_11_2"></a>
 Dangling リファレンスとは、破棄後のオブジェクトを指しているリファレンスを指す。
 このようなリファレンスにアクセスすると、[未定義動作](core_lang_spec.md#SS_27_14_3)に繋がるに繋がる。
 
@@ -4516,11 +4538,11 @@ Dangling リファレンスとは、破棄後のオブジェクトを指して�
     ASSERT_TRUE(A_destructed && X_destructed);
 ```
 
-### danglingポインタ <a id="SS_29_11_3"></a>
-danglingポインタとは、[danglingリファレンス](cpp_idioms.md#SS_29_11_2)と同じような状態になったポインタを指す。
+### danglingポインタ <a id="SS_21_11_3"></a>
+danglingポインタとは、[danglingリファレンス](cpp_idioms.md#SS_21_11_2)と同じような状態になったポインタを指す。
 
 
-### Most Vexing Parse <a id="SS_29_11_4"></a>
+### Most Vexing Parse <a id="SS_21_11_4"></a>
 Most Vexing Parse(最も困惑させる構文解析)とは、C++の文法に関連する問題で、
 Scott Meyersが彼の著書"Effective STL"の中でこの現象に名前をつけたことに由来する。
 
@@ -4555,8 +4577,8 @@ Scott Meyersが彼の著書"Effective STL"の中でこの現象に名前をつ�
 [初期化子リストコンストラクタ](core_lang_spec.md#SS_27_6_1_1)の呼び出しでオブジェクトの初期化を行うことで、
 このような問題を回避できる。
 
-## ソフトウェア一般 <a id="SS_29_12"></a>
-### ヒープ <a id="SS_29_12_1"></a>
+## ソフトウェア一般 <a id="SS_21_12"></a>
+### ヒープ <a id="SS_21_12_1"></a>
 ヒープとは、プログラム実行時に動的メモリ割り当てを行うためのメモリ領域である。
 malloc、calloc、reallocといった関数を使用して必要なサイズのメモリを確保し、freeで解放する。
 スタックとは異なり、プログラマが明示的にメモリ管理を行う必要があり、解放漏れはメモリリークを引き起こす。
@@ -4565,24 +4587,24 @@ malloc、calloc、reallocといった関数を使用して必要なサイズの�
 連続的な割り当てと解放により利用可能なメモリが分散する課題がある。適切なヒープ管理は、
 C/C++プログラミングにおける重要なスキルの一つである。
 
-### スレッドセーフ <a id="SS_29_12_2"></a>
+### スレッドセーフ <a id="SS_21_12_2"></a>
 スレッドセーフとは「複数のスレッドから同時にアクセスされても、
 排他制御などの機構([std::mutex](stdlib_and_concepts.md#SS_28_3_2))により共有データの整合性が保たれ、正しく動作する性質」である。
 
-### リエントラント <a id="SS_29_12_3"></a>
+### リエントラント <a id="SS_21_12_3"></a>
 リエントラントとは「実行中に同じ関数が再度呼び出されても、グローバル変数や静的変数に依存せず、
 ローカル変数のみで動作するため正しく動作する性質」である。
 
-一般に、リエントラントな関数は[スレッドセーフ](cpp_idioms.md#SS_29_12_2)であるが、逆は成り立たない。
+一般に、リエントラントな関数は[スレッドセーフ](cpp_idioms.md#SS_21_12_2)であるが、逆は成り立たない。
 
 
-### クリティカルセクション <a id="SS_29_12_4"></a>
+### クリティカルセクション <a id="SS_21_12_4"></a>
 複数のスレッドから同時にアクセスされると競合状態を引き起こす可能性があるコード領域をクリティカルセクションと呼ぶ。
 典型的には、共有変数や共有データ構造を読み書きするコード部分がこれに該当する。
 クリティカルセクションは、[std::mutex](stdlib_and_concepts.md#SS_28_3_2)等の排他制御機構によって保護し、
 一度に一つのスレッドのみが実行できるようにする必要がある。
 
-### スピンロック <a id="SS_29_12_5"></a>
+### スピンロック <a id="SS_21_12_5"></a>
 スピンロックとは、
 スレッドがロックを取得できるまでCPUを占有したままビジーループで待機する排他制御方式である。
 スリープを伴わずカーネルを呼び出さないため、短時間の競合では高速に動作するが、
@@ -4653,35 +4675,35 @@ C++11では、スピンロックは[std::atomic](stdlib_and_concepts.md#SS_28_3_
     ASSERT_EQ(c.count_, expected);
 ```
 
-### ミックスイン <a id="SS_29_12_6"></a>
+### ミックスイン <a id="SS_21_12_6"></a>
 ミックスインとは、オブジェクト指向プログラミングにおいて、
 複数のクラスに対して特定の機能やメソッドを提供するための設計パターンである。
 「混ぜ込む（mix in）」という名称が示すとおり、既存のクラスに機能を追加する目的で使用される。
 
-C++では[CRTP(curiously recurring template pattern)](cpp_idioms.md#SS_29_1_4)や通常の継承によってミックスインを実現する。
+C++では[CRTP(curiously recurring template pattern)](cpp_idioms.md#SS_21_1_4)や通常の継承によってミックスインを実現する。
 
-### ハンドル <a id="SS_29_12_7"></a>
+### ハンドル <a id="SS_21_12_7"></a>
 CやC++の文脈でのハンドルとは、ポインタかリファレンスを指す。
 
-### フリースタンディング環境 <a id="SS_29_12_8"></a>
+### フリースタンディング環境 <a id="SS_21_12_8"></a>
 [フリースタンディング環境](https://ja.wikipedia.org/wiki/%E3%83%95%E3%83%AA%E3%83%BC%E3%82%B9%E3%82%BF%E3%83%B3%E3%83%87%E3%82%A3%E3%83%B3%E3%82%B0%E7%92%B0%E5%A2%83)
 とは、組み込みソフトウェアやOSのように、その実行にOSの補助を受けられないソフトウエアを指す。
 
-### サイクロマティック複雑度 <a id="SS_29_12_9"></a>
+### サイクロマティック複雑度 <a id="SS_21_12_9"></a>
 [サイクロマティック複雑度](https://ja.wikipedia.org/wiki/%E5%BE%AA%E7%92%B0%E7%9A%84%E8%A4%87%E9%9B%91%E5%BA%A6)
 とは関数の複雑さを表すメトリクスである。
 
 
-### 凝集性 <a id="SS_29_12_10"></a>
+### 凝集性 <a id="SS_21_12_10"></a>
 [凝集性(凝集度)](https://ja.wikipedia.org/wiki/%E5%87%9D%E9%9B%86%E5%BA%A6)
 とはクラス設計の妥当性を表す尺度の一種であり、
-「[凝集性の欠如](cpp_idioms.md#SS_29_12_10_1)(LCOM)」というメトリクスで計測される。
+「[凝集性の欠如](cpp_idioms.md#SS_21_12_10_1)(LCOM)」というメトリクスで計測される。
 
-* [凝集性の欠如](cpp_idioms.md#SS_29_12_10_1)メトリクスの値が1に近ければ凝集性は低く、この値が0に近ければ凝集性は高い。
+* [凝集性の欠如](cpp_idioms.md#SS_21_12_10_1)メトリクスの値が1に近ければ凝集性は低く、この値が0に近ければ凝集性は高い。
 * メンバ変数やメンバ関数が多くなれば、凝集性は低くなりやすい。
 * 凝集性は、クラスのメンバがどれだけ一貫した責任を持つかを示す。
 * 「[単一責任の原則(SRP)](temp.md#SS_4_2)」を守ると凝集性は高くなりやすい。
-* 「[Accessor](cpp_idioms.md#SS_29_1_5)」を多用すれば、振る舞いが分散しがちになるため、通常、凝集性は低くなる。
+* 「[Accessor](cpp_idioms.md#SS_21_1_5)」を多用すれば、振る舞いが分散しがちになるため、通常、凝集性は低くなる。
    従って、下記のようなクラスは凝集性が低い。言い換えれば、凝集性を下げることなく、
    より小さいクラスに分割できる。
    なお、以下のクラスでは、LCOMが位置にに近い値となっており、凝集性が欠如していることがわかる。
@@ -4708,7 +4730,7 @@ CやC++の文脈でのハンドルとは、ポインタかリファレンスを�
 ```
 
 良く設計されたクラスは、下記のようにメンバが結合しあっているため凝集性が高い
-(ただし、「[Immutable](cpp_idioms.md#SS_29_1_6)」の観点からは、QuadraticEquation::Set()がない方が良い)。
+(ただし、「[Immutable](cpp_idioms.md#SS_21_1_6)」の観点からは、QuadraticEquation::Set()がない方が良い)。
 言い換えれば、凝集性を落とさずにクラスを分割することは難しい。
 なお、上記の凝集性を欠くクラスを凝集性が高くなるように修正した例を以下に示す。
 
@@ -4754,19 +4776,19 @@ CやC++の文脈でのハンドルとは、ポインタかリファレンスを�
     }
 ```
 
-#### 凝集性の欠如 <a id="SS_29_12_10_1"></a>
-[凝集性](cpp_idioms.md#SS_29_12_10)の欠如(Lack of Cohesion in Methods/LCOM)とは、
+#### 凝集性の欠如 <a id="SS_21_12_10_1"></a>
+[凝集性](cpp_idioms.md#SS_21_12_10)の欠如(Lack of Cohesion in Methods/LCOM)とは、
 クラス設計の妥当性を表す尺度の一種であり、`0 ～ 1`の値で表すメトリクスである。
 
 LCOMの値が大きい(1か1に近い値)場合、「クラス内のメンバ関数が互いに関連性を持たず、
 それぞれが独立した責務やデータに依存するため、クラス全体の統一性が欠けている」ことを表す。
 
-クラスデザイン見直しの基準値としてLCOMを活用する場合、[クラス凝集性のクライテリア](cpp_idioms.md#SS_29_7_3)に具体的な推奨値を示す。
+クラスデザイン見直しの基準値としてLCOMを活用する場合、[クラス凝集性のクライテリア](cpp_idioms.md#SS_21_7_3)に具体的な推奨値を示す。
 
-#### LCOM <a id="SS_29_12_10_2"></a>
-[凝集性の欠如](cpp_idioms.md#SS_29_12_10_1)とはLack of Cohesion in Methodsの和訳であり、LCOMと呼ばれる。
+#### LCOM <a id="SS_21_12_10_2"></a>
+[凝集性の欠如](cpp_idioms.md#SS_21_12_10_1)とはLack of Cohesion in Methodsの和訳であり、LCOMと呼ばれる。
 
-### Spurious Wakeup <a id="SS_29_12_11"></a>
+### Spurious Wakeup <a id="SS_21_12_11"></a>
 [Spurious Wakeup](https://en.wikipedia.org/wiki/Spurious_wakeup)とは、
 条件変数に対する通知待ちの状態であるスレッドが、その通知がされていないにもかかわらず、
 起き上がってしまう現象のことを指す。
@@ -4832,7 +4854,7 @@ std::condition_variable::wait()の第2引数を下記のようにすることで
     }
 ```
 
-### Static Initialization Order Fiasco(静的初期化順序問題) <a id="SS_29_12_12"></a>
+### Static Initialization Order Fiasco(静的初期化順序問題) <a id="SS_21_12_12"></a>
 静的初期化順序問題とは、
 グローバルや名前空間スコープの静的オブジェクトの初期化順序が翻訳単位間で未定義であることに起因する不具合である。
 あるオブジェクトAが初期化時に別のオブジェクトBに依存していても、Bがまだ初期化されていない場合、
@@ -4844,7 +4866,7 @@ Aの初期化は未定義の状態となり、不正アクセスやクラッシ�
 
 C++20からこの問題の対策として、[constinit](core_lang_spec.md#SS_27_5_8)が導入された。
 
-### 副作用 <a id="SS_29_12_13"></a>
+### 副作用 <a id="SS_21_12_13"></a>
 プログラミングにおいて、式の評価による作用には、
 主たる作用とそれ以外の
 [副作用](https://ja.wikipedia.org/wiki/%E5%89%AF%E4%BD%9C%E7%94%A8_(%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%A0))
@@ -4855,13 +4877,13 @@ C++20からこの問題の対策として、[constinit](core_lang_spec.md#SS_27_
 ファイルの読み書き等のI/O実行、等がある。
 
 
-### Itanium C++ ABI <a id="SS_29_12_14"></a>
+### Itanium C++ ABI <a id="SS_21_12_14"></a>
 ItaniumC++ABIとは、C++コンパイラ間でバイナリ互換性を確保するための規約である。
 関数呼び出し規約、クラスレイアウト、仮想関数テーブル、例外処理、
 名前修飾(マングリング)などC++のオブジェクト表現と呼び出し方法に関する標準ルールを定めている。
 
 もともとはIntelItanium(IA-64)プロセッサ向けに策定されたが、
-[g++](cpp_idioms.md#SS_29_13_1)や[clang++](cpp_idioms.md#SS_29_13_2)はx86/x86-64やARM64など多くのプラットフォームでもItaniumC++ABI準拠の規約を採用している。
+[g++](cpp_idioms.md#SS_21_13_1)や[clang++](cpp_idioms.md#SS_21_13_2)はx86/x86-64やARM64など多くのプラットフォームでもItaniumC++ABI準拠の規約を採用している。
 そのため異なるコンパイラ間でもオブジェクトファイルやライブラリのリンクが可能である。
 また、typeid(...).name()をデマングルした場合、
 constがeast-const形式(T const)で表示されるのもこのABIの規約によるものである。
@@ -4873,10 +4895,10 @@ constがeast-const形式(T const)で表示されるのもこのABIの規約に�
 | **ARM C++ABI**    | AArch32, AArch64          | 基本的にItanium準拠だが例外あり         | ARM規則     |
 
 
-## C++コンパイラ <a id="SS_29_13"></a>
+## C++コンパイラ <a id="SS_21_13"></a>
 本ドキュメントで使用するg++/clang++のバージョンは以下のとおりである。
 
-### g++ <a id="SS_29_13_1"></a>
+### g++ <a id="SS_21_13_1"></a>
 ```
     g++ (Ubuntu 11.3.0-1ubuntu1~22.04) 11.3.0
     Copyright (C) 2021 Free Software Foundation, Inc.
@@ -4884,7 +4906,7 @@ constがeast-const形式(T const)で表示されるのもこのABIの規約に�
     warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 ```
 
-### clang++ <a id="SS_29_13_2"></a>
+### clang++ <a id="SS_21_13_2"></a>
 ```
     Ubuntu clang version 14.0.0-1ubuntu1
     Target: x86_64-pc-linux-gnu
@@ -4892,8 +4914,8 @@ constがeast-const形式(T const)で表示されるのもこのABIの規約に�
     InstalledDir: /usr/bin
 ```
 
-## 非ソフトウェア用語 <a id="SS_29_14"></a>
-### セマンティクス <a id="SS_29_14_1"></a>
+## 非ソフトウェア用語 <a id="SS_21_14"></a>
+### セマンティクス <a id="SS_21_14_1"></a>
 シンタックスとは構文論のことであり、セマンティクスとは意味論のことである。
 セマンティクス、シンタックスの違いをはっきりと際立たせる以下の有名な例文により、
 セマンティクスの意味を直感的に理解することができる。
@@ -4907,7 +4929,7 @@ constがeast-const形式(T const)で表示されるのもこのABIの規約に�
 構文が正しくても意味が成立しないことがあるという事実を示しており、構文と意味の違いを鮮やかに浮かび上がらせる。
 
 
-### 割れ窓理論 <a id="SS_29_14_2"></a>
+### 割れ窓理論 <a id="SS_21_14_2"></a>
 [割れ窓理論](https://ja.wikipedia.org/wiki/%E5%89%B2%E3%82%8C%E7%AA%93%E7%90%86%E8%AB%96)とは、
 軽微な犯罪も徹底的に取り締まることで、凶悪犯罪を含めた犯罪を抑止できるとする環境犯罪学上の理論。
 アメリカの犯罪学者ジョージ・ケリングが考案した。
@@ -4923,7 +4945,7 @@ constがeast-const形式(T const)で表示されるのもこのABIの規約に�
 等の重要な狙いがある。
 
 
-### 車輪の再発明 <a id="SS_29_14_3"></a>
+### 車輪の再発明 <a id="SS_21_14_3"></a>
 [車輪の再発明](https://ja.wikipedia.org/wiki/%E8%BB%8A%E8%BC%AA%E3%81%AE%E5%86%8D%E7%99%BA%E6%98%8E)
 とは、広く受け入れられ確立されている技術や解決法を（知らずに、または意図的に無視して）
 再び一から作ること」を指すための慣用句である。
