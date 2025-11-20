@@ -10,3 +10,6 @@
 [submodule "comprehensive"]
 	path = comprehensive
 	url = git@github:ichiroprogrammer/comprehensive_cpp.git
+[submodule "essential"]
+	path = essential
+	url = git@github.com:ichiroprogrammer/essential_cpp.git

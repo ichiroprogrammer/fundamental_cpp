@@ -1,3 +1,6 @@
 *
 !.gitignore
-!fundamental_cpp.md
+!core_lang_spec.md
+!cpp_idioms.md
+!sample_code.md
+!stdlib_and_concepts.md

@@ -1,18 +1,10 @@
-# RAII(scoped guard)
+# Appnedix
 
-# Polymorphic Memory Resource(pmr)
+## Visitor
 
-# Visitor
-
-# パラメータパック
-
-# 単一責任の原則(SRP)
-
-# Accessor
-
-# オープン・クローズドの原則(OCP)
-
-# Immutable
+## 単一責任の原則(SRP)
+## オープン・クローズドの原則(OCP)
+## リスコフの置換原則(LSP)
 
 # スコープ
 ## 名前空間
@@ -42,12 +34,11 @@
 ## 配列
 
 
-# グローバルnew/deleteのオーバーロードの実装
+# グローバルnew/deleteのオーバーロード
 
 # 演算子
 ## メモリアロケーション
 
-# Copy-And-Swap
 
 
 
