@@ -58,7 +58,7 @@ C++での`struct`と`class`は以下の点について異なるが、概念と�
 一般的には、データ構造的な性格が強い単純な型にはstructを、
 カプセル化を意識した抽象化された型にはclassを用いる慣習がある。
 
-cでの`struct`は以下の点において、c++での`struct`と異なる。
+Cでの`struct`は以下の点において、C++での`struct`と異なる。
 
 * [非モダンC++|クラス|メンバ関数](---)の定義
 * デフォルトの[メンバ変数の初期化](---)
@@ -73,27 +73,27 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 まずは、以下の構造体と関数の組み合わせのコード例について見ていこう。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_0.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_00.cpp #0:0 begin
 ```
 
 上記のcalc_bmiはPersonインスタンスからBMIを導き出す関数である。
 以下にPersonとcalc_bmiの使用例を示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_0.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_00.cpp #0:1 begin -1
 ```
 
 C++では、上記のような場合、メンバ関数を使用して、下記のように記述する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_1.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_01.cpp #0:0 begin
 ```
 
 なお、Person::calc_bmiは、 calc_bmiがPersonのメンバであることを表す。
 Person::calc_bmi()の使用方法は、以下のとおりである。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_1.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_01.cpp #0:1 begin -1
 ```
 
 上記例でのPersonのインスタンスpersonは適切に初期化されているが、
@@ -107,7 +107,6 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 * [コンストラクタ](---)
 * [デストラクタ](---)
 * [コピーコンストラクタ/コピー代入演算子](---)
-* [ムーブコンストラクタ/ムーブ代入演算子](---)
 
 
 ### コンストラクタ
@@ -117,13 +116,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 以下のコードでは、前例のPersonにコンストラクタを定義する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_2.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_02.cpp #0:0 begin
 ```
 
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_2.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_02.cpp #0:1 begin -1
 ```
 
 コンストラクタは戻り値を持つことはできないため、引数がクラスの制限に収まらない場合、
@@ -140,13 +139,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 * full_nameに保存したポインタを返す
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_3.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_03.cpp #0:0 begin
 ```
 
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_3.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_03.cpp #0:1 begin -1
 ```
 
 単体テストで示したようにこの関数は想定通り動作するが、メモリーリークを引き起こす。
@@ -159,10 +158,10 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_4.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_04.cpp #0:0 begin
 ```
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_4.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_04.cpp #0:1 begin -1
 ```
 
 ### アクセス指定子
@@ -173,7 +172,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 
 * public
   - どこからでもアクセス可能。
-  - クラスの利用者が使用するインターフェース（関数や定数など）を公開する場合に用いる。
+  - クラスの利用者が使用するインターフェース(関数や定数など)を公開する場合に用いる。
 
 * protected
   - クラス自身とその派生クラスからのみアクセス可能。
@@ -197,7 +196,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 * full_nameはNULLであるか、family_nameとfirst_nameから生成されるヒープ上の文字列
 * height_cmとweight_kgは0でない
 
-これらの制約が外部から変更された場合、Personが正常にできないことがある。
+これらの制約が外部から変更された場合、Personが正常に動作しないことがある。
 このような問題を避けるために、クラスは[アクセス指定子](---)を使用し、
 メンバへのアクセスを制御することが一般的である。
 
@@ -205,7 +204,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 [アクセス指定子](---)と`class`を使用し、以下のようにPersonのリファクタリングを行う。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_5.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_05.cpp #0:0 begin
 ```
 
 ### staticメンバ
@@ -225,18 +224,18 @@ C++では以下の3種類のアクセス指定子が存在する。
 
 前出のPerson::get_full_name()の実装に使用したmake_full_nameは、
 以下の例のようにstaticな関数にすることができる。
-上記したようにPerson::get_full_name()はメンバ変数に直接アクセスできないため、
-通用のメンバ関数に比べて制限が多い分、可読性が向上する。
+上記したようにPerson::make_full_name()はメンバ変数に直接アクセスできないため、
+通常のメンバ関数に比べて制限が多い分、可読性が向上する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_6.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_06.cpp #0:0 begin
 ```
 
 publicなstaitcメンバへのクラス外でのアクセスには、
 下記コードの例のようにクラス名修飾(任意のクラス名Tに対してT::member)がに必要になる。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_6.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_06.cpp #0:1 begin -1
 ```
 
 
@@ -247,13 +246,13 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 * Person::make_full_nameをクラス内部での使用専用にするためにprivate化
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_6.cpp #1:0 begin
+    // @@@ example/cpp03_syntax/class_ut_06.cpp #1:0 begin
 ```
 
-コードの修正した場合、それに合わせて単体テストも修正する必要がある。
+コードを修正した場合、それに合わせて単体テストも修正する必要がある。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_6.cpp #1:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_06.cpp #1:1 begin -1
 ```
 
 ### コピーコンストラクタ/コピー代入演算子
@@ -279,7 +278,7 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 上記のコードは「Cの構造体インスタンスの`=`による代入は、
 メンバの逐次コピーによって全体の代入や初期化が行われる」ことを示している。
 
-C++では、この挙動がそのまま「暗黙定義されたコピーコンストラクタ／コピー代入演算子」
+C++では、この挙動がそのまま「暗黙定義されたコピーコンストラクタ/コピー代入演算子」
 として取り込まれている。
 
 すなわち、Cの構造体のコピーと同様に、C++のクラスでもユーザが特別に定義しなければ、
@@ -291,26 +290,26 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下は二重解放バグの典型的なコード例である([staticメンバ](---)の例からメンバ変数を除いている)。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_7.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_07.cpp #0:0 begin
 ```
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_7.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_07.cpp #0:1 begin -1
 ```
 
 三の原則(Rule of Three)に従うことで上記の問題を避けることができる
 (C++11ではこの原則は[五の原則(Rule of Five)](---)に拡張された)。
 
-* オブジェクト生成時にリソースを確保するようなクラスは、ユーザが定義したデストラクタ持つ必要がある。
-* ユーザが定義したデストラクタ持つクラスはコピーコンストラクタを持つ必要がある。
-* ユーザが定義したコピーコンストラクタを持つクラスはコピー代入演算子をを持つ必要がある。
+* オブジェクト生成時にリソースを確保するようなクラスは、ユーザが定義したデストラクタを持つ必要がある。
+* ユーザが定義したデストラクタを持つクラスはコピーコンストラクタを持つ必要がある。
+* ユーザが定義したコピーコンストラクタを持つクラスはコピー代入演算子を持つ必要がある。
 
 以下にこの原則に従ったPersonを示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_8.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_ut_08.cpp #0:0 begin
 ```
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_8.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_ut_08.cpp #0:1 begin -1
 ```
 
 コピーコンストラクタ/コピー代入演算子を追加する前のコードが持っていた単純なコピーを[シャローコピー](---)と呼び、
@@ -321,19 +320,61 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 * [リファレンス](---)(型Tに対して、`T&`という形式)
 * [this](---)
 * [new/delete](---)
-* メンバ関数の後ろの[const](---)
+* [constメンバ関数](---)(宣言の末尾にconstがついているメンバ関数)
+
+
+### constメンバ関数
+constメンバ関数は、オブジェクトの状態(非mutableメンバ変数)を変更しないことを宣言するメンバ関数である。
+関数宣言の末尾にconst修飾子を付けて定義する。
+
+- 意味論:  
+    constメンバ関数内では、[this](---)ポインタが`const T*`型となり、
+    非constメンバ変数への代入や非constメンバ関数の呼び出しができない。
+- const正当性:  
+    constオブジェクトからはconstメンバ関数のみ呼び出し可能である。
+    これにより、const参照やconstポインタ経由でのアクセス時の安全性が保証される。
+- 論理的const:  
+    mutableキーワードを用いることで、
+    論理的にはconstでも物理的には変更可能なメンバ(キャッシュ、カウンタなど)を実装できる。
+
+```cpp
+    // @@@ example/cpp03_syntax/const_ut.cpp #0:0 begin
+```
+```cpp
+    // @@@ example/cpp03_syntax/const_ut.cpp #0:1 begin -1
+```
+
+### constメンバ変数
+constメンバ変数は、オブジェクトの生存期間中、値が変更されないメンバ変数である。以下の特性を持つ。
+
+- 初期化の必須性:  
+    constメンバ変数は宣言時またはコンストラクタの初期化リストで必ず初期化しなければならない。
+    コンストラクタ本体での代入は許されない。
+- イミュータブル性:  
+    一度初期化されると、オブジェクトの生存期間中、その値を変更することはできない。
+- 設計上の利点:  
+    変更不可能な属性を表現するのに適している。
+
+
+コード例については、[constメンバ関数](---)を参照せよ。
+
 
 ### Personのリファクタリング
 これまで例示してきたPersonを以下の方針でリファクタリングを行う。
 
-* 可読性向上のために、[C++の慣習](---)に従う。
-* [const](---)を正確に使用する。
+* 可読性向上のために、[Trailing Underscore(末尾アンダースコア)](---)に従う。
+* メンバを適切にconst修飾することで、[constメンバ関数](---)/[constメンバ変数](---)へ変更する。
+* Cでは、引数を持たない関数funcは`func(void)`のように宣言するが、C++では通常、単に`func()`と書く。
 
+```cpp
+    // @@@ example/cpp03_syntax/class_ut_09.cpp #0:0 begin
+```
 
-### ムーブコンストラクタ/ムーブ代入演算子
-一時オブジェクトやリソースの所有権を効率的に移動させるため、
-導入された[C++11の主な新規機能](---)である。
+リファクタリングにより、以下の改善が実現された。
 
+* メンバ変数名の末尾アンダースコアにより、引数名との区別が明確になった。
+* メンバが適切にconst修飾されたことで可読性が向上した。
+* malloc/freeからnew/deleteへ統一され、C++らしいメモリ管理となった。
 
 ### メンバ変数の初期化
 
@@ -342,14 +383,9 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 ### new/delete
 
 ### 継承
+### 派生
 
 --- 
-
-## C++の慣習
-C++でよく使われるコード上の慣習には多くのものがあるが、ここでは以下の最低限に留めて紹介する。
-
-* メンバ変数のシンボル名を`_`で終端する。
-* 引数なし関数`func(void)`と書かず、単に`func()`と書く。
 
 
 ## const

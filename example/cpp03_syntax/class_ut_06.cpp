@@ -34,8 +34,9 @@ private:  // メンバ変数への外部からのアクセスを禁止する
 Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
     // clang-format off
     : family_name(family_name), first_name(first_name), full_name(NULL),
-      height_cm(height_cm), weight_kg(weight_kg)  // clang-format on
+      height_cm(height_cm), weight_kg(weight_kg)
 {
+    // clang-format on
     // コンストラクタの中身は省略
     // @@@ ignore begin
     // メンバ変数の初期化などの処理はここに通常の関数の中に入れることができる
@@ -161,17 +162,17 @@ Person::Person(char const* family_name, char const* first_name, uint32_t height_
     // clang-format off
     : family_name(family_name), first_name(first_name),
       full_name(make_full_name(family_name, first_name)),
-      height_cm(height_cm), weight_kg(weight_kg)  // clang-format on
+      height_cm(height_cm), weight_kg(weight_kg)  
 {
+    // clang-format on
     // コンストラクタの中身は省略
     // @@@ ignore begin
     // メンバ変数の初期化などの処理はここに通常の関数の中に入れることができる
     assert(family_name && first_name);  // 本来ならエクセプションの送出すべきだが
     assert(height_cm != 0);             // 本来ならエクセプションの送出すべきだが
     assert(full_name != NULL);          // 本来ならエクセプションの送出すべきだが
-                                        //
-    ++instance_counter;  // コンストラクタが呼ばれたため、インスタンスの数が一つ増えた
     // @@@ ignore end
+    ++instance_counter;  // コンストラクタが呼ばれたため、インスタンスの数が一つ増えた
 }
 
 char* Person::make_full_name(char const* family_name, char const* first_name)

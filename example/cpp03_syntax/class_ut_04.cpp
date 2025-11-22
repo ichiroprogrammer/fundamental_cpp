@@ -29,8 +29,9 @@ struct Person {
 Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
     // clang-format off
     : family_name(family_name), first_name(first_name), full_name(NULL),
-      height_cm(height_cm), weight_kg(weight_kg)  // clang-format on
+      height_cm(height_cm), weight_kg(weight_kg)
 {
+    // clang-format on
     // コンストラクタの中身は省略
     // @@@ ignore begin
     // メンバ変数の初期化などの処理はここに通常の関数の中に入れることができる

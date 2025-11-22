@@ -6,33 +6,32 @@
 #include "suppress_warning.h"
 
 namespace {
-SUPPRESS_WARN_BEGIN
-SUPPRESS_WARN_GCC_NOT_EFF_CPP;
+// clang-formant off
 // @@@ sample begin 0:0
 
-class Person {
-public:
+struct Person {
     Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
 
-    uint32_t    calc_bmi(void);  // メンバ関数
-    char const* get_full_name(void);
-
-    ~Person(void);  // デストラクタ
-
-private:  // メンバ変数への外部からのアクセスを禁止する。
     char const* family_name;
     char const* first_name;
     char*       full_name;  // 新規メンバ
 
-    uint32_t height_cm;  // 身長 (cm単位と仮定)
-    uint32_t weight_kg;  // 体重 (kg単位と仮定)
+    uint32_t height_cm;       // 身長 (cm単位と仮定)
+    uint32_t weight_kg;       // 体重 (kg単位と仮定)
+    uint32_t calc_bmi(void);  // メンバ関数
+
+    char const* get_full_name(void);
 };
 
+// コンストラクタの定義
 Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
-    // clang-format off
-    : family_name(family_name), first_name(first_name), full_name(NULL),
-      height_cm(height_cm), weight_kg(weight_kg)  // clang-format on
+    : family_name(family_name),
+      first_name(first_name),
+      full_name(NULL),  // 新規に追加されたメンバをNULLで初期化
+      height_cm(height_cm),
+      weight_kg(weight_kg)
 {
+    // clang-format on
     // コンストラクタの中身は省略
     // @@@ ignore begin
     // メンバ変数の初期化などの処理はここに通常の関数の中に入れることができる
@@ -43,8 +42,6 @@ Person::Person(char const* family_name, char const* first_name, uint32_t height_
 
 char* make_full_name(char const* family_name, char const* first_name)
 {
-    // 関数の中身は変わっていないので省略
-    // @@@ ignore begin
     if (!family_name || !first_name) {
         return NULL;
     }
@@ -63,9 +60,9 @@ char* make_full_name(char const* family_name, char const* first_name)
     strcpy(full_name + family_len + 1, first_name);
 
     return full_name;
-    // @@@ ignore end
 }
 
+// 新規関数
 char const* Person::get_full_name(void)
 {
     if (full_name) {  // すでにfull_nameの生成済
@@ -74,14 +71,24 @@ char const* Person::get_full_name(void)
 
     return full_name = make_full_name(family_name, first_name);
 }
-
-Person::~Person(void)  // デストラクタの定義。
-{
-    if (full_name) {
-        free((void*)full_name);
-    }
-}
 // @@@ sample end
+
+TEST(cpp03, class_exp3)
+{
+#if !defined(__clang_analyzer__)
+    // @@@ sample begin 0:1
+
+    Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
+
+    char const* full_name = person.get_full_name();
+
+    ASSERT_STREQ(full_name, "yamada taro");  // 文字列として同値
+    // @@@ sample end
+
+    free((char*)full_name);
+    person.calc_bmi();
+#endif
+}
 
 uint32_t Person::calc_bmi(void)  // Personのcalc_bmiの定義
 {
@@ -94,18 +101,4 @@ uint32_t Person::calc_bmi(void)  // Personのcalc_bmiの定義
 
     return bmi;
 }
-TEST(cpp03, class_exp5)
-{
-    // @@@ sample begin 0:1
-
-    Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
-
-    char const* full_name = person.get_full_name();
-
-    ASSERT_STREQ(full_name, "yamada taro");  // 文字列として同値
-    // @@@ sample end
-    //
-    person.calc_bmi();
-}
-SUPPRESS_WARN_END;
 }  // namespace

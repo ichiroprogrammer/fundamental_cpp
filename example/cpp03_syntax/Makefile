@@ -1,6 +1,6 @@
 SRCS:=\
-	class_ut_0.cpp class_ut_1.cpp class_ut_2.cpp class_ut_3.cpp class_ut_4.cpp class_ut_5.cpp \
-	class_ut_6.cpp class_ut_7.cpp class_ut_8.cpp \
+	class_ut_00.cpp class_ut_01.cpp class_ut_02.cpp class_ut_03.cpp class_ut_04.cpp class_ut_05.cpp \
+	class_ut_06.cpp class_ut_07.cpp class_ut_08.cpp class_ut_09.cpp const_ut.cpp \
    	c_syle_ut.cpp \
 
 CPP_VER = c++20

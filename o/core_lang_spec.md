@@ -1,234 +1,234 @@
 <!-- essential/md/core_lang_spec.md -->
-# C++コア言語仕様 <a id="SS_27"></a>
+# C++コア言語仕様 <a id="SS_19"></a>
 この章では、C++コア言語仕様について説明する。
 
 ___
 
 __この章の構成__
 
-&emsp;&emsp; [型システムと算術の基礎](core_lang_spec.md#SS_27_1)  
-&emsp;&emsp;&emsp; [基本型](core_lang_spec.md#SS_27_1_1)  
-&emsp;&emsp;&emsp; [組み込み型](core_lang_spec.md#SS_27_1_2)  
-&emsp;&emsp;&emsp; [算術型](core_lang_spec.md#SS_27_1_3)  
-&emsp;&emsp;&emsp; [汎整数型](core_lang_spec.md#SS_27_1_4)  
-&emsp;&emsp;&emsp; [整数型](core_lang_spec.md#SS_27_1_5)  
-&emsp;&emsp;&emsp;&emsp; [ビットシフトにおける未定義動作](core_lang_spec.md#SS_27_1_5_1)  
+&emsp;&emsp; [型システムと算術の基礎](core_lang_spec.md#SS_19_1)  
+&emsp;&emsp;&emsp; [基本型](core_lang_spec.md#SS_19_1_1)  
+&emsp;&emsp;&emsp; [組み込み型](core_lang_spec.md#SS_19_1_2)  
+&emsp;&emsp;&emsp; [算術型](core_lang_spec.md#SS_19_1_3)  
+&emsp;&emsp;&emsp; [汎整数型](core_lang_spec.md#SS_19_1_4)  
+&emsp;&emsp;&emsp; [整数型](core_lang_spec.md#SS_19_1_5)  
+&emsp;&emsp;&emsp;&emsp; [ビットシフトにおける未定義動作](core_lang_spec.md#SS_19_1_5_1)  
 
-&emsp;&emsp;&emsp; [算術変換](core_lang_spec.md#SS_27_1_6)  
-&emsp;&emsp;&emsp; [汎整数型昇格](core_lang_spec.md#SS_27_1_7)  
-&emsp;&emsp;&emsp; [汎整数型拡張](core_lang_spec.md#SS_27_1_8)  
-&emsp;&emsp;&emsp; [浮動小数点型昇格](core_lang_spec.md#SS_27_1_9)  
-&emsp;&emsp;&emsp; [デフォルト引数昇格](core_lang_spec.md#SS_27_1_10)  
-&emsp;&emsp;&emsp; [縮小型変換](core_lang_spec.md#SS_27_1_11)  
-&emsp;&emsp;&emsp; [浮動小数点型](core_lang_spec.md#SS_27_1_12)  
-&emsp;&emsp;&emsp;&emsp; [浮動小数点型のダイナミックレンジ](core_lang_spec.md#SS_27_1_12_1)  
-&emsp;&emsp;&emsp;&emsp; [浮動小数点の誤差](core_lang_spec.md#SS_27_1_12_2)  
-&emsp;&emsp;&emsp;&emsp; [イプシロン](core_lang_spec.md#SS_27_1_12_3)  
-&emsp;&emsp;&emsp;&emsp; [浮動小数点の演算エラー](core_lang_spec.md#SS_27_1_12_4)  
+&emsp;&emsp;&emsp; [算術変換](core_lang_spec.md#SS_19_1_6)  
+&emsp;&emsp;&emsp; [汎整数型昇格](core_lang_spec.md#SS_19_1_7)  
+&emsp;&emsp;&emsp; [汎整数型拡張](core_lang_spec.md#SS_19_1_8)  
+&emsp;&emsp;&emsp; [浮動小数点型昇格](core_lang_spec.md#SS_19_1_9)  
+&emsp;&emsp;&emsp; [デフォルト引数昇格](core_lang_spec.md#SS_19_1_10)  
+&emsp;&emsp;&emsp; [縮小型変換](core_lang_spec.md#SS_19_1_11)  
+&emsp;&emsp;&emsp; [浮動小数点型](core_lang_spec.md#SS_19_1_12)  
+&emsp;&emsp;&emsp;&emsp; [浮動小数点型のダイナミックレンジ](core_lang_spec.md#SS_19_1_12_1)  
+&emsp;&emsp;&emsp;&emsp; [浮動小数点の誤差](core_lang_spec.md#SS_19_1_12_2)  
+&emsp;&emsp;&emsp;&emsp; [イプシロン](core_lang_spec.md#SS_19_1_12_3)  
+&emsp;&emsp;&emsp;&emsp; [浮動小数点の演算エラー](core_lang_spec.md#SS_19_1_12_4)  
 
-&emsp;&emsp; [リテラル](core_lang_spec.md#SS_27_2)  
-&emsp;&emsp;&emsp; [生文字列リテラル](core_lang_spec.md#SS_27_2_1)  
-&emsp;&emsp;&emsp; [2進数リテラル](core_lang_spec.md#SS_27_2_2)  
-&emsp;&emsp;&emsp; [数値リテラル](core_lang_spec.md#SS_27_2_3)  
-&emsp;&emsp;&emsp; [ワイド文字列](core_lang_spec.md#SS_27_2_4)  
-&emsp;&emsp;&emsp; [16進浮動小数点数リテラル](core_lang_spec.md#SS_27_2_5)  
-&emsp;&emsp;&emsp; [ユーザー定義リテラル](core_lang_spec.md#SS_27_2_6)  
-&emsp;&emsp;&emsp;&emsp; [ユーザ定義リテラル演算子](core_lang_spec.md#SS_27_2_6_1)  
-&emsp;&emsp;&emsp;&emsp; [std::string型リテラル](core_lang_spec.md#SS_27_2_6_2)  
-&emsp;&emsp;&emsp;&emsp; [std::chronoのリテラル](core_lang_spec.md#SS_27_2_6_3)  
-&emsp;&emsp;&emsp;&emsp; [std::complexリテラル](core_lang_spec.md#SS_27_2_6_4)  
+&emsp;&emsp; [リテラル](core_lang_spec.md#SS_19_2)  
+&emsp;&emsp;&emsp; [生文字列リテラル](core_lang_spec.md#SS_19_2_1)  
+&emsp;&emsp;&emsp; [2進数リテラル](core_lang_spec.md#SS_19_2_2)  
+&emsp;&emsp;&emsp; [数値リテラル](core_lang_spec.md#SS_19_2_3)  
+&emsp;&emsp;&emsp; [ワイド文字列](core_lang_spec.md#SS_19_2_4)  
+&emsp;&emsp;&emsp; [16進浮動小数点数リテラル](core_lang_spec.md#SS_19_2_5)  
+&emsp;&emsp;&emsp; [ユーザー定義リテラル](core_lang_spec.md#SS_19_2_6)  
+&emsp;&emsp;&emsp;&emsp; [ユーザ定義リテラル演算子](core_lang_spec.md#SS_19_2_6_1)  
+&emsp;&emsp;&emsp;&emsp; [std::string型リテラル](core_lang_spec.md#SS_19_2_6_2)  
+&emsp;&emsp;&emsp;&emsp; [std::chronoのリテラル](core_lang_spec.md#SS_19_2_6_3)  
+&emsp;&emsp;&emsp;&emsp; [std::complexリテラル](core_lang_spec.md#SS_19_2_6_4)  
 
-&emsp;&emsp; [列挙型とバイト表現](core_lang_spec.md#SS_27_3)  
-&emsp;&emsp;&emsp; [enum](core_lang_spec.md#SS_27_3_1)  
-&emsp;&emsp;&emsp; [enum class](core_lang_spec.md#SS_27_3_2)  
-&emsp;&emsp;&emsp; [スコープドenum](core_lang_spec.md#SS_27_3_3)  
-&emsp;&emsp;&emsp; [underlying type](core_lang_spec.md#SS_27_3_4)  
-&emsp;&emsp;&emsp; [std::byte](core_lang_spec.md#SS_27_3_5)  
-&emsp;&emsp;&emsp; [using enum](core_lang_spec.md#SS_27_3_6)  
+&emsp;&emsp; [列挙型とバイト表現](core_lang_spec.md#SS_19_3)  
+&emsp;&emsp;&emsp; [enum](core_lang_spec.md#SS_19_3_1)  
+&emsp;&emsp;&emsp; [enum class](core_lang_spec.md#SS_19_3_2)  
+&emsp;&emsp;&emsp; [スコープドenum](core_lang_spec.md#SS_19_3_3)  
+&emsp;&emsp;&emsp; [underlying type](core_lang_spec.md#SS_19_3_4)  
+&emsp;&emsp;&emsp; [std::byte](core_lang_spec.md#SS_19_3_5)  
+&emsp;&emsp;&emsp; [using enum](core_lang_spec.md#SS_19_3_6)  
 
-&emsp;&emsp; [型とインスタンス](core_lang_spec.md#SS_27_4)  
-&emsp;&emsp;&emsp; [トリビアル型](core_lang_spec.md#SS_27_4_1)  
-&emsp;&emsp;&emsp; [トリビアルに破壊可能な型](core_lang_spec.md#SS_27_4_2)  
-&emsp;&emsp;&emsp; [標準レイアウト型](core_lang_spec.md#SS_27_4_3)  
-&emsp;&emsp;&emsp; [集成体](core_lang_spec.md#SS_27_4_4)  
-&emsp;&emsp;&emsp; [POD](core_lang_spec.md#SS_27_4_5)  
-&emsp;&emsp;&emsp; [不完全型](core_lang_spec.md#SS_27_4_6)  
-&emsp;&emsp;&emsp; [完全型](core_lang_spec.md#SS_27_4_7)  
-&emsp;&emsp;&emsp; [ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)  
-&emsp;&emsp;&emsp; [RTTI](core_lang_spec.md#SS_27_4_9)  
-&emsp;&emsp;&emsp;&emsp; [dynamic_cast](core_lang_spec.md#SS_27_4_9_1)  
-&emsp;&emsp;&emsp;&emsp; [typeid](core_lang_spec.md#SS_27_4_9_2)  
-&emsp;&emsp;&emsp;&emsp; [std::type_info](core_lang_spec.md#SS_27_4_9_3)  
+&emsp;&emsp; [型とインスタンス](core_lang_spec.md#SS_19_4)  
+&emsp;&emsp;&emsp; [トリビアル型](core_lang_spec.md#SS_19_4_1)  
+&emsp;&emsp;&emsp; [トリビアルに破壊可能な型](core_lang_spec.md#SS_19_4_2)  
+&emsp;&emsp;&emsp; [標準レイアウト型](core_lang_spec.md#SS_19_4_3)  
+&emsp;&emsp;&emsp; [集成体](core_lang_spec.md#SS_19_4_4)  
+&emsp;&emsp;&emsp; [POD](core_lang_spec.md#SS_19_4_5)  
+&emsp;&emsp;&emsp; [不完全型](core_lang_spec.md#SS_19_4_6)  
+&emsp;&emsp;&emsp; [完全型](core_lang_spec.md#SS_19_4_7)  
+&emsp;&emsp;&emsp; [ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)  
+&emsp;&emsp;&emsp; [RTTI](core_lang_spec.md#SS_19_4_9)  
+&emsp;&emsp;&emsp;&emsp; [dynamic_cast](core_lang_spec.md#SS_19_4_9_1)  
+&emsp;&emsp;&emsp;&emsp; [typeid](core_lang_spec.md#SS_19_4_9_2)  
+&emsp;&emsp;&emsp;&emsp; [std::type_info](core_lang_spec.md#SS_19_4_9_3)  
 
-&emsp;&emsp;&emsp; [Run-time Type Information](core_lang_spec.md#SS_27_4_10)  
-&emsp;&emsp;&emsp; [インターフェースクラス](core_lang_spec.md#SS_27_4_11)  
-&emsp;&emsp;&emsp; [constインスタンス](core_lang_spec.md#SS_27_4_12)  
+&emsp;&emsp;&emsp; [Run-time Type Information](core_lang_spec.md#SS_19_4_10)  
+&emsp;&emsp;&emsp; [インターフェースクラス](core_lang_spec.md#SS_19_4_11)  
+&emsp;&emsp;&emsp; [constインスタンス](core_lang_spec.md#SS_19_4_12)  
 
-&emsp;&emsp; [定数式とコンパイル時評価](core_lang_spec.md#SS_27_5)  
-&emsp;&emsp;&emsp; [constexpr](core_lang_spec.md#SS_27_5_1)  
-&emsp;&emsp;&emsp; [constexpr定数](core_lang_spec.md#SS_27_5_2)  
-&emsp;&emsp;&emsp; [constexpr関数](core_lang_spec.md#SS_27_5_3)  
-&emsp;&emsp;&emsp; [コア定数式](core_lang_spec.md#SS_27_5_4)  
-&emsp;&emsp;&emsp; [リテラル型](core_lang_spec.md#SS_27_5_5)  
-&emsp;&emsp;&emsp; [constexprインスタンス](core_lang_spec.md#SS_27_5_6)  
-&emsp;&emsp;&emsp; [consteval](core_lang_spec.md#SS_27_5_7)  
-&emsp;&emsp;&emsp; [constinit](core_lang_spec.md#SS_27_5_8)  
-&emsp;&emsp;&emsp; [constexprラムダ](core_lang_spec.md#SS_27_5_9)  
+&emsp;&emsp; [定数式とコンパイル時評価](core_lang_spec.md#SS_19_5)  
+&emsp;&emsp;&emsp; [constexpr](core_lang_spec.md#SS_19_5_1)  
+&emsp;&emsp;&emsp; [constexpr定数](core_lang_spec.md#SS_19_5_2)  
+&emsp;&emsp;&emsp; [constexpr関数](core_lang_spec.md#SS_19_5_3)  
+&emsp;&emsp;&emsp; [コア定数式](core_lang_spec.md#SS_19_5_4)  
+&emsp;&emsp;&emsp; [リテラル型](core_lang_spec.md#SS_19_5_5)  
+&emsp;&emsp;&emsp; [constexprインスタンス](core_lang_spec.md#SS_19_5_6)  
+&emsp;&emsp;&emsp; [consteval](core_lang_spec.md#SS_19_5_7)  
+&emsp;&emsp;&emsp; [constinit](core_lang_spec.md#SS_19_5_8)  
+&emsp;&emsp;&emsp; [constexprラムダ](core_lang_spec.md#SS_19_5_9)  
 
-&emsp;&emsp; [オブジェクト生成と初期化](core_lang_spec.md#SS_27_6)  
-&emsp;&emsp;&emsp; [特殊メンバ関数](core_lang_spec.md#SS_27_6_1)  
-&emsp;&emsp;&emsp;&emsp; [初期化子リストコンストラクタ](core_lang_spec.md#SS_27_6_1_1)  
-&emsp;&emsp;&emsp;&emsp; [継承コンストラクタ](core_lang_spec.md#SS_27_6_1_2)  
-&emsp;&emsp;&emsp;&emsp; [委譲コンストラクタ](core_lang_spec.md#SS_27_6_1_3)  
+&emsp;&emsp; [オブジェクト生成と初期化](core_lang_spec.md#SS_19_6)  
+&emsp;&emsp;&emsp; [特殊メンバ関数](core_lang_spec.md#SS_19_6_1)  
+&emsp;&emsp;&emsp;&emsp; [初期化子リストコンストラクタ](core_lang_spec.md#SS_19_6_1_1)  
+&emsp;&emsp;&emsp;&emsp; [継承コンストラクタ](core_lang_spec.md#SS_19_6_1_2)  
+&emsp;&emsp;&emsp;&emsp; [委譲コンストラクタ](core_lang_spec.md#SS_19_6_1_3)  
 
-&emsp;&emsp;&emsp; [explicit コンストラクタと型変換制御](core_lang_spec.md#SS_27_6_2)  
-&emsp;&emsp;&emsp;&emsp; [explicit](core_lang_spec.md#SS_27_6_2_1)  
-&emsp;&emsp;&emsp;&emsp; [暗黙の型変換](core_lang_spec.md#SS_27_6_2_2)  
-&emsp;&emsp;&emsp;&emsp; [暗黙の型変換抑止](core_lang_spec.md#SS_27_6_2_3)  
-&emsp;&emsp;&emsp;&emsp; [explicit(COND)](core_lang_spec.md#SS_27_6_2_4)  
-&emsp;&emsp;&emsp;&emsp; [explicit type operator()](core_lang_spec.md#SS_27_6_2_5)  
+&emsp;&emsp;&emsp; [explicit コンストラクタと型変換制御](core_lang_spec.md#SS_19_6_2)  
+&emsp;&emsp;&emsp;&emsp; [explicit](core_lang_spec.md#SS_19_6_2_1)  
+&emsp;&emsp;&emsp;&emsp; [暗黙の型変換](core_lang_spec.md#SS_19_6_2_2)  
+&emsp;&emsp;&emsp;&emsp; [暗黙の型変換抑止](core_lang_spec.md#SS_19_6_2_3)  
+&emsp;&emsp;&emsp;&emsp; [explicit(COND)](core_lang_spec.md#SS_19_6_2_4)  
+&emsp;&emsp;&emsp;&emsp; [explicit type operator()](core_lang_spec.md#SS_19_6_2_5)  
 
-&emsp;&emsp;&emsp; [==演算子](core_lang_spec.md#SS_27_6_3)  
-&emsp;&emsp;&emsp;&emsp; [メンバ==演算子](core_lang_spec.md#SS_27_6_3_1)  
-&emsp;&emsp;&emsp;&emsp; [非メンバ==演算子](core_lang_spec.md#SS_27_6_3_2)  
+&emsp;&emsp;&emsp; [==演算子](core_lang_spec.md#SS_19_6_3)  
+&emsp;&emsp;&emsp;&emsp; [メンバ==演算子](core_lang_spec.md#SS_19_6_3_1)  
+&emsp;&emsp;&emsp;&emsp; [非メンバ==演算子](core_lang_spec.md#SS_19_6_3_2)  
 
-&emsp;&emsp;&emsp; [比較演算子](core_lang_spec.md#SS_27_6_4)  
-&emsp;&emsp;&emsp;&emsp; [<=>演算子](core_lang_spec.md#SS_27_6_4_1)  
-&emsp;&emsp;&emsp;&emsp; [三方比較演算子](core_lang_spec.md#SS_27_6_4_2)  
-&emsp;&emsp;&emsp;&emsp; [spaceship operator](core_lang_spec.md#SS_27_6_4_3)  
+&emsp;&emsp;&emsp; [比較演算子](core_lang_spec.md#SS_19_6_4)  
+&emsp;&emsp;&emsp;&emsp; [<=>演算子](core_lang_spec.md#SS_19_6_4_1)  
+&emsp;&emsp;&emsp;&emsp; [三方比較演算子](core_lang_spec.md#SS_19_6_4_2)  
+&emsp;&emsp;&emsp;&emsp; [spaceship operator](core_lang_spec.md#SS_19_6_4_3)  
 
-&emsp;&emsp;&emsp; [リスト初期化](core_lang_spec.md#SS_27_6_5)  
-&emsp;&emsp;&emsp; [一様初期化](core_lang_spec.md#SS_27_6_6)  
-&emsp;&emsp;&emsp; [非静的なメンバ変数の初期化](core_lang_spec.md#SS_27_6_7)  
-&emsp;&emsp;&emsp;&emsp; [NSDMI](core_lang_spec.md#SS_27_6_7_1)  
-&emsp;&emsp;&emsp;&emsp; [初期化子リストでの初期化](core_lang_spec.md#SS_27_6_7_2)  
-&emsp;&emsp;&emsp;&emsp; [コンストラクタ内での非静的なメンバ変数の初期値の代入](core_lang_spec.md#SS_27_6_7_3)  
+&emsp;&emsp;&emsp; [リスト初期化](core_lang_spec.md#SS_19_6_5)  
+&emsp;&emsp;&emsp; [一様初期化](core_lang_spec.md#SS_19_6_6)  
+&emsp;&emsp;&emsp; [非静的なメンバ変数の初期化](core_lang_spec.md#SS_19_6_7)  
+&emsp;&emsp;&emsp;&emsp; [NSDMI](core_lang_spec.md#SS_19_6_7_1)  
+&emsp;&emsp;&emsp;&emsp; [初期化子リストでの初期化](core_lang_spec.md#SS_19_6_7_2)  
+&emsp;&emsp;&emsp;&emsp; [コンストラクタ内での非静的なメンバ変数の初期値の代入](core_lang_spec.md#SS_19_6_7_3)  
 
-&emsp;&emsp;&emsp; [オブジェクトのライフタイム](core_lang_spec.md#SS_27_6_8)  
-&emsp;&emsp;&emsp; [プレースメントnew](core_lang_spec.md#SS_27_6_9)  
-&emsp;&emsp;&emsp; [new (std::nothrow)](core_lang_spec.md#SS_27_6_10)  
+&emsp;&emsp;&emsp; [オブジェクトのライフタイム](core_lang_spec.md#SS_19_6_8)  
+&emsp;&emsp;&emsp; [プレースメントnew](core_lang_spec.md#SS_19_6_9)  
+&emsp;&emsp;&emsp; [new (std::nothrow)](core_lang_spec.md#SS_19_6_10)  
 
-&emsp;&emsp; [値カテゴリとリファレンス](core_lang_spec.md#SS_27_7)  
-&emsp;&emsp;&emsp; [expression](core_lang_spec.md#SS_27_7_1)  
-&emsp;&emsp;&emsp;&emsp; [lvalue](core_lang_spec.md#SS_27_7_1_1)  
-&emsp;&emsp;&emsp;&emsp; [rvalue](core_lang_spec.md#SS_27_7_1_2)  
-&emsp;&emsp;&emsp;&emsp; [xvalue](core_lang_spec.md#SS_27_7_1_3)  
-&emsp;&emsp;&emsp;&emsp; [prvalue](core_lang_spec.md#SS_27_7_1_4)  
-&emsp;&emsp;&emsp;&emsp; [glvalue](core_lang_spec.md#SS_27_7_1_5)  
+&emsp;&emsp; [値カテゴリとリファレンス](core_lang_spec.md#SS_19_7)  
+&emsp;&emsp;&emsp; [expression](core_lang_spec.md#SS_19_7_1)  
+&emsp;&emsp;&emsp;&emsp; [lvalue](core_lang_spec.md#SS_19_7_1_1)  
+&emsp;&emsp;&emsp;&emsp; [rvalue](core_lang_spec.md#SS_19_7_1_2)  
+&emsp;&emsp;&emsp;&emsp; [xvalue](core_lang_spec.md#SS_19_7_1_3)  
+&emsp;&emsp;&emsp;&emsp; [prvalue](core_lang_spec.md#SS_19_7_1_4)  
+&emsp;&emsp;&emsp;&emsp; [glvalue](core_lang_spec.md#SS_19_7_1_5)  
 
-&emsp;&emsp;&emsp; [decltypeとexpression](core_lang_spec.md#SS_27_7_2)  
+&emsp;&emsp;&emsp; [decltypeとexpression](core_lang_spec.md#SS_19_7_2)  
 
-&emsp;&emsp; [リファレンス](core_lang_spec.md#SS_27_8)  
-&emsp;&emsp;&emsp; [lvalueリファレンス](core_lang_spec.md#SS_27_8_1)  
-&emsp;&emsp;&emsp; [rvalueリファレンス](core_lang_spec.md#SS_27_8_2)  
-&emsp;&emsp;&emsp;&emsp; [lvalueからの代入](core_lang_spec.md#SS_27_8_2_1)  
-&emsp;&emsp;&emsp;&emsp; [rvalueからの代入](core_lang_spec.md#SS_27_8_2_2)  
-&emsp;&emsp;&emsp;&emsp; [std::move(lvalue)からの代入](core_lang_spec.md#SS_27_8_2_3)  
+&emsp;&emsp; [リファレンス](core_lang_spec.md#SS_19_8)  
+&emsp;&emsp;&emsp; [lvalueリファレンス](core_lang_spec.md#SS_19_8_1)  
+&emsp;&emsp;&emsp; [rvalueリファレンス](core_lang_spec.md#SS_19_8_2)  
+&emsp;&emsp;&emsp;&emsp; [lvalueからの代入](core_lang_spec.md#SS_19_8_2_1)  
+&emsp;&emsp;&emsp;&emsp; [rvalueからの代入](core_lang_spec.md#SS_19_8_2_2)  
+&emsp;&emsp;&emsp;&emsp; [std::move(lvalue)からの代入](core_lang_spec.md#SS_19_8_2_3)  
 
-&emsp;&emsp;&emsp; [forwardingリファレンス](core_lang_spec.md#SS_27_8_3)  
-&emsp;&emsp;&emsp; [ユニバーサルリファレンス](core_lang_spec.md#SS_27_8_4)  
-&emsp;&emsp;&emsp; [perfect forwarding](core_lang_spec.md#SS_27_8_5)  
-&emsp;&emsp;&emsp; [リファレンスcollapsing](core_lang_spec.md#SS_27_8_6)  
-&emsp;&emsp;&emsp; [リファレンス修飾](core_lang_spec.md#SS_27_8_7)  
-&emsp;&emsp;&emsp;&emsp; [rvalue修飾](core_lang_spec.md#SS_27_8_7_1)  
-&emsp;&emsp;&emsp;&emsp; [lvalue修飾](core_lang_spec.md#SS_27_8_7_2)  
+&emsp;&emsp;&emsp; [forwardingリファレンス](core_lang_spec.md#SS_19_8_3)  
+&emsp;&emsp;&emsp; [ユニバーサルリファレンス](core_lang_spec.md#SS_19_8_4)  
+&emsp;&emsp;&emsp; [perfect forwarding](core_lang_spec.md#SS_19_8_5)  
+&emsp;&emsp;&emsp; [リファレンスcollapsing](core_lang_spec.md#SS_19_8_6)  
+&emsp;&emsp;&emsp; [リファレンス修飾](core_lang_spec.md#SS_19_8_7)  
+&emsp;&emsp;&emsp;&emsp; [rvalue修飾](core_lang_spec.md#SS_19_8_7_1)  
+&emsp;&emsp;&emsp;&emsp; [lvalue修飾](core_lang_spec.md#SS_19_8_7_2)  
 
-&emsp;&emsp; [構文と制御構造](core_lang_spec.md#SS_27_9)  
-&emsp;&emsp;&emsp; [属性構文](core_lang_spec.md#SS_27_9_1)  
-&emsp;&emsp;&emsp; [関数tryブロック](core_lang_spec.md#SS_27_9_2)  
-&emsp;&emsp;&emsp; [範囲for文](core_lang_spec.md#SS_27_9_3)  
-&emsp;&emsp;&emsp; [構造化束縛](core_lang_spec.md#SS_27_9_4)  
-&emsp;&emsp;&emsp; [初期化付きif/switch文](core_lang_spec.md#SS_27_9_5)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きfor文(従来のfor文)](core_lang_spec.md#SS_27_9_5_1)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きwhile文(従来のwhile文)](core_lang_spec.md#SS_27_9_5_2)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きif文](core_lang_spec.md#SS_27_9_5_3)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きswitch文](core_lang_spec.md#SS_27_9_5_4)  
+&emsp;&emsp; [構文と制御構造](core_lang_spec.md#SS_19_9)  
+&emsp;&emsp;&emsp; [属性構文](core_lang_spec.md#SS_19_9_1)  
+&emsp;&emsp;&emsp; [関数tryブロック](core_lang_spec.md#SS_19_9_2)  
+&emsp;&emsp;&emsp; [範囲for文](core_lang_spec.md#SS_19_9_3)  
+&emsp;&emsp;&emsp; [構造化束縛](core_lang_spec.md#SS_19_9_4)  
+&emsp;&emsp;&emsp; [初期化付きif/switch文](core_lang_spec.md#SS_19_9_5)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きfor文(従来のfor文)](core_lang_spec.md#SS_19_9_5_1)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きwhile文(従来のwhile文)](core_lang_spec.md#SS_19_9_5_2)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きif文](core_lang_spec.md#SS_19_9_5_3)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きswitch文](core_lang_spec.md#SS_19_9_5_4)  
 
-&emsp;&emsp; [言語拡張機能](core_lang_spec.md#SS_27_10)  
-&emsp;&emsp;&emsp; [コルーチン](core_lang_spec.md#SS_27_10_1)  
-&emsp;&emsp;&emsp;&emsp; [co_await](core_lang_spec.md#SS_27_10_1_1)  
-&emsp;&emsp;&emsp;&emsp; [co_return](core_lang_spec.md#SS_27_10_1_2)  
-&emsp;&emsp;&emsp;&emsp; [co_yield](core_lang_spec.md#SS_27_10_1_3)  
+&emsp;&emsp; [言語拡張機能](core_lang_spec.md#SS_19_10)  
+&emsp;&emsp;&emsp; [コルーチン](core_lang_spec.md#SS_19_10_1)  
+&emsp;&emsp;&emsp;&emsp; [co_await](core_lang_spec.md#SS_19_10_1_1)  
+&emsp;&emsp;&emsp;&emsp; [co_return](core_lang_spec.md#SS_19_10_1_2)  
+&emsp;&emsp;&emsp;&emsp; [co_yield](core_lang_spec.md#SS_19_10_1_3)  
 
-&emsp;&emsp;&emsp; [モジュール](core_lang_spec.md#SS_27_10_2)  
-&emsp;&emsp;&emsp; [ラムダ式](core_lang_spec.md#SS_27_10_3)  
-&emsp;&emsp;&emsp;&emsp; [クロージャ](core_lang_spec.md#SS_27_10_3_1)  
-&emsp;&emsp;&emsp;&emsp; [クロージャ型](core_lang_spec.md#SS_27_10_3_2)  
-&emsp;&emsp;&emsp;&emsp; [一時的ラムダ](core_lang_spec.md#SS_27_10_3_3)  
-&emsp;&emsp;&emsp;&emsp; [transient lambda](core_lang_spec.md#SS_27_10_3_4)  
+&emsp;&emsp;&emsp; [モジュール](core_lang_spec.md#SS_19_10_2)  
+&emsp;&emsp;&emsp; [ラムダ式](core_lang_spec.md#SS_19_10_3)  
+&emsp;&emsp;&emsp;&emsp; [クロージャ](core_lang_spec.md#SS_19_10_3_1)  
+&emsp;&emsp;&emsp;&emsp; [クロージャ型](core_lang_spec.md#SS_19_10_3_2)  
+&emsp;&emsp;&emsp;&emsp; [一時的ラムダ](core_lang_spec.md#SS_19_10_3_3)  
+&emsp;&emsp;&emsp;&emsp; [transient lambda](core_lang_spec.md#SS_19_10_3_4)  
 
-&emsp;&emsp;&emsp; [指示付き初期化](core_lang_spec.md#SS_27_10_4)  
+&emsp;&emsp;&emsp; [指示付き初期化](core_lang_spec.md#SS_19_10_4)  
 
-&emsp;&emsp; [テンプレートと型推論](core_lang_spec.md#SS_27_11)  
-&emsp;&emsp;&emsp; [SFINAE](core_lang_spec.md#SS_27_11_1)  
-&emsp;&emsp;&emsp; [メタ関数](core_lang_spec.md#SS_27_11_2)  
-&emsp;&emsp;&emsp; [コンセプト](core_lang_spec.md#SS_27_11_3)  
-&emsp;&emsp;&emsp; [パラメータパック](core_lang_spec.md#SS_27_11_4)  
-&emsp;&emsp;&emsp; [畳み込み式](core_lang_spec.md#SS_27_11_5)  
-&emsp;&emsp;&emsp; [ジェネリックラムダ](core_lang_spec.md#SS_27_11_6)  
-&emsp;&emsp;&emsp; [クラステンプレートのテンプレート引数の型推論](core_lang_spec.md#SS_27_11_7)  
-&emsp;&emsp;&emsp; [CTAD(Class Template Argument Deduction)](core_lang_spec.md#SS_27_11_8)  
-&emsp;&emsp;&emsp; [テンプレートの型推論ガイド](core_lang_spec.md#SS_27_11_9)  
-&emsp;&emsp;&emsp; [変数テンプレート](core_lang_spec.md#SS_27_11_10)  
-&emsp;&emsp;&emsp; [エイリアステンプレート](core_lang_spec.md#SS_27_11_11)  
-&emsp;&emsp;&emsp; [constexpr if文](core_lang_spec.md#SS_27_11_12)  
-&emsp;&emsp;&emsp; [autoパラメータによる関数テンプレートの簡易定義](core_lang_spec.md#SS_27_11_13)  
-&emsp;&emsp;&emsp; [auto](core_lang_spec.md#SS_27_11_14)  
-&emsp;&emsp;&emsp; [decltype](core_lang_spec.md#SS_27_11_15)  
-&emsp;&emsp;&emsp; [decltype(auto)](core_lang_spec.md#SS_27_11_16)  
-&emsp;&emsp;&emsp; [戻り値型を後置する関数宣言](core_lang_spec.md#SS_27_11_17)  
-&emsp;&emsp;&emsp; [関数の戻り値型auto](core_lang_spec.md#SS_27_11_18)  
-&emsp;&emsp;&emsp; [後置戻り値型auto](core_lang_spec.md#SS_27_11_19)  
+&emsp;&emsp; [テンプレートと型推論](core_lang_spec.md#SS_19_11)  
+&emsp;&emsp;&emsp; [SFINAE](core_lang_spec.md#SS_19_11_1)  
+&emsp;&emsp;&emsp; [メタ関数](core_lang_spec.md#SS_19_11_2)  
+&emsp;&emsp;&emsp; [コンセプト](core_lang_spec.md#SS_19_11_3)  
+&emsp;&emsp;&emsp; [パラメータパック](core_lang_spec.md#SS_19_11_4)  
+&emsp;&emsp;&emsp; [畳み込み式](core_lang_spec.md#SS_19_11_5)  
+&emsp;&emsp;&emsp; [ジェネリックラムダ](core_lang_spec.md#SS_19_11_6)  
+&emsp;&emsp;&emsp; [クラステンプレートのテンプレート引数の型推論](core_lang_spec.md#SS_19_11_7)  
+&emsp;&emsp;&emsp; [CTAD(Class Template Argument Deduction)](core_lang_spec.md#SS_19_11_8)  
+&emsp;&emsp;&emsp; [テンプレートの型推論ガイド](core_lang_spec.md#SS_19_11_9)  
+&emsp;&emsp;&emsp; [変数テンプレート](core_lang_spec.md#SS_19_11_10)  
+&emsp;&emsp;&emsp; [エイリアステンプレート](core_lang_spec.md#SS_19_11_11)  
+&emsp;&emsp;&emsp; [constexpr if文](core_lang_spec.md#SS_19_11_12)  
+&emsp;&emsp;&emsp; [autoパラメータによる関数テンプレートの簡易定義](core_lang_spec.md#SS_19_11_13)  
+&emsp;&emsp;&emsp; [auto](core_lang_spec.md#SS_19_11_14)  
+&emsp;&emsp;&emsp; [decltype](core_lang_spec.md#SS_19_11_15)  
+&emsp;&emsp;&emsp; [decltype(auto)](core_lang_spec.md#SS_19_11_16)  
+&emsp;&emsp;&emsp; [戻り値型を後置する関数宣言](core_lang_spec.md#SS_19_11_17)  
+&emsp;&emsp;&emsp; [関数の戻り値型auto](core_lang_spec.md#SS_19_11_18)  
+&emsp;&emsp;&emsp; [後置戻り値型auto](core_lang_spec.md#SS_19_11_19)  
 
-&emsp;&emsp; [name lookupと継承構造](core_lang_spec.md#SS_27_12)  
-&emsp;&emsp;&emsp; [ルックアップ](core_lang_spec.md#SS_27_12_1)  
-&emsp;&emsp;&emsp; [name lookup](core_lang_spec.md#SS_27_12_2)  
-&emsp;&emsp;&emsp; [two phase name lookup](core_lang_spec.md#SS_27_12_3)  
-&emsp;&emsp;&emsp; [実引数依存探索](core_lang_spec.md#SS_27_12_4)  
-&emsp;&emsp;&emsp; [ADL](core_lang_spec.md#SS_27_12_5)  
-&emsp;&emsp;&emsp; [関連名前空間](core_lang_spec.md#SS_27_12_6)  
-&emsp;&emsp;&emsp; [修飾付き関数呼び出し](core_lang_spec.md#SS_27_12_7)  
-&emsp;&emsp;&emsp; [hidden-friend関数](core_lang_spec.md#SS_27_12_8)  
-&emsp;&emsp;&emsp; [name-hiding](core_lang_spec.md#SS_27_12_9)  
-&emsp;&emsp;&emsp; [ダイヤモンド継承](core_lang_spec.md#SS_27_12_10)  
-&emsp;&emsp;&emsp; [仮想継承](core_lang_spec.md#SS_27_12_11)  
-&emsp;&emsp;&emsp; [仮想基底](core_lang_spec.md#SS_27_12_12)  
-&emsp;&emsp;&emsp; [ドミナンス](core_lang_spec.md#SS_27_12_13)  
-&emsp;&emsp;&emsp;&emsp; [ダイヤモンド継承を含まない場合](core_lang_spec.md#SS_27_12_13_1)  
-&emsp;&emsp;&emsp;&emsp; [ダイヤモンド継承かつそれが仮想継承でない場合](core_lang_spec.md#SS_27_12_13_2)  
-&emsp;&emsp;&emsp;&emsp; [ダイヤモンド継承かつそれが仮想継承である場合](core_lang_spec.md#SS_27_12_13_3)  
+&emsp;&emsp; [name lookupと継承構造](core_lang_spec.md#SS_19_12)  
+&emsp;&emsp;&emsp; [ルックアップ](core_lang_spec.md#SS_19_12_1)  
+&emsp;&emsp;&emsp; [name lookup](core_lang_spec.md#SS_19_12_2)  
+&emsp;&emsp;&emsp; [two phase name lookup](core_lang_spec.md#SS_19_12_3)  
+&emsp;&emsp;&emsp; [実引数依存探索](core_lang_spec.md#SS_19_12_4)  
+&emsp;&emsp;&emsp; [ADL](core_lang_spec.md#SS_19_12_5)  
+&emsp;&emsp;&emsp; [関連名前空間](core_lang_spec.md#SS_19_12_6)  
+&emsp;&emsp;&emsp; [修飾付き関数呼び出し](core_lang_spec.md#SS_19_12_7)  
+&emsp;&emsp;&emsp; [hidden-friend関数](core_lang_spec.md#SS_19_12_8)  
+&emsp;&emsp;&emsp; [name-hiding](core_lang_spec.md#SS_19_12_9)  
+&emsp;&emsp;&emsp; [ダイヤモンド継承](core_lang_spec.md#SS_19_12_10)  
+&emsp;&emsp;&emsp; [仮想継承](core_lang_spec.md#SS_19_12_11)  
+&emsp;&emsp;&emsp; [仮想基底](core_lang_spec.md#SS_19_12_12)  
+&emsp;&emsp;&emsp; [ドミナンス](core_lang_spec.md#SS_19_12_13)  
+&emsp;&emsp;&emsp;&emsp; [ダイヤモンド継承を含まない場合](core_lang_spec.md#SS_19_12_13_1)  
+&emsp;&emsp;&emsp;&emsp; [ダイヤモンド継承かつそれが仮想継承でない場合](core_lang_spec.md#SS_19_12_13_2)  
+&emsp;&emsp;&emsp;&emsp; [ダイヤモンド継承かつそれが仮想継承である場合](core_lang_spec.md#SS_19_12_13_3)  
 
-&emsp;&emsp;&emsp; [using宣言](core_lang_spec.md#SS_27_12_14)  
-&emsp;&emsp;&emsp; [usingディレクティブ](core_lang_spec.md#SS_27_12_15)  
+&emsp;&emsp;&emsp; [using宣言](core_lang_spec.md#SS_19_12_14)  
+&emsp;&emsp;&emsp; [usingディレクティブ](core_lang_spec.md#SS_19_12_15)  
 
-&emsp;&emsp; [エクセプション安全性の保証](core_lang_spec.md#SS_27_13)  
-&emsp;&emsp;&emsp; [no-fail保証](core_lang_spec.md#SS_27_13_1)  
-&emsp;&emsp;&emsp; [強い安全性の保証](core_lang_spec.md#SS_27_13_2)  
-&emsp;&emsp;&emsp; [基本的な安全性の保証](core_lang_spec.md#SS_27_13_3)  
-&emsp;&emsp;&emsp; [noexcept](core_lang_spec.md#SS_27_13_4)  
-&emsp;&emsp;&emsp; [exception-unfriendly](core_lang_spec.md#SS_27_13_5)  
+&emsp;&emsp; [エクセプション安全性の保証](core_lang_spec.md#SS_19_13)  
+&emsp;&emsp;&emsp; [no-fail保証](core_lang_spec.md#SS_19_13_1)  
+&emsp;&emsp;&emsp; [強い安全性の保証](core_lang_spec.md#SS_19_13_2)  
+&emsp;&emsp;&emsp; [基本的な安全性の保証](core_lang_spec.md#SS_19_13_3)  
+&emsp;&emsp;&emsp; [noexcept](core_lang_spec.md#SS_19_13_4)  
+&emsp;&emsp;&emsp; [exception-unfriendly](core_lang_spec.md#SS_19_13_5)  
 
-&emsp;&emsp; [言語仕様の定義要素](core_lang_spec.md#SS_27_14)  
-&emsp;&emsp;&emsp; [ill-formed](core_lang_spec.md#SS_27_14_1)  
-&emsp;&emsp;&emsp; [well-formed](core_lang_spec.md#SS_27_14_2)  
-&emsp;&emsp;&emsp; [未定義動作](core_lang_spec.md#SS_27_14_3)  
-&emsp;&emsp;&emsp; [未規定動作](core_lang_spec.md#SS_27_14_4)  
-&emsp;&emsp;&emsp; [未定義動作と未規定動作](core_lang_spec.md#SS_27_14_5)  
-&emsp;&emsp;&emsp; [被修飾型](core_lang_spec.md#SS_27_14_6)  
-&emsp;&emsp;&emsp; [実引数/仮引数](core_lang_spec.md#SS_27_14_7)  
-&emsp;&emsp;&emsp; [単純代入](core_lang_spec.md#SS_27_14_8)  
-&emsp;&emsp;&emsp; [one-definition rule](core_lang_spec.md#SS_27_14_9)  
-&emsp;&emsp;&emsp; [ODR](core_lang_spec.md#SS_27_14_10)  
-&emsp;&emsp;&emsp; [型特性キーワード](core_lang_spec.md#SS_27_14_11)  
-&emsp;&emsp;&emsp;&emsp; [alignof](core_lang_spec.md#SS_27_14_11_1)  
-&emsp;&emsp;&emsp;&emsp; [alignas](core_lang_spec.md#SS_27_14_11_2)  
-&emsp;&emsp;&emsp;&emsp; [addressof](core_lang_spec.md#SS_27_14_11_3)  
+&emsp;&emsp; [言語仕様の定義要素](core_lang_spec.md#SS_19_14)  
+&emsp;&emsp;&emsp; [ill-formed](core_lang_spec.md#SS_19_14_1)  
+&emsp;&emsp;&emsp; [well-formed](core_lang_spec.md#SS_19_14_2)  
+&emsp;&emsp;&emsp; [未定義動作](core_lang_spec.md#SS_19_14_3)  
+&emsp;&emsp;&emsp; [未規定動作](core_lang_spec.md#SS_19_14_4)  
+&emsp;&emsp;&emsp; [未定義動作と未規定動作](core_lang_spec.md#SS_19_14_5)  
+&emsp;&emsp;&emsp; [被修飾型](core_lang_spec.md#SS_19_14_6)  
+&emsp;&emsp;&emsp; [実引数/仮引数](core_lang_spec.md#SS_19_14_7)  
+&emsp;&emsp;&emsp; [単純代入](core_lang_spec.md#SS_19_14_8)  
+&emsp;&emsp;&emsp; [one-definition rule](core_lang_spec.md#SS_19_14_9)  
+&emsp;&emsp;&emsp; [ODR](core_lang_spec.md#SS_19_14_10)  
+&emsp;&emsp;&emsp; [型特性キーワード](core_lang_spec.md#SS_19_14_11)  
+&emsp;&emsp;&emsp;&emsp; [alignof](core_lang_spec.md#SS_19_14_11_1)  
+&emsp;&emsp;&emsp;&emsp; [alignas](core_lang_spec.md#SS_19_14_11_2)  
+&emsp;&emsp;&emsp;&emsp; [addressof](core_lang_spec.md#SS_19_14_11_3)  
 
-&emsp;&emsp;&emsp; [演算子のオペランドの評価順位](core_lang_spec.md#SS_27_14_12)  
+&emsp;&emsp;&emsp; [演算子のオペランドの評価順位](core_lang_spec.md#SS_19_14_12)  
 
-&emsp;&emsp; [その他](core_lang_spec.md#SS_27_15)  
-&emsp;&emsp;&emsp; [RVO(Return Value Optimization)](core_lang_spec.md#SS_27_15_1)  
-&emsp;&emsp;&emsp; [トライグラフ](core_lang_spec.md#SS_27_15_2)  
+&emsp;&emsp; [その他](core_lang_spec.md#SS_19_15)  
+&emsp;&emsp;&emsp; [RVO(Return Value Optimization)](core_lang_spec.md#SS_19_15_1)  
+&emsp;&emsp;&emsp; [トライグラフ](core_lang_spec.md#SS_19_15_2)  
   
   
 
@@ -236,32 +236,32 @@ __この章の構成__
 
 ___
 
-## 型システムと算術の基礎 <a id="SS_27_1"></a>
+## 型システムと算術の基礎 <a id="SS_19_1"></a>
 
-### 基本型 <a id="SS_27_1_1"></a>
+### 基本型 <a id="SS_19_1_1"></a>
 基本型(fundamental types)は、C++の標準で定義されている型で、
 特別なキーワードを使用して直接宣言できる型の総称である。
-[組み込み型](core_lang_spec.md#SS_27_1_2)とも呼ばれることもある。
+[組み込み型](core_lang_spec.md#SS_19_1_2)とも呼ばれることもある。
 
 基本型は以下のに示した型によって構成される。
 
-* [算術型](core_lang_spec.md#SS_27_1_3)
-* [汎整数型](core_lang_spec.md#SS_27_1_4)
-* [浮動小数点型](core_lang_spec.md#SS_27_1_12)
+* [算術型](core_lang_spec.md#SS_19_1_3)
+* [汎整数型](core_lang_spec.md#SS_19_1_4)
+* [浮動小数点型](core_lang_spec.md#SS_19_1_12)
 * void
 * 上記した型のポインタ型
 
 注:  
 リファレンスは基本型に含まれない。
 
-### 組み込み型 <a id="SS_27_1_2"></a>
-組み込み型(built-in types)は[基本型](core_lang_spec.md#SS_27_1_1)(fundamental types)の別称。
+### 組み込み型 <a id="SS_19_1_2"></a>
+組み込み型(built-in types)は[基本型](core_lang_spec.md#SS_19_1_1)(fundamental types)の別称。
 
-### 算術型 <a id="SS_27_1_3"></a>
+### 算術型 <a id="SS_19_1_3"></a>
 算術型とは下記の型の総称である。
 
-* [汎整数型](core_lang_spec.md#SS_27_1_4)(bool, char, int, unsigned int, long long等)
-* [浮動小数点型](core_lang_spec.md#SS_27_1_12)(float、double、long double)
+* [汎整数型](core_lang_spec.md#SS_19_1_4)(bool, char, int, unsigned int, long long等)
+* [浮動小数点型](core_lang_spec.md#SS_19_1_12)(float、double、long double)
 
 算術型のサイズは下記のように規定されている。
 
@@ -272,14 +272,14 @@ ___
 * 4 == sizeof(float)
 * 8 == sizeof(double) <= sizeof(long double)
 
-### 汎整数型 <a id="SS_27_1_4"></a>
+### 汎整数型 <a id="SS_19_1_4"></a>
 汎整数型とは下記の型の総称である。
 
 * 論理型(bool)
 * 文字型(char、wchar_t等)
-* [整数型](core_lang_spec.md#SS_27_1_5)(int、unsigned int、long等)
+* [整数型](core_lang_spec.md#SS_19_1_5)(int、unsigned int、long等)
 
-### 整数型 <a id="SS_27_1_5"></a>
+### 整数型 <a id="SS_19_1_5"></a>
 整数型とは下記の型の総称である。
 
 * signed char
@@ -293,7 +293,7 @@ ___
 * long long
 * unsigned long long
 
-#### ビットシフトにおける未定義動作 <a id="SS_27_1_5_1"></a>
+#### ビットシフトにおける未定義動作 <a id="SS_19_1_5_1"></a>
 
 __[動作の分類]__
 
@@ -327,14 +327,14 @@ __[安全なビットシフトのガイドライン]__
 | 負の値をシフトしない          | 未定義動作の原因              |
 | オーバーフローの可能性を考慮  | 特にsigned型での左シフト      |
 | 静的解析ツールを活用          | コンパイル時に検出可能        |
-(注) 符号なし[整数型](core_lang_spec.md#SS_27_1_5)変数(us)をオペランドにした左ビットシフトがオーバーフローした場合、
+(注) 符号なし[整数型](core_lang_spec.md#SS_19_1_5)変数(us)をオペランドにした左ビットシフトがオーバーフローした場合、
      usが整数昇格によりintに変換されるため、未定義動作になる可能性がある。
 
-### 算術変換 <a id="SS_27_1_6"></a>
+### 算術変換 <a id="SS_19_1_6"></a>
 C++における算術変換とは、算術演算の1つのオペランドが他のオペランドと同じ型でない場合、
 1つのオペランドを他のオペランドと同じ型に変換するプロセスのことを指す。
 
-算術変換は、[汎整数型昇格](core_lang_spec.md#SS_27_1_7)と通常算術変換に分けられる。
+算術変換は、[汎整数型昇格](core_lang_spec.md#SS_19_1_7)と通常算術変換に分けられる。
 
 ```cpp
     //  example/core_lang_spec/integral_promotion_ut.cpp 11
@@ -386,8 +386,8 @@ C++における算術変換とは、算術演算の1つのオペランドが他�
     static_assert(std::is_same<decltype(ret_9), long>::value, "");
 ```
 
-[一様初期化](core_lang_spec.md#SS_27_6_6)を使用することで、
-変数定義時の算術変換による意図しない値の変換([縮小型変換](core_lang_spec.md#SS_27_1_11))を防ぐことができる。
+[一様初期化](core_lang_spec.md#SS_19_6_6)を使用することで、
+変数定義時の算術変換による意図しない値の変換([縮小型変換](core_lang_spec.md#SS_19_1_11))を防ぐことができる。
 
 ```cpp
     //  example/core_lang_spec/integral_promotion_ut.cpp 62
@@ -423,7 +423,7 @@ C++における算術変換とは、算術演算の1つのオペランドが他�
     ASSERT_TRUE(s < us);  // 汎整数拡張により、-1 < 1が成立
 ```
 
-### 汎整数型昇格 <a id="SS_27_1_7"></a>
+### 汎整数型昇格 <a id="SS_19_1_7"></a>
 bool、char、signed char、unsigned char、short、unsigned short型の変数が、
 算術のオペランドとして使用される場合、
 
@@ -460,10 +460,10 @@ bool、char、signed char、unsigned char、short、unsigned short型の変数�
     static_assert(std::is_same<int, decltype(sval + usval)>::value, "");
 ```
 
-### 汎整数型拡張 <a id="SS_27_1_8"></a>
-汎整数型拡張とは[汎整数型昇格](core_lang_spec.md#SS_27_1_7)と同じ概念を指す。
+### 汎整数型拡張 <a id="SS_19_1_8"></a>
+汎整数型拡張とは[汎整数型昇格](core_lang_spec.md#SS_19_1_7)と同じ概念を指す。
 
-### 浮動小数点型昇格 <a id="SS_27_1_9"></a>
+### 浮動小数点型昇格 <a id="SS_19_1_9"></a>
 浮動小数点型昇格とは、float型とdouble型の演算で、
 float型オブジェクトがdoulbe型に変換されることを指す。
 
@@ -480,19 +480,19 @@ float型オブジェクトがdoulbe型に変換されることを指す。
     ASSERT_FALSE(b2);  // dとfの差はdoubleのイプシロンには収まらない。
 ```
 
-### デフォルト引数昇格 <a id="SS_27_1_10"></a>
+### デフォルト引数昇格 <a id="SS_19_1_10"></a>
 デフォルト引数昇格(Default Argument Promotions)とは、可変長引数`(...)`や、
-プロトタイプを持たない関数に[算術型](core_lang_spec.md#SS_27_1_3)引数を渡す際に適用される昇格ルールの総称である。
+プロトタイプを持たない関数に[算術型](core_lang_spec.md#SS_19_1_3)引数を渡す際に適用される昇格ルールの総称である。
 
 デフォルト引数昇格には以下が含まれる。
 
-- [汎整数型昇格](core_lang_spec.md#SS_27_1_7)
-- [浮動小数点型昇格](core_lang_spec.md#SS_27_1_9)
+- [汎整数型昇格](core_lang_spec.md#SS_19_1_7)
+- [浮動小数点型昇格](core_lang_spec.md#SS_19_1_9)
 
-### 縮小型変換 <a id="SS_27_1_11"></a>
+### 縮小型変換 <a id="SS_19_1_11"></a>
 縮小型変換(Narrowing Conversion) とは、あるデータ型から別のデータ型に変換する際に、
 変換先の型が元の型の表現範囲を完全にカバーしていない場合に発生する変換を指す。
-主に[整数型](core_lang_spec.md#SS_27_1_5)や[浮動小数点型](core_lang_spec.md#SS_27_1_12)などの値を小さな範囲の型に変換する際に起こる。
+主に[整数型](core_lang_spec.md#SS_19_1_5)や[浮動小数点型](core_lang_spec.md#SS_19_1_12)などの値を小さな範囲の型に変換する際に起こる。
 
 ```cpp
     //  example/core_lang_spec/etc_ut.cpp 19
@@ -506,10 +506,10 @@ float型オブジェクトがdoulbe型に変換されることを指す。
     // large = int32_t{d};   縮小型変換回避のためリスト初期化の使用。コンパイルエラー
 ```
 
-[リスト初期化](core_lang_spec.md#SS_27_6_5)を使うことで、このような変換によるバグの発生を防ぐことができる。
+[リスト初期化](core_lang_spec.md#SS_19_6_5)を使うことで、このような変換によるバグの発生を防ぐことができる。
 
 
-### 浮動小数点型 <a id="SS_27_1_12"></a>
+### 浮動小数点型 <a id="SS_19_1_12"></a>
 浮動小数点型は以下の型の総称である。
 
 * `float`
@@ -520,7 +520,7 @@ float型オブジェクトがdoulbe型に変換されることを指す。
 この標準は、浮動小数点演算の表現方法、精度、丸め方法、および例外処理を規定しており、
 広く使用されている。
 
-#### 浮動小数点型のダイナミックレンジ <a id="SS_27_1_12_1"></a>
+#### 浮動小数点型のダイナミックレンジ <a id="SS_19_1_12_1"></a>
 
 | 型                          | 正の最小値                    | 正の最大値                    |
 |:----------------------------|:------------------------------|:------------------------------|
@@ -532,7 +532,7 @@ float型オブジェクトがdoulbe型に変換されることを指す。
 
 ここで`long double`の最小値と最大値は、システムやコンパイラに依存して異なる場合がある点に留意する。
 
-#### 浮動小数点の誤差 <a id="SS_27_1_12_2"></a>
+#### 浮動小数点の誤差 <a id="SS_19_1_12_2"></a>
 浮動小数点変数の10進数の表現が2進数では循環小数となる場合があり、
 正確に表現できないことがある。これにより、計算結果がわずかに異なる値を返す場合がある。
 浮動小数点誤差は、特に計算の繰り返しや桁数の多い計算で顕著になる。
@@ -550,7 +550,7 @@ float型オブジェクトがdoulbe型に変換されることを指す。
     ASSERT_NE(0.05F, a + b);
 ```
 
-#### イプシロン <a id="SS_27_1_12_3"></a>
+#### イプシロン <a id="SS_19_1_12_3"></a>
 イプシロン(epsilon)とは、ある浮動小数点数に対して「1」を加えた時に、
 異なる値として識別できる最小の差分を指す。
 つまり、イプシロンは浮動小数点数の精度を示す尺度である。
@@ -574,7 +574,7 @@ float型オブジェクトがdoulbe型に変換されることを指す。
     ASSERT_TRUE(is_nearly_equal);  // 浮動小数点の同値はこのように判定する
 ```
 
-#### 浮動小数点の演算エラー <a id="SS_27_1_12_4"></a>
+#### 浮動小数点の演算エラー <a id="SS_19_1_12_4"></a>
 浮動小数点の演算は以下のようなエラーを生じることがある。
 
 | エラーの種類   | 説明                                                                           | 例                           |
@@ -626,11 +626,11 @@ float型オブジェクトがdoulbe型に変換されることを指す。
 浮動小数演算を複数コンテキストで行うソフトウェアの開発する場合、
 処理系の選択に注意が必要である。
 
-## リテラル <a id="SS_27_2"></a>
+## リテラル <a id="SS_19_2"></a>
 プログラムに具体的な値を与えるための基本的な即値を指す。
 例えば、1, 2, 1.0, true/false, nullptr, "literal string"など。
 
-### 生文字列リテラル <a id="SS_27_2_1"></a>
+### 生文字列リテラル <a id="SS_19_2_1"></a>
 下記の例にあるように正規表現をそのまま文字列リテラルとして表現するために、
 C++11から導入された導入されたリテラル。
 
@@ -654,7 +654,7 @@ C++11から導入された導入されたリテラル。
         }
 ```
 
-### 2進数リテラル <a id="SS_27_2_2"></a>
+### 2進数リテラル <a id="SS_19_2_2"></a>
 C++14以降では、0bまたは 0B をプレフィックスとして使うことで、2進数リテラルを表現できる。
 
 ```cpp
@@ -664,7 +664,7 @@ C++14以降では、0bまたは 0B をプレフィックスとして使うこと
     ASSERT_EQ(bin_value, 13);
 ```
 
-### 数値リテラル <a id="SS_27_2_3"></a>
+### 数値リテラル <a id="SS_19_2_3"></a>
 C++14では区切り文字'を使用し、数値リテラルを記述できるようになった。
 
 ```cpp
@@ -681,7 +681,7 @@ C++14では区切り文字'を使用し、数値リテラルを記述できる�
     ASSERT_EQ(hex_with_separator, 65535);    // 16進数 0x00010011 == 65535
 ```
 
-### ワイド文字列 <a id="SS_27_2_4"></a>
+### ワイド文字列 <a id="SS_19_2_4"></a>
 ワイド文字列リテラルを保持する型は下記のように定義された。
 
 * char16_t: UTF-16エンコーディングのコード単位を扱う型。 u"..." というリテラルでUTF-16文字列を表す。
@@ -711,7 +711,7 @@ C++14では区切り文字'を使用し、数値リテラルを記述できる�
     #endif
 ```
 
-### 16進浮動小数点数リテラル <a id="SS_27_2_5"></a>
+### 16進浮動小数点数リテラル <a id="SS_19_2_5"></a>
 16進浮動小数点数リテラルは、
 C++17から導入された浮動小数点数を16進数で表現する方法である。
 特に、ハードウェアや低レベルのプログラミングで、
@@ -760,10 +760,10 @@ C++17から導入された浮動小数点数を16進数で表現する方法で�
     EXPECT_FLOAT_EQ(static_cast<float>(hex_double), hex_float);  // double型をfloatにキャスト
 ```
 
-### ユーザー定義リテラル <a id="SS_27_2_6"></a>
-[ユーザ定義リテラル演算子](core_lang_spec.md#SS_27_2_6_1)により定義されたリテラルを指す。
+### ユーザー定義リテラル <a id="SS_19_2_6"></a>
+[ユーザ定義リテラル演算子](core_lang_spec.md#SS_19_2_6_1)により定義されたリテラルを指す。
 
-#### ユーザ定義リテラル演算子 <a id="SS_27_2_6_1"></a>
+#### ユーザ定義リテラル演算子 <a id="SS_19_2_6_1"></a>
 ユーザ定義リテラル演算子とは以下のようなものである。
 
 ```cpp
@@ -784,7 +784,7 @@ C++17から導入された浮動小数点数を16進数で表現する方法で�
     ASSERT_EQ(m, km);
 ```
 
-#### std::string型リテラル <a id="SS_27_2_6_2"></a>
+#### std::string型リテラル <a id="SS_19_2_6_2"></a>
 "xxx"sとすることで、std::string型のリテラルを作ることができる。
 
 ```cpp
@@ -802,7 +802,7 @@ C++17から導入された浮動小数点数を16進数で表現する方法で�
     ASSERT_STREQ("str", b);
 ```
 
-#### std::chronoのリテラル <a id="SS_27_2_6_3"></a>
+#### std::chronoのリテラル <a id="SS_19_2_6_3"></a>
 std::chronoのリテラルは以下のコードのように使用できる。
 
 ```cpp
@@ -819,7 +819,7 @@ std::chronoのリテラルは以下のコードのように使用できる。
     static_assert(1.5s == 1500ms);  // 小数点を使った時間リテラル
 ```
 
-#### std::complexリテラル <a id="SS_27_2_6_4"></a>
+#### std::complexリテラル <a id="SS_19_2_6_4"></a>
 std::complexリテラル以下のコードのように使用できる。
 
 ```cpp
@@ -836,10 +836,10 @@ std::complexリテラル以下のコードのように使用できる。
     EXPECT_EQ(result, 4.0 + 6.0i);
 ```
 
-## 列挙型とバイト表現 <a id="SS_27_3"></a>
-### enum <a id="SS_27_3_1"></a>
+## 列挙型とバイト表現 <a id="SS_19_3"></a>
+### enum <a id="SS_19_3_1"></a>
 C++03までのenumは定数を分かりやすい名前で定義するための記法である。
-このドキュメントでは、[スコープドenum](core_lang_spec.md#SS_27_3_3)に対して、C++03までのenumを非スコープドenum、
+このドキュメントでは、[スコープドenum](core_lang_spec.md#SS_19_3_3)に対して、C++03までのenumを非スコープドenum、
 通常のenum、あるいは単にenumと呼ぶことがある。
 C++03までのenumには、以下のような問題があった。
 
@@ -859,8 +859,8 @@ C++03までのenumには、以下のような問題があった。
     ASSERT_TRUE(Green == Monday);  // 別のenumが比較できてしまう
 ```
 
-### enum class <a id="SS_27_3_2"></a>
-enum classは通常の[enum](core_lang_spec.md#SS_27_3_1)の問題を解決するためにC++11から導入された。
+### enum class <a id="SS_19_3_2"></a>
+enum classは通常の[enum](core_lang_spec.md#SS_19_3_1)の問題を解決するためにC++11から導入された。
 
 ```cpp
     //  example/core_lang_spec/enum_ut.cpp 29
@@ -887,12 +887,12 @@ enum classは通常の[enum](core_lang_spec.md#SS_27_3_1)の問題を解決す�
     DayOfWeek d2{DayOfWeek::Tuesday};  // 値あり初期化
 ```
 
-### スコープドenum <a id="SS_27_3_3"></a>
-[enum class](core_lang_spec.md#SS_27_3_2)はスコープドenum(scoped enum)と呼ばれることがある。
+### スコープドenum <a id="SS_19_3_3"></a>
+[enum class](core_lang_spec.md#SS_19_3_2)はスコープドenum(scoped enum)と呼ばれることがある。
 
 
-### underlying type <a id="SS_27_3_4"></a>
-underlying typeとは、enumやenum classの[汎整数型](core_lang_spec.md#SS_27_1_4)を指定できるようにするために、
+### underlying type <a id="SS_19_3_4"></a>
+underlying typeとは、enumやenum classの[汎整数型](core_lang_spec.md#SS_19_1_4)を指定できるようにするために、
 C++11で導入されたシンタックスである。enumのサイズをユーザが定義できるため、
 特定のバイナリプロトコルとの互換性が必要な場合や、特定のハードウェアと連携する際に特に有効である。
 
@@ -920,7 +920,7 @@ C++11で導入されたシンタックスである。enumのサイズをユー�
 ```
 
 C++17までは、型安全の観点から、初期化においては、以下のコードコメントのような仕様であったが、
-C++17から導入された[std::byte](core_lang_spec.md#SS_27_3_5)の利便性のため、
+C++17から導入された[std::byte](core_lang_spec.md#SS_19_3_5)の利便性のため、
 underlying typeを指定したenumやenum class変数のunderlying typeインスタンスによる初期化が認められるようになった。
 
 ```cpp
@@ -939,7 +939,7 @@ underlying typeを指定したenumやenum class変数のunderlying typeインス
 
 上記コードにもあるが、underlying typeインスタンスによる初期化を行う場合は、
 意図しない縮小型変換によるバグの発生を防ぐためにも、
-[一様初期化](core_lang_spec.md#SS_27_6_6)を使用するべきだろう。
+[一様初期化](core_lang_spec.md#SS_19_6_6)を使用するべきだろう。
 
 一部の例外を除くとunderlying typeを指定しないenumやenum classはコンパイル時にサイズが確定できないため、
 前方宣言できないが、underlying typeを指定したenum、enum classは前方宣言することができる。
@@ -956,10 +956,10 @@ underlying typeを指定したenumやenum class変数のunderlying typeインス
     enum class DayOfWeek : int8_t { Sunday, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday };
 ```
 
-### std::byte <a id="SS_27_3_5"></a>
+### std::byte <a id="SS_19_3_5"></a>
 C++17で導入されたstd::byte型は、バイト単位のデータ操作に使用され、
-[整数型](core_lang_spec.md#SS_27_1_5)としての意味を持たないため、型安全性を確保する。
-uint8_t型と似ているが、uint8_t型の演算による[汎整数型昇格](core_lang_spec.md#SS_27_1_7)を発生させないため、
+[整数型](core_lang_spec.md#SS_19_1_5)としての意味を持たないため、型安全性を確保する。
+uint8_t型と似ているが、uint8_t型の演算による[汎整数型昇格](core_lang_spec.md#SS_19_1_7)を発生させないため、
 可読性、保守性の向上が見込める。
 
 ```cpp
@@ -981,7 +981,7 @@ uint8_t型と似ているが、uint8_t型の演算による[汎整数型昇格](
     ASSERT_EQ(0x00, std::to_integer<int>(result_1));  // 0x100はstd::byteでは0
 ```
 
-### using enum <a id="SS_27_3_6"></a>
+### using enum <a id="SS_19_3_6"></a>
 名前空間のように、
 
 ```cpp
@@ -1075,15 +1075,15 @@ uint8_t型と似ているが、uint8_t型の演算による[汎整数型昇格](
 C++03までのenumが持っていた問題を再発生させてしまうため、
 ブロックスコープ以外での使用に関しては控え目に使用するべきだろう。
 
-## 型とインスタンス <a id="SS_27_4"></a>
-### トリビアル型 <a id="SS_27_4_1"></a>
+## 型とインスタンス <a id="SS_19_4"></a>
+### トリビアル型 <a id="SS_19_4_1"></a>
 トリビアル型とは、
 
-* 全ての[特殊メンバ関数](core_lang_spec.md#SS_27_6_1)がデフォルトである。
+* 全ての[特殊メンバ関数](core_lang_spec.md#SS_19_6_1)がデフォルトである。
 * バーチャル関数や仮想継承を持たない。
 * 基底クラスがある場合、基底クラスもトリビアルである。
 
-である。その結果、トリビアル型とは、[トリビアルに破壊可能な型](core_lang_spec.md#SS_27_4_2)となる。
+である。その結果、トリビアル型とは、[トリビアルに破壊可能な型](core_lang_spec.md#SS_19_4_2)となる。
 
 「型Tがトリビアルであること」と「以下の行がコンパイルできること」は等価である。
 
@@ -1113,7 +1113,7 @@ C++03までのenumが持っていた問題を再発生させてしまうため�
     static_assert(!is_pod_v<Trivial>);
 ```
 
-### トリビアルに破壊可能な型 <a id="SS_27_4_2"></a>
+### トリビアルに破壊可能な型 <a id="SS_19_4_2"></a>
 「トリビアルに破壊可能な型(Trivially Destructible)」とは、以下の条件を満たす型を指す。
 
 * デストラクタがユーザー定義されていない
@@ -1141,7 +1141,7 @@ C++03までのenumが持っていた問題を再発生させてしまうため�
     static_assert(!std::is_trivially_destructible_v<Trivial>);
 ```
 
-### 標準レイアウト型 <a id="SS_27_4_3"></a>
+### 標準レイアウト型 <a id="SS_19_4_3"></a>
 「型Tが標準レイアウトであること」と「以下の行がコンパイルできること」は等価である。
 
 ```cpp
@@ -1171,7 +1171,7 @@ C++03までのenumが持っていた問題を再発生させてしまうため�
     static_assert(!is_pod_v<StanderdLayout>);
 ```
 
-### 集成体 <a id="SS_27_4_4"></a>
+### 集成体 <a id="SS_19_4_4"></a>
 型Tが集成体であるための条件を以下に示す。
 
 * 型Tが`class`、`struct`、`union`であった場合、以下の条件を満たせばTは集成体である。
@@ -1188,7 +1188,7 @@ C++03までのenumが持っていた問題を再発生させてしまうため�
 
 * 集成体の配列や、組み込み型の配列は集成体である。
 
-### POD <a id="SS_27_4_5"></a>
+### POD <a id="SS_19_4_5"></a>
 PODとは、 Plain Old Dataの略語であり、
 「型TがPODであること」と「以下の行がコンパイルできること」は等価である。
 
@@ -1196,8 +1196,8 @@ PODとは、 Plain Old Dataの略語であり、
     static_assert(std::is_pod_v<T>);  // is_podはC++20から非推奨
 ```
 
-「型が[トリビアル型](core_lang_spec.md#SS_27_4_1)且つ[標準レイアウト型](core_lang_spec.md#SS_27_4_3)であること」と
-「型が[POD](core_lang_spec.md#SS_27_4_5)であること」は等価であるため、C++20では、
+「型が[トリビアル型](core_lang_spec.md#SS_19_4_1)且つ[標準レイアウト型](core_lang_spec.md#SS_19_4_3)であること」と
+「型が[POD](core_lang_spec.md#SS_19_4_5)であること」は等価であるため、C++20では、
 [PODという用語は非推奨](https://cpprefjp.github.io/lang/cpp20/deprecate_pod.html)となった。
 従って、std::is_pod_vは以下のように置き換えられるべきである。
 
@@ -1237,7 +1237,7 @@ PODとは、 Plain Old Dataの略語であり、
 上記からわかる通り、POD型とは概ね、C言語と互換性のある型を指すと思って良い。
 
 
-### 不完全型 <a id="SS_27_4_6"></a>
+### 不完全型 <a id="SS_19_4_6"></a>
 不完全型とは、型のサイズや構造が不明な型を指す。
 以下のis_completeで示したテンプレート定数で、不完全型か否かを判定できる。
 
@@ -1276,22 +1276,22 @@ PODとは、 Plain Old Dataの略語であり、
     static_assert(is_complete_v<A>);
 ```
 
-### 完全型 <a id="SS_27_4_7"></a>
-[不完全型](core_lang_spec.md#SS_27_4_6)ではない型を指す。
+### 完全型 <a id="SS_19_4_7"></a>
+[不完全型](core_lang_spec.md#SS_19_4_6)ではない型を指す。
 
-### ポリモーフィックなクラス <a id="SS_27_4_8"></a>
+### ポリモーフィックなクラス <a id="SS_19_4_8"></a>
 ポリモーフィックなクラスとは仮想関数を持つクラスや、
 ポリモーフィックなクラスから派生したクラスを指す。
 なお、純粋仮想関数を持つクラスは、
-仮想クラスと呼ばれれる(「[インターフェースクラス](core_lang_spec.md#SS_27_4_11)」参照)。
+仮想クラスと呼ばれれる(「[インターフェースクラス](core_lang_spec.md#SS_19_4_11)」参照)。
 ポリモーフィックなクラスと、
-非ポリモーフィックなクラスは[RTTI](core_lang_spec.md#SS_27_4_9)との組み合わせで動作の違いが顕著となる。
+非ポリモーフィックなクラスは[RTTI](core_lang_spec.md#SS_19_4_9)との組み合わせで動作の違いが顕著となる。
 
 非ポリモーフィックなクラスは非静的なメンバ変数が定義された順にメモリ上に配置されたレイアウトを持つ
 (CPUアーキテクチャに依存したパディング領域が変数間に挿入されることもある)。
-このようなクラスは[POD](core_lang_spec.md#SS_27_4_5)
+このようなクラスは[POD](core_lang_spec.md#SS_19_4_5)
 (C++20では、[PODという用語は非推奨](https://cpprefjp.github.io/lang/cpp20/deprecate_pod.html)
-となり、[トリビアル型](core_lang_spec.md#SS_27_4_1)と[標準レイアウト型](core_lang_spec.md#SS_27_4_3)に用語が分割された)とも呼ばれ、
+となり、[トリビアル型](core_lang_spec.md#SS_19_4_1)と[標準レイアウト型](core_lang_spec.md#SS_19_4_3)に用語が分割された)とも呼ばれ、
 C言語の構造体のレイアウトと互換性を持つことが一般的である。
 
 ポリモーフィックなクラスは、
@@ -1442,21 +1442,21 @@ X、Y、Zのメモリレイアウトは以下の様に出力される。
 
 なお、オブジェクトの解放は生成とは逆の順番で行われる。
 
-### RTTI <a id="SS_27_4_9"></a>
+### RTTI <a id="SS_19_4_9"></a>
 RTTI(Run-time Type Information)とは、プログラム実行中のオブジェクトの型を導出するための機能であり、
 具体的には下記の3つの要素を指す。
 
-* [dynamic_cast](core_lang_spec.md#SS_27_4_9_1)
-* [typeid](core_lang_spec.md#SS_27_4_9_2)
-* [std::type_info](core_lang_spec.md#SS_27_4_9_3)
+* [dynamic_cast](core_lang_spec.md#SS_19_4_9_1)
+* [typeid](core_lang_spec.md#SS_19_4_9_2)
+* [std::type_info](core_lang_spec.md#SS_19_4_9_3)
 
 
-#### dynamic_cast <a id="SS_27_4_9_1"></a>
+#### dynamic_cast <a id="SS_19_4_9_1"></a>
 dynamic_castは、実行時の型チェックと安全なダウンキャストを行うためのキャスト演算子であるため、
-[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)とは密接な関係を持つ。
+[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)とは密接な関係を持つ。
 
 
-下記のような[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)に対しては、
+下記のような[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)に対しては、
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 8
@@ -1497,7 +1497,7 @@ dynamic_castは下記のように振舞う。
 ```
 
 
-一方で、下記のような非[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)に対しては、
+一方で、下記のような非[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)に対しては、
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 102
@@ -1530,12 +1530,12 @@ dynamic_castは下記のように振舞う。
     #endif
 ```
 
-#### typeid <a id="SS_27_4_9_2"></a>
-typeidは[RTTI](core_lang_spec.md#SS_27_4_9)オブジェクトの型情報
-([std::type_info](core_lang_spec.md#SS_27_4_9_3))を実行時に取得するための演算子である。
+#### typeid <a id="SS_19_4_9_2"></a>
+typeidは[RTTI](core_lang_spec.md#SS_19_4_9)オブジェクトの型情報
+([std::type_info](core_lang_spec.md#SS_19_4_9_3))を実行時に取得するための演算子である。
 dynamic_castとは違い、
-typeidのオペランドは[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)のインスタンスでなくても良い。
-以下の例では[基本型](core_lang_spec.md#SS_27_1_1)に対するtypeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)の振る舞いを表す。
+typeidのオペランドは[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)のインスタンスでなくても良い。
+以下の例では[基本型](core_lang_spec.md#SS_19_1_1)に対するtypeidが返す[std::type_info](core_lang_spec.md#SS_19_4_9_3)の振る舞いを表す。
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 52
@@ -1552,7 +1552,7 @@ typeidのオペランドは[ポリモーフィックなクラス](core_lang_spec
     ASSERT_STREQ(type_info_i.name(), "i");  // 実装定義の型名(clang++/g++ではintはi)
 ```
 
-下記のような[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)のインスタンスに関して、
+下記のような[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)のインスタンスに関して、
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 8
@@ -1566,7 +1566,7 @@ class Polymorphic_Derived : public Polymorphic_Base {  // ポリモーフィッ�
 };
 ```
 
-typeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)オブジェクトは下記のように振舞う。
+typeidが返す[std::type_info](core_lang_spec.md#SS_19_4_9_3)オブジェクトは下記のように振舞う。
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 65
@@ -1586,7 +1586,7 @@ typeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)オブジェクト
     ASSERT_EQ(typeid(b_ref_b), typeid(b));  // b_ref_bとbの表層の型が同じであることを示す
 ```
 
-一方で、下記のような非[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)に対しては、
+一方で、下記のような非[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)に対しては、
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 102
@@ -1598,7 +1598,7 @@ typeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)オブジェクト
     };
 ```
 
-typeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)オブジェクトは下記のように振舞う。
+typeidが返す[std::type_info](core_lang_spec.md#SS_19_4_9_3)オブジェクトは下記のように振舞う。
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 139
@@ -1621,7 +1621,7 @@ typeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)オブジェクト
 従って、このような場合のtypeidは静的な型(表層の型)に対しての情報を返すため、
 コンパイル時にのみ評価され、ランタイム時に評価されない。
 
-[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)のオブジェクトをオペランドとするtypeidの実行は、
+[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)のオブジェクトをオペランドとするtypeidの実行は、
 そのオペランドの実際のオブジェクトの型を取得することはすでに示した。
 このような場合、オペランド式は実行時に評価される。以下のコードはそのことを表している。
 
@@ -1640,7 +1640,7 @@ typeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)オブジェクト
 ```
 
 
-一方、非[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)のオブジェクトをオペランドとするtypeidのオペランド式は、
+一方、非[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)のオブジェクトをオペランドとするtypeidのオペランド式は、
 コンパイル時に処理されるため、その式は実行されない。以下のコードはそのことを表している。
 
 ```cpp
@@ -1657,7 +1657,7 @@ typeidが返す[std::type_info](core_lang_spec.md#SS_27_4_9_3)オブジェクト
     ASSERT_EQ(base_ptr, &derived);  // base_ptr = &baseは実行されない
 ```
 
-#### std::type_info <a id="SS_27_4_9_3"></a>
+#### std::type_info <a id="SS_19_4_9_3"></a>
 type_infoクラスは、[typeid](----)演算子によって返される、型の情報が格納された型である。
 
 std::type_infoはコンパイラの実装で定義された型名を含んでいる。
@@ -1681,7 +1681,7 @@ std::type_infoはコンパイラの実装で定義された型名を含んでい
 そのような関数は、`abi::__cxa_demangle`である。
 
 `std::type_info::name()`と`abi::__cxa_demangle`を利用して、
-オブジェクトの[被修飾型](core_lang_spec.md#SS_27_14_6)名をstd::stringオブジェクトとして取り出す関数とその使用例を以下に示す。
+オブジェクトの[被修飾型](core_lang_spec.md#SS_19_14_6)名をstd::stringオブジェクトとして取り出す関数とその使用例を以下に示す。
 
 ```cpp
     //  example/core_lang_spec/rtti_ut.cpp 191
@@ -1726,11 +1726,11 @@ std::type_infoはコンパイラの実装で定義された型名を含んでい
     ASSERT_EQ(type2str(b_ref_b), "Polymorphic_Base");     // b_ref_bの実際の型はPolymorphic_Base
 ```
 
-### Run-time Type Information <a id="SS_27_4_10"></a>
-「[RTTI](core_lang_spec.md#SS_27_4_9)」を参照せよ。
+### Run-time Type Information <a id="SS_19_4_10"></a>
+「[RTTI](core_lang_spec.md#SS_19_4_9)」を参照せよ。
 
 
-### インターフェースクラス <a id="SS_27_4_11"></a>
+### インターフェースクラス <a id="SS_19_4_11"></a>
 インターフェースクラスとは、純粋仮想関数のみを持つ抽象クラスのことを指す。
 インターフェースクラスは、クラスの実装を提供することなく、
 クラスのインターフェースを定義するために使用される。
@@ -1759,13 +1759,13 @@ std::type_infoはコンパイラの実装で定義された型名を含んでい
     };
 ```
 
-### constインスタンス <a id="SS_27_4_12"></a>
+### constインスタンス <a id="SS_19_4_12"></a>
 constインスタンスは、ランタイムまたはコンパイル時に初期化され、
 その後、状態が不変であるインスタンスである。
 必ずしも以下に示すようにconstインスタンスがコンパイル時に値が定まっているわけではない。
-[constexprインスタンス](core_lang_spec.md#SS_27_5_6)はconstインスタンスである。
+[constexprインスタンス](core_lang_spec.md#SS_19_5_6)はconstインスタンスである。
 C++03までのコンパイラに、
-最適化の一環で`static const`インスタンスを[constexprインスタンス](core_lang_spec.md#SS_27_5_6)と扱うものもあった。
+最適化の一環で`static const`インスタンスを[constexprインスタンス](core_lang_spec.md#SS_19_5_6)と扱うものもあった。
 
 
 ```cpp
@@ -1792,19 +1792,19 @@ C++03までのコンパイラに、
     static_assert(is_const_v<decltype(c_int)>);  // c_intはcons
 ```
 
-## 定数式とコンパイル時評価 <a id="SS_27_5"></a>
+## 定数式とコンパイル時評価 <a id="SS_19_5"></a>
 
-### constexpr <a id="SS_27_5_1"></a>
+### constexpr <a id="SS_19_5_1"></a>
 constexprはC++11で導入されたキーワードで、
 関数や変数をコンパイル時に評価可能にする。
 これにより、定数計算がコンパイル時に行われ、
 実行時のパフォーマンスが向上し、コンパイル時にエラーを検出できることがある。
 
-### constexpr定数 <a id="SS_27_5_2"></a>
+### constexpr定数 <a id="SS_19_5_2"></a>
 C++11以前で定数を定義する方法は、
 
 * マクロ定数
-* [enum](core_lang_spec.md#SS_27_3_1)
+* [enum](core_lang_spec.md#SS_19_3_1)
 * static const(定数となるか否かは、コンパイラの実装依存に依存する)
 
 の方法があったが、それぞれの方法には下記のような問題がある。
@@ -1839,11 +1839,11 @@ C++11以前で定数を定義する方法は、
     static_assert(templ.value == 5);
 ```
 
-constexpr定数がif文のオカレンスになる場合、[constexpr if文](core_lang_spec.md#SS_27_11_12)することで、
-[ill-formed](core_lang_spec.md#SS_27_14_1)を使用した場合分けが可能になる。
+constexpr定数がif文のオカレンスになる場合、[constexpr if文](core_lang_spec.md#SS_19_11_12)することで、
+[ill-formed](core_lang_spec.md#SS_19_14_1)を使用した場合分けが可能になる。
 
 
-### constexpr関数 <a id="SS_27_5_3"></a>
+### constexpr関数 <a id="SS_19_5_3"></a>
 関数に`constexpr`をつけて宣言することで定数を定義することができる。
 constexpr関数の呼び出し式の値がコンパイル時に確定する場合、
 その値はconstexpr定数となるため、関数呼び出しが発生しないため、実行効率が向上する。
@@ -1899,7 +1899,7 @@ for/if文や条件分岐のような処理を含むことができなかった�
     static_assert(0b1111 == bit_mask_1);
 ```
 
-### コア定数式 <a id="SS_27_5_4"></a>
+### コア定数式 <a id="SS_19_5_4"></a>
 コア定数式(core constant expression)とは以下の条件を満たす式である。
 
 1. 以下のいずれかに該当する式であること  
@@ -1909,7 +1909,7 @@ for/if文や条件分岐のような処理を含むことができなかった�
    - constexprサブオブジェクトへの参照
    - constexpr関数呼び出し
    - sizeof演算子の適用結果
-   - typeid演算子の適用結果(式の値が[ポリモーフィックなクラス](core_lang_spec.md#SS_27_4_8)である場合を除く)
+   - typeid演算子の適用結果(式の値が[ポリモーフィックなクラス](core_lang_spec.md#SS_19_4_8)である場合を除く)
 
 2. 以下のすべてを満たすこと:  
    - 浮動小数点の比較演算を含まない
@@ -1926,9 +1926,9 @@ for/if文や条件分岐のような処理を含むことができなかった�
    - 使用されるすべての変数は定数式で初期化されている
    - 呼び出されるすべての関数はconstexpr関数である
 
-このドキュメントでは慣用的に[constexpr定数](core_lang_spec.md#SS_27_5_2)と呼んでいる概念が、コア定数式である。
+このドキュメントでは慣用的に[constexpr定数](core_lang_spec.md#SS_19_5_2)と呼んでいる概念が、コア定数式である。
 
-### リテラル型 <a id="SS_27_5_5"></a>
+### リテラル型 <a id="SS_19_5_5"></a>
 constexpr導入後のC++11の標準では、下記の条件を満たすクラスは、
 
 * constexprコンストラクタを持つ
@@ -1936,7 +1936,7 @@ constexpr導入後のC++11の標準では、下記の条件を満たすクラス
 * 仮想関数や仮想基底クラスを持たない
 
 constexpr定数もしくはconstexprインスタンスをコンストラクタに渡すことにより、
-[constexprインスタンス](core_lang_spec.md#SS_27_5_6)を生成できる。
+[constexprインスタンス](core_lang_spec.md#SS_19_5_6)を生成できる。
 
 このようなクラスは慣習的にリテラル型(literal type)と呼ばれる。
 
@@ -1972,9 +1972,9 @@ constexpr定数もしくはconstexprインスタンスをコンストラクタ�
                                           // int_3.Allways3()はconstexprt定数
 ```
 
-### constexprインスタンス <a id="SS_27_5_6"></a>
-[constexpr定数](core_lang_spec.md#SS_27_5_2)を引数にして、[リテラル型](core_lang_spec.md#SS_27_5_5)のconstexprコンストラクタを呼び出せば、
-constexprインスタンスを生成できる。このリテラル型を使用して下記のように[ユーザー定義リテラル](core_lang_spec.md#SS_27_2_6)
+### constexprインスタンス <a id="SS_19_5_6"></a>
+[constexpr定数](core_lang_spec.md#SS_19_5_2)を引数にして、[リテラル型](core_lang_spec.md#SS_19_5_5)のconstexprコンストラクタを呼び出せば、
+constexprインスタンスを生成できる。このリテラル型を使用して下記のように[ユーザー定義リテラル](core_lang_spec.md#SS_19_2_6)
 を定義することで、constexprインスタンスをより簡易に使用することができるようになる。
 
 ```cpp
@@ -1993,7 +1993,7 @@ constexprインスタンスを生成できる。このリテラル型を使用�
     static_assert(std::is_same_v<decltype(i), Integer const>);
 ```
 
-### consteval <a id="SS_27_5_7"></a>
+### consteval <a id="SS_19_5_7"></a>
 constevalはC++20から導入されたキーワードであり、
 呼び出しが必ずコンパイル時に評価されなければならない関数を定義するために使用される。
 この関数は、コンパイル時に評価できない引数や式が与えられるとコンパイルエラーとなる。
@@ -2035,7 +2035,7 @@ consteval関数の呼び出しは、その結果が定数式でなければコ�
     ASSERT_EQ(0b1111'1111, bm);
 ```
 
-### constinit <a id="SS_27_5_8"></a>
+### constinit <a id="SS_19_5_8"></a>
 constinitはC++20から導入されたキーワードであり、
 静的記憶域期間（static、namespaceスコープ）またはthread_local変数が、
 コンパイル時に初期化されることを保証するために使用される。
@@ -2067,8 +2067,8 @@ constinitはC++20から導入されたキーワードであり、
     #endif
 ```
 
-### constexprラムダ <a id="SS_27_5_9"></a>
-constexprラムダはC++17から導入された機能であり、以下の条件を満たした[ラムダ式](core_lang_spec.md#SS_27_10_3)である。
+### constexprラムダ <a id="SS_19_5_9"></a>
+constexprラムダはC++17から導入された機能であり、以下の条件を満たした[ラムダ式](core_lang_spec.md#SS_19_10_3)である。
 
 * 引数やラムダ式内の処理がコンパイル時に評価可能である必要がある。
   すべての処理はconstexpr関数のようにコンパイル時に確定する必要があり、
@@ -2112,8 +2112,8 @@ constexprラムダはC++17から導入された機能であり、以下の条件
     static_assert(fact_5 == 120);
 ```
 
-## オブジェクト生成と初期化 <a id="SS_27_6"></a>
-### 特殊メンバ関数 <a id="SS_27_6_1"></a>
+## オブジェクト生成と初期化 <a id="SS_19_6"></a>
+### 特殊メンバ関数 <a id="SS_19_6_1"></a>
 特殊メンバ関数とは下記の関数を指す。
 
 * デフォルトコンストラクタ
@@ -2125,10 +2125,10 @@ constexprラムダはC++17から導入された機能であり、以下の条件
 
 以下のメンバ関数は特殊関数ではないが、C++20から特殊関数と同様に`=default`とすることで自動生成される。
 
-* [==演算子](core_lang_spec.md#SS_27_6_3)  
+* [==演算子](core_lang_spec.md#SS_19_6_3)  
   クラス内のすべてのメンバが==をサポートしている場合、`= default`とすることで自動生成される。
-* [<=>演算子](core_lang_spec.md#SS_27_6_4_1)  
-  すべてのメンバが[<=>演算子](core_lang_spec.md#SS_27_6_4_1)での比較可能である場合、`= default`とすることで自動生成される。 
+* [<=>演算子](core_lang_spec.md#SS_19_6_4_1)  
+  すべてのメンバが[<=>演算子](core_lang_spec.md#SS_19_6_4_1)での比較可能である場合、`= default`とすることで自動生成される。 
 
 ユーザがこれらを一切定義しない場合、または一部のみを定義する場合、
 コンパイラは、下記のテーブル等で示すルールに従い、特殊関数メンバの宣言、定義の状態を定める。
@@ -2213,9 +2213,9 @@ constexprラムダはC++17から導入された機能であり、以下の条件
 
 とすることで安全で保守性性の高いコードを設計できる。
 
-#### 初期化子リストコンストラクタ <a id="SS_27_6_1_1"></a>
-初期化子リストコンストラクタ([リスト初期化](core_lang_spec.md#SS_27_6_5)用のコンストラクタ)とは、
-{}による[リスト初期化](core_lang_spec.md#SS_27_6_5)をサポートするためのコンストラクタである。
+#### 初期化子リストコンストラクタ <a id="SS_19_6_1_1"></a>
+初期化子リストコンストラクタ([リスト初期化](core_lang_spec.md#SS_19_6_5)用のコンストラクタ)とは、
+{}による[リスト初期化](core_lang_spec.md#SS_19_6_5)をサポートするためのコンストラクタである。
 下記コードでは、 E::E(std::initializer_list\<uint32_t>)が初期化子リストコンストラクタである。
 
 ```cpp
@@ -2262,7 +2262,7 @@ constexprラムダはC++17から導入された機能であり、以下の条件
 の両方を持つクラスの初期化時にどちらでも呼び出せる初期化子リストが渡された場合({}を使った呼び出し)、
 初期化子コンストラクタが呼び出される。
 
-#### 継承コンストラクタ <a id="SS_27_6_1_2"></a>
+#### 継承コンストラクタ <a id="SS_19_6_1_2"></a>
 継承コンストラクタとは、基底クラスで定義したコンストラクタ群を、
 派生クラスのインターフェースとしても使用できるようにするための機能である。
 下記コードのように、継承コンストラクタは派生クラス内でusingを用いて宣言される。
@@ -2292,7 +2292,7 @@ constexprラムダはC++17から導入された機能であり、以下の条件
     }
 ```
 
-#### 委譲コンストラクタ <a id="SS_27_6_1_3"></a>
+#### 委譲コンストラクタ <a id="SS_19_6_1_3"></a>
 委譲コンストラクタとは、コンストラクタから同じクラスの他のコンストラクタに処理を委譲する機能である。
 以下のコード中では、委譲コンストラクタを使い、
 A::A(uint32_t)の処理をA::A(std::string const&)へ委譲している。
@@ -2316,9 +2316,9 @@ A::A(uint32_t)の処理をA::A(std::string const&)へ委譲している。
     };
 ```
 
-### explicit コンストラクタと型変換制御 <a id="SS_27_6_2"></a>
+### explicit コンストラクタと型変換制御 <a id="SS_19_6_2"></a>
 
-#### explicit <a id="SS_27_6_2_1"></a>
+#### explicit <a id="SS_19_6_2_1"></a>
 explicitは、コンストラクタに対して付与することで、
 コンストラクタによる暗黙の型変換を禁止するためのキーワードである。
 暗黙の型変換とは、ある型の値を別の型の値に自動的に変換する言語機能を指す。
@@ -2326,15 +2326,15 @@ explicitキーワードを付けることで、意図しない型変換を防ぎ
 
 この節で説明するexplicitの機能は下記のような項目に渡って説明を行う。
 
-- [暗黙の型変換](core_lang_spec.md#SS_27_6_2_2)
-- [暗黙の型変換抑止](core_lang_spec.md#SS_27_6_2_3)
-- [explicit(COND)](core_lang_spec.md#SS_27_6_2_4)
-- [explicit type operator()](core_lang_spec.md#SS_27_6_2_5)
+- [暗黙の型変換](core_lang_spec.md#SS_19_6_2_2)
+- [暗黙の型変換抑止](core_lang_spec.md#SS_19_6_2_3)
+- [explicit(COND)](core_lang_spec.md#SS_19_6_2_4)
+- [explicit type operator()](core_lang_spec.md#SS_19_6_2_5)
 
-#### 暗黙の型変換 <a id="SS_27_6_2_2"></a>
+#### 暗黙の型変換 <a id="SS_19_6_2_2"></a>
 この節で扱う暗黙の型変換とは、
 以下に示したような「非explicitなコンストラクタを持つクラス」による暗黙の型変換を指し、
-[汎整数型昇格](core_lang_spec.md#SS_27_1_7)や[算術変換](core_lang_spec.md#SS_27_1_6)等を指さない。
+[汎整数型昇格](core_lang_spec.md#SS_19_1_7)や[算術変換](core_lang_spec.md#SS_19_1_6)等を指さない。
 
 ```cpp
     //  example/core_lang_spec/implicit_conversion_ut.cpp 8
@@ -2478,9 +2478,9 @@ std::stringは暗黙の型変換を許して良く、(多くの場合)Personに�
 クラスPersonと同様に、
 ほとんどのユーザ定義クラスには非explicitなコンストラクタによる暗黙の型変換は必要ない。
 
-#### 暗黙の型変換抑止 <a id="SS_27_6_2_3"></a>
+#### 暗黙の型変換抑止 <a id="SS_19_6_2_3"></a>
 explicit宣言されていないコンストラクタを持つクラスは、
-下記のコードのように[暗黙の型変換](core_lang_spec.md#SS_27_6_2_2)が起こる。
+下記のコードのように[暗黙の型変換](core_lang_spec.md#SS_19_6_2_2)が起こる。
 
 ```cpp
     //  example/core_lang_spec/explicit_ut.cpp 10
@@ -2522,10 +2522,10 @@ explicit宣言されていないコンストラクタを持つクラスは、
     // auto b = f(2);  // A::Aがexplicitであるため、コンパイルエラー
 ```
 
-C++03までは、[一様初期化](core_lang_spec.md#SS_27_6_6)がサポートされていなかったため、
+C++03までは、[一様初期化](core_lang_spec.md#SS_19_6_6)がサポートされていなかったため、
 explicitは単一引数のコンストラクタに使用されることが一般的であった。
 
-C++11からサポートされた[一様初期化](core_lang_spec.md#SS_27_6_6)を下記のように使用することで、
+C++11からサポートされた[一様初期化](core_lang_spec.md#SS_19_6_6)を下記のように使用することで、
 暗黙の型変換を使用できる。
 
 ```cpp
@@ -2572,7 +2572,7 @@ C++11からは暗黙の型変換を抑止したい型のコンストラクタに
     // auto b = f({2, 1});  // A::Aがexplicitであるため、コンパイルエラー
 ```
 
-#### explicit(COND) <a id="SS_27_6_2_4"></a>
+#### explicit(COND) <a id="SS_19_6_2_4"></a>
 C++20から導入されたexplicit(COND)は、
 コンストラクタや変換演算子に対して、
 特定の条件下で暗黙の型変換を許可または禁止する機能である。
@@ -2660,7 +2660,7 @@ CONDには、型特性や定数式などの任意のconstexprな条件式を指�
 こういった工夫により、コードの過度な柔軟性を適度に保つことができ、
 可読性の向上につながる。
 
-#### explicit type operator() <a id="SS_27_6_2_5"></a>
+#### explicit type operator() <a id="SS_19_6_2_5"></a>
 型変換演算子のオーバーロードの戻り値をさらに別の型に変換すると、
 きわめてわかりづらいバグを生み出してしまうことがあるため、
 この機能を使用すると型変換演算子のオーバーロードの型変換の抑止することができる。
@@ -2707,12 +2707,12 @@ CONDには、型特性や定数式などの任意のconstexprな条件式を指�
     // int b = a + 1;  // operator boolがexplicitであるため、コンパイルエラー
 ```
 
-### ==演算子 <a id="SS_27_6_3"></a>
+### ==演算子 <a id="SS_19_6_3"></a>
 クラスの==演算子の実装方法には、
-[メンバ==演算子](core_lang_spec.md#SS_27_6_3_1)、[非メンバ==演算子](core_lang_spec.md#SS_27_6_3_2)の2つの方法がある。
+[メンバ==演算子](core_lang_spec.md#SS_19_6_3_1)、[非メンバ==演算子](core_lang_spec.md#SS_19_6_3_2)の2つの方法がある。
 
-#### メンバ==演算子 <a id="SS_27_6_3_1"></a>
-メンバ==演算子には、[非メンバ==演算子](core_lang_spec.md#SS_27_6_3_2)に比べ、下記のようなメリットがある。
+#### メンバ==演算子 <a id="SS_19_6_3_1"></a>
+メンバ==演算子には、[非メンバ==演算子](core_lang_spec.md#SS_19_6_3_2)に比べ、下記のようなメリットがある。
 
 * メンバ変数へのアクセスが容易であるため、より実装が単純になりやすい。
 * メンバ変数へのアクセスが容易であるため、パフォーマンスが向上する。
@@ -2754,8 +2754,8 @@ C++20以降より、`=default`により==演算子を自動生成させること
     };
 ```
 
-#### 非メンバ==演算子 <a id="SS_27_6_3_2"></a>
-非メンバ==演算子には、[メンバ==演算子](core_lang_spec.md#SS_27_6_3_1)に比べ、下記のようなメリットがある。
+#### 非メンバ==演算子 <a id="SS_19_6_3_2"></a>
+非メンバ==演算子には、[メンバ==演算子](core_lang_spec.md#SS_19_6_3_1)に比べ、下記のようなメリットがある。
 
 * クラスをよりコンパクトに記述できるが、その副作用として、
   アクセッサやfriend宣言が必要になることがある。
@@ -2780,7 +2780,7 @@ C++20以降より、`=default`により==演算子を自動生成させること
     };
 ```
 
-* [暗黙の型変換](core_lang_spec.md#SS_27_6_2_2)を利用した以下に示すようなシンプルな記述ができる場合がある。
+* [暗黙の型変換](core_lang_spec.md#SS_19_6_2_2)を利用した以下に示すようなシンプルな記述ができる場合がある。
 
 ```cpp
     //  example/core_lang_spec/comparison_operator_old_ut.cpp 75
@@ -2809,12 +2809,12 @@ C++20以降より、`=default`により==演算子を自動生成させること
     bool operator==(Integer const& lhs, Integer const& rhs) noexcept = default;  // 自動生成
 ```
 
-### 比較演算子 <a id="SS_27_6_4"></a>
+### 比較演算子 <a id="SS_19_6_4"></a>
 比較演算子とは、[==演算子](--)の他に、!=、 <=、>、>= <、>を指す。
-C++20から導入された[<=>演算子](core_lang_spec.md#SS_27_6_4_1)の定義により、すべてが定義される。
+C++20から導入された[<=>演算子](core_lang_spec.md#SS_19_6_4_1)の定義により、すべてが定義される。
 
-#### <=>演算子 <a id="SS_27_6_4_1"></a>
-「[std::tuppleを使用した比較演算子の実装方法](stdlib_and_concepts.md#SS_28_10_2)」
+#### <=>演算子 <a id="SS_19_6_4_1"></a>
+「[std::tuppleを使用した比較演算子の実装方法](stdlib_and_concepts.md#SS_20_10_2)」
 で示した定型のコードはコンパイラが自動生成するのがC++規格のセオリーである。
 このためC++20から導入されたのが<=>演算子`<=>`である。
 
@@ -2877,15 +2877,15 @@ C++20から導入された[<=>演算子](core_lang_spec.md#SS_27_6_4_1)の定義
     };
 ```
 
-#### 三方比較演算子 <a id="SS_27_6_4_2"></a>
-三方比較演算子とは[<=>演算子](core_lang_spec.md#SS_27_6_4_1)を指す。
+#### 三方比較演算子 <a id="SS_19_6_4_2"></a>
+三方比較演算子とは[<=>演算子](core_lang_spec.md#SS_19_6_4_1)を指す。
 
-#### spaceship operator <a id="SS_27_6_4_3"></a>
-spaceship operatorとは[<=>演算子](core_lang_spec.md#SS_27_6_4_1)を指す。
+#### spaceship operator <a id="SS_19_6_4_3"></a>
+spaceship operatorとは[<=>演算子](core_lang_spec.md#SS_19_6_4_1)を指す。
 この名前は`<=>`が宇宙船に見えることに由来としている。
 
 
-### リスト初期化 <a id="SS_27_6_5"></a>
+### リスト初期化 <a id="SS_19_6_5"></a>
 リスト初期化とは、C++11で導入された`{}`を使ったオブジェクトの初期化構文を指す。
 以下にコード例を示す。
 
@@ -2946,23 +2946,23 @@ spaceship operatorとは[<=>演算子](core_lang_spec.md#SS_27_6_4_1)を指す�
     // int i2{d};  // 縮小型変換のため、コンパイルエラー
 ```
 
-### 一様初期化 <a id="SS_27_6_6"></a>
+### 一様初期化 <a id="SS_19_6_6"></a>
 一様初期化(Uniform Initialization)は 、
-[リスト初期化](core_lang_spec.md#SS_27_6_5)による初期化方法がC++における初期化を統一的に扱えるように設計された概念を指さす。
+[リスト初期化](core_lang_spec.md#SS_19_6_5)による初期化方法がC++における初期化を統一的に扱えるように設計された概念を指さす。
 
-### 非静的なメンバ変数の初期化 <a id="SS_27_6_7"></a>
+### 非静的なメンバ変数の初期化 <a id="SS_19_6_7"></a>
 非静的なメンバ変数の初期化には下記の3つの方法がある。
 
-* [NSDMI](core_lang_spec.md#SS_27_6_7_1)
-* [初期化子リストでの初期化](core_lang_spec.md#SS_27_6_7_2)
-* [コンストラクタ内での非静的なメンバ変数の初期値の代入](core_lang_spec.md#SS_27_6_7_3)
+* [NSDMI](core_lang_spec.md#SS_19_6_7_1)
+* [初期化子リストでの初期化](core_lang_spec.md#SS_19_6_7_2)
+* [コンストラクタ内での非静的なメンバ変数の初期値の代入](core_lang_spec.md#SS_19_6_7_3)
 
 同一変数に対して、
-「[NSDMI](core_lang_spec.md#SS_27_6_7_1)」と「[初期化子リストでの初期化](core_lang_spec.md#SS_27_6_7_2)」
+「[NSDMI](core_lang_spec.md#SS_19_6_7_1)」と「[初期化子リストでの初期化](core_lang_spec.md#SS_19_6_7_2)」
 が行われた場合、その変数に対するNSDMIは行われない。
 
 
-#### NSDMI <a id="SS_27_6_7_1"></a>
+#### NSDMI <a id="SS_19_6_7_1"></a>
 NSDMIとは、non-static data member initializerの略語であり、
 下記のような非静的なメンバ変数の初期化子を指す。
 
@@ -2982,13 +2982,13 @@ NSDMIとは、non-static data member initializerの略語であり、
     };
 ```
 
-#### 初期化子リストでの初期化 <a id="SS_27_6_7_2"></a>
+#### 初期化子リストでの初期化 <a id="SS_19_6_7_2"></a>
 「非静的メンバ変数をコンストラクタの本体よりも前に初期化する」言語機能である。
 メンバ変数は宣言された順序で初期化されるため、
 初期化子リストでの順序は、実際の初期化の順序とは関係がない。
 
 この機能を使うことで、メンバ変数の初期化処理が簡素に記述できる。
-constメンバ変数は、初期化子リストでの初期化か[NSDMI](core_lang_spec.md#SS_27_6_7_1)でしか初期化できない。
+constメンバ変数は、初期化子リストでの初期化か[NSDMI](core_lang_spec.md#SS_19_6_7_1)でしか初期化できない。
 
 ```cpp
     //  example/core_lang_spec/nsdmi.cpp 27
@@ -3008,11 +3008,11 @@ constメンバ変数は、初期化子リストでの初期化か[NSDMI](core_la
     };
 ```
 
-#### コンストラクタ内での非静的なメンバ変数の初期値の代入 <a id="SS_27_6_7_3"></a>
+#### コンストラクタ内での非静的なメンバ変数の初期値の代入 <a id="SS_19_6_7_3"></a>
 この方法は単なる代入でありメンバ変数の初期化ではない。
 
-[NSDMI](core_lang_spec.md#SS_27_6_7_1)、
-[初期化子リストでの初期化](core_lang_spec.md#SS_27_6_7_2)で初期化できない変数を未初期化でない状態にするための唯一の方法である。
+[NSDMI](core_lang_spec.md#SS_19_6_7_1)、
+[初期化子リストでの初期化](core_lang_spec.md#SS_19_6_7_2)で初期化できない変数を未初期化でない状態にするための唯一の方法である。
 
 ```cpp
     //  example/core_lang_spec/nsdmi.cpp 45
@@ -3031,14 +3031,14 @@ constメンバ変数は、初期化子リストでの初期化か[NSDMI](core_la
     };
 ```
 
-### オブジェクトのライフタイム <a id="SS_27_6_8"></a>
+### オブジェクトのライフタイム <a id="SS_19_6_8"></a>
 オブジェクトは、以下のような種類のライフタイムを持つ。
 
 * 静的に生成されたオブジェクトのライフタイム
 * thread_localに生成されたオブジェクトのライフタイム
 * newで生成されたオブジェクトのライフタイム
 * スタック上に生成されたオブジェクトのライフタイム
-* prvalue(「[rvalue](core_lang_spec.md#SS_27_7_1_2)」参照)のライフタイム
+* prvalue(「[rvalue](core_lang_spec.md#SS_19_7_1_2)」参照)のライフタイム
 
 なお、リファレンスの初期化をrvalueで行った場合、
 そのrvalueはリファレンスがスコープを抜けるまで存続し続ける。
@@ -3050,7 +3050,7 @@ rvalueをバインドするリファレンスが存在しない状態で、
 このような状態のリファレンスを[danglingリファレンス](cpp_idioms.md#SS_21_11_2)と呼ぶ。
 同様に、このような状態のポインタを[danglingポインタ](cpp_idioms.md#SS_21_11_3)と呼ぶ。
 
-### プレースメントnew <a id="SS_27_6_9"></a>
+### プレースメントnew <a id="SS_19_6_9"></a>
 プレースメントnewは、既に確保済みの生ストレージ上で、
 オブジェクトを生成するための `new(raw_storage) T(args...)`のような構文である。
 通常のnew演算子が「メモリ確保＋初期化」を同時に行うのに対し、プレースメントnewは「初期化のみ」を担当する。
@@ -3116,17 +3116,17 @@ rvalueをバインドするリファレンスが存在しない状態で、
     // xがスコープアウトするタイミングでカスタムデリータdeleterが呼ばれるため、~X()の呼び出し漏れが回避できる
 ```
 
-### new (std::nothrow) <a id="SS_27_6_10"></a>
+### new (std::nothrow) <a id="SS_19_6_10"></a>
 `new (std::nothrow)`は、メモリ確保失敗時に例外を投げずnullptrを返すnewの形式である。
 通常のnewはメモリ確保に失敗するとstd::bad_alloc例外を投げるが、
 `new (std::nothrow)`はstd::nothrow_t型の引数を取ることで、失敗時にnullptrを返す動作に変更される。
 この形式は例外を使わない環境(組み込みシステムなど)や、明示的なnullチェックによるエラー処理が望ましい場合に使用される。
 解放方法は通常のnewと同じで、単一オブジェクトの場合はdelete、配列の場合はdelete[]を使用する。
 
-## 値カテゴリとリファレンス <a id="SS_27_7"></a>
+## 値カテゴリとリファレンス <a id="SS_19_7"></a>
 ここでは、expression(式)の値カテゴリや、それに付随した機能についての解説を行う。
 
-### expression <a id="SS_27_7_1"></a>
+### expression <a id="SS_19_7_1"></a>
 
 [expression](https://ja.cppreference.com/w/cpp/language/expressions)(式)とは、
 「演算子とそのオペランドの並び」である(オペランドのみの記述も式である)。
@@ -3140,48 +3140,48 @@ rvalueをバインドするリファレンスが存在しない状態で、
 
 expressionは、
 
-* [lvalue](core_lang_spec.md#SS_27_7_1_1)
-* [rvalue](core_lang_spec.md#SS_27_7_1_2)
-* [xvalue](core_lang_spec.md#SS_27_7_1_3)
-* [glvalue](core_lang_spec.md#SS_27_7_1_5)
-* [prvalue](core_lang_spec.md#SS_27_7_1_4)
+* [lvalue](core_lang_spec.md#SS_19_7_1_1)
+* [rvalue](core_lang_spec.md#SS_19_7_1_2)
+* [xvalue](core_lang_spec.md#SS_19_7_1_3)
+* [glvalue](core_lang_spec.md#SS_19_7_1_5)
+* [prvalue](core_lang_spec.md#SS_19_7_1_4)
 
 に分類される。
 <!-- pu:essential/plant_uml/rvalue.pu--><p><img src="data:image/png;base64,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" /></p>
 
 
-expressionは、[lvalue](core_lang_spec.md#SS_27_7_1_1)か[rvalue](core_lang_spec.md#SS_27_7_1_2)である。
+expressionは、[lvalue](core_lang_spec.md#SS_19_7_1_1)か[rvalue](core_lang_spec.md#SS_19_7_1_2)である。
 
 
-#### lvalue <a id="SS_27_7_1_1"></a>
+#### lvalue <a id="SS_19_7_1_1"></a>
 lvalueとは、
 
 * 名前を持つオブジェクト(識別子で参照可能)や関数を指す式
 * 代入式の左辺になり得る式であるため、左辺値と呼ばれることがある。
 * constなlvalueは代入式の左辺にはなり得ないが、lvalueである。
-* [rvalue](core_lang_spec.md#SS_27_7_1_2)でない[expression](core_lang_spec.md#SS_27_7_1)がlvalueである。
+* [rvalue](core_lang_spec.md#SS_19_7_1_2)でない[expression](core_lang_spec.md#SS_19_7_1)がlvalueである。
 
-`T const&`は代入式の左辺になりは得ないがlvalueである。[rvalueリファレンス](core_lang_spec.md#SS_27_8_2)もlvalueである。
+`T const&`は代入式の左辺になりは得ないがlvalueである。[rvalueリファレンス](core_lang_spec.md#SS_19_8_2)もlvalueである。
 
-#### rvalue <a id="SS_27_7_1_2"></a>
+#### rvalue <a id="SS_19_7_1_2"></a>
 rvalueとは、
 
 * テンポラリな値を表す式(代入式の右辺値として使われることが多い)
-* [xvalue](core_lang_spec.md#SS_27_7_1_3)か[prvalue](core_lang_spec.md#SS_27_7_1_4)である。
-* [lvalue](core_lang_spec.md#SS_27_7_1_1)でない[expression](core_lang_spec.md#SS_27_7_1)がrvalueである。
+* [xvalue](core_lang_spec.md#SS_19_7_1_3)か[prvalue](core_lang_spec.md#SS_19_7_1_4)である。
+* [lvalue](core_lang_spec.md#SS_19_7_1_1)でない[expression](core_lang_spec.md#SS_19_7_1)がrvalueである。
 
-[rvalueリファレンス](core_lang_spec.md#SS_27_8_2)(`T&&`型の変数)はlvalueである。
-一方、その初期化に使われる式(例えばstd::move(x))は[xvalue](core_lang_spec.md#SS_27_7_1_3)である。
+[rvalueリファレンス](core_lang_spec.md#SS_19_8_2)(`T&&`型の変数)はlvalueである。
+一方、その初期化に使われる式(例えばstd::move(x))は[xvalue](core_lang_spec.md#SS_19_7_1_3)である。
 
 
-#### xvalue <a id="SS_27_7_1_3"></a>
+#### xvalue <a id="SS_19_7_1_3"></a>
 xvalueとは以下のようなものである。
 
 * 戻り値の型がT&&(Tは任意の型)である関数の呼び出し式(std::move(x))
 * オブジェクトへのT&&へのキャスト式(static_cast<char&&>(x))
 * aを配列のxvalueとした場合のa[N]や、cをクラス型のrvalueとした場合のc.m(mはaの非staticメンバ)等
 
-#### prvalue <a id="SS_27_7_1_4"></a>
+#### prvalue <a id="SS_19_7_1_4"></a>
 prvalueとは、オブジェクトやビットフィールドを初期化する、
 もしくはオペランドの値を計算する式であり、以下のようなものである。
 
@@ -3193,13 +3193,13 @@ prvalueとは、オブジェクトやビットフィールドを初期化する�
   `a + b`、 `a % b`、 `a & b`、 `a && b`、 `a || b`、 `!a`、 `a < b`、 `a == b`等
 * prvalue(もしくはrvalue)は、
     * アドレス演算子(&)のオペランドになれない。
-    * 非constな[lvalueリファレンス](core_lang_spec.md#SS_27_8_1)ではバインドできないが、
-      constな[lvalueリファレンス](core_lang_spec.md#SS_27_8_1)や[rvalueリファレンス](core_lang_spec.md#SS_27_8_2)でバインドできる。
+    * 非constな[lvalueリファレンス](core_lang_spec.md#SS_19_8_1)ではバインドできないが、
+      constな[lvalueリファレンス](core_lang_spec.md#SS_19_8_1)や[rvalueリファレンス](core_lang_spec.md#SS_19_8_2)でバインドできる。
   
 
 つまり、prvalueとはいわゆるテンポラリオブジェクトのことである(下記の`std::string{}`で作られるようなオブジェクト)。
 多くの場合、prvalueはテンポラリオブジェクトを生成するが、
-C++17以降は[RVO(Return Value Optimization)](core_lang_spec.md#SS_27_15_1)により、
+C++17以降は[RVO(Return Value Optimization)](core_lang_spec.md#SS_19_15_1)により、
 テンポラリオブジェクトを生成せず、直接、初期化に使われる場合もある。  
 また、正確にはprvalueと呼ぶべき場面でも単にrvalueと呼ばれることがある。
 このドキュメントでも、そうなっていることもある。
@@ -3227,17 +3227,17 @@ C++17以降は[RVO(Return Value Optimization)](core_lang_spec.md#SS_27_15_1)に�
     std::string* str3_ptr = &str3_ref;  // str_ptrはprvalueのアドレスを指しているが、、、
 ```
 
-#### glvalue <a id="SS_27_7_1_5"></a>
+#### glvalue <a id="SS_19_7_1_5"></a>
 glvalueは、
 
-* [lvalue](core_lang_spec.md#SS_27_7_1_1)か[xvalue](core_lang_spec.md#SS_27_7_1_3)である。
+* [lvalue](core_lang_spec.md#SS_19_7_1_1)か[xvalue](core_lang_spec.md#SS_19_7_1_3)である。
 * "generalized lvalue"の略称
 
 オブジェクトや関数を参照する式を総称してglvalueと呼ぶ。
 これにより、式が「場所を指す」か「一時的な値を表す」かを大きく分類できる。
 
 
-### decltypeとexpression <a id="SS_27_7_2"></a>
+### decltypeとexpression <a id="SS_19_7_2"></a>
 エッセンシャルタイプがTであるlvalue、xvalue、prvalueに対して
 (例えば、std::string const&のエッセンシャルタイプはstd::stringである)、
 decltypeの算出結果は下表のようになる。
@@ -3277,31 +3277,31 @@ decltypeの算出結果は下表のようになる。
     static_assert(!IS_LVALUE(std::string{}), "EXPR_ must NOT be lvalue");
 ```
 
-## リファレンス <a id="SS_27_8"></a>
+## リファレンス <a id="SS_19_8"></a>
 
 リファレンス(参照)とは、以下のいずれか、もしくはすべてを指すが、
 単にリファレンスと呼ぶ場合、lvalueリファレンスを指すことが多い。
 
-* [lvalueリファレンス](core_lang_spec.md#SS_27_8_1)
-* [rvalueリファレンス](core_lang_spec.md#SS_27_8_2)
-* [forwardingリファレンス](core_lang_spec.md#SS_27_8_3)
+* [lvalueリファレンス](core_lang_spec.md#SS_19_8_1)
+* [rvalueリファレンス](core_lang_spec.md#SS_19_8_2)
+* [forwardingリファレンス](core_lang_spec.md#SS_19_8_3)
 
 
-これらの概念と関わり強い、[リファレンスcollapsing](core_lang_spec.md#SS_27_8_6)についても併せて解説を行う。
+これらの概念と関わり強い、[リファレンスcollapsing](core_lang_spec.md#SS_19_8_6)についても併せて解説を行う。
 
-### lvalueリファレンス <a id="SS_27_8_1"></a>
+### lvalueリファレンス <a id="SS_19_8_1"></a>
 lvalueリファレンスとは、
 
 * C++98(もしくは03)から導入されたシンタックスであり、任意の型Tに対して`T&`という形式で宣言される。
 * 既存のオブジェクトに対する別名(エイリアス)であり、宣言時に必ず初期化が必要で、
   一度初期化後は別のオブジェクトを参照することはできない。
-* [rvalueリファレンス](core_lang_spec.md#SS_27_8_2)導入前のC++では、すべてのリファレンスはlvalueリファレンスであったため、
+* [rvalueリファレンス](core_lang_spec.md#SS_19_8_2)導入前のC++では、すべてのリファレンスはlvalueリファレンスであったため、
   lvalueリファレンスを単にリファレンスと呼んでいた。
 * オブジェクトaのエイリアスとして、
    リファレンスa_refが宣言されることを「a_refはaをバインドする」という。
 * 以下のコード例で示すように、
-    * 非const lvalueリファレンスは[rvalue](core_lang_spec.md#SS_27_7_1_2)をバインドできないが、
-    * const lvalueリファレンスは[rvalue](core_lang_spec.md#SS_27_7_1_2)をバインドできる。
+    * 非const lvalueリファレンスは[rvalue](core_lang_spec.md#SS_19_7_1_2)をバインドできないが、
+    * const lvalueリファレンスは[rvalue](core_lang_spec.md#SS_19_7_1_2)をバインドできる。
 
 ```cpp
     //  example/core_lang_spec/rvalue_lvalue_ut.cpp 40
@@ -3344,13 +3344,13 @@ lvalueリファレンスとは、
     ASSERT_EQ(2, f(int{}));                       // rvalueのバインド
 ```
 
-### rvalueリファレンス <a id="SS_27_8_2"></a>
+### rvalueリファレンス <a id="SS_19_8_2"></a>
 rvalueリファレンスは、
 
 * C++11で導入されたシンタックスであり、任意の型Tに対して、`T&&`で宣言される。
-* 「テンポラリオブジェクト([rvalue](core_lang_spec.md#SS_27_7_1_2))」をバインドできるリファレンス。
-* C++11の[moveセマンティクス](cpp_idioms.md#SS_21_5_3)と[perfect forwarding](core_lang_spec.md#SS_27_8_5)を実現するために導入された。
-* **注意1** 型が`T&&`である変数の値カテゴリは[lvalue](core_lang_spec.md#SS_27_7_1_1)である。
+* 「テンポラリオブジェクト([rvalue](core_lang_spec.md#SS_19_7_1_2))」をバインドできるリファレンス。
+* C++11の[moveセマンティクス](cpp_idioms.md#SS_21_5_3)と[perfect forwarding](core_lang_spec.md#SS_19_8_5)を実現するために導入された。
+* **注意1** 型が`T&&`である変数の値カテゴリは[lvalue](core_lang_spec.md#SS_19_7_1_1)である。
 * **注意2** 型が`T&&`である変数は、`T&`でバインドできる。
 
 ```cpp
@@ -3406,13 +3406,13 @@ rvalueリファレンスは、
     ASSERT_EQ(1, f(ref_ref));                     // f-3ではなくf-1を呼び出す。従って間違いなくこのテストはパスする
 ```
 
-ref_refの型は`int &&`であるが、ref_refの値カテゴリは[rvalue](core_lang_spec.md#SS_27_7_1_2)ではなく、[lvalue](core_lang_spec.md#SS_27_7_1_1)である。
+ref_refの型は`int &&`であるが、ref_refの値カテゴリは[rvalue](core_lang_spec.md#SS_19_7_1_2)ではなく、[lvalue](core_lang_spec.md#SS_19_7_1_1)である。
 そのため、`f(ref_ref)`はlvalueリファレンスを引数とするf-1が選択される。
 
 rvalueリファレンス型の仮引数（`T&&`）を持つ関数は、ムーブコンストラクタやムーブ代入演算子など頻繁に使用される。
 しかし、関数内では仮引数は名前を持つため、常にlvalueとして扱われる。
 この動作を理解することは、
-[moveセマンティクス](cpp_idioms.md#SS_21_5_3)や[perfect forwarding](core_lang_spec.md#SS_27_8_5)を正しく実装/使用するために極めて重要である。
+[moveセマンティクス](cpp_idioms.md#SS_21_5_3)や[perfect forwarding](core_lang_spec.md#SS_19_8_5)を正しく実装/使用するために極めて重要である。
 
 ```cpp
     //  example/core_lang_spec/rvalue_lvalue_ut.cpp 150
@@ -3434,14 +3434,14 @@ C++11でrvalueの概念の整理やrvalueリファレンス、
 std::move()の導入が行われた目的はプログラム実行速度の向上である。
 以下のパターンの代入式の処理がどのように違うのかを見ることでrvalueやstd::moveの効果について説明する。
 
-* [lvalueからの代入](core_lang_spec.md#SS_27_8_2_1)
-* [rvalueからの代入](core_lang_spec.md#SS_27_8_2_2)
-* [std::move(lvalue)からの代入](core_lang_spec.md#SS_27_8_2_3)
+* [lvalueからの代入](core_lang_spec.md#SS_19_8_2_1)
+* [rvalueからの代入](core_lang_spec.md#SS_19_8_2_2)
+* [std::move(lvalue)からの代入](core_lang_spec.md#SS_19_8_2_3)
 
 
 
-#### lvalueからの代入 <a id="SS_27_8_2_1"></a>
-下記コードにより「[lvalue](core_lang_spec.md#SS_27_7_1_1)からの代入」を説明する。
+#### lvalueからの代入 <a id="SS_19_8_2_1"></a>
+下記コードにより「[lvalue](core_lang_spec.md#SS_19_7_1_1)からの代入」を説明する。
 
 ```.cpp
     //  example/core_lang_spec/rvalue_move_ut.cpp 10
@@ -3462,8 +3462,8 @@ std::move()の導入が行われた目的はプログラム実行速度の向上
 <!-- pu:essential/plant_uml/rvalue_from_lvalue.pu--><p><img src="data:image/png;base64,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" /></p>
 
 
-#### rvalueからの代入 <a id="SS_27_8_2_2"></a>
-下記コードにより「[rvalue](core_lang_spec.md#SS_27_7_1_2)からの代入」を説明する。
+#### rvalueからの代入 <a id="SS_19_8_2_2"></a>
+下記コードにより「[rvalue](core_lang_spec.md#SS_19_7_1_2)からの代入」を説明する。
 
 ```.cpp
     //  example/core_lang_spec/rvalue_move_ut.cpp 23
@@ -3490,7 +3490,7 @@ std::move()の導入が行われた目的はプログラム実行速度の向上
 
 <!-- pu:essential/plant_uml/rvalue_from_rvalue.pu--><p><img src="data:image/png;base64,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kMriGZOrVq3q27fvwoULP/zwQ/1crffee2/ChAkFBQXf//73586dG35qy5Ytp59++jXXXNO+ffsZM2b06tVr1KhRR44ckUtdffXVP/jBD0477bSrw8jbkle99NJL7777bk1NzR133DFv3jzZX0oGFxYWhl8ZOEXEJJDK4hmTlZWVb7/9tqTdnDlzBoYZMWKEVnndddeFx+Thw4fPOussydeDBw9mZmZK2pWVlXXr1k22j05Bbm5u5I8llN3kgw8+uHHjRumPHDly5cqV0rnkkkuKioq0SuBUEJNAKotnTH766aeyC/zlL38pIbe11i233HLjjTdqX0F85513unTpsm/fPjXy1ltvderUSfaOGzZsyMnJcQZvuummiRMnSueTTz5p3rz5v//7v48JEwqF8vLyfvSjHznxKW/X2cIOGDCgpKREXRk4dcQkkMriGZOy+ZO946RJk9SIZFj44dHazDvzzDNXr14dPvj666+fc845R2vrb731VmdwyJAhDz30UHV19f/7f/9P4nbp0qU/+9nPJCyX1pKdq9RMnz5dXrJq1SoVrrIHLS8vP3ZhIA6ISSCVxTMmxbx58+qJydLS0j59+ixZskT6sndU4wcOHGjfvv2aNWt69+6dn58vpx555JGWLVvu3r37iSee+Ld/+7fDhw87V5NcVK86WhuTd999d3Z29vr16++6665BgwadffbZ4QXAqSMmgVSWwJjcsGHD6NGjJb3U2WnTpqWnp7dq1app06Y/+MEP1Lh44YUXsrKyhg0btmnTpjPOOKNr167ON7tKZC5YsGBerR//+MdS4PRfeuklub7Eavfu3a+++uopU6aMHz/+qquukrcuyRp+ZeAUEZNAKotzTC5btkx9b86oUaMkC2Wfd3xJAw4dOvTaa68520fHrFmzJkX4y1/+smXLlqVLl37++eePP/74nXfeecsttzhftpT3Iex6wKkiJoFUFueYBOxDTAKpjJgEGkBMAqmMmAQaQEwCqYyYBBpATAKpjJgEGkBMAqmMmAQaQEwCqYyYBBpATAKpjJgEGkBMAqmMmAQaQEwCqYyYBBpATAKpzKqYzMrKCsBeMr/6lCdFwKOYbN+4kf4hgEW8ep4RK6tiUp48dRewj8xvKBSqqKiorKysrq6uqanRn4DECHgUk/J2y7/Xk2Zr8+p5RqzcJUj19BJzEJN2k/kNBoOlpaVlZWWyuMjKoj8BiUFM0hLRvHqeESt3CVI9vcQcxKTdZH6Li4tLSkr27NkjK4vzq7mTgJikJaJ59TwjVu4SpHp6iTmISbvJ/BYUFBQVFcnKIv8Gl3+A609AYhCTtEQ0r55nxMpdglRPLzEHMWk3md+8vDxZWeTf4MFgMBQK6U9AYhCTtEQ0r55nxMpdglRPLzEHMWk3md8VK1bk5+cXFhbKP8DLysr0JyAxiElaIppXzzNi5S5BqqeXmIOYtJtXywoxSUtE8+p5RqzcJUj19BJzEJN282pZISZpiWhePc+IlbsEqZ5eYg5i0m5eLSvEJC0RzavnGbFylyDV00vMQUzazatlhZikJaJ59TwjVu4SpHp6iTmISbt5tawQk7RENK+eZ8TKXYJUTy8xBzFpN6+WFWKSlojm1fOMWLlLkOrpJeYgJu3m1bJCTNIS0bx6nhErdwlSPb3EHMSk3bxaVohJWiKaV88zYuUuQaqnl5iDmLSbV8sKMUlLRPPqeUas3CVI9fQScxCTdvNqWSEmaYloXj3PiJW7BKmeXmIOYtJuXi0rxCQtEc2r5xmxcpcg1dNLzEFM2s2rZYWYpCWiefU8I1buEqR6eok5iEm7ebWsEJO0RDSvnmfEyl2CVE8vMQcxaTevlhVikpaI5tXzjFi5S5Dq6SXmICbt5tWyQkzSEtG8ep4RK3cJUj29xBzEpN28WlaIyRNvEzq1/cc5XSLHfdJmd8t6omfHv53dOfJU8ptXzzNi5S5BqqeXmCPVYvKzzz7btm2bPhph+/bty5cvf/HFF6uqqvRzRvFqWSEmVdvRr/vGvl0jx1WT9/mBM0+LHD+RVv/F5bJvnhf17Im0h7qf1qFxo0d6dDitcaOSnO6RBUluXj3PiJW7BKmeXmKOVIvJzMzMRx99VB8NIx+TsWPHBo7Jzs6Wv416kTm8WlaISdVapKfVn4KnEpP1X/xUrizt0/N7tG2U/ofuHaTfu1mTOzq3jaxJcvPqeUas3CVI9fQSc1gfk+vWrVuyZMn7778vfdkgyv2OGDFCknLfvn1OgfR37dq1efPmRx55RA4fe+wxqZkzZ055efnGjRu7d+8+aNCg8AuaxatlJZVj8u+9O8/v0eGt87pJf1F2R3mX/r19S4mrj8J2Y/97QfaKszo90fP0D/t1P/EwC79yeV0Xl8673zlzzbld5nSr44Jydst3ur1+bpeF2R2fOavT3guz1ami7565OLujvD+/6tT2wsyMz2pPzeyaJTFZesE3/d92aS/byshrJrl59TwjVu4SpHp6iTnsjsnx48cHaqWlpd1///2Sec6hkFx0aqSfm5srBcOGDZPDiy66aPDgweoKf/3rX6Xgww8/VCNm8WpZCaRqTN7csc23j1wgcG/X9t2aNlaPnKSXU/NBv+69mjVxBls1Sg8ci0lnRF1KO9SuLCORF5fOLae3kYKhbVo4h+EBLId9mjVVL7kgM2NfbRz+pdfpGWlpanxsxzbO+I9aNb+yXabz2rw+Z8ipej7Bm5wW8Oh5RqzcJUj19BJzBKyOyZYtW44bN27//v0LFy78/PPPv66NDe2TrjLSuXPnN954o7q6Wg5bt249bdo0dXbv3r1S8Nxzz7kvMIpXy0ogVWMyMz39po6tPzm/x4NnnuZ8MS8QsVkcmdWqXeP0ted2kbKxteF3IjEZeeXIi8vh6U0are5zhrMdjDzbslH6k706/euC7IW1O9Fna78xp0dGk0tbN//0/B7O9lQKnHq51F1ntHP68hbl1LJep6uredICHj3PiJW7BKmeXmKOgNUxKfvCbt26PfXUUzU1Nc5IoK6YHDNmjDrMyMj4wx/+oA4PHjwoBUuWLFEjZvFqWQmkakz+sFXzLk0bP5bd8fMLvx3RskqaFEzo9O3X+fZemB1ZUGeLvHJ5xMXl8L87tK7n7N3HYm9f7dt1vu4oO1pnexo8v4cMSoI6NU3S0mZ3y3L6zvv5SG29h82r5xmxcpcg1dNLzBGwOibLy8tvu+225s2bDxw40Pme1UBdMblgwQJ1mJ2dffvtt6vDjz76SApeffVVNWIWr5aVQKrG5K7ze4zp2KZZetr3MjOcr+ppWVVe+303v+v6bfzUWVBni7xy5GvlcO7xh9rZOg+Ht2/ZsUmjaV3aD23TonFa2pbvfPu1T9ny/rbLN/Ep7ZPaBH2iJ7tJnBB3CVI9vcQcAatj0vk86tatW+U2n3nmma+jxGT4yKhRo7p06fLll186h5MnT27RokUoFFIFZvFqWQmkakw6n+0s6NtV3pM/14aKFk7S+rXIuKL2a4fS1p7bJbKgzhZ55fKIi5/cobwz32netEPjRmfW7lZVQU6LjP/vtFZO/5+1bze/zxnqrCfNq+cZsXKXINXTS8wRsDcmN2zY0KFDh4kTJ44bN05u85VXXvm69j+EDB06dPr06YcPH3bKAsfHZHFxcbNmzXJycmbPnj127Nj09HS5gjprHK+WlUBKxmRenzNOa9xo3OltburYOnDsK3+yd7y0dfPfnNHO+b4YaQt6dJCz/5XVatIZ7WTHpuIqUEtdLfywzitHXlxdSl3hRA5lK9m2UfqPWn/zDTu3nN7m5WNZOKFT2x4ZTZz+vO4dMtLTSsO+OdaTFvDoeUas3CVI9fQScwTsjUnZAt58883t2rVr06ZNbm6uMzhlyhTZHfbp02f79u3OSCBif7lu3br+/ftnZGScccYZsptUgWoir5aVQErG5Kfn97j+tNYSOa0bpUveOIN3dm7XPD3trGZNwv+n/71d23du0lgycuRpraS4wZis88qRF48WhPUfTuvS/pusPkb6r9X+VKDC87o1Sgs81/ubSL6kdfPh7Vuq13rVAh49z4iVuwSpnl5ijoC9MYmviUnaCbQ2jdIvzMyY2S1r7pmn3Xr6N995+9RZ336z6w0dWn8vM+ONc7s2SUtbf67H/xuknJg0h7sEqZ5eYg5i0m5eLSvEpEHt8Z4dz2vetFl6mrTvNG8a/qMJSi/Ivqx1izs6t/t152+/Rdbb5tXzjFi5S5Dq6SXmICbt5tWyQkzSEtG8ep4RK3cJUj29xBzEpN28WlaISVoimlfPM2LlLkGqp5eYg5i0m1fLCjFJS0Tz6nlGrNwlSPX0EnMQk3bzalkhJmmJaF49z4iVuwSpnl5iDmLSbl4tK8QkLRHNq+cZsXKXINXTS8xBTNrNq2WFmKQlonn1PCNW7hKkenqJOYhJu3m1rBCTtEQ0r55nxMpdglRPLzEHMWk3r5YVYpKWiObV84xYuUuQ6ukl5iAm7ebVskJM0hLRvHqeESt3CVI9vcQcxKTdvFpWiElaIppXzzNi5S5BqqeXmIOYtJtXywoxSUtE8+p5RqzcJUj19BJzEJN282pZISZpiWhePc+IlbsEqZ5eYg5i0m5eLSvEJC0RzavnGbFylyDV00vMQUzazatlhZikJaJ59TwjVu4SpHp6iTmISbt5tawQk7RENK+eZ8TKXYJUTy8xBzFpN6+WFWKSlojm1fOMWLlLkOrpJeYgJu3m1bJCTNIS0bx6nhErdwlSPb3EHMSk3bxaVohJWiKaV88zYuUuQaqnl5iDmLSbV8sKMUlLRPPqeUas3CVI9fQScxCTdvNqWSEmaYloXj3PiJW7BKmeXmIOYtJuXi0rxCQtEc2r5xmxcpcg1dNLzJGVlRWAvTIzMz1ZVgIexSTPs928ep4RK6tiUoRCoWAwWFxcXFBQkJeXt8Jqgdp/jaYUmVOZWZlfmWWZa336EyPgUUwe5Xm2nSfPM2JlW0xWVFSUlpbKP82Kiork+cu3miwr+pDtZE5lZmV+ZZZlrvXpTwwPY5Ln2W6ePM+IlW0xWVlZWVZWtmfPHnny5N9ohVaTZUUfsp3MqcyszK/Mssy1Pv2J4WFM8jzbzZPnGbGyLSarq6vlH2XyzMm/zoLBYInVZFnRh2wncyozK/MrsyxzrU9/YngYkzzPdvPkeUasbIvJmpoaedrk32Xy2IVCoTKrybKiD9lO5lRmVuZXZlnmWp/+xPAwJnme7ebJ84xY2RaTKcXD5Tul8HFODj7O8Cdi0mAsK8nBxzk5+DjDn4hJg7GsJAcf5+Tg4wx/IiYNxrKSHHyck4OPM/yJmDQYy0py8HFODj7O8Cdi0mAsK8nBxzk5+DjDn4hJg7GsJAcf5+Tg4wx/IiYNxrKSHHyck4OPM/yJmDQYy0py8HFODj7O8Cdi0mAsK8nBxzk5+DjDn4hJg7GsJAcf5+Tg4wx/IiYNxrKSHHyck4OPM/yJmDQYy0py8HFODj7O8Cdi0mAsK8nBxzk5+DjDn4hJg7GsJAcf5+Tg4wx/IiZN0q9fv0AUckqvRpwEWL4Tg+cZRiAmTTJ79mx9OTlGTunViJMAMZkYPM8wAjFpkmAwmJ6erq8ogYAMyim9GnESICYTg+cZRiAmDTN48GB9UQkEZFCvQ/wEiMmE4XmG/xGThlm8eLG+qAQCMqjXIX4CxGTC8DzD/4hJw5SXl2dkZISvKXIog3od4idATCYMzzP8j5g0z/Dhw8OXFTnUKxBXAWIykXie4XPEpHlWrVoVvqzIoV6BuAoQk4nE8wyfIybNU1VV1a5dO2dNkY4c6hWIK2IyoXie4XPEpJFGjx7tLCvS0c8h3ojJRON5hp8Rk0Zau3ats6xIRz+HeCMmE43nGX5GTBrpyJEj3WpJRz+HeCMmE43nGX5GTJpqUi19FAlATCYBzzN8i5g01Xu19FEkADGZBDzP8C1iEmgAMQmkMmISaAAxaaJDhw6pr3SG94FYEZNAA4hJE8msLViwILJfj9LS0uLiYn0UKY+YBBpATJroJGIyMzPzRMqQaohJoAHEpOckvUpKSrZs2bJ06dLVq1dXV1er8W3btoWXqcN6YlL6O3bsWLNmzfLlyz/++GNncNmyZVI2YsQIObt3716nbOfOnYWFhfPmzVOvRQoiJoEGEJOekyno27dv4Jj+/fsfOnTIGQ/Pv2jRGFnWpUsX51JNmzZ98sknZbB79+7q+hKNTllubm5aWtqwYcPUa5GCiEmgAQFi0msyBa1atXr++ee/+uor2VDKYX5+vjN+cjF52mmnvf766/v377/pppvatm37xRdf1FnWuXPn9evXHzx4UA0iBRGTvpbZNvPbf9/aIisrS79J3wsQk16TKZg+fbrTl32kHC5atMgZP7mYnDVrltPfvXu3HL788st1lo0ZM0YdImURk772zXKwc5FNTe4oFApVVFRUVlZWV1fX1NTo9+w/xKTnIgPMOYw2Xk9fO5RHUQ5lh1pn2fz589UhUhYx6WtWxmQwGCwtLS0rK5MVSn0vhp8Rk56LDDDnsEWLFrNnz3YG8/LyokVj5Mt/9atfOf3Vq1fL4ZtvvllnWfghUhYx6WtWxmRxcXFJScmePXskKWVPqd+z/xCTnosWYJdeemmnTp0kKSdOnJiZ+c1XKOqMxsiXp6Wl3Xzzzffdd5+8fMCAAc4PH5ArDB069N57763z+4OQsohJX7MyJgsKCoqKiiQpZU8pG0r9nv2HmPRcZM45h7t27RoyZEjLli2zs7NnzpzZunXrOqMx8uUSh/ISeeFPfvKT3bt3O+NTpkyR7WmfPn2c/1VCTMJBTPqalTGZl5cnSSl7ymAwGAqF9Hv2H2LSMuQfYkJM+pqVMblixYr8/PzCwkLZUJaVlen37D/EpGWIScSEmPS1lI3J8vLy//qv/9JHPUJMWmbMmDHr16/XR4EoiElfiykm5xXPm7F2xpyNc+TPRz96dOiYoXc9e1dkWbQWU732tiILorUTick1a9Z069bNP+Hkn/cEQPIRk74WU0yOXTBW6nMuz5E/H976sPw5csbIyLJoLaZ67W1FFkRr9cdkVVXVHXfckZ6eHqgVfspD/nlPACQfMelrMcVk7rJcqb/kF5ekpact/HhhTLG3KMaY1N5WZEG0Vk9Mvvfee/369XMC0hH2kfCSf94TAMlHTPpaIJaYvPuFu6X+2ruubdGmhRNIEnuTX5w86oFR458Yv2DHgvDi+R/Mv+3Pt90076bfb/q9MxJTvfa2TrwF6orJI0eOzJ07NyMjIywiv6F/ODzin/cEQPIRk74WiCUm52ycc85F5+Quzx1w1QAnkDqc2UFFTo9+PdQXEeduntv1nK7OeLOWzSatmhRrvfa2TrwFImIyGAxeeuml6u2G0z8cHvHPewIg+YhJXwvEEpNak9c2y2x266Jb/7j9j7JBlMMJSyY4pwaNGNT13K4zX5859eWp7Tq16/W9XidRf3ItcHxMLl68uG3btmHJeBz9w+ER/7wnAJKPmPS1wKnF5NW3X+30ZV8ohz+f+XPnMKtr1sX/efHIGSOlffeS76alp83/cH6s9ZFv8URaIJaY9AkTf6sJgHghJn0tcGoxGf4tOeGHTZs31ZLgd+t+F2t95Fs8kRYw8JOuAFIZMelrgcTEZNdzu94w9wanv7Bk4dzNc0+i/uRaICImj/r+W3gApDJi0tcCiYnJ6++/vkmzJpf992XD7xze68JerTu0jvx/lg3WR77FE2mBumLS4dv/EAIglRGTvpagmJQm/dOzT2+S0ST7/OyJKydGFjRYf3Ktnpg86tcfLwAglRGTvnYqMenPVn9MOvz2w+oApDJi0tdSMyaP+uxHnwNIZcSkr6VsTAKATxCTvkZMAoC3iElfIyYBwFvEpK8RkwDgLWLS14jJ5FiwYMFbb721fPnyv/zlL//617/+7//+b+XKlc8///xXX32lag4ePPiPf/xDxvfs2aMGFy9enJeXpw7l5S+99NLR2v/Z8vLLL0txaWmpOgvARMSkrxGTySHvVePGjQO1OnXqpH7KQf/+/Q8dOiQFn3/++fe//31nMDMz89lnn3VeeNVVV2VlZVVXV0v/o48+krMPPvjg3r171RVat269cePG8LcFwCzEpK8FiMmkkPfqrLPOkpx75ZVXpN+7d+9PP/109erV0pdNoRTceuutEngFBQWSl1deeaVE4/79+2X8hRdekBpnBzl9+vSMjAwpGDt2bE5Ozs6dO7du3dq1a9eLL75Ye3MADEJM+hoxmRzyXj300EPSqampcXaEqr9o0SLpn3nmmRMnTnSKnV2jE5+HDx/u0qXLyJEjpX/eeeddd9110unRo8eNN964oNZPf/rT9PT0gwcPHntTAAxDTPoaMZkc8l5JpNXTz8zMnDt3rjNYUVEh40uXLnUO77nnnpYtW27atEkG//GPf8hIixYtAseTO3WKARiHmPS1ADGZFIG6ojG8f/755//sZz9zBp1Pxr755pvO4c6dO9PS0vr379+zZ88jR47ISE5OzpIlS5yzsiXdu3ev0wdgImLS14jJ5KgzGsP7jz/+uPRvuOGG3/3udx07drzoooucRHRcfvnlclZOOYdPPPFE8+bNJ0yYMGvWLKns1KnTgQMHVDEAsxCTvkZMJked0aj1H3roIdkvtm3b9j/+4z+0DeLKlSsbNWoU/h9F5FW9e/du1qzZwIED169fH1YLwDDEpK8RkwDgLWLS14hJAPAWMelrxCQAeIuY9DViEgC8RUz6GjEJAN4iJn2NmAQAbxGTvkZMAoC3iElfIyYBwFvEpK8RkwDgLWLS17KysgJ2yczMJCYBGISY9LtQKBQMBouLiwsKCvLy8laYT+5C7kXuSO5L7k6/YQDwE2LS7yoqKkpLS2XjVVRUJOmSbz65C7kXuSO5L7k7/YYBwE+ISb+rrKwsKyvbs2eP5IrswArNJ3ch9yJ3JPcld6ffMAD4CTHpd9XV1bLlkkSRvVcwGCwxn9yF3IvckdyX3J1+wwDgJ8Sk39XU1EiWyK5LQiUUCpWZT+5C7kXuSO5L7k6/YQDwE2ISAICoiEkAAKIiJgEAiIqYBAAgKmISAICoiEkAAKIiJgEAiIqYBAAgqmTE5NSpU8N/R4QccpaznOUsZ/1wFg1KRkwCAGAoYhIAgKiISQAAoiImAQCIipgEACAqYhIAgKiISQAAoiImAQCIKp4xuWnTpvLycn0UAABjxS0mP/nkk/bt27/22mt33nlnrzBLly5VNe+///7cuXOnTZtWWFgY9lIAAHwqPjG5Y8eO7t275+bmfvnll7t27SoMs3fvXqfmiy++6Nix4y9+8YtRo0Y1bdq0pKTk+GsAAOA78YnJDz74YMaMGZMnT77mmmv+drw1a9aosqqqKqdz+umnv/DCC2ocAAB/ik9MitWrV7do0aK4uPiyY9q0aXPeeeeNGTNG1ZSXlz/22GOym8zJydm/f3/YqwEA8KP4xGR+fn7Tpk0l/MIHL7744vAvTIpgMDh8+PCBAwdeccUV//M//xN+CgAAH4pPTO7cufPXv/51gzGpyKl77rlHHwUAwGfiE5PijTfeqD8mJUpff/31qqqqTz75pFu3bg888EBYLQAAfpSQmAwGg+vXrz/vvPOWLVumCt59991OnToFAoFGjRpdeeWVFRUV6hQAAP4Ut5jcuHHjD3/4Q6dfWFjYp08fickdO3YcX3VU0vHw4cPaIAAA/hS3mAQAwD7EJAAAURGTAABERUwCABAVMQkAQFTEJAAAURGTAABERUwCABAVMQkAQFRWxWRWVlYA9pL51afcas7zPHXq1PBBOQz/mHDW3LOp9jyby6qYlCdP3QXsI/MbCoUqKioqKyurq6tramr0J8Aucr/6ECzC/JrCXYJUTy8xBzFpN5nfYDBYWlpaVlYmYSlJqT8BdmEZtZu2y4RvuUuQ6ukl5iAm7SbzW1xcXFJSsmfPHklK2VPqT4BdiEnAD9wlSPX0EnMQk3aT+S0oKCgqKpKklD2l9b+LjZgE/MBdglRPLzEHMWk3md+8vDxJStlTBoPBUCikPwF24ZNygB+4S5Dq6SXmICbtJvO7YsWK/Pz8wsJC2VCWlZXpTwAAxJu7BKmeXmIOYtJuxCRswmcLTOEuQaqnl5iDmLQbMQmbePK150mTJr355pv6KOrlLkGqp5eYg5i0GzEJm3gSk/JGFyxYoI/Wq7S0tLi4WB89BdoF5f3Ztm1b2HnfcZcg1dNLzEFM2i3VYpJPytnNlJjMzMyM9SX10y54Eu9SkrlLkOrpJeYgJu2WajHpyTKKpEna/H755Zd///vfV65c+a9//Ss8k6qqql5++WUZl+1deP3atWv//Oc/b9++XfrLli2Tl4wYMUJetXfvXqdA+jt37pS/hvPmzXMOw7eD4YcHDx585ZVX5CLBYNAZqfOC4WRc/nZv2bJl6dKlq1evDv8pIrt27Vq+fLm8w3fdddeAAQPk4mGvSyB3CVI9vcQcxKTdiEnYJDmfLfjf//3f3r17B2q1bt1axaREVL9+/dT4xo0bnfrx48c7g2lpaXPmzOnevbtzKOTvnVMj/dzcXCkYNmyYc1jn7nDfvn0XXHCB89qmTZs+++yzMhh5wciX9+3bV9X079//0KFDMr5q1aqMjAw1PmHCBGc8CdwlSPX0EnMEiEmrBYhJIEY33HBD+/btN2/eXF5eLtESOJZJY8eOzcnJkU3h1q1bu3btevHFFzv1LVu2HDdunBQ/+uijknNHI2LMGencufP69eud/ZxWEP4m2rZtu2nTJonkyy67THaQWkG0w1atWj3//PNfffWVbCjlUP7Ky3jPnj2HDh26f/9+Zz8qBeolieYuQaqnl5iDmLQbMQnEqlu3bpMmTXL61dXVKpN69Ohx4403Lqj105/+ND093cm8wYMHy0uefPLJw4cPO6+qMybHjBkTflhn7J155pkTJ050BquqqiILoh1Onz7d6ct+UQ4XLVokfdnyyu5WOqFQSAYlQdVLEs1dglRPLzEHMWm3VIvJ5HxSDnbLzMycO3euOlSZ1KJFi8Dx5O+UjMtfq9tuu6158+YDBw50fmyyekn4RebPnx9+WGfsaW9aiVZf/+F1113XqVOn2bNnDxs2rHHjxs57mxzuEqR6eok5AsSk1QIpFpPAqbvggguuvPJKp79582aVOjk5OUuWLHHGa2pq1HfTOHvK9957TyqffvrpoxG5FTkiiSvp5fTz8vLU2QsvvPCqq65yxrdv3/7Pf/7T6UcLwvoP5S7kfe7YsaPsg2WzqwqSwF2CVE8vMQcxaTdiEjZJzmcLJAvlL871118vb659+/YqdZ544gnZMk6YMGHWrFkXXXSRbNQOHDjwxhtvdOjQYeLEiePGjQsc+6KgbAqHDh167733qm+Z0ZLs0ksvdfZ58kIpVmedryyOHDlSTnXt2rVv377OJ3K1C0bLRe1Q3kS7du0uv/zya6+9Njc3d8OGDaom0dwlSPX0EnMQk3YjJmGTQLK+9jxnzpwuXbpIRo4aNapNmzYqhKTTu3fvZs2aDRw4cP369TKyf//+m2++WdJIyiSKnLIpU6bIfrFPnz7qv3loSbZr164hQ4a0bNkyOzt75syZrVu3VmcfeeSRXr16yct//OMfq/8Tol0wWi5qh5K16enpgWOk/9Zbb6myhHKXINXTS8xBTNqNmIRNkhaTdmjbtu2AAQMefPDB+fPn33777fLRe+GFF/SixHCXINXTS8xBTNot1WIyOZ+Ug1eIyZjI3/1+/fo1r5WTk+P8ZIPkcJcg1dNLzEFM2i3VYpJl1G7MryncJUj19BJzEJN2Iyb9z+e/gOLhhx9++umnX3nlFf2EF/hsgSncJUj19BJzpFpMfvbZZ9u2bdNHI2zfvn358uUvvvhiVVWVfs4oxKTnGvxlEYHjv/8iJvVffMEp/x6JhQsXduzY8fHHH+/QoYPz82WAE+EuQaqnl5gj1WIyMzPz0Ucf1UfDHK39eVGBY7KzsyVd9CJzEJOea/CXRZxKTNZ/8VO58tHa7+Fs166d8/Nczj333HvuuUevAKJwlyDV00vMYX1Mrlu3bsmSJe+//770ZYMYqP1B+86PXnQKpL9r167Nmzc/8sgjcvjYY49JzZw5c8rLyzdu3Ni9e/dBgwaFX9AsqRaTfvikXIO/LOJo9F9AUb/wKx+t6+ILjv81FJoFMf4eiQceeEBi0vmxMjNnzpRtpaoH6ucuQaqnl5jD7pgM/8n9999/f/gP2pdcdGoCYT+5Xw4vuuiiwYMHqyv89a9/lYIPP/xQjZglkGIx6bkT+WUR0X4BhTOiLqUdalc+GuUXR9T/ayhi+j0Sl1122bXXXuu89o033pBT9XyCFwjnLkGqp5eYI2B1TDo/uX///v0LFy78/PPPv66NDe2TroHan9wvq4D841oOZdmaNm2aOiv/SJeC5557zn2BUQLEZHKdyC+LiPYLKJyUUmXaYeSVnRotCOv/NRQx/R4JuZT8XXD68hbl1N/+9jd1NU/44bMFOBHuEqR6eok5AlbHpPOT+5966qmamhpnJFBXTI4ZM0Ydyj+r//CHP6hDWW6kYMmSJWrELAFiMrlO5JdFRPsFFPWLvPLRiIs7D3M9Z2P6PRJNmjR5+OGHnb7zfv7pT39yDr0S8N/XnlEndwlSPb3EHHbHpPzTW/3kfud7VuuMSVlK1GF2dvbtt9+uDj/66CMpePXVV9WIWYjJJDuRXxYR7RdQ1C/yykcjXhs4sV9DoR1G+z0SsuWdOXOm05e/SlK/cuVK9XJPEJOmcJcg1dNLzGF3TDqfR926davc5jPPPPN1lJgMHxk1alSXLl2+/PJL53Dy5MktWrSQf2WrArOkWkx6/km5E/llEdF+AUX9Iq98NOLiJ3cY7fdIXHjhhaNHj3b6zl+igoICddYTxKQp3CVI9fQSc1gckxs2bAj/yf2vvPLK17X/IWTo0KHTp08/fPiwU6bFZHFxcbNmzWTVkH9cjx07Nj09Xa6gzhon1WLS22X0BH9ZRLRfQBGopa4WfljnlY9GXFxdSl3hRA6j/R6JSZMm9ezZ0+k/9thj8vci/BcFeyL84wM/c5cg1dNLzBGwNyZlCxj+k/udQfWD9rdv3+6MBCL2l+vWrevfv39GRsYZZ5whu0kVqCYKEJNJdIK/LOJolF9AEZ6L2mGdVz4acfFoQVj/YbTfI/HBBx80atToH//4h/SHDBly3XXXqdd6xfPPFuAEuUuQ6ukl5gjYG5P4mpjECajn90iMHTt24MCB7777bpMmTd55553jXwdE5S5BqqeXmIOYtBsxiQbV83skKisrr7jiinvuuee3v/1t2CuABrhLkOrpJeYgJu2WajHJJ+UAP3CXINXTS8xBTNot1WISgB+4S5Dq6SXmICbtRkzCJny2wBTuEqR6eok5iEm7EZOwCV97NoW7BKmeXmIOYtJuxCRsQkyawl2CVE8vMQcxabdUi0k+KWc3YtIU7hKkenqJOYhJu6VaTLKM2o35NYW7BKmeXmIOYtJuxCRswmcLTOEuQaqnl5iDmLQbMQkg+dwlSPX0EnMQk3YjJgEkn7sEqZ5eYg5i0m6pFpN8Ug7wA3cJUj29xBzEpN1SLSYB+IG7BKmeXmIOYtJuxCRswmcLTOEuQaqnl5iDmLQbMQmb8LVnU7hLkOrpJeYgJu1GTMImxKQp3CVI9fQScxCTdku1mOSTcnYjJk3hLkGqp5eYg5i0W6rFJMuo3ZhfU7hLkOrpJeYgJu1GTMImfLbAFO4SpHp6iTmISbsRkwCSz12CVE8vMQcxaTdiEkDyuUuQ6ukl5iAm7ZZqMckn5QA/cJcg1dNLzJGVlRWAvTIzM1MqJsNJZIZ/KLQEtePs2WefXc/ZsJdaeBZ+ZlVMilAoFAwGi4uLCwoK8vLyVlgtULu7SikypzKzMr8yyzLX+vTDZAE+yQxfsi0mKyoqSktLZatRVFQk62m+1WRZ0YdsJ3MqMyvzK7Msc61PP0xGTMKfbIvJysrKsrKyPXv2yEoqe45Cq8myog/ZTuZUZlbmV2ZZ5lqffpiMmIQ/2RaT1dXVssmQNVR2G8FgsMRqsqzoQ7aTOZWZlfmVWZa51qcfJiMm4U+2xWRNTY2snrLPkGU0FAqVWU2WFX3IdjKnMrMyvzLLMtf69MNkxCT8ybaYTCksK7AJzzP8iZg0GMsKbMLzDH8iJg3GsgKb8DzDn4hJg7GswCY8z/AnYtJgLCuwCc8z/ImYNBjLCmzC8wx/IiYNxrICm/A8w5+ISYOxrMAmPM/wJ2LSYCwrsAnPM/yJmDQYywpswvMMfyImDcayApvwPMOfiEmDsazAJjzP8Cdi0mAsK7AJzzP8iZg0GMsKbMLzDH8iJg3GsgKb8DzDn4hJk/Tr1y8QhZzSqwF/43mGEYhJk8yePVtfTo6RU3o14G88zzACMWmSYDCYnp6uryiBgAzKKb0a8DeeZxiBmDTM4MGD9UUlEJBBvQ4wAc8z/I+YNMzixYv1RSUQkEG9DjABzzP8j5g0THl5eUZGRviaIocyqNcBJuB5hv8Rk+YZPnx4+LIih3oFYA6eZ/gcMWmeVatWhS8rcqhXAObgeYbPEZPmqaqqateunbOmSEcO9QrAHDzP8Dli0kijR492lhXp6OcA0/A8w8+ISSOtXbvWWVako58DTMPzDD8jJo105MiRbrWko58DTMPzDD8jJk01qZY+CpiJ5xm+RUya6r1a+ihgJp5n+BYxCQBAVMQkAAsdOnRIfaUzvA/EipgEYKFAILBgwYLIfj1KS0uLi4v1UaQ8YhKAhU4iJjMzM0+kDKmGmATgd5JeJSUlW7ZsWbp06erVq6urq9X4tm3bwsvUYT0xKf0dO3asWbNm+fLlH3/8sTO4bNkyKRsxYoSc3bt3r1O2c+fOwsLCefPmqdciBRGTAPxOAqxv377OjyAQ/fv3P3TokDMenn/RojGyrEuXLs6lmjZt+uSTT8pg9+7d1fUlGp2y3NzctLS0YcOGqdciBRGTAPxOEqtVq1bPP//8V199JRtKOczPz3fGTy4mTzvttNdff33//v033XRT27Ztv/jiizrLOnfuvH79+oMHD6pBpCBi0tcy22Ye+weuJbKysvSbBBoiT8706dOdvuwj5XDRokXO+MnF5KxZs5z+7t275fDll1+us2zMmDHqECmLmPS1b5aDnYtsanJHoVCooqKisrKyurq6pqZGv2cgQmSAOYfRxuvpa4fyKMqh7FDrLJs/f746RMoiJn3NypgMBoOlpaVlZWWyQqnvxQDqERlgzmGLFi1mz57tDObl5UWLxsiX/+pXv3L6q1evlsM333yzzrLwQ6QsYtLXrIzJ4uLikpKSPXv2SFLKnlK/ZyBCtAC79NJLO3XqJEk5ceLEzMxvvkJRZzRGvjwtLe3mm2++77775OUDBgxwfviAXGHo0KH33ntvnd8fhJRFTPqalTFZUFBQVFQkSSl7StlQ6vcMRIjMOedw165dQ4YMadmyZXZ29syZM1u3bl1nNEa+XOJQXiIv/MlPfrJ7925nfMqUKbI97dOnj/O/SohJOIhJX7MyJvPy8iQpZU8ZDAZDoZB+z0CCkX+ICTHpa1bG5IoVK/Lz8wsLC2VDWVZWpt8zkGDEJGJCTPoaMQnE3ZgxY9avX6+PAlEQk74WU0zOK543Y+2MORvnyJ+PfvTo0DFD73r2rsiyaC2meu1tRRZEa8QkALMQk74WU0yOXTBW6nMuz5E/H976sPw5csbIyLJoLaZ67W1FFkRrxCQAsxCTvhZTTOYuy5X6S35xSVp62sKPF8YUe4tijEntbUUWRGvEJACzEJO+FlNM3v3C3VJ/7V3XtmjTwgkkib3JL04e9cCo8U+MX7BjQXjx/A/m3/bn226ad9PvN/3eGYmpXntbJ96ISQBmISZ9LaaYnLNxzjkXnZO7PHfAVQOcQOpwZofAMT369VBfRJy7eW7Xc7o6481aNpu0alKs9drbOvEWICYBGIWY9LVALDGptW8iLbPZrYtu/eP2P8oGUQ4nLJngnBo0YlDXc7vOfH3m1JentuvUrtf3ep1E/ck1YhKAWYhJXzvFmLz69qudvuwL5fDnM3/uHGZ1zbr4Py8eOWOktO9e8t209LT5H86PtT7yLZ5IIyYBmIWY9LVTjMnwb8kJP2zavGngeL9b97tY6yPf4om0ADEJwCjEpK8FEhOTXc/tesPcG5z+wpKFczfPPYn6k2vEJACzEJO+lqCYvP7+65s0a3LZf182/M7hvS7s1bpD68j/Z9lgfeRbPJFGTAIwCzHpawmKSWnSPz379CYZTbLPz564cmJkQYP1J9eISQBmISZ97VRi0p+NmARgFmLS14hJAPAWMelrxCQAeIuY9DViEgC8RUz6GjEJAN4iJn2NmAQAbxGTvkZMAoC3iElfIyYBwFvEpK8RkwDgLWLS14hJAPAWMelrxCQAeIuY9DViEgC8RUz6GjEJAN4iJn2NmAQAbxGTvkZMAoC3iElfIyYBwFvEpK8RkwDgLWLS14hJAPAWMelrxCQAeIuY9DViEgC8RUz6GjEJAN4iJn2NmAQAbxGTvkZMAoC3iElfy8rKCtglMzOTmARgEGLS70KhUDAYLC4uLigoyMvLW2E+uQu5F7kjuS+5O/2GAcBPiEm/q6ioKC0tlY1XUVGRpEu++eQu5F7kjuS+5O70GwYAPyEm/a6ysrKsrGzPnj2SK7IDKzSf3IXci9yR3JfcnX7DAOAnxKTfVVdXy5ZLEkX2XsFgsMR8chdyL3JHcl9yd/oNA4CfEJN+V1NTI1kiuy4JlVAoVGY+uQu5F7kjuS+5O/2GAcBPiEkAAKIiJgEAiIqYBAAgKmISAICoiEkAAKIiJgEAiIqYBAAgKmISAICoiEkAAKIiJgEAiIqYBAAgKmISAICoiEkAAKIiJgEAiIqYBAAgKmISAICoiEkAAKIiJgEAiIqYBAAgKmISAICoiEkAAKIiJgEAiIqYBAAgKmISAICoiEkAAKIiJgEAiKqOmAQAABpiEgCAqIhJAACi+v8B2aZtOdCn4XgAAAAASUVORK5CYII=" /></p>
 
-#### std::move(lvalue)からの代入 <a id="SS_27_8_2_3"></a>
+#### std::move(lvalue)からの代入 <a id="SS_19_8_2_3"></a>
 下記コードにより「std::move(lvalue)からの代入」を説明する。
 
 ```.cpp
@@ -3502,30 +3502,30 @@ std::move()の導入が行われた目的はプログラム実行速度の向上
 ```
 
 * 行１  
-  「[lvalueからの代入](core_lang_spec.md#SS_27_8_2_1)」の行１と同じである。
+  「[lvalueからの代入](core_lang_spec.md#SS_19_8_2_1)」の行１と同じである。
 
 * 行２  
-  「[lvalueからの代入](core_lang_spec.md#SS_27_8_2_1)」の行２と同じである。
+  「[lvalueからの代入](core_lang_spec.md#SS_19_8_2_1)」の行２と同じである。
 
 * 行３  
   std::moveは単にrvalueリファレンスへのキャストを行うだけであり、ランタイム時の処理コストは発生しない。
   この例の場合、std::stringがmoveコンストラクタ／move代入演算子を提供しているため、
   下記図のようなバッファの所有が移し替えられるだけである(この代入もmove代入と呼ぶ)。
-  この動作は「[rvalueからの代入](core_lang_spec.md#SS_27_8_2_2)の行２の左辺」と同じであり、同様に速度が向上するが、その副作用として、
-  str1への代入以外のアクセスは[未規定動作](core_lang_spec.md#SS_27_14_4)であるため、避けるべきである
+  この動作は「[rvalueからの代入](core_lang_spec.md#SS_19_8_2_2)の行２の左辺」と同じであり、同様に速度が向上するが、その副作用として、
+  str1への代入以外のアクセスは[未規定動作](core_lang_spec.md#SS_19_14_4)であるため、避けるべきである
   (多くの実装では、str1.size() == 0となることが多いがこの動作は約束されない)。
 
 <!-- pu:essential/plant_uml/rvalue_from_move.pu--><p><img src="data:image/png;base64,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" /></p>
 
 
-### forwardingリファレンス <a id="SS_27_8_3"></a>
+### forwardingリファレンス <a id="SS_19_8_3"></a>
 関数テンプレートの型パラメータTに対して`T&&`として宣言された仮引数、
 または型推論を伴うauto&&として宣言された変数を、forwardingリファレンスと呼ぶ
 (この概念はC++14から存在し、慣用的にユニバーサルリファレンスと呼ばれていたが、
 C++17から正式にforwardingリファレンスと命名された)。
 forwardingリファレンスは一見rvalueリファレンスのように見えるが、
 下記に示す通り、lvalueにもrvalueにもバインドできる
-([リファレンスcollapsing](core_lang_spec.md#SS_27_8_6)により、このようなバインドが可能になる)。
+([リファレンスcollapsing](core_lang_spec.md#SS_19_8_6)により、このようなバインドが可能になる)。
 
 ```cpp
     //  example/core_lang_spec/universal_ref_ut.cpp 8
@@ -3557,7 +3557,7 @@ forwardingリファレンスは一見rvalueリファレンスのように見え�
     g(std::vector<std::string>{"rvalue"});  // 引数はrvalue
 ```
 
-下記のコードは[ジェネリックラムダ](core_lang_spec.md#SS_27_11_6)の引数をforwardingリファレンスにした例である。
+下記のコードは[ジェネリックラムダ](core_lang_spec.md#SS_19_11_6)の引数をforwardingリファレンスにした例である。
 
 ```cpp
     //  example/core_lang_spec/universal_ref_ut.cpp 47
@@ -3587,14 +3587,14 @@ forwardingリファレンスは一見rvalueリファレンスのように見え�
 通常、forwardingリファレンスはstd::forwardと組み合わせて使用される。
 
 
-### ユニバーサルリファレンス <a id="SS_27_8_4"></a>
-ユニバーサルリファレンスとは、「[forwardingリファレンス](core_lang_spec.md#SS_27_8_3)」の通称、もしくは旧称である。
+### ユニバーサルリファレンス <a id="SS_19_8_4"></a>
+ユニバーサルリファレンスとは、「[forwardingリファレンス](core_lang_spec.md#SS_19_8_3)」の通称、もしくは旧称である。
 
-### perfect forwarding <a id="SS_27_8_5"></a>
-perfect forwarding(完全転送)とは、引数の[rvalue](core_lang_spec.md#SS_27_7_1_2)性や
-[lvalue](core_lang_spec.md#SS_27_7_1_1)性を損失することなく、
+### perfect forwarding <a id="SS_19_8_5"></a>
+perfect forwarding(完全転送)とは、引数の[rvalue](core_lang_spec.md#SS_19_7_1_2)性や
+[lvalue](core_lang_spec.md#SS_19_7_1_1)性を損失することなく、
 その引数を別の関数に転送する技術のことを指す。
-通常は、[forwardingリファレンス](core_lang_spec.md#SS_27_8_3)である関数の仮引数をstd::forwardを用いて、
+通常は、[forwardingリファレンス](core_lang_spec.md#SS_19_8_3)である関数の仮引数をstd::forwardを用いて、
 他の関数に渡すことで実現される。
 
 perfect forwardingの使用例を以下に示す。
@@ -3637,7 +3637,7 @@ perfect forwardingの使用例を以下に示す。
     ASSERT_EQ(w3.GetName(), "lvalue ref");    // strはムーブされたのでアクセス不可
 ```
 
-### リファレンスcollapsing <a id="SS_27_8_6"></a>
+### リファレンスcollapsing <a id="SS_19_8_6"></a>
 Tを任意の型とし、TRを下記のように宣言した場合、
 
 ```cpp
@@ -3743,10 +3743,10 @@ C++11からはエラーとならず、TRRはT&となる。
 このようなテンプレートの特殊化を不要にするリファレンスcollapsingは、
 有用な機能拡張であると言える。
 
-### リファレンス修飾 <a id="SS_27_8_7"></a>
-[rvalue修飾](core_lang_spec.md#SS_27_8_7_1)と[lvalue修飾](core_lang_spec.md#SS_27_8_7_2)とを併せて、リファレンス修飾と呼ぶ。
+### リファレンス修飾 <a id="SS_19_8_7"></a>
+[rvalue修飾](core_lang_spec.md#SS_19_8_7_1)と[lvalue修飾](core_lang_spec.md#SS_19_8_7_2)とを併せて、リファレンス修飾と呼ぶ。
 
-#### rvalue修飾 <a id="SS_27_8_7_1"></a>
+#### rvalue修飾 <a id="SS_19_8_7_1"></a>
 下記GetString0()のような関数が返すオブジェクトの内部メンバに対する[ハンドル](cpp_idioms.md#SS_21_12_7)は、
 オブジェクトのライフタイム終了後にもアクセスすることができるため、
 そのハンドルを通じて、
@@ -3822,13 +3822,13 @@ rvalueの内部ハンドルを返さないようにすることが可能とな�
     // auto const& s4_1 = C{"c1"}.GetString4();  // 危険なのでコンパイルさせない
 ```
 
-#### lvalue修飾 <a id="SS_27_8_7_2"></a>
-[rvalue修飾](core_lang_spec.md#SS_27_8_7_1)を参照せよ。
+#### lvalue修飾 <a id="SS_19_8_7_2"></a>
+[rvalue修飾](core_lang_spec.md#SS_19_8_7_1)を参照せよ。
 
 
-## 構文と制御構造 <a id="SS_27_9"></a>
+## 構文と制御構造 <a id="SS_19_9"></a>
 
-### 属性構文 <a id="SS_27_9_1"></a>
+### 属性構文 <a id="SS_19_9_1"></a>
 C++14から導入されたの属性構文は、[[属性名]]の形式で記述され、
 特定のコード要素に対する追加情報やコンパイラへの指示を与えるためのものである。
 
@@ -3883,7 +3883,7 @@ C++14から導入されたの属性構文は、[[属性名]]の形式で記述�
     }
 ```
 
-### 関数tryブロック <a id="SS_27_9_2"></a>
+### 関数tryブロック <a id="SS_19_9_2"></a>
 関数tryブロックとはtry-catchを本体とした下記のような関数のブロックを指す。
 
 ```cpp
@@ -3902,7 +3902,7 @@ C++14から導入されたの属性構文は、[[属性名]]の形式で記述�
     }
 ```
 
-### 範囲for文 <a id="SS_27_9_3"></a>
+### 範囲for文 <a id="SS_19_9_3"></a>
 範囲for文は、
 
 ```cpp
@@ -4002,7 +4002,7 @@ C++17以降は、この規制が緩和されたため、以下のように展開
     ASSERT_EQ("Hello", oss.str());  // 結果は "Hello" になるはず
 ```
 
-### 構造化束縛 <a id="SS_27_9_4"></a>
+### 構造化束縛 <a id="SS_19_9_4"></a>
 構造化束縛はC++17 から導入されたもので、std::tuppleやstd::pair、std::arrayなど、
 構造体のメンバーを個別の変数に分解して簡潔に扱うことをできるようにするための機能である。
 
@@ -4068,7 +4068,7 @@ C++17以降は、この規制が緩和されたため、以下のように展開
     ASSERT_EQ(z, 3);
 ```
 
-### 初期化付きif/switch文 <a id="SS_27_9_5"></a>
+### 初期化付きif/switch文 <a id="SS_19_9_5"></a>
 C++17で、if文とswitc文に初期化を行う構文が導入された。
 これにより、変数をそのスコープ内で初期化し、その変数を条件式の評価に使用できる。
 初期化された変数は、if文やswitch文のスコープ内でのみ有効であり、他のスコープには影響を与えない。
@@ -4077,13 +4077,13 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
 この類似性が理解しやすいように、本節では、 敢えて以下のコード例で同じ関数、同じクラスを使用し、
 対比できるようにした。
 
-- [初期化付きfor文(従来のfor文)](core_lang_spec.md#SS_27_9_5_1)
-- [初期化付きwhile文(従来のwhile文)](core_lang_spec.md#SS_27_9_5_2)
-- [初期化付きif文](core_lang_spec.md#SS_27_9_5_3)
-- [初期化付きswitch文](core_lang_spec.md#SS_27_9_5_4)
+- [初期化付きfor文(従来のfor文)](core_lang_spec.md#SS_19_9_5_1)
+- [初期化付きwhile文(従来のwhile文)](core_lang_spec.md#SS_19_9_5_2)
+- [初期化付きif文](core_lang_spec.md#SS_19_9_5_3)
+- [初期化付きswitch文](core_lang_spec.md#SS_19_9_5_4)
 
 
-#### 初期化付きfor文(従来のfor文) <a id="SS_27_9_5_1"></a>
+#### 初期化付きfor文(従来のfor文) <a id="SS_19_9_5_1"></a>
 下記の疑似コードは従来のfor文の構造を表す。
 
 ```cpp
@@ -4121,7 +4121,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     // ...
 ```
 
-#### 初期化付きwhile文(従来のwhile文) <a id="SS_27_9_5_2"></a>
+#### 初期化付きwhile文(従来のwhile文) <a id="SS_19_9_5_2"></a>
 下記の疑似コードこの節で説明しようとしているwhile文の構造を表す(従来からのwhile文)。
 
 ```cpp
@@ -4130,7 +4130,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     }
 ```
 
-[初期化付きif文](core_lang_spec.md#SS_27_9_5_3)/[初期化付きswitch文](core_lang_spec.md#SS_27_9_5_4)はC++17から導入されたシンタックスであるが、
+[初期化付きif文](core_lang_spec.md#SS_19_9_5_3)/[初期化付きswitch文](core_lang_spec.md#SS_19_9_5_4)はC++17から導入されたシンタックスであるが、
 それと同様のシンタックスはwhileには存在しないが、
 以下のコード例のように従来の記法は広く知られているため、念とため紹介する。
 
@@ -4143,7 +4143,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     // resultはスコープアウトする
 ```
 
-#### 初期化付きif文 <a id="SS_27_9_5_3"></a>
+#### 初期化付きif文 <a id="SS_19_9_5_3"></a>
 下記の疑似コードこの節で説明しようとしているif文の構造を表す。
 
 ```cpp
@@ -4183,7 +4183,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     // resultはスコープアウトする
 ```
 
-クラスの独自の[<=>演算子](core_lang_spec.md#SS_27_6_4_1)を定義する場合、下記のように使用することができる。
+クラスの独自の[<=>演算子](core_lang_spec.md#SS_19_6_4_1)を定義する場合、下記のように使用することができる。
 
 ```cpp
     //  example/core_lang_spec/if_switch_init_ut.cpp 70
@@ -4205,7 +4205,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     }
 ```
 
-#### 初期化付きswitch文 <a id="SS_27_9_5_4"></a>
+#### 初期化付きswitch文 <a id="SS_19_9_5_4"></a>
 下記の疑似コードはこの節で説明しようとしているswitch文の構造を表す。
 
 ```cpp
@@ -4255,15 +4255,15 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     // resultはスコープアウトする
 ```
 
-## 言語拡張機能 <a id="SS_27_10"></a>
-### コルーチン <a id="SS_27_10_1"></a>
+## 言語拡張機能 <a id="SS_19_10"></a>
+### コルーチン <a id="SS_19_10_1"></a>
 コルーチンはC++20から導入された機能であり、以下の新しいキーワードによりサポートされる。
 
-* [co_await](core_lang_spec.md#SS_27_10_1_1)
-* [co_return](core_lang_spec.md#SS_27_10_1_2)
-* [co_yield](core_lang_spec.md#SS_27_10_1_3)
+* [co_await](core_lang_spec.md#SS_19_10_1_1)
+* [co_return](core_lang_spec.md#SS_19_10_1_2)
+* [co_yield](core_lang_spec.md#SS_19_10_1_3)
 
-#### co_await <a id="SS_27_10_1_1"></a>
+#### co_await <a id="SS_19_10_1_1"></a>
 co_awaitはコルーチンの非同期操作の一時停止と再開に使用される。
 co_waitとco_returnを使用したコードを以下に示す。
 
@@ -4455,11 +4455,11 @@ co_waitとco_returnを使用したコードを以下に示す。
 C++20から導入されたco_await、co_return、TaskとC++17以前の機能のみを使用したコードの対比によって、
 コルーチンのサポート機能により実装が容易になることが理解できるだろう。
 
-#### co_return <a id="SS_27_10_1_2"></a>
+#### co_return <a id="SS_19_10_1_2"></a>
 co_returnはコルーチンの終了時に値を返すために使用される。
-co_returnは通常[co_await](core_lang_spec.md#SS_27_10_1_1)と同時に使われることが多い。
+co_returnは通常[co_await](core_lang_spec.md#SS_19_10_1_1)と同時に使われることが多い。
 
-#### co_yield <a id="SS_27_10_1_3"></a>
+#### co_yield <a id="SS_19_10_1_3"></a>
 co_yieldはコルーチンから値を返しつつ、
 次の再開ポイントまで処理を中断する。これはジェネレーターの実装に便利である。
 
@@ -4601,7 +4601,7 @@ co_yieldはコルーチンから値を返しつつ、
     EXPECT_EQ(index, expected_values.size());
 ```
 
-[co_await](core_lang_spec.md#SS_27_10_1_1)、co_returnの例でみたように、
+[co_await](core_lang_spec.md#SS_19_10_1_1)、co_returnの例でみたように、
 co_yieldを使用したコルーチンと同じ機能を持つクラスのco_yieldを使わない実装を以下に示す。
 
 ```cpp
@@ -4713,7 +4713,7 @@ co_yieldを使用したコルーチンと同じ機能を持つクラスのco_yie
 C++20から導入されたco_await、co_return、TaskとC++17以前の機能のみを使用したコードの対比によって、
 コルーチンのサポート機能により実装が容易になることが理解できるだろう。
 
-### モジュール <a id="SS_27_10_2"></a>
+### モジュール <a id="SS_19_10_2"></a>
 モジュールはC++20から導入された機能であり、以下の新しいキーワードによりサポートされる。
 
 * module: モジュールを宣言する。独立した構造を持ち、名前の衝突を防ぐ。
@@ -4788,7 +4788,7 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
 大規模プロジェクトでの保守性向上に貢献する。
 が、一方ではC++のモジュールに対応してるビルドツールを使用することが望ましい。
 
-### ラムダ式 <a id="SS_27_10_3"></a>
+### ラムダ式 <a id="SS_19_10_3"></a>
 ラムダ式に関する言葉の定義と例を示す。
 
 * ラムダ式とは、その場で関数オブジェクトを定義する式。
@@ -4796,8 +4796,8 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
 * クロージャ型とは、クロージャオブジェクトの型。
 * キャプチャとは、ラムダ式外部の変数をラムダ式内にコピーかリファレンスとして定義する機能。
 * ラムダ式からキャプチャできるのは、ラムダ式から可視である自動変数と仮引数(thisを含む)。
-* [constexprラムダ](core_lang_spec.md#SS_27_5_9)とはクロージャ型の[constexprインスタンス](core_lang_spec.md#SS_27_5_6)。
-* [ジェネリックラムダ](core_lang_spec.md#SS_27_11_6)とは、C++11のラムダ式を拡張して、
+* [constexprラムダ](core_lang_spec.md#SS_19_5_9)とはクロージャ型の[constexprインスタンス](core_lang_spec.md#SS_19_5_6)。
+* [ジェネリックラムダ](core_lang_spec.md#SS_19_11_6)とは、C++11のラムダ式を拡張して、
   パラメータにautoを使用(型推測)できるようにした機能。
 
 ```cpp
@@ -4820,13 +4820,13 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
     auto s = g_closure(std::string{"1"}, std::string{"2"});  // t0、t1はstd::string
 ```
 
-#### クロージャ <a id="SS_27_10_3_1"></a>
-「[ラムダ式](core_lang_spec.md#SS_27_10_3)」を参照せよ。
+#### クロージャ <a id="SS_19_10_3_1"></a>
+「[ラムダ式](core_lang_spec.md#SS_19_10_3)」を参照せよ。
 
-#### クロージャ型 <a id="SS_27_10_3_2"></a>
-「[ラムダ式](core_lang_spec.md#SS_27_10_3)」を参照せよ。
+#### クロージャ型 <a id="SS_19_10_3_2"></a>
+「[ラムダ式](core_lang_spec.md#SS_19_10_3)」を参照せよ。
 
-#### 一時的ラムダ <a id="SS_27_10_3_3"></a>
+#### 一時的ラムダ <a id="SS_19_10_3_3"></a>
 一時的ラムダ(transient lambda)とは下記のような使い方をするラムダ式指す慣用用語である。
 
 複雑な初期化を必要とするconstオブジェクトの生成をするような場合に有用なテクニックである。
@@ -4851,11 +4851,11 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
     ASSERT_EQ(vec_act, vec_exp);
 ```
 
-#### transient lambda <a id="SS_27_10_3_4"></a>
-「[一時的ラムダ](core_lang_spec.md#SS_27_10_3_3)」を参照せよ。
+#### transient lambda <a id="SS_19_10_3_4"></a>
+「[一時的ラムダ](core_lang_spec.md#SS_19_10_3_3)」を参照せよ。
 
 
-### 指示付き初期化 <a id="SS_27_10_4"></a>
+### 指示付き初期化 <a id="SS_19_10_4"></a>
 指示付き初期化(designated initialization)とは、C++20から導入されたシンタックスであり、
 構造体やクラスのメンバを明示的に指定して初期化できるようにする機能である。
 この構文により、コードの可読性と安全性が向上し、初期化漏れや順序の誤りを防ぐことができる。
@@ -4914,7 +4914,7 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
     ASSERT_EQ(circl_1, circl_2);
 ```
 
-下記に示すように、[Polymorphic Memory Resource(pmr)](stdlib_and_concepts.md#SS_28_6)のpool_resourceの初期化には、
+下記に示すように、[Polymorphic Memory Resource(pmr)](stdlib_and_concepts.md#SS_20_6)のpool_resourceの初期化には、
 この機能を使うと可読性の改善が期待できる。
 
 ```cpp
@@ -4948,24 +4948,24 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
     std::pmr::vector<int> vec{&pool_resource};  // pmrを使用するベクタの定義
 ```
 
-## テンプレートと型推論 <a id="SS_27_11"></a>
-### SFINAE <a id="SS_27_11_1"></a>
+## テンプレートと型推論 <a id="SS_19_11"></a>
+### SFINAE <a id="SS_19_11_1"></a>
 [SFINAE](https://cpprefjp.github.io/lang/cpp11/sfinae_expressions.html)
 (Substitution Failure Is Not An Errorの略称、スフィネェと読む)とは、
-「テンプレートのパラメータ置き換えに失敗した([ill-formed](core_lang_spec.md#SS_27_14_1)になった)際に、
+「テンプレートのパラメータ置き換えに失敗した([ill-formed](core_lang_spec.md#SS_19_14_1)になった)際に、
 即時にコンパイルエラーとはせず、置き換えに失敗したテンプレートを
-[name lookup](core_lang_spec.md#SS_27_12_2)の候補から除外する」
+[name lookup](core_lang_spec.md#SS_19_12_2)の候補から除外する」
 という言語機能である。
 
-### メタ関数 <a id="SS_27_11_2"></a>
+### メタ関数 <a id="SS_19_11_2"></a>
 メタ関数とは、型を引数として型または値を返すテンプレートのことを指す。
 通常の関数が実行時に値を返すのに対し、メタ関数はコンパイル時に型情報を生成または変換する。
-主要なメタ関数は標準ライブラリの[type_traits](stdlib_and_concepts.md#SS_28_2)で定義されている。
+主要なメタ関数は標準ライブラリの[type_traits](stdlib_and_concepts.md#SS_20_2)で定義されている。
 
-### コンセプト <a id="SS_27_11_3"></a>
+### コンセプト <a id="SS_19_11_3"></a>
 C++17までのテンプレートには以下のような問題があった。
 
-* [SFINAE](core_lang_spec.md#SS_27_11_1)による制約が複雑  
+* [SFINAE](core_lang_spec.md#SS_19_11_1)による制約が複雑  
   テンプレートの制約を行うために、
   std::enable_ifやの仕組みを使う必要があり、コードが非常に複雑で難読になりがちだった。
 * エラーメッセージが不明瞭  
@@ -5106,7 +5106,7 @@ C++20から導入された「コンセプト(concepts)」は、
 
 ```
 
-### パラメータパック <a id="SS_27_11_4"></a>
+### パラメータパック <a id="SS_19_11_4"></a>
 パラメータパック(parameter pack)は、可変長テンプレート引数を表現するためにC++11で導入されたシンタックスである。
 テンプレートの定義時に、任意個数のテンプレート引数または関数引数をまとめて受け取ることができる。
 
@@ -5148,7 +5148,7 @@ C++20から導入された「コンセプト(concepts)」は、
     ASSERT_EQ(4, parameter_pack_count);
 ```
 
-### 畳み込み式 <a id="SS_27_11_5"></a>
+### 畳み込み式 <a id="SS_19_11_5"></a>
 畳み式(fold expression)とは、C++17から導入された新機能であり、
 可変引数テンプレートのパラメータパックに対して二項演算を累積的に行うためのものである。
 
@@ -5312,7 +5312,7 @@ C++20から導入された「コンセプト(concepts)」は、
     static_assert(is_same_some_of<std::string, std::string, int>::value);
 ```
 
-### ジェネリックラムダ <a id="SS_27_11_6"></a>
+### ジェネリックラムダ <a id="SS_19_11_6"></a>
 ジェネリックラムダとは、C++11のラムダ式のパラメータの型にautoを指定できるようにした機能で、
 C++14で導入された。
 
@@ -5372,7 +5372,7 @@ C++14で導入された。
     }
 ```
 
-### クラステンプレートのテンプレート引数の型推論 <a id="SS_27_11_7"></a>
+### クラステンプレートのテンプレート引数の型推論 <a id="SS_19_11_7"></a>
 C++17から、
 「コンストラクタに渡される値によって、クラステンプレートのテンプレート引数を推論する」
 機能が導入された。
@@ -5397,16 +5397,16 @@ C++17から、
     static_assert(std::is_same_v<decltype(a), std::vector<int>>);  // テンプレート引数がintと推論
 ```
 
-### CTAD(Class Template Argument Deduction) <a id="SS_27_11_8"></a>
+### CTAD(Class Template Argument Deduction) <a id="SS_19_11_8"></a>
 CTAD（Class Template Argument Deduction、クラステンプレート実引数推論）は、C++17で導入された機能である。
 この機能により、クラステンプレートのインスタンス化時にテンプレート引数を明示的に指定せず、
 コンストラクタの引数から自動的に型を推論できるようになる。
-クラステンプレートの型推論が不十分な場合、[テンプレートの型推論ガイド](core_lang_spec.md#SS_27_11_9)を追加することにより、
+クラステンプレートの型推論が不十分な場合、[テンプレートの型推論ガイド](core_lang_spec.md#SS_19_11_9)を追加することにより、
 型推論を強化することができる。
 
 
-### テンプレートの型推論ガイド <a id="SS_27_11_9"></a>
-[CTAD(Class Template Argument Deduction)](core_lang_spec.md#SS_27_11_8)による型推論をカスタマイズするために、型推論ガイドを定義できる。
+### テンプレートの型推論ガイド <a id="SS_19_11_9"></a>
+[CTAD(Class Template Argument Deduction)](core_lang_spec.md#SS_19_11_8)による型推論をカスタマイズするために、型推論ガイドを定義できる。
 特にコンストラクタがテンプレートである場合など、暗黙の型推論では不十分な場合に有用である。
 
 ```cpp
@@ -5432,7 +5432,7 @@ CTAD（Class Template Argument Deduction、クラステンプレート実引数�
 ```
 
 上記のクラステンプレートは、型推論ガイドがない場合、コンストラクタがテンプレートであるため、
-[CTAD(Class Template Argument Deduction)](core_lang_spec.md#SS_27_11_8)による型推論ができない。
+[CTAD(Class Template Argument Deduction)](core_lang_spec.md#SS_19_11_8)による型推論ができない。
 そのため、以下のように明示的にテンプレート引数を指定する必要がある。
 
 ```cpp
@@ -5469,7 +5469,7 @@ CTAD（Class Template Argument Deduction、クラステンプレート実引数�
 明示的な型推論ガイドが必要なのは、 上記の例のようにコンストラクタがテンプレートである場合や、
 特殊な推論ルールが必要な場合である。
 
-### 変数テンプレート <a id="SS_27_11_10"></a>
+### 変数テンプレート <a id="SS_19_11_10"></a>
 変数テンプレートとは、下記のコード示したような機能である。
 
 ```cpp
@@ -5501,7 +5501,7 @@ CTAD（Class Template Argument Deduction、クラステンプレート実引数�
 「定数テンプレート」ではなく変数テンプレートである。
 
 
-### エイリアステンプレート <a id="SS_27_11_11"></a>
+### エイリアステンプレート <a id="SS_19_11_11"></a>
 エイリアステンプレート(alias templates)とはC++11から導入され、
 下記のコード例で示したようにテンプレートによって型の別名を定義する機能である。
 
@@ -5516,7 +5516,7 @@ CTAD（Class Template Argument Deduction、クラステンプレート実引数�
     static_assert(std::is_same_v<IntVector, Vec<int>>);  // Vec<int> == std::vector<int>
 ```
 
-### constexpr if文 <a id="SS_27_11_12"></a>
+### constexpr if文 <a id="SS_19_11_12"></a>
 C++17で導入された[constexpr if文](https://cpprefjp.github.io/lang/cpp17/if_constexpr.html)とは、
 文を条件付きコンパイルすることができるようにするための制御構文である。
 
@@ -5559,7 +5559,7 @@ C++17で導入された[constexpr if文](https://cpprefjp.github.io/lang/cpp17/i
     ASSERT_EQ(std::size(v), Length(v));
 ```
 
-このような場合、[SFINAE](core_lang_spec.md#SS_27_11_1)によるオーバーロードが必須であったが、
+このような場合、[SFINAE](core_lang_spec.md#SS_19_11_1)によるオーバーロードが必須であったが、
 この文を使用することで、下記のようにオーバーロードを使用せずに記述できるため、
 条件分岐の可読性の向上が見込める。
 
@@ -5589,7 +5589,7 @@ C++17で導入された[constexpr if文](https://cpprefjp.github.io/lang/cpp17/i
     }
 ```
 
-この構文は[パラメータパック](core_lang_spec.md#SS_27_11_4)の展開においても有用な場合がある。
+この構文は[パラメータパック](core_lang_spec.md#SS_19_11_4)の展開においても有用な場合がある。
 
 ```cpp
     //  example/core_lang_spec/constexpr_if_ut.cpp 93
@@ -5635,7 +5635,7 @@ constexpr ifを使用することで、やや単純に記述できる。
     }
 ```
 
-### autoパラメータによる関数テンプレートの簡易定義 <a id="SS_27_11_13"></a>
+### autoパラメータによる関数テンプレートの簡易定義 <a id="SS_19_11_13"></a>
 この機能は、C++20から導入された。
 下記のコードで示すように簡易的に関数テンプレートを定義するための機能である。
 
@@ -5659,14 +5659,14 @@ constexpr ifを使用することで、やや単純に記述できる。
     ASSERT_EQ(add("hello"s, "world"s), "helloworld"s);
 ```
 
-### auto <a id="SS_27_11_14"></a>
+### auto <a id="SS_19_11_14"></a>
 autoは、C++11で導入された型推論キーワードである。変数宣言時に明示的な型指定を省略し、
 初期化式からコンパイラが型を自動的に推定する。 これにより、複雑な型やテンプレート使用時の記述が簡潔になり、
 可読性と保守性が向上する。
-コード例については、[decltype](core_lang_spec.md#SS_27_11_15)を参照せよ。
+コード例については、[decltype](core_lang_spec.md#SS_19_11_15)を参照せよ。
 
-### decltype <a id="SS_27_11_15"></a>
-decltypeはオペランドに[expression](core_lang_spec.md#SS_27_7_1)を取り、その型を算出する機能である。
+### decltype <a id="SS_19_11_15"></a>
+decltypeはオペランドに[expression](core_lang_spec.md#SS_19_7_1)を取り、その型を算出する機能である。
 下記のコードにあるようなautoの機能との微妙な差に気を付ける必要がある。
 
 ```cpp
@@ -5684,7 +5684,7 @@ decltypeはオペランドに[expression](core_lang_spec.md#SS_27_7_1)を取り�
 ```
 
 decltypeは、テンプレートプログラミングに多用されるが、
-クロージャ型(「[ラムダ式](core_lang_spec.md#SS_27_10_3)」参照)
+クロージャ型(「[ラムダ式](core_lang_spec.md#SS_19_10_3)」参照)
 のような記述不可能な型をオブジェクトから算出できるため、
 下記例のような場合にも有用である。
 
@@ -5720,7 +5720,7 @@ decltypeは、テンプレートプログラミングに多用されるが、
     }
 ```
 
-### decltype(auto) <a id="SS_27_11_16"></a>
+### decltype(auto) <a id="SS_19_11_16"></a>
 decltype(auto)はC++14から導入されたdecltypeの類似機能である。
 
 auto、decltype、decltype(auto)では、以下に示す通りリファレンスの扱いが異なることに注意する必要がある。
@@ -5742,7 +5742,7 @@ auto、decltype、decltype(auto)では、以下に示す通りリファレンス
     static_assert(std::is_same_v<decltype(c), int&>);
 ```
 
-### 戻り値型を後置する関数宣言 <a id="SS_27_11_17"></a>
+### 戻り値型を後置する関数宣言 <a id="SS_19_11_17"></a>
 関数の戻り値型後置構文は戻り値型をプレースホルダ(auto)にして、
 実際の型を->で示して型推論させるシンタックスを指す。実際には関数テンプレートで使用されることが多い。
 コード例を以下に示す。
@@ -5779,11 +5779,11 @@ auto、decltype、decltype(auto)では、以下に示す通りリファレンス
                                  std::string>);  // addの戻り値型はstd::stringに型推論
 ```
 
-### 関数の戻り値型auto <a id="SS_27_11_18"></a>
+### 関数の戻り値型auto <a id="SS_19_11_18"></a>
 C++14から導入された機能で、関数の戻り値の型をautoキーワードで宣言することで、
 コンパイラがreturn文から自動的に型を推論してくれる機能である。
 これにより、複雑な型の戻り値を持つ関数でも、より簡潔に記述できるようになる
-(「[autoパラメータによる関数テンプレートの簡易定義](core_lang_spec.md#SS_27_11_13)」を参照)。
+(「[autoパラメータによる関数テンプレートの簡易定義](core_lang_spec.md#SS_19_11_13)」を参照)。
 
 ```cpp
     //  example/core_lang_spec/decltype_ut.cpp 114
@@ -5823,8 +5823,8 @@ C++14から導入された機能で、関数の戻り値の型をautoキーワ�
     ASSERT_EQ(result[1], "world");
 ```
 
-### 後置戻り値型auto <a id="SS_27_11_19"></a>
-C++14から導入された[関数の戻り値型auto](core_lang_spec.md#SS_27_11_18)と似た、
+### 後置戻り値型auto <a id="SS_19_11_19"></a>
+C++14から導入された[関数の戻り値型auto](core_lang_spec.md#SS_19_11_18)と似た、
 関数の戻り値の型を関数本体の後に-> autoと書くことでができる機能である。
 autoプレースホルダーとし、そのプレースホルダーを修飾することで、戻り値型の推論を補助できる。
 
@@ -5852,13 +5852,13 @@ autoプレースホルダーとし、そのプレースホルダーを修飾す�
     ASSERT_EQ(gvalue, 12);
 ```
 
-## name lookupと継承構造 <a id="SS_27_12"></a>
+## name lookupと継承構造 <a id="SS_19_12"></a>
 ここではname lookupとそれに影響を与える名前空間について解説する。
 
-### ルックアップ <a id="SS_27_12_1"></a>
-このドキュメントでのルックアップとは[name lookup](core_lang_spec.md#SS_27_12_2)を指す。
+### ルックアップ <a id="SS_19_12_1"></a>
+このドキュメントでのルックアップとは[name lookup](core_lang_spec.md#SS_19_12_2)を指す。
 
-### name lookup <a id="SS_27_12_2"></a>
+### name lookup <a id="SS_19_12_2"></a>
 [name lookup](https://en.cppreference.com/w/cpp/language/lookup)
 とはソースコードで名前が検出された時に、その名前をその宣言と関連付けることである。
 以下、name lookupの例を上げる。
@@ -5952,7 +5952,7 @@ autoプレースホルダーとし、そのプレースホルダーを修飾す�
 ```
 
 1. ToString()呼び出しの引数xの型Xが名前空間NS_LUで定義されているため、
-   ToStringを探索する名前空間にNS_LUを組み入れる(「[関連名前空間](core_lang_spec.md#SS_27_12_6)」参照)
+   ToStringを探索する名前空間にNS_LUを組み入れる(「[関連名前空間](core_lang_spec.md#SS_19_12_6)」参照)
 2. ToString()呼び出しより前方で宣言されたグローバル名前空間とNS_LUの中から、
    複数のToStringの定義を見つける
 3. ToString()呼び出しを、
@@ -5961,7 +5961,7 @@ autoプレースホルダーとし、そのプレースホルダーを修飾す�
 という手順で行われる。
 
 
-### two phase name lookup <a id="SS_27_12_3"></a>
+### two phase name lookup <a id="SS_19_12_3"></a>
 [two phase name lookup](https://en.cppreference.com/w/cpp/language/two-phase_lookup)
 とはテンプレートをインスタンス化するときに使用される、下記のような2段階でのname lookupである。
 
@@ -5970,7 +5970,7 @@ autoプレースホルダーとし、そのプレースホルダーを修飾す�
    ([dependent_name](https://en.cppreference.com/w/cpp/language/dependent_name))は
    name lookupの対象外となる(name lookupの対象が確定しないため)。
 2. 1の後、テンプレートパラメータを展開した関数内で、
-   [関連名前空間](core_lang_spec.md#SS_27_12_6)の宣言も含めたname lookupを行う。
+   [関連名前空間](core_lang_spec.md#SS_19_12_6)の宣言も含めたname lookupを行う。
 
 以下の議論では、
 
@@ -6029,7 +6029,7 @@ autoプレースホルダーとし、そのプレースホルダーを修飾す�
 ```
 
 1. TypeName()呼び出しの引数xの型Xが名前空間NS_TPLUで宣言されているため、
-   NS_TPLUをTypeNameを探索する[関連名前空間](core_lang_spec.md#SS_27_12_6)にする。
+   NS_TPLUをTypeNameを探索する[関連名前空間](core_lang_spec.md#SS_19_12_6)にする。
 2. TypeName()呼び出しより前方で宣言されたグローバル名前空間とNS_TPLUの中からTypeNameを見つける。
 3. TypeNameは関数テンプレートであるためtwo phase lookupが以下のように行われる。
     1. TypeName内でのHeader(int{})の呼び出しは、1st name lookupにより、
@@ -6038,9 +6038,9 @@ autoプレースホルダーとし、そのプレースホルダーを修飾す�
        TypeNameの定義より後方で宣言されているため、name lookupの対象外となる。
     2. TypeName内でのToType(t)の呼び出しに対しては、2nd name lookupが行われる。
        このためTypeName定義より前方で宣言されたグローバル名前空間と、
-       tの型がNS_TPLU::Xであるため[関連名前空間](core_lang_spec.md#SS_27_12_6)となったNS_TPLUがname lookupの対象となるが、
+       tの型がNS_TPLU::Xであるため[関連名前空間](core_lang_spec.md#SS_19_12_6)となったNS_TPLUがname lookupの対象となるが、
        グローバル名前空間内のToTypeは、
-       NS_TPLU内でTypeNameより前に宣言されたtemplate<> ToTypeによって[name-hiding](core_lang_spec.md#SS_27_12_9)が起こり、
+       NS_TPLU内でTypeNameより前に宣言されたtemplate<> ToTypeによって[name-hiding](core_lang_spec.md#SS_19_12_9)が起こり、
        TypeNameからは非可視となるためname lookupの対象から外れる。
        このため、ToType(t)の呼び出しは、NS_TPLU::ToType(X const&)の宣言と関連付けられる。
 
@@ -6055,16 +6055,16 @@ autoプレースホルダーとし、そのプレースホルダーを修飾す�
 ```
 
 1. NS_TPLUを名前空間と関連付けする
-   (引数の型がintなのでNS_TPLUは[関連名前空間](core_lang_spec.md#SS_27_12_6)とならず、NS_TPLUを明示する必要がある)。
+   (引数の型がintなのでNS_TPLUは[関連名前空間](core_lang_spec.md#SS_19_12_6)とならず、NS_TPLUを明示する必要がある)。
 2. TypeName()呼び出しより前方で宣言されたNS_TPLUの中からTypeNameを見つける。
 3. TypeNameは関数テンプレートであるためtwo phase lookupが以下のように行われる。
     1. TypeName内でのHeader(int{})の呼び出しは、1st name lookupにより、
        前例と同じ理由で、Header(long)の宣言と関連付けられる。
     2. TypeName内でのToType(t)の呼び出しに対しては、2nd name lookupが行われる。
-       tの型がintであるためNS_TPLUは[関連名前空間](core_lang_spec.md#SS_27_12_6)とならず、通常のname lookupと同様に
+       tの型がintであるためNS_TPLUは[関連名前空間](core_lang_spec.md#SS_19_12_6)とならず、通常のname lookupと同様に
        ToType(t)の呼び出し前方のグローバル名前空間とNS_TPLUがname lookupの対象になるが、
        グローバル名前空間内のToTypeは、
-       NS_TPLU内でTypeNameより前に宣言されたtemplate<> ToTypeによって[name-hiding](core_lang_spec.md#SS_27_12_9)が起こり、
+       NS_TPLU内でTypeNameより前に宣言されたtemplate<> ToTypeによって[name-hiding](core_lang_spec.md#SS_19_12_9)が起こり、
        TypeNameからは非可視となるためname lookupの対象から外れる。
        また、ToType(int const&)は、TypeNameの定義より後方で宣言されているため、
        name lookupの対象外となり、
@@ -6185,12 +6185,12 @@ TypeName内でのname lookupで関数オーバーライドToType(NS_TPLU2::Y con
 
 * TypeNameの中で行われる2nd name lookupの対象となる宣言は下記の和集合である。
     * 1st name lookupで使われた宣言
-    * TypeName呼び出しより前方にある[関連名前空間](core_lang_spec.md#SS_27_12_6)内の宣言
+    * TypeName呼び出しより前方にある[関連名前空間](core_lang_spec.md#SS_19_12_6)内の宣言
 
 この認識に基づくNS_TPLU2::Yに対するグローバルなTypeName内でのtwo phase name lookupは、
 
 1. TypeName内に1st name lookupの対象がないため何もしない。
-2. TypeName内の2nd name lookupに使用される[関連名前空間](core_lang_spec.md#SS_27_12_6)NS_TPLU2は、
+2. TypeName内の2nd name lookupに使用される[関連名前空間](core_lang_spec.md#SS_19_12_6)NS_TPLU2は、
    ToType(NS_TPLU2::Y const&)の宣言を含まないため、この宣言は2nd name lookupの対象とならない。
    その結果、ToType(t)の呼び出しは関数テンプレートToType(T const&)と関連付けられる。
 
@@ -6293,13 +6293,13 @@ STLを含むテンプレートメタプログラミングを支える重要な�
 C++プログラマには、最低でもこれを理解し、出来れば使いこなせるようになってほしい。
 
 
-### 実引数依存探索 <a id="SS_27_12_4"></a>
+### 実引数依存探索 <a id="SS_19_12_4"></a>
 実引数依存探索とは、argument-dependent lookupの和訳語であり、
-通常はその略語である[ADL](core_lang_spec.md#SS_27_12_5)と呼ばれる。
+通常はその略語である[ADL](core_lang_spec.md#SS_19_12_5)と呼ばれる。
 
-### ADL <a id="SS_27_12_5"></a>
-ADLとは、関数の実引数の型が宣言されている名前空間(これを[関連名前空間](core_lang_spec.md#SS_27_12_6)と呼ぶ)内の宣言が、
-その関数の[name lookup](core_lang_spec.md#SS_27_12_2)の対象になることである。
+### ADL <a id="SS_19_12_5"></a>
+ADLとは、関数の実引数の型が宣言されている名前空間(これを[関連名前空間](core_lang_spec.md#SS_19_12_6)と呼ぶ)内の宣言が、
+その関数の[name lookup](core_lang_spec.md#SS_19_12_2)の対象になることである。
 
 下記のようなコードがあった場合、
 
@@ -6330,7 +6330,7 @@ ADLとは、関数の実引数の型が宣言されている名前空間(これ�
 の両方を対象として行われる。
 NS_ADL内の宣言がToStringの呼び出しに対するのname lookupの対象になる理由は、
 ToStringの呼び出しに使われている実引数aの型AがNS_ADLで宣言されているからである。
-すでに述べたようにこれをADLと呼び、この場合のNS_ADLを[関連名前空間](core_lang_spec.md#SS_27_12_6)と呼ぶ。
+すでに述べたようにこれをADLと呼び、この場合のNS_ADLを[関連名前空間](core_lang_spec.md#SS_19_12_6)と呼ぶ。
 
 ADLは思わぬname lookupによるバグを誘発することもあるが、
 下記コードを見れば明らかなように、また、
@@ -6350,17 +6350,17 @@ ADLは思わぬname lookupによるバグを誘発することもあるが、
     std::operator<<(std::cout, std::string{__func__});
 ```
 
-### 関連名前空間 <a id="SS_27_12_6"></a>
+### 関連名前空間 <a id="SS_19_12_6"></a>
 関連名前空間(associated namespace)とは、
-[ADL](core_lang_spec.md#SS_27_12_5)(実引数依存探索)によってname lookupの対象になった宣言を含む名前空間のことである。
+[ADL](core_lang_spec.md#SS_19_12_5)(実引数依存探索)によってname lookupの対象になった宣言を含む名前空間のことである。
 
 
-### 修飾付き関数呼び出し <a id="SS_27_12_7"></a>
+### 修飾付き関数呼び出し <a id="SS_19_12_7"></a>
 修飾付き関数呼び出し(Qualified Call)は、
 C++で関数やメンバ関数を明示的にスコープやクラス名で修飾して呼び出す方法である。
 名前の曖昧性を回避し、特定の関数やクラスメンバを明確に選択する際に利用される。
-これにより、意図しない[name lookup](core_lang_spec.md#SS_27_12_2)を回避することができるため、可読性と安全性が向上する。
-一方で、[ADL](core_lang_spec.md#SS_27_12_5)が働かなくなるため、フレキシブルな[name lookup](core_lang_spec.md#SS_27_12_2)ができなくなる。
+これにより、意図しない[name lookup](core_lang_spec.md#SS_19_12_2)を回避することができるため、可読性と安全性が向上する。
+一方で、[ADL](core_lang_spec.md#SS_19_12_5)が働かなくなるため、フレキシブルな[name lookup](core_lang_spec.md#SS_19_12_2)ができなくなる。
 
 ```cpp
     //  example/core_lang_spec/etc_ut.cpp 40
@@ -6390,11 +6390,11 @@ C++で関数やメンバ関数を明示的にスコープやクラス名で修�
     d.func("str");         // 通常の関数呼び出し
 ```
 
-### hidden-friend関数 <a id="SS_27_12_8"></a>
+### hidden-friend関数 <a id="SS_19_12_8"></a>
 hidden-friend関数(隠れたフレンド関数、あるいは単にhidden-friend)とは、
 
 * クラスの内部で定義された、
-* 名前空間スコープでの通常の[name lookup](core_lang_spec.md#SS_27_12_2)できず、[ADL](core_lang_spec.md#SS_27_12_5)のみでname lookupできる
+* 名前空間スコープでの通常の[name lookup](core_lang_spec.md#SS_19_12_2)できず、[ADL](core_lang_spec.md#SS_19_12_5)のみでname lookupできる
 
 friend関数のことを指す。このような性質から、non-namespace-visible friend関数と呼ばれることもある。
 
@@ -6447,10 +6447,10 @@ hidden-friend関数(隠れたフレンド関数)の目的は、
 ```
 
 
-### name-hiding <a id="SS_27_12_9"></a>
+### name-hiding <a id="SS_19_12_9"></a>
 name-hidingとは
 「前方の識別子が、その後方に同一の名前をもつ識別子があるために、
-[name lookup](core_lang_spec.md#SS_27_12_2)の対象外になる」現象一般を指す通称である
+[name lookup](core_lang_spec.md#SS_19_12_2)の対象外になる」現象一般を指す通称である
 ([namespace](https://en.cppreference.com/w/cpp/language/namespace)参照)。
 
 まずは、クラスとその派生クラスでのname-hidingの例を示す。
@@ -6488,7 +6488,7 @@ Base::f()には、修飾しない形式でのDerivedクラス経由のアクセ�
 Base::fがその後方にあるDerived::f(int)によりname-hidingされたために起こる現象である
 (name lookupによる探索には識別子が使われるため、シグネチャの違いはname-hidingに影響しない)。
 
-下記のように[using宣言](core_lang_spec.md#SS_27_12_14)を使用することで、
+下記のように[using宣言](core_lang_spec.md#SS_19_12_14)を使用することで、
 修飾しない形式でのDerivedクラス経由のBase::f()へのアクセスが可能となる。
 
 ```cpp
@@ -6576,8 +6576,8 @@ Base::fがその後方にあるDerived::f(int)によりname-hidingされたた�
     }  // namespace NS_A_fixed_2
 ```
 
-修飾の副作用として「[two phase name lookup](core_lang_spec.md#SS_27_12_3)」の例で示したような
-[ADL](core_lang_spec.md#SS_27_12_5)を利用した高度な静的ディスパッチが使用できなくなるが、
+修飾の副作用として「[two phase name lookup](core_lang_spec.md#SS_19_12_3)」の例で示したような
+[ADL](core_lang_spec.md#SS_19_12_5)を利用した高度な静的ディスパッチが使用できなくなるが、
 通常のソフトウェア開発では、ADLが必要な場面は限られているため、
 デフォルトでは名前空間を使用して修飾を行うことにするのが、
 無用の混乱をさけるための安全な記法であると言えるだろう。
@@ -6620,7 +6620,7 @@ name-hidingが原因で、NS_B_Inner::h()内のf(int)の呼び出しはコンパ
 全チームメンバがこういったname lookupを正しく扱えると確信できないのであれば、
 前述の通り、デフォルトでは名前空間を使用して修飾を行うのが良いだろう。
 
-### ダイヤモンド継承 <a id="SS_27_12_10"></a>
+### ダイヤモンド継承 <a id="SS_19_12_10"></a>
 ダイヤモンド継承(Diamond Inheritance)とは、以下のような構造のクラス継承を指す。
 
 * 基底クラス(Base)が一つ存在し、その基底クラスから二つのクラス(Derived_0、Derived_1)が派生する。
@@ -6633,9 +6633,9 @@ name-hidingが原因で、NS_B_Inner::h()内のf(int)の呼び出しはコンパ
 <!-- pu:essential/plant_uml/diamond_inheritance.pu--><p><img src="data:image/png;base64,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" /></p>
 
 ダイヤモンド継承は、
-[仮想継承](core_lang_spec.md#SS_27_12_11)(virtual inheritance)を使ったものと、使わないものに分類できる。
+[仮想継承](core_lang_spec.md#SS_19_12_11)(virtual inheritance)を使ったものと、使わないものに分類できる。
 
-[仮想継承](core_lang_spec.md#SS_27_12_11)を使わないダイヤモンド継承のコードを以下に示す。
+[仮想継承](core_lang_spec.md#SS_19_12_11)を使わないダイヤモンド継承のコードを以下に示す。
 
 ```cpp
     //  example/core_lang_spec/diamond_inheritance_ut.cpp 6
@@ -6707,7 +6707,7 @@ Baseインスタンスが2つ存在するため、下記に示すようなわか
     ASSERT_EQ(2, dd.Derived_1::get());  // Derived_1::Base::x_は2に変更
 ```
 
-次に示すのは、[仮想継承](core_lang_spec.md#SS_27_12_11)を使用したダイヤモンド継承の例である。
+次に示すのは、[仮想継承](core_lang_spec.md#SS_19_12_11)を使用したダイヤモンド継承の例である。
 
 ```cpp
     //  example/core_lang_spec/diamond_inheritance_ut.cpp 70
@@ -6740,7 +6740,7 @@ Baseインスタンスが2つ存在するため、下記に示すようなわか
 
 仮想継承の効果で、DerivedDerivedインスタンスの中に存在するBaseインスタンスは1つになるため、
 上で示した仮想継承を使わないダイヤモンド継承での問題は解消される
-(が、[仮想継承](core_lang_spec.md#SS_27_12_11)による別の問題が発生する)。
+(が、[仮想継承](core_lang_spec.md#SS_19_12_11)による別の問題が発生する)。
 
 ```cpp
     //  example/core_lang_spec/diamond_inheritance_ut.cpp 99
@@ -6760,7 +6760,7 @@ Baseインスタンスが2つ存在するため、下記に示すようなわか
 
 <!-- pu:essential/plant_uml/diamond_inheritance_virtual_obj.pu--><p><img src="data:image/png;base64,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" /></p>
 
-### 仮想継承 <a id="SS_27_12_11"></a>
+### 仮想継承 <a id="SS_19_12_11"></a>
 下記に示した継承方法を仮想継承、仮想継承の基底クラスを仮想基底クラスと呼ぶ。
 
 ```cpp
@@ -6781,7 +6781,7 @@ Baseインスタンスが2つ存在するため、下記に示すようなわか
     };
 ```
 
-仮想継承は、[ダイヤモンド継承](core_lang_spec.md#SS_27_12_10)の基底クラスのインスタンスを、
+仮想継承は、[ダイヤモンド継承](core_lang_spec.md#SS_19_12_10)の基底クラスのインスタンスを、
 その継承ヒエラルキーの中で1つのみにするための言語機能である。
 
 仮想継承の独特の動作を示すため、
@@ -6861,7 +6861,7 @@ __「仮想継承クラスを継承したクラスが、仮想継承クラスの
     ASSERT_EQ(1, ddn.get());
 ```
 「仮想継承のコンストラクタ呼び出し」仕様は、
-[ダイヤモンド継承](core_lang_spec.md#SS_27_12_10)での基底クラスのコンストラクタ呼び出しを一度にするために存在する。
+[ダイヤモンド継承](core_lang_spec.md#SS_19_12_10)での基底クラスのコンストラクタ呼び出しを一度にするために存在する。
 
 もし、この機能がなければ、下記のコードでの基底クラスのコンストラクタ呼び出しは2度になるため、
 デバッグ困難なバグが発生してしまうことは容易に想像できるだろう。
@@ -6944,26 +6944,26 @@ __「仮想継承クラスを継承したクラスが、仮想継承クラスの
     };
 ```
 
-### 仮想基底 <a id="SS_27_12_12"></a>
-仮想基底(クラス)とは、[仮想継承](core_lang_spec.md#SS_27_12_11)の基底クラス指す。
+### 仮想基底 <a id="SS_19_12_12"></a>
+仮想基底(クラス)とは、[仮想継承](core_lang_spec.md#SS_19_12_11)の基底クラス指す。
 
-### ドミナンス <a id="SS_27_12_13"></a>
+### ドミナンス <a id="SS_19_12_13"></a>
 [ドミナンス(Dominance、支配性)](https://en.wikipedia.org/wiki/Dominance_(C%2B%2B))とは、
-「探索対称の名前が継承の中にも存在するような場合の[name lookup](core_lang_spec.md#SS_27_12_2)の仕様の一部」
+「探索対称の名前が継承の中にも存在するような場合の[name lookup](core_lang_spec.md#SS_19_12_2)の仕様の一部」
 を指す慣用句である。
 
 以下に
 
-* [ダイヤモンド継承を含まない場合](core_lang_spec.md#SS_27_12_13_1)
-* [ダイヤモンド継承かつそれが仮想継承でない場合](core_lang_spec.md#SS_27_12_13_2)
-* [ダイヤモンド継承かつそれが仮想継承である場合](core_lang_spec.md#SS_27_12_13_3)
+* [ダイヤモンド継承を含まない場合](core_lang_spec.md#SS_19_12_13_1)
+* [ダイヤモンド継承かつそれが仮想継承でない場合](core_lang_spec.md#SS_19_12_13_2)
+* [ダイヤモンド継承かつそれが仮想継承である場合](core_lang_spec.md#SS_19_12_13_3)
 
 のドミナンスについてのコードを例示する。
 
-この例で示したように、[ダイヤモンド継承](core_lang_spec.md#SS_27_12_10)を通常の継承で行うか、
-[仮想継承](core_lang_spec.md#SS_27_12_11)で行うかでは結果が全く異なるため、注意が必要である。
+この例で示したように、[ダイヤモンド継承](core_lang_spec.md#SS_19_12_10)を通常の継承で行うか、
+[仮想継承](core_lang_spec.md#SS_19_12_11)で行うかでは結果が全く異なるため、注意が必要である。
 
-#### ダイヤモンド継承を含まない場合 <a id="SS_27_12_13_1"></a>
+#### ダイヤモンド継承を含まない場合 <a id="SS_19_12_13_1"></a>
 
 ```cpp
     //  example/core_lang_spec/dominance_ut.cpp 9
@@ -6997,9 +6997,9 @@ __「仮想継承クラスを継承したクラスが、仮想継承クラスの
     ASSERT_EQ(3, dd.g());
 ```
 
-この[name lookup](core_lang_spec.md#SS_27_12_2)については、[name-hiding](core_lang_spec.md#SS_27_12_9)で説明した通りである。
+この[name lookup](core_lang_spec.md#SS_19_12_2)については、[name-hiding](core_lang_spec.md#SS_19_12_9)で説明した通りである。
 
-#### ダイヤモンド継承かつそれが仮想継承でない場合 <a id="SS_27_12_13_2"></a>
+#### ダイヤモンド継承かつそれが仮想継承でない場合 <a id="SS_19_12_13_2"></a>
 
 ```cpp
     //  example/core_lang_spec/dominance_ut.cpp 45
@@ -7031,7 +7031,7 @@ Derived_0のドミナンスにより、DerivedDerived::gはDerived_0::fを呼び
 Derived_1によるドミナンスも働き、その結果として、呼び出しが曖昧(ambiguous)になることで、
 このような結果となる。
 
-#### ダイヤモンド継承かつそれが仮想継承である場合 <a id="SS_27_12_13_3"></a>
+#### ダイヤモンド継承かつそれが仮想継承である場合 <a id="SS_19_12_13_3"></a>
 
 ```cpp
     //  example/core_lang_spec/dominance_ut.cpp 71
@@ -7062,13 +7062,13 @@ Derived_1によるドミナンスも働き、その結果として、呼び出�
     ASSERT_EQ(3, dd.g());
 ```
 
-これまでと同様にDerived_0のドミナンスによりBase::fは[name-hiding](core_lang_spec.md#SS_27_12_9)されることになる。
-この時、Derived_0、Derived_1がBaseから[仮想継承](core_lang_spec.md#SS_27_12_11)した効果により、
+これまでと同様にDerived_0のドミナンスによりBase::fは[name-hiding](core_lang_spec.md#SS_19_12_9)されることになる。
+この時、Derived_0、Derived_1がBaseから[仮想継承](core_lang_spec.md#SS_19_12_11)した効果により、
 この継承ヒエラルキーの中でBaseは１つのみ存在することになるため、
-Derived_1により導入されたBase::fも併せて[name-hiding](core_lang_spec.md#SS_27_12_9)される。
+Derived_1により導入されたBase::fも併せて[name-hiding](core_lang_spec.md#SS_19_12_9)される。
 結果として、曖昧性は排除され、コンパイルエラーにはならず、このような結果となる。
 
-### using宣言 <a id="SS_27_12_14"></a>
+### using宣言 <a id="SS_19_12_14"></a>
 using宣言とは、"using XXX::func"のような記述である。
 この記述が行われたスコープでは、この記述後の行から名前空間XXXでの修飾をすることなく、
 funcが使用できる。
@@ -7094,7 +7094,7 @@ funcが使用できる。
 
 ```
 
-### usingディレクティブ <a id="SS_27_12_15"></a>
+### usingディレクティブ <a id="SS_19_12_15"></a>
 usingディレクティブとは、"using namespace XXX"のような記述である。
 この記述が行われたスコープでは、下記例のように、この記述後から名前空間XXXでの修飾をすることなく、
 XXXの識別子が使用できる。
@@ -7120,8 +7120,8 @@ XXXの識別子が使用できる。
 ```
 
 より多くの識別子が名前空間の修飾無しで使えるようになる点において、
-[using宣言](core_lang_spec.md#SS_27_12_14)よりも危険であり、また、
-下記のように[name-hiding](core_lang_spec.md#SS_27_12_9)された識別子の導入には効果がない。
+[using宣言](core_lang_spec.md#SS_19_12_14)よりも危険であり、また、
+下記のように[name-hiding](core_lang_spec.md#SS_19_12_9)された識別子の導入には効果がない。
 
 ```cpp
     //  example/core_lang_spec/namespace_ut.cpp 6
@@ -7150,33 +7150,33 @@ XXXの識別子が使用できる。
 従って、usingディレクティブの使用は避けるべきである。
 
 
-## エクセプション安全性の保証 <a id="SS_27_13"></a>
+## エクセプション安全性の保証 <a id="SS_19_13"></a>
 関数のエクセプション発生時の安全性の保証には以下の3つのレベルが規定されている。
 
-* [no-fail保証](core_lang_spec.md#SS_27_13_1)
-* [強い安全性の保証](core_lang_spec.md#SS_27_13_2)
-* [基本的な安全性の保証](core_lang_spec.md#SS_27_13_3)
+* [no-fail保証](core_lang_spec.md#SS_19_13_1)
+* [強い安全性の保証](core_lang_spec.md#SS_19_13_2)
+* [基本的な安全性の保証](core_lang_spec.md#SS_19_13_3)
 
-### no-fail保証 <a id="SS_27_13_1"></a>
+### no-fail保証 <a id="SS_19_13_1"></a>
 「no-fail保証」を満たす関数はエクセプションをthrowしない。
 no-failを保証する関数は、
-[noexcept](core_lang_spec.md#SS_27_13_4)を使用してエクセプションを発生させないことを明示できる。
+[noexcept](core_lang_spec.md#SS_19_13_4)を使用してエクセプションを発生させないことを明示できる。
 
 標準テンプレートクラスのパラメータとして使用するクラスのメンバ関数には、
 正確にnoexceptの宣言をしないと、
 テンプレートクラスのメンバ関数によってはパフォーマンスを起こしてしまう可能性がある。
 
-### 強い安全性の保証 <a id="SS_27_13_2"></a>
+### 強い安全性の保証 <a id="SS_19_13_2"></a>
 「強い保証」を満たす関数は、この関数がエクセプションによりスコープから外れた場合でも、
 この関数が呼ばれなかった状態と同じ(プログラムカウンタ以外の状態は同じ)であることを保証する。
 従って、この関数呼び出しは成功したか、完全な無効だったかのどちらかになる。
 
-### 基本的な安全性の保証 <a id="SS_27_13_3"></a>
+### 基本的な安全性の保証 <a id="SS_19_13_3"></a>
 「基本的な安全性の保証」を満たす関数は、この関数がエクセプションによりスコープから外れた場合でも、
 メモリ等のリソースリークは起こさず、
 オブジェクトは(変更されたかもしれないが)引き続き使えることを保証する。
 
-### noexcept <a id="SS_27_13_4"></a>
+### noexcept <a id="SS_19_13_4"></a>
 C++11で導入されたnoexceptキーワードには、以下の2つの意味がある。
 
 * C++03までのthrowキーワードによるエクセプション仕様の代替。
@@ -7254,7 +7254,7 @@ C++11で導入されたnoexceptキーワードには、以下の2つの意味が
     static_assert(!noexcept(t_f(p)));
 ```
 
-### exception-unfriendly <a id="SS_27_13_5"></a>
+### exception-unfriendly <a id="SS_19_13_5"></a>
 以下のような関数  
 
 * 初期化に関連する関数やコンストラクタ
@@ -7269,27 +7269,27 @@ C++11で導入されたnoexceptキーワードには、以下の2つの意味が
 * C言語との互換性を持つ関数
     * Cとのリンケージを持つすべての関数
 
-の呼び出しでエクセプションがthrowされると、[未定義動作](core_lang_spec.md#SS_27_14_3)や[未規定動作](core_lang_spec.md#SS_27_14_4)が発生するため、
+の呼び出しでエクセプションがthrowされると、[未定義動作](core_lang_spec.md#SS_19_14_3)や[未規定動作](core_lang_spec.md#SS_19_14_4)が発生するため、
 exception-unfriendly(エクセプションに不向き)であるとされる。
 従って上記の関数は暗黙的または明示的に`noexcept`であることが求められる。
 
 
-## 言語仕様の定義要素 <a id="SS_27_14"></a>
-### ill-formed <a id="SS_27_14_1"></a>
+## 言語仕様の定義要素 <a id="SS_19_14"></a>
+### ill-formed <a id="SS_19_14_1"></a>
 [標準規格と処理系](https://cpprefjp.github.io/implementation-compliance.html)に詳しい解説があるが、
 
-* [well-formed](core_lang_spec.md#SS_27_14_2)(適格)とはプログラムが全ての構文規則・診断対象の意味規則・
+* [well-formed](core_lang_spec.md#SS_19_14_2)(適格)とはプログラムが全ての構文規則・診断対象の意味規則・
   単一定義規則を満たすことである。
 * ill-formed(不適格)とはプログラムが適格でないことである。
 
 プログラムがwell-formedになった場合、そのプログラムはコンパイルできる。
 プログラムがill-formedになった場合、通常はコンパイルエラーになるが、
-対象がテンプレートの場合、事情は少々異なり、[SFINAE](core_lang_spec.md#SS_27_11_1)によりコンパイルできることもある。
+対象がテンプレートの場合、事情は少々異なり、[SFINAE](core_lang_spec.md#SS_19_11_1)によりコンパイルできることもある。
 
-### well-formed <a id="SS_27_14_2"></a>
-「[ill-formed](core_lang_spec.md#SS_27_14_1)」を参照せよ。
+### well-formed <a id="SS_19_14_2"></a>
+「[ill-formed](core_lang_spec.md#SS_19_14_1)」を参照せよ。
 
-### 未定義動作 <a id="SS_27_14_3"></a>
+### 未定義動作 <a id="SS_19_14_3"></a>
 未定義動作(Undefined Behavior)とは、
 C++標準が特定の操作や状況に対して一切の制約を設けないケースである。
 未定義動作が発生すると、プログラムの実行結果が予測できなくなり、
@@ -7308,7 +7308,7 @@ C++標準が特定の操作や状況に対して一切の制約を設けない�
 
 ```
 
-### 未規定動作 <a id="SS_27_14_4"></a>
+### 未規定動作 <a id="SS_19_14_4"></a>
 未規定動作(Unspecified Behavior)とは、C++標準がある操作の動作を完全には決めておらず、
 複数の許容可能な選択肢がある場合でのコードの動作を指す。
 未規定動作は、実装ごとに異なる可能性があり、標準は少なくとも「何らかの合理的な結果」を保証する。
@@ -7325,14 +7325,14 @@ C++標準が特定の操作や状況に対して一切の制約を設けない�
     auto result = lambda(a++, a++);  // 未規定 - 引数評価の順序が決まっていない
 ```
 
-### 未定義動作と未規定動作 <a id="SS_27_14_5"></a>
+### 未定義動作と未規定動作 <a id="SS_19_14_5"></a>
 | 種類            |定義                                                               | 例                               | 結果                           |
 |-----------------|-------------------------------------------------------------------|----------------------------------|--------------------------------|
-|[未定義動作](core_lang_spec.md#SS_27_14_3)|C++標準が全く保証しない動作                                        | ゼロ除算、配列範囲外アクセス     | 予測不能(クラッシュなど)       |
-|[未規定動作](core_lang_spec.md#SS_27_14_4)|C++標準が動作を定めていないが、いくつかの選択肢が許容されている動作| `int8_t` に収まらない値のキャスト| 実装依存(異なるが合理的な動作) |
+|[未定義動作](core_lang_spec.md#SS_19_14_3)|C++標準が全く保証しない動作                                        | ゼロ除算、配列範囲外アクセス     | 予測不能(クラッシュなど)       |
+|[未規定動作](core_lang_spec.md#SS_19_14_4)|C++標準が動作を定めていないが、いくつかの選択肢が許容されている動作| `int8_t` に収まらない値のキャスト| 実装依存(異なるが合理的な動作) |
 
 
-### 被修飾型 <a id="SS_27_14_6"></a>
+### 被修飾型 <a id="SS_19_14_6"></a>
 被修飾型(unqualified type)とは、変数の宣言において付加される修飾子(const、
 volatile など)やポインタやリファレンスなどの間接指定子を除いた素の型を指す。
 
@@ -7347,9 +7347,9 @@ volatile など)やポインタやリファレンスなどの間接指定子を�
 |const T* C   |C       |
 |const D d    |D       |
 
-見た目が類似する[修飾付き関数呼び出し](core_lang_spec.md#SS_27_12_7)とは無関係である。
+見た目が類似する[修飾付き関数呼び出し](core_lang_spec.md#SS_19_12_7)とは無関係である。
 
-### 実引数/仮引数 <a id="SS_27_14_7"></a>
+### 実引数/仮引数 <a id="SS_19_14_7"></a>
 引数(もしくは実引数、argument)、仮引数(parameter)とは下記のように定義される。
 
 ```cpp
@@ -7368,17 +7368,17 @@ volatile など)やポインタやリファレンスなどの間接指定子を�
     }
 ```
 
-### 単純代入 <a id="SS_27_14_8"></a>
+### 単純代入 <a id="SS_19_14_8"></a>
 代入は下記のように分類される。
 
 * 単純代入(=)
 * 複合代入(+=，++ 等)
 
 
-### one-definition rule <a id="SS_27_14_9"></a>
-「[ODR](core_lang_spec.md#SS_27_14_10)」を参照せよ。
+### one-definition rule <a id="SS_19_14_9"></a>
+「[ODR](core_lang_spec.md#SS_19_14_10)」を参照せよ。
 
-### ODR <a id="SS_27_14_10"></a>
+### ODR <a id="SS_19_14_10"></a>
 ODRとは、One Definition Ruleの略語であり、下記のようなことを定めている。
 
 * どの翻訳単位でも、テンプレート、型、関数、またはオブジェクトは、複数の定義を持つことができない。
@@ -7389,15 +7389,15 @@ ODRとは、One Definition Ruleの略語であり、下記のようなことを�
 [https://en.cppreference.com/w/cpp/language/definition](https://en.cppreference.com/w/cpp/language/definition)
 が参考になる。
 
-### 型特性キーワード <a id="SS_27_14_11"></a>
+### 型特性キーワード <a id="SS_19_14_11"></a>
 アライメントとは、
 データが効率的にアクセスされるために特定のメモリアドレス境界に配置される規則である。
 C++03までの規約では、アライメントのコントロールは実装依存した#pragmaなどで行っていた。
 
-[alignas](core_lang_spec.md#SS_27_14_11_2)、
-[alignof](core_lang_spec.md#SS_27_14_11_1)によりコンパイラの標準的な方法でアライメントのコントロールできるようになった。
+[alignas](core_lang_spec.md#SS_19_14_11_2)、
+[alignof](core_lang_spec.md#SS_19_14_11_1)によりコンパイラの標準的な方法でアライメントのコントロールできるようになった。
 
-#### alignof <a id="SS_27_14_11_1"></a>
+#### alignof <a id="SS_19_14_11_1"></a>
 C++11で導入されたキーワードで、型のアライメント要求を取得するために使用する。
 
 ```cpp
@@ -7417,7 +7417,7 @@ C++11で導入されたキーワードで、型のアライメント要求を取
     ASSERT_EQ(alignof(AlignedStruct), 16);  // アライメントが正しいか確認
 ```
 
-#### alignas <a id="SS_27_14_11_2"></a>
+#### alignas <a id="SS_19_14_11_2"></a>
 C++11で導入されたキーワードで、メモリのアライメントを指定するために使用する。
 
 ```cpp
@@ -7429,7 +7429,7 @@ C++11で導入されたキーワードで、メモリのアライメントを指
     ASSERT_EQ(alignof(int), 4);           // アライメントが正しいか確認
 ```
 
-#### addressof <a id="SS_27_14_11_3"></a>
+#### addressof <a id="SS_19_14_11_3"></a>
 addressofは、オブジェクトの「実際の」
 アドレスを取得するために使用されるC++標準ライブラリのユーティリティ関数である。
 通常、オブジェクトのアドレスを取得するには&演算子を使うが、
@@ -7480,10 +7480,10 @@ operator& がオーバーロードされている場合には、
     ASSERT_EQ(p1, p2);
 ```
 
-### 演算子のオペランドの評価順位 <a id="SS_27_14_12"></a>
+### 演算子のオペランドの評価順位 <a id="SS_19_14_12"></a>
 
 C++17で、演算子のオペランドに対する評価順序が明確に規定された。
-それに対し、C++14までは、演算子のオペランド部分式の評価順序は[未規定動作](core_lang_spec.md#SS_27_14_4)であった。
+それに対し、C++14までは、演算子のオペランド部分式の評価順序は[未規定動作](core_lang_spec.md#SS_19_14_4)であった。
 以下の表で示す演算子に関しては、オペランドaがオペランドbよりも先に評価される。
 
 | 演算子               |説明                                                                   |
@@ -7529,8 +7529,8 @@ conditionの評価結果に基づき、expr1または expr2 のどちらかが�
 
 なお、単項演算子のオペランドは1つであるため、優先順位の定義は不要である。
 
-## その他 <a id="SS_27_15"></a>
-### RVO(Return Value Optimization) <a id="SS_27_15_1"></a>
+## その他 <a id="SS_19_15"></a>
+### RVO(Return Value Optimization) <a id="SS_19_15_1"></a>
 関数の戻り値がオブジェクトである場合、
 戻り値オブジェクトは、その関数の呼び出し元のオブジェクトにcopyされた後、すぐに破棄される。
 この「オブジェクトをcopyして、その後すぐにそのオブジェクトを破棄する」動作は、
@@ -7541,7 +7541,7 @@ RVOとはこのような最適化を指す。
 [C++17から規格化](https://cpprefjp.github.io/lang/cpp17/guaranteed_copy_elision.html)された。
 
 
-### トライグラフ <a id="SS_27_15_2"></a>
+### トライグラフ <a id="SS_19_15_2"></a>
 トライグラフとは、2つの疑問符とその後に続く1文字によって表される、下記の文字列である。
 
 ```
