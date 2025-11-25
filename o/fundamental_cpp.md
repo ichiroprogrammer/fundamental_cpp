@@ -66,17 +66,17 @@ ___
 <!-- ./md/cpp03_syntax.md -->
 # 非モダンC++ <a id="SS_2"></a>
 このドキュメントでの非モダンC++とはC++03までのC++を指す。
-従って、C++から導入された以下のシンタックスは本章の対象外となる。
+従って、C++から導入された以下のシンタックスや標準ライブラリは本章の対象外となる。
 
-- スマートポインタ(ダイナミックメモリアロケーションで生成されたオブジェクトの自動開放)
-- 右辺値参照 / ムーブセマンティクス
+- [スマートポインタ](#SS_20_6)(ダイナミックメモリアロケーションで生成されたオブジェクトの自動開放)
+- [rvalueリファレンス](#SS_19_8_2)(右辺値参照)/ [moveセマンティクス](#SS_21_5_3)
 - 範囲forループ
 - ラムダ式
 - auto/decltypeによる型推論
 - テンプレートの強化(パラメータパック、SFINAE強化等)
 
-非モダンC++はC98のシンタックスと以下のようなシンタックスやライブラリから形作られる。
-なお、C98のシンタックスについての知識が不十分な場合、
+非モダンC++はC90のシンタックスと以下のようなシンタックスやライブラリから形作られる。
+なお、C90のシンタックスについての知識が不十分な場合、
 本ドキュメントを読み進める前に、
 [プログラミング言語C](https://www.amazon.co.jp/%E3%83%97%E3%83%AD%E3%82%B0%E3%83%A9%E3%83%9F%E3%83%B3%E3%82%B0%E8%A8%80%E8%AA%9EC-%E7%AC%AC2%E7%89%88-ANSI%E8%A6%8F%E6%A0%BC%E6%BA%96%E6%8B%A0-B-W-%E3%82%AB%E3%83%BC%E3%83%8B%E3%83%8F%E3%83%B3/dp/4320026926/ref=sr_1_3?dib=eyJ2IjoiMSJ9.9Y_CW98q5Eu6U4fMPe6uvEk0WTyCyc9HJeKOSU9VvnvGjHj071QN20LucGBJIEps.W4xuvhyS-yLi38GF8W6XUxu0IowUfHtbcHdfKVWPa8s&dib_tag=se&qid=1756356689&refinements=p_27%3AB.W.+%E3%82%AB%E3%83%BC%E3%83%8B%E3%83%8F%E3%83%B3&s=books&sr=1-3&text=B.W.+%E3%82%AB%E3%83%BC%E3%83%8B%E3%83%8F%E3%83%B3)
 の熟読を薦める。
@@ -101,23 +101,27 @@ __インデックス__
 &emsp;&emsp; [クラス](#SS_2_1)  
 &emsp;&emsp;&emsp; [メンバ関数](#SS_2_1_1)  
 &emsp;&emsp;&emsp; [コンストラクタ](#SS_2_1_2)  
-&emsp;&emsp;&emsp; [デストラクタ](#SS_2_1_3)  
-&emsp;&emsp;&emsp; [アクセス指定子](#SS_2_1_4)  
-&emsp;&emsp;&emsp; [アクセス指定子の使用例](#SS_2_1_5)  
-&emsp;&emsp;&emsp; [staticメンバ](#SS_2_1_6)  
-&emsp;&emsp;&emsp; [コピーコンストラクタ/コピー代入演算子](#SS_2_1_7)  
-&emsp;&emsp;&emsp; [constメンバ関数](#SS_2_1_8)  
-&emsp;&emsp;&emsp; [constメンバ変数](#SS_2_1_9)  
-&emsp;&emsp;&emsp; [Personのリファクタリング](#SS_2_1_10)  
-&emsp;&emsp;&emsp; [メンバ変数の初期化](#SS_2_1_11)  
-&emsp;&emsp;&emsp; [this](#SS_2_1_12)  
-&emsp;&emsp;&emsp; [new/delete](#SS_2_1_13)  
-&emsp;&emsp;&emsp; [継承](#SS_2_1_14)  
-&emsp;&emsp;&emsp; [派生](#SS_2_1_15)  
+&emsp;&emsp;&emsp; [メンバ変数の初期化リスト](#SS_2_1_3)  
+&emsp;&emsp;&emsp; [デストラクタ](#SS_2_1_4)  
+&emsp;&emsp;&emsp; [アクセス指定子](#SS_2_1_5)  
+&emsp;&emsp;&emsp; [アクセス指定子の使用例](#SS_2_1_6)  
+&emsp;&emsp;&emsp; [staticメンバ](#SS_2_1_7)  
+&emsp;&emsp;&emsp; [コピーコンストラクタ/コピー代入演算子](#SS_2_1_8)  
+&emsp;&emsp;&emsp; [this](#SS_2_1_9)  
+&emsp;&emsp;&emsp; [constメンバ関数](#SS_2_1_10)  
+&emsp;&emsp;&emsp; [constメンバ変数](#SS_2_1_11)  
+&emsp;&emsp;&emsp; [Personのリファクタリング](#SS_2_1_12)  
+&emsp;&emsp;&emsp; [継承](#SS_2_1_13)  
+&emsp;&emsp;&emsp; [派生](#SS_2_1_14)  
+&emsp;&emsp;&emsp; [オーバライド](#SS_2_1_15)  
 
-&emsp;&emsp; [const](#SS_2_2)  
-&emsp;&emsp; [エクセプション](#SS_2_3)  
-&emsp;&emsp; [オーバーロード](#SS_2_4)  
+&emsp;&emsp; [new/delete](#SS_2_2)  
+&emsp;&emsp;&emsp; [new演算子](#SS_2_2_1)  
+&emsp;&emsp;&emsp; [delete演算子](#SS_2_2_2)  
+&emsp;&emsp;&emsp; [new[]演算子](cpp03_syntax.md#SS_2_2_3)  
+&emsp;&emsp;&emsp; [delete[]演算子](cpp03_syntax.md#SS_2_2_4)  
+
+&emsp;&emsp; [オーバーロード](#SS_2_3)  
   
   
 
@@ -132,11 +136,11 @@ C++におけるクラスは、C90でも規定されている`struct`と、
 C++で規定されている`class`によってユーザが定義する型である。
 C++での`struct`と`class`は以下の点について異なるが、概念としては同一であると考えられる。
 
-* [アクセス指定子](#SS_2_1_4)無しでのメンバへのアクセス
+* [アクセス指定子](#SS_2_1_5)無しでのメンバへのアクセス
     - structではデフォルトが`public`
     - classではデフォルトが`private`
 
-* [アクセス指定子](#SS_2_1_4)無しでの継承
+* [アクセス指定子](#SS_2_1_5)無しでの継承
    - `struct`からの継承はデフォルトで`public`
    - `class`からの継承はデフォルトで`private`
 
@@ -148,9 +152,9 @@ C++での`struct`と`class`は以下の点について異なるが、概念と�
 Cでの`struct`は以下の点において、C++での`struct`と異なる。
 
 * [メンバ関数](#SS_2_1_1)の定義
-* デフォルトの[メンバ変数の初期化](#SS_2_1_11)
-* [アクセス指定子](#SS_2_1_4)
-* [継承](#SS_2_1_14)
+* デフォルトのメンバ変数の初期化(そのメンバ変数がデフォルトコンストラクタを持っている場合)
+* [アクセス指定子](#SS_2_1_5)
+* [継承](#SS_2_1_13)
 
 ### メンバ関数 <a id="SS_2_1_1"></a>
 メンバ関数とは、クラスに属し、そのインスタンスを通じて呼び出される関数である。
@@ -253,18 +257,17 @@ Person::height_cmを0で初期されたpersonはcalc_bmiに0除算を発生さ�
 Person::calc_bmi()のような一般のメンバ関数以外に用途が限定された以下のような特殊な関数がある。
 
 * [コンストラクタ](#SS_2_1_2)
-* [デストラクタ](#SS_2_1_3)
-* [コピーコンストラクタ/コピー代入演算子](#SS_2_1_7)
+* [デストラクタ](#SS_2_1_4)
+* [コピーコンストラクタ/コピー代入演算子](#SS_2_1_8)
 
 
 ### コンストラクタ <a id="SS_2_1_2"></a>
 インスタンス生成時に呼ばれる特別なメンバ関数であり、メンバ変数の初期化やリソース確保を行う。
 
-
 以下のコードでは、前例のPersonにコンストラクタを定義する。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_02.cpp 9
+    //  example/cpp03_syntax/class_ut_02.cpp 12
 
     struct Person {
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
@@ -277,23 +280,72 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     };
 
     // コンストラクタの定義
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
-        : family_name(family_name),
-          first_name(first_name),
-          height_cm(height_cm),
-          weight_kg(weight_kg)  // メンバ変数初期化リスト
+    Person::Person(char const* a_family_name, char const* a_first_name, uint32_t a_height_cm, uint32_t a_weight_kg)
     {
-        // メンバ変数の初期化などの処理はここに通常の関数の中に入れることができる
-        assert(family_name && first_name);  // 本来ならエクセプションの送出すべきだが
-        assert(height_cm != 0);             // 本来ならエクセプションの送出すべきだが
-    }
+        family_name = a_family_name;  //初期化と呼ばれることもあるが、正確には代入
+        first_name  = a_first_name;
+        height_cm   = a_height_cm;
+        weight_kg   = a_weight_kg;
 
+        assert(family_name && first_name);  // コンストラクタはエラーを通知できないので、
+        assert(height_cm != 0);             // ここでは不正な引数にはassertで対処
+    }
 ```
 
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_02.cpp 37
+    //  example/cpp03_syntax/class_ut_02.cpp 39
+
+    Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
+
+    // ASSERT_EQ(person.height_cm, 173);
+    // ASSERT_EQ(person.weight_kg, 75);
+    ASSERT_STREQ(person.family_name, "yamada");  // 文字列として同値
+    ASSERT_STREQ(person.first_name, "taro");     // 文字列として同値
+```
+
+### メンバ変数の初期化リスト <a id="SS_2_1_3"></a>
+[コンストラクタ](#SS_2_1_2)のコード例で示したメンバ変数の初期化は、慣習的には初期化と呼ばれるが、
+正確にはメンバ変数への値の代入である。
+前記したコード例では、メンバ変数の初期化リストを以下のように使用するべきである
+([constメンバ変数](#SS_2_1_11)の初期化を行うためには、初期化リストが必須)。
+
+なお、メンバ変数の初期化順序は、メンバ変数の初期化リストの順とは関係なく、
+変数の宣言の順に従うため注意が必要である。
+従って、メンバ変数の宣言の順で、初期化リストを並べるのがセオリーとなっている。
+
+```cpp
+    //  example/cpp03_syntax/class_ut_02.cpp 67
+
+    struct Person {
+        Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
+
+        char const* family_name;
+        char const* first_name;
+        uint32_t    height_cm;       // 身長 (cm単位と仮定)
+        uint32_t    weight_kg;       // 体重 (kg単位と仮定)
+        uint32_t    calc_bmi(void);  // メンバ関数
+    };
+
+    // コンストラクタの定義
+    Person::Person(char const* a_family_name, char const* a_first_name, uint32_t a_height_cm, uint32_t a_weight_kg)
+        // メンバ変数の初期化リスト
+        // メンバ変数の初期化の順番は、変数の宣言の順番通りに行われる
+        : family_name(a_family_name), first_name(a_first_name), height_cm(a_height_cm), weight_kg(a_weight_kg)
+    {
+        if ((family_name == NULL) || (first_name == NULL)) {
+            throw std::invalid_argument("name must be not NULL");  // エラーの通知
+        }
+        if (height_cm == 0) {
+            throw std::logic_error("height_cm must be not zero");  // エラーの通知
+        }
+    }
+
+```
+
+```cpp
+    //  example/cpp03_syntax/class_ut_02.cpp 97
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -301,14 +353,28 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     ASSERT_EQ(person.weight_kg, 75);
     ASSERT_STREQ(person.family_name, "yamada");  // 文字列として同値
     ASSERT_STREQ(person.first_name, "taro");     // 文字列として同値
+
+    bool exception_occured = false;
+
+    try {
+        Person person_error(NULL, NULL, 0, 75);
+    }
+    catch (std::logic_error const& logic_error) {  // エクセプションのcatch
+        exception_occured = true;
+    }
+
+    ASSERT_TRUE(exception_occured);  // エクセプションのthrowの確認
+
+    // gtestでのエクセプションのテスト
+    ASSERT_THROW(({ Person person_error("yamada", "taro", 0, 75); }), std::logic_error);
+    ASSERT_THROW(({ Person person_error(NULL, "taro", 1, 75); }), std::invalid_argument);
 ```
 
 コンストラクタは戻り値を持つことはできないため、引数がクラスの制限に収まらない場合、
-エラーを返すことができない。
-そのような場合、
-[エクセプション](#SS_2_3)を送出させることにより、呼び出し元にエラーを通知させることができるが、
-エクセプション送出については後述する
-(この例では、コンストラクタの不正な引数のチェックに`assert()`を用いている)。
+エラーを返すことができない。そのような場合、
+すでに示したコード例のように、[エクセプションのthrow](#SS_19_13_3)によって呼び出し元にエラーを通知することができる。
+
+### デストラクタ <a id="SS_2_1_4"></a>
 
 次の例では前出のPersonに以下の仕様を満たすget_full_name()を追加する。
 
@@ -381,7 +447,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_03.cpp 79
+    //  example/cpp03_syntax/class_ut_03.cpp 82
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -391,9 +457,8 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 ```
 
 単体テストで示したようにこの関数は想定通り動作するが、メモリーリークを引き起こす。
-これに対処するためのメンバ関数が[デストラクタ](#SS_2_1_3)である。
+これに対処するためのメンバ関数が[デストラクタ](#SS_2_1_4)である。
 
-### デストラクタ <a id="SS_2_1_3"></a>
 インスタンス破棄時に呼ばれる特別なメンバ関数であり、リソース解放などの後処理を行う。
 
 以下の例では前節で指摘したメモリーリークのバグをデストラクタを用いて対処する。
@@ -465,7 +530,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut_04.cpp 96
+    //  example/cpp03_syntax/class_ut_04.cpp 99
 
     {
         Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -477,7 +542,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
        // personのfull_nameがfreeされる。
 ```
 
-### アクセス指定子 <a id="SS_2_1_4"></a>
+### アクセス指定子 <a id="SS_2_1_5"></a>
 
 アクセス指定子とは、クラスや構造体のメンバ(データメンバやメンバ関数)に対して、
 外部からのアクセスをどの範囲まで許すかを指定する仕組みである。
@@ -502,7 +567,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 * class：デフォルトはprivate
 * struct：デフォルトはpublic
 
-### アクセス指定子の使用例 <a id="SS_2_1_5"></a>
+### アクセス指定子の使用例 <a id="SS_2_1_6"></a>
 これまで例として使ってきたPersonのメンバ変数は以下のような制約を持つ。
 
 * family_nameとfirst_nameはNULLでなく、文字列リテラル
@@ -510,11 +575,11 @@ C++では以下の3種類のアクセス指定子が存在する。
 * height_cmとweight_kgは0でない
 
 これらの制約が外部から変更された場合、Personが正常に動作しないことがある。
-このような問題を避けるために、クラスは[アクセス指定子](#SS_2_1_4)を使用し、
+このような問題を避けるために、クラスは[アクセス指定子](#SS_2_1_5)を使用し、
 メンバへのアクセスを制御することが一般的である。
 
 これまでクラスは`struct`を使用してきたが、ここで、
-[アクセス指定子](#SS_2_1_4)と`class`を使用し、以下のようにPersonのリファクタリングを行う。
+[アクセス指定子](#SS_2_1_5)と`class`を使用し、以下のようにPersonのリファクタリングを行う。
 
 ```cpp
     //  example/cpp03_syntax/class_ut_05.cpp 11
@@ -568,7 +633,7 @@ C++では以下の3種類のアクセス指定子が存在する。
     }
 ```
 
-### staticメンバ <a id="SS_2_1_6"></a>
+### staticメンバ <a id="SS_2_1_7"></a>
 `static`メンバは、クラスの各インスタンスに属するのではなく、
 クラス全体で共有されるメンバを定義するために使用される。
 
@@ -579,7 +644,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 
 * 静的メンバ関数
     - インスタンスに依存せずに呼び出せる関数。
-    - [this](#SS_2_1_12)ポインタを持たないため、非静的メンバ変数や非静的メンバ関数に直接アクセスできない。
+    - [this](#SS_2_1_9)ポインタを持たないため、非静的メンバ変数や非静的メンバ関数に直接アクセスできない。
     - クラスのユーティリティ的な操作や、静的メンバ変数の操作に利用される。
 
 
@@ -651,7 +716,7 @@ publicなstaitcメンバへのクラス外でのアクセスには、
 下記コードの例のようにクラス名修飾(任意のクラス名Tに対してT::member)がに必要になる。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_06.cpp 110
+    //  example/cpp03_syntax/class_ut_06.cpp 113
 
     char* full_name = Person::make_full_name("yamada", "taro");
     //                      ^^^^^ static関数の呼び出しはクラス名修飾が必要
@@ -668,7 +733,7 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 * Person::make_full_nameをクラス内部での使用専用にするためにprivate化
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_06.cpp 135
+    //  example/cpp03_syntax/class_ut_06.cpp 138
 
     class Person {
     public:
@@ -723,7 +788,7 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 コードを修正した場合、それに合わせて単体テストも修正する必要がある。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_06.cpp 226
+    //  example/cpp03_syntax/class_ut_06.cpp 229
 
     ASSERT_EQ(Person::instance_counter, 0);  // staticな変数はデフォルト初期化される
 
@@ -744,7 +809,7 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
     ASSERT_EQ(Person::instance_counter, 1);  // jiro、saburoが解放された
 ```
 
-### コピーコンストラクタ/コピー代入演算子 <a id="SS_2_1_7"></a>
+### コピーコンストラクタ/コピー代入演算子 <a id="SS_2_1_8"></a>
 コピーコンストラクタとは、
 
 * 型Tに対して、`T(T const&)`のようなシグネチャのコンストラクタの一種である。
@@ -805,7 +870,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 ただし、この方法ではポインタ型のメンバも単純にアドレスがコピーされるため、
 リソースの二重解放や参照の共有によるバグの原因となる可能性がある。
 
-以下は二重解放バグの典型的なコード例である([staticメンバ](#SS_2_1_6)の例からメンバ変数を除いている)。
+以下は二重解放バグの典型的なコード例である([staticメンバ](#SS_2_1_7)の例からメンバ変数を除いている)。
 
 ```cpp
     //  example/cpp03_syntax/class_ut_07.cpp 15
@@ -852,7 +917,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut_07.cpp 102
+    //  example/cpp03_syntax/class_ut_07.cpp 104
 
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -883,8 +948,10 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
     class Person {
     public:
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
-        Person(Person const& rhs);                                   // コピーコンストラクタ
-        Person& operator=(Person const& rhs);                        // コピー代入演算子
+
+        Person(Person const& rhs);             // コピーコンストラクタの宣言
+        Person& operator=(Person const& rhs);  // コピー代入演算子の宣言
+
         ~Person(void);                                               // デストラクタ
         uint32_t    calc_bmi(void);                                  // メンバ関数
         char const* get_full_name(void) const { return full_name; }  // クラス内部でのメンバ関数定義
@@ -896,32 +963,16 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
         uint32_t     height_cm;  // 身長 (cm単位と仮定)
         uint32_t     weight_kg;  // 体重 (kg単位と仮定)
     };
+    // 以下省略
+    // ...
+```
 
-    Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
-        : family_name(family_name), first_name(first_name),
-          full_name(make_full_name(family_name, first_name)),
-          height_cm(height_cm), weight_kg(weight_kg)
-    {
-        // コンストラクタの中身は省略
-        // ...
-    }
+以下にコピーコンストラクタの実装を示す。
 
-    char* Person::make_full_name(char const* family_name, char const* first_name)
-    {
-        // 関数の中身は変わっていないので省略
-        // ...
-    }
+```cpp
+    //  example/cpp03_syntax/class_ut_08.cpp 79
 
-    Person::~Person(void)  // デストラクタの定義
-    {
-        if (full_name) {
-            delete[] full_name;
-            //  ^^^ free((void*)full_name);
-            //      new[]で取得したメモリはdelete[]で解放する
-        }
-    }
-
-    // コピーコンストラクタ
+    // コピーコンストラクタの実装
     Person::Person(Person const& rhs)
         : family_name(rhs.family_name),
           first_name(rhs.first_name),
@@ -930,8 +981,14 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
           weight_kg(rhs.weight_kg)
     {
     }
+```
 
-    // コピー代入演算子
+以下にコピー代入演算子の実装を示す。
+
+```cpp
+    //  example/cpp03_syntax/class_ut_08.cpp 91
+
+    // コピー代入演算子の実装
     Person& Person::operator=(Person const& rhs)
     {
         // 自己代入チェック
@@ -951,8 +1008,11 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
         return *this;
     }
 ```
+
+以下にコピーコンストラクタ/コピー代入演算子のテストを示す。
+
 ```cpp
-    //  example/cpp03_syntax/class_ut_08.cpp 120
+    //  example/cpp03_syntax/class_ut_08.cpp 130
 
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -981,23 +1041,119 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 
 ```
 
-コピーコンストラクタ/コピー代入演算子を追加する前のコードが持っていた単純なコピーを[シャローコピー](#SS_21_10_1)と呼び、
+一般に、T型のコピー代入演算子の戻り値型を`T&`にすることで以下のようなコードを実現できる。
+
+```cpp
+    //  example/cpp03_syntax/class_ut_08.cpp 159
+
+    Person p0("yamada", "taro", 173, 75);
+    Person p1("yamada", "jiro", 170, 70);
+    Person p2("yamada", "saburo", 170, 70);
+
+    ASSERT_STRNE(p0.get_full_name(), p1.get_full_name());  // p0、p1のフルネームが異なることの確認
+    ASSERT_STRNE(p1.get_full_name(), p2.get_full_name());  // p1、p2のフルネームが異なることの確認
+
+    p2 = p1 = p0;  // operator= の戻り値型がPerson&であるために可能になる
+    ASSERT_STREQ(p0.get_full_name(), p1.get_full_name());  // p0、p1のフルネームが等しいことの確認
+    ASSERT_STREQ(p1.get_full_name(), p2.get_full_name());  // p1、p2のフルネームが等しいことの確認
+
+    // p2 = p1 = p0;  を通常の関数呼び出しとして展開すると下記のようになる
+    p2.operator=(p1.operator=(p0));
+```
+
+なお、コピーコンストラクタ/コピー代入演算子を追加する前のコードが持っていた単純なコピーを[シャローコピー](#SS_21_10_1)と呼び、
 このコード例のようなコピーを[ディープコピー](#SS_21_10_2)と呼ぶ。
 
 上記コードには、C99には存在しない以下のようなシンタックスやキーワードを含む。
 
 * [リファレンス](#SS_19_8)(型Tに対して、`T&`という形式)
-* [this](#SS_2_1_12)
-* [new/delete](#SS_2_1_13)
-* [constメンバ関数](#SS_2_1_8)(宣言の末尾にconstがついているメンバ関数)
+* [this](#SS_2_1_9)
+* [new/delete](#SS_2_2)
+* [constメンバ関数](#SS_2_1_10)(宣言の末尾にconstがついているメンバ関数)
 
 
-### constメンバ関数 <a id="SS_2_1_8"></a>
+### this <a id="SS_2_1_9"></a>
+thisとは、メンバ関数内で暗黙的に利用可能なポインタであり、
+そのメンバ関数を呼び出したオブジェクト自身を指す。thisポインタを用いることで、
+メンバ変数やメンバ関数に明示的にアクセスでき、
+特にパラメータ名とメンバ変数名が衝突する場合や、オブジェクト自身を返す必要がある場合に有用である。
+
+thisのポインタとしての型は、そのメンバ関数が[constメンバ関数](#SS_2_1_10)か否かによって異なる。
+
+| メンバ関数関数    | thisの型(Tはクラス型)  |
+|:----------------- |:----------------------:|
+| 非constメンバ関数 | T* const               |
+| constメンバ関数   | const T* const         |
+
+thisポインタ自体は常にconst（再代入不可）である。
+下記例にあるように呼び出し関数がメンバであることを明示するために用いることがある。
+
+```cpp
+    //  example/cpp03_syntax/this_ut.cpp 8
+
+    class A {
+    public:
+        A()
+        {
+            /* thisの型はA* constであるため、代入はコンパイルエラー
+            this = 0; */
+        }
+
+        A* this_ptr() { return this; }
+
+        void func0() {}
+        void func1()
+        {
+            extern void func0();
+
+            func0();        // メンバ関数func0の呼び出し
+            ::func0();      // クラスAの外部の関数func0の呼び出し
+            this->func0();  // クラスAの外部の関数func0の呼び出しではなく、メンバ関数func0の呼び出しであることの明記
+        }
+    };
+```
+```cpp
+    //  example/cpp03_syntax/this_ut.cpp 34
+
+    A a;
+
+    A* a_ptr = &a;
+
+    ASSERT_EQ(a_ptr, a.this_ptr());  // this_ptrはthisを返す。 thisがオブジェクトのポインタを指すことのテスト
+```
+
+以下のPersonのコピー代入演算子のようにthisを使用し自己代入を避けることが一般的である。
+
+```cpp
+    //  example/cpp03_syntax/class_ut_08.cpp 91
+
+    // コピー代入演算子の実装
+    Person& Person::operator=(Person const& rhs)
+    {
+        // 自己代入チェック
+        if (this == &rhs) {
+            return *this;
+        }
+        family_name = rhs.family_name;
+        first_name  = rhs.first_name;
+
+        delete[] full_name;
+        char* temp = new char[strlen(rhs.full_name) + 1];
+
+        strcpy(temp, rhs.full_name);
+        full_name = temp;
+        height_cm = rhs.height_cm;
+        weight_kg = rhs.weight_kg;
+        return *this;
+    }
+```
+
+### constメンバ関数 <a id="SS_2_1_10"></a>
 constメンバ関数は、オブジェクトの状態(非mutableメンバ変数)を変更しないことを宣言するメンバ関数である。
 関数宣言の末尾にconst修飾子を付けて定義する。
 
 - 意味論:  
-    constメンバ関数内では、[this](#SS_2_1_12)ポインタが`const T*`型となり、
+    constメンバ関数内では、[this](#SS_2_1_9)ポインタが`const T*`型となり、
     非constメンバ変数への代入や非constメンバ関数の呼び出しができない。
 - const正当性:  
     constオブジェクトからはconstメンバ関数のみ呼び出し可能である。
@@ -1062,7 +1218,7 @@ constメンバ関数は、オブジェクトの状態(非mutableメンバ変数)
     */
 ```
 
-### constメンバ変数 <a id="SS_2_1_9"></a>
+### constメンバ変数 <a id="SS_2_1_11"></a>
 constメンバ変数は、オブジェクトの生存期間中、値が変更されないメンバ変数である。以下の特性を持つ。
 
 - 初期化の必須性:  
@@ -1074,18 +1230,19 @@ constメンバ変数は、オブジェクトの生存期間中、値が変更さ
     変更不可能な属性を表現するのに適している。
 
 
-コード例については、[constメンバ関数](#SS_2_1_8)を参照せよ。
+コード例については、[constメンバ関数](#SS_2_1_10)を参照せよ。
 
 
-### Personのリファクタリング <a id="SS_2_1_10"></a>
+### Personのリファクタリング <a id="SS_2_1_12"></a>
 これまで例示してきたPersonを以下の方針でリファクタリングを行う。
 
 * 可読性向上のために、[Trailing Underscore(末尾アンダースコア)](#SS_21_9_4)に従う。
-* メンバを適切にconst修飾することで、[constメンバ関数](#SS_2_1_8)/[constメンバ変数](#SS_2_1_9)へ変更する。
+* メンバを適切にconst修飾することで、[constメンバ関数](#SS_2_1_10)/[constメンバ変数](#SS_2_1_11)へ変更する。
 * Cでは、引数を持たない関数funcは`func(void)`のように宣言するが、C++では通常、単に`func()`と書く。
 
 ```cpp
     //  example/cpp03_syntax/class_ut_09.cpp 9
+
     class Person {
     public:
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);
@@ -1116,23 +1273,67 @@ constメンバ変数は、オブジェクトの生存期間中、値が変更さ
 * メンバが適切にconst修飾されたことで可読性が向上した。
 * malloc/freeからnew/deleteへ統一され、C++らしいメモリ管理となった。
 
-### メンバ変数の初期化 <a id="SS_2_1_11"></a>
-
-### this <a id="SS_2_1_12"></a>
-
-### new/delete <a id="SS_2_1_13"></a>
-
-### 継承 <a id="SS_2_1_14"></a>
-### 派生 <a id="SS_2_1_15"></a>
+### 継承 <a id="SS_2_1_13"></a>
+### 派生 <a id="SS_2_1_14"></a>
+### オーバライド <a id="SS_2_1_15"></a>
 
 --- 
 
+## new/delete <a id="SS_2_2"></a>
+Cの`malloc`/`free`と異なり、
+C++ではメモリアロケーションとオブジェクトの生成と破棄を適切に行うために、以下の演算子が定義されている。
 
-## const <a id="SS_2_2"></a>
+* [new演算子](#SS_2_2_1)/[delete演算子](#SS_2_2_2)
+* [new[]演算子](cpp03_syntax.md#SS_2_2_3)/[delete[]演算子](cpp03_syntax.md#SS_2_2_4)
 
-## エクセプション <a id="SS_2_3"></a>
+上記のnew演算子以外に[プレースメントnew](#SS_19_6_9)と[new (std::nothrow)](#SS_19_6_10)が定義されているが、
+これらの対となるdeleteは存在しない。
 
-## オーバーロード <a id="SS_2_4"></a>
+
+### new演算子 <a id="SS_2_2_1"></a>
+### delete演算子 <a id="SS_2_2_2"></a>
+`new`演算子は、ヒープ上にメモリを確保し、オブジェクトを構築する。  
+`delete`演算子は、`new`で確保したメモリを解放する前に、デストラクタを呼び出す。
+
+```cpp
+    //  example/cpp03_syntax/new_delete_ut.cpp 96
+
+    int*    p      = new int;                                // int型のメモリを確保(未初期化)
+    int*    q      = new int(42);                            // int型のメモリを確保し、42で初期化
+    Person* person = new Person("yamada", "taro", 173, 75);  // コンストラクタを呼び出す
+
+    ASSERT_EQ(*q, 42);
+    ASSERT_STREQ(person->get_full_name(), "yamada taro");
+
+    delete p;       // pが指すメモリを解放
+    delete q;       // qが指すメモリを解放
+    delete person;  // personのデストラクタを呼び出してからメモリを解放
+```
+
+### new[]演算子 <a id="SS_2_2_3"></a>
+### delete[]演算子 <a id="SS_2_2_4"></a>
+配列を動的に確保する場合は、new[]とdelete[]を使用する。
+
+
+```cpp
+    //  example/cpp03_syntax/new_delete_ut.cpp 113
+
+    // 配列の生成
+    int*    array   = new int[10];    // 10個のint型配列を確保
+    Person* persons = new Person[5];  // 5個のPersonオブジェクトの配列を確保
+
+    // 配列の解放
+    delete[] array;    // 配列全体を解放
+    delete[] persons;  // 各要素のデストラクタを呼び出してから配列を解放
+```
+
+[注]
+
+* クラスTに対し`new T[N]`を実行するためにはTがデフォルトコンストラクタを持つ必要がある。
+* new[]でアロケートしたメモリはdelete[]で解放しなければならない。
+
+## オーバーロード <a id="SS_2_3"></a>
+
 
 
 
@@ -1181,13 +1382,13 @@ ___
 |:--------------------------------------------------------|:---------------------------------------------------------------------------|
 | 型推論([auto](#SS_19_11_14))                |変数や、式の型の推論                                                        |
 | [decltype](#SS_19_11_15)                                         |式の型を取得                                                                |
-| [範囲for文](#SS_19_9_3)                         |インデックス変数なしのfor文                                                 |
+| [範囲for文](#SS_19_9_2)                         |インデックス変数なしのfor文                                                 |
 | [初期化子リストコンストラクタ](#SS_19_6_1_1)      |`vector<int>` v = {1, 2, 3}; など。                                         |
 | [一様初期化](#SS_19_6_6)                                       |コンストラクタの呼び出しを、波カッコで行う。|vector<int> v{1, 2, 3};        |
 | [rvalue](#SS_19_7_1_2)/[moveセマンティクス](#SS_21_5_3)      |[オブジェクトの所有権](#SS_21_4)の移転、高速化。                     |
 | [rvalueリファレンス](#SS_19_8_2)                               |テンポラリオブジェクトをバインドできる`T&&`形式のリファレンス               |
 | [ラムダ式](#SS_19_10_3)                            |関数オブジェクトをその場に書く                                              |
-| [noexcept](#SS_19_13_4)                                         |関数の例外指定、例外を投げる可能性のある式かbool値を返す演算子              |
+| [noexcept](#SS_19_13_6)                                         |関数の例外指定、例外を投げる可能性のある式かbool値を返す演算子              |
 | [constexpr](#SS_19_5_1)                                        |定数式やconstexpr関数の定義                                                 |
 | nullptr                                                 |ヌルポインタを表すポインタ[リテラル](#SS_19_2)                   |
 | インライン名前空間                                      |ネストした名前空間に透過的にアクセスする。「[名前空間](#SS_5_1)」参照  |
@@ -1252,7 +1453,7 @@ ___
 |[std::forward](#SS_20_1_2) |[perfect forwarding](#SS_19_8_5)の実装、利用|
 
 #### stdコンテナ <a id="SS_3_1_6_2"></a>
-[コンテナ](#SS_20_7)全般が[moveセマンティクス](#SS_21_5_3)に対応したため、
+[コンテナ](#SS_20_8)全般が[moveセマンティクス](#SS_21_5_3)に対応したため、
 テンプレートのパラメータTが、コピー構築可能(`is_copy_constructible<T> == true`)な型だけでなく、
 ムーブ構築(is_move_constructible)のみ可能な型も受け付けるられるようになった。
 push_back()やinsert()等の要素追加のためのメンバ関数が、
@@ -1263,20 +1464,20 @@ move挿入ができるようになった(「[その他のテンプレートテ�
 |機能                            |説明                                                                                |
 |:-------------------------------|:-----------------------------------------------------------------------------------|
 |std::array                      |このコンテナは固定長配列クラスを表す「[配列](#SS_16_1)」参照)。         |
-|[std::forward_list](#SS_20_7_1_1)        |このは単方向リンクリストの実装である。                                              |
-|[std::unordered_map](#SS_20_7_3_2)       |同一キーの要素を複数格納しない、格納順が規定されていない連想配列の実装であるである。|
-|[std::unordered_set](#SS_20_7_3_1)       |同一キーの要素を複数格納できず、格納順が規定されていないコンテナである。            |
-|[std::type_index](#SS_20_7_3_3)          |型情報型を連想コンテナのキーとして使用するためのクラス。                            |
+|[std::forward_list](#SS_20_8_1_1)        |このは単方向リンクリストの実装である。                                              |
+|[std::unordered_map](#SS_20_8_3_2)       |同一キーの要素を複数格納しない、格納順が規定されていない連想配列の実装であるである。|
+|[std::unordered_set](#SS_20_8_3_1)       |同一キーの要素を複数格納できず、格納順が規定されていないコンテナである。            |
+|[std::type_index](#SS_20_8_3_3)          |型情報型を連想コンテナのキーとして使用するためのクラス。                            |
 
 #### 並列処理 <a id="SS_3_1_6_3"></a>
 |機能                          | 説明                                                    |
 |:----------------------------:|:--------------------------------------------------------|
-| [std::thread](#SS_20_3_1)           | スレッドの生成                                          |
-| [std::atomic](#SS_20_3_3)           | 単純なオブジェクトのアトミック処理                      |
-| [std::mutex](#SS_20_3_2)            | スレッド間の競合の回避                                  |
-| [std::lock_guard](#SS_20_4_1)       | ミューテックスのロック/アンロックを管理するためクラス   |
-| [std::unique_lock](#SS_20_4_2)      | ミューテックスのロック/アンロックを管理するためクラス   |
-| [std::scoped_lock](#SS_20_4_3)      | ミューテックスのロック/アンロックを管理するためクラス   |
+| [std::thread](#SS_20_4_1)           | スレッドの生成                                          |
+| [std::atomic](#SS_20_4_3)           | 単純なオブジェクトのアトミック処理                      |
+| [std::mutex](#SS_20_4_2)            | スレッド間の競合の回避                                  |
+| [std::lock_guard](#SS_20_5_1)       | ミューテックスのロック/アンロックを管理するためクラス   |
+| [std::unique_lock](#SS_20_5_2)      | ミューテックスのロック/アンロックを管理するためクラス   |
+| [std::scoped_lock](#SS_20_5_3)      | ミューテックスのロック/アンロックを管理するためクラス   |
 
 
 ## C++14の主な新規機能 <a id="SS_3_2"></a>
@@ -1295,7 +1496,7 @@ move挿入ができるようになった(「[その他のテンプレートテ�
 |[[deprecated]]属性                                    |「[属性構文](#SS_19_9_1)」参照                                                          |
 |[数値リテラル](#SS_19_2_3)の桁区切り文字                     |シングルクォーテーションで数値リテラルを桁区切りする                             |
 |サイズ付きデアロケーション                            |[グローバルnew/deleteのオーバーロード](#SS_17)                                      |
-|[heap allocation elision](#SS_20_11_2)                        |動的メモリ確保の省略(heap allocation elision)の許可                              |
+|[heap allocation elision](#SS_20_12_2)                        |動的メモリ確保の省略(heap allocation elision)の許可                              |
 
 ### stdの変更、追加 <a id="SS_3_2_1"></a>
 
@@ -1372,14 +1573,14 @@ move挿入ができるようになった(「[その他のテンプレートテ�
 |[演算子のオペランドの評価順位](#SS_19_14_12)             |C++14まで未規定であった部分式の評価順序を規定                                    |
 |enum class変数の初期値のルール変更              |「[スコープドenum](#SS_19_3_3)」、 「[underlying type](#SS_19_3_4)」参照                       |
 |[newのアライメント指定](#SS_3_3_1_2)                    |                                                                                 |
-|[初期化付きif/switch文](#SS_19_9_5)                    |if文とswitch文の条件式と初期化を分離する構文                                     |
+|[初期化付きif/switch文](#SS_19_9_4)                    |if文とswitch文の条件式と初期化を分離する構文                                     |
 |[[fallthrough]]属性                             |「[属性構文](#SS_19_9_1)」参照                                                          |
 |[constexpr if文](#SS_19_11_12)                           |if constexpr(cond) とすることで、その if 文はコンパイル時に処理                  |
 |[範囲for文のイテレータ型の不一致の許可](#SS_3_3_1_3)    |std::istream_iteratorとstd::istreamに利用                                        |
 |[ラムダ式での\*thisのコピーキャプチャ](#SS_3_3_1_4)     |キャプチャリストに\*this を指定することで、\*thisをコピーキャプチャする          |
 |[constexprラムダ](#SS_19_5_9) |ラムダ式の関数オブジェクトのconstexpr指定を可能に                                |
-|[std::optional](#SS_20_8)                            |関数の戻り値の無効表現を行うためのクラステンプレート                             |
-|[std::variant](#SS_20_9)                             |型安全なunion機能を提供するクラステンプレート                                    |
+|[std::optional](#SS_20_9)                            |関数の戻り値の無効表現を行うためのクラステンプレート                             |
+|[std::variant](#SS_20_10)                             |型安全なunion機能を提供するクラステンプレート                                    |
 
 
 #### 単一要素の波カッコ初期化を非配列とする <a id="SS_3_3_1_1"></a>
@@ -1949,14 +2150,13 @@ __この章の構成__
 
 &emsp;&emsp; [構文と制御構造](#SS_19_9)  
 &emsp;&emsp;&emsp; [属性構文](#SS_19_9_1)  
-&emsp;&emsp;&emsp; [関数tryブロック](#SS_19_9_2)  
-&emsp;&emsp;&emsp; [範囲for文](#SS_19_9_3)  
-&emsp;&emsp;&emsp; [構造化束縛](#SS_19_9_4)  
-&emsp;&emsp;&emsp; [初期化付きif/switch文](#SS_19_9_5)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きfor文(従来のfor文)](#SS_19_9_5_1)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きwhile文(従来のwhile文)](#SS_19_9_5_2)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きif文](#SS_19_9_5_3)  
-&emsp;&emsp;&emsp;&emsp; [初期化付きswitch文](#SS_19_9_5_4)  
+&emsp;&emsp;&emsp; [範囲for文](#SS_19_9_2)  
+&emsp;&emsp;&emsp; [構造化束縛](#SS_19_9_3)  
+&emsp;&emsp;&emsp; [初期化付きif/switch文](#SS_19_9_4)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きfor文(従来のfor文)](#SS_19_9_4_1)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きwhile文(従来のwhile文)](#SS_19_9_4_2)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きif文](#SS_19_9_4_3)  
+&emsp;&emsp;&emsp;&emsp; [初期化付きswitch文](#SS_19_9_4_4)  
 
 &emsp;&emsp; [言語拡張機能](#SS_19_10)  
 &emsp;&emsp;&emsp; [コルーチン](#SS_19_10_1)  
@@ -2015,12 +2215,19 @@ __この章の構成__
 &emsp;&emsp;&emsp; [using宣言](#SS_19_12_14)  
 &emsp;&emsp;&emsp; [usingディレクティブ](#SS_19_12_15)  
 
-&emsp;&emsp; [エクセプション安全性の保証](#SS_19_13)  
-&emsp;&emsp;&emsp; [no-fail保証](#SS_19_13_1)  
-&emsp;&emsp;&emsp; [強い安全性の保証](#SS_19_13_2)  
-&emsp;&emsp;&emsp; [基本的な安全性の保証](#SS_19_13_3)  
-&emsp;&emsp;&emsp; [noexcept](#SS_19_13_4)  
-&emsp;&emsp;&emsp; [exception-unfriendly](#SS_19_13_5)  
+&emsp;&emsp; [エクセプション](#SS_19_13)  
+&emsp;&emsp;&emsp; [try-catch](#SS_19_13_1)  
+&emsp;&emsp;&emsp; [関数tryブロック](#SS_19_13_2)  
+&emsp;&emsp;&emsp; [エクセプションのthrow](#SS_19_13_3)  
+&emsp;&emsp;&emsp; [エクセプションの再throw](#SS_19_13_4)  
+&emsp;&emsp;&emsp; [catch-all](#SS_19_13_5)  
+&emsp;&emsp;&emsp; [noexcept](#SS_19_13_6)  
+&emsp;&emsp;&emsp; [エクセプション安全性の保証](#SS_19_13_7)  
+&emsp;&emsp;&emsp;&emsp; [no-fail保証](#SS_19_13_7_1)  
+&emsp;&emsp;&emsp;&emsp; [強い安全性の保証](#SS_19_13_7_2)  
+&emsp;&emsp;&emsp;&emsp; [基本的な安全性の保証](#SS_19_13_7_3)  
+
+&emsp;&emsp;&emsp; [exception-unfriendly](#SS_19_13_8)  
 
 &emsp;&emsp; [言語仕様の定義要素](#SS_19_14)  
 &emsp;&emsp;&emsp; [ill-formed](#SS_19_14_1)  
@@ -4628,7 +4835,7 @@ C++20以降より、`=default`により==演算子を自動生成させること
 C++20から導入された[<=>演算子](#SS_19_6_4_1)の定義により、すべてが定義される。
 
 #### <=>演算子 <a id="SS_19_6_4_1"></a>
-「[std::tuppleを使用した比較演算子の実装方法](#SS_20_10_2)」
+「[std::tuppleを使用した比較演算子の実装方法](#SS_20_11_2)」
 で示した定型のコードはコンパイラが自動生成するのがC++規格のセオリーである。
 このためC++20から導入されたのが<=>演算子`<=>`である。
 
@@ -5697,26 +5904,7 @@ C++14から導入されたの属性構文は、[[属性名]]の形式で記述�
     }
 ```
 
-### 関数tryブロック <a id="SS_19_9_2"></a>
-関数tryブロックとはtry-catchを本体とした下記のような関数のブロックを指す。
-
-```cpp
-    //  example/core_lang_spec/func_try_block.cpp 8
-
-    void function_try_block()
-    try {  // 関数tryブロック
-        // 何らかの処理
-        // ...
-    }
-    catch (std::length_error const& e) {  // 関数tryブロックのエクセプションハンドラ
-        // ...
-    }
-    catch (std::logic_error const& e) {  // 関数tryブロックのエクセプションハンドラ
-        // ...
-    }
-```
-
-### 範囲for文 <a id="SS_19_9_3"></a>
+### 範囲for文 <a id="SS_19_9_2"></a>
 範囲for文は、
 
 ```cpp
@@ -5816,7 +6004,7 @@ C++17以降は、この規制が緩和されたため、以下のように展開
     ASSERT_EQ("Hello", oss.str());  // 結果は "Hello" になるはず
 ```
 
-### 構造化束縛 <a id="SS_19_9_4"></a>
+### 構造化束縛 <a id="SS_19_9_3"></a>
 構造化束縛はC++17 から導入されたもので、std::tuppleやstd::pair、std::arrayなど、
 構造体のメンバーを個別の変数に分解して簡潔に扱うことをできるようにするための機能である。
 
@@ -5882,7 +6070,7 @@ C++17以降は、この規制が緩和されたため、以下のように展開
     ASSERT_EQ(z, 3);
 ```
 
-### 初期化付きif/switch文 <a id="SS_19_9_5"></a>
+### 初期化付きif/switch文 <a id="SS_19_9_4"></a>
 C++17で、if文とswitc文に初期化を行う構文が導入された。
 これにより、変数をそのスコープ内で初期化し、その変数を条件式の評価に使用できる。
 初期化された変数は、if文やswitch文のスコープ内でのみ有効であり、他のスコープには影響を与えない。
@@ -5891,13 +6079,13 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
 この類似性が理解しやすいように、本節では、 敢えて以下のコード例で同じ関数、同じクラスを使用し、
 対比できるようにした。
 
-- [初期化付きfor文(従来のfor文)](#SS_19_9_5_1)
-- [初期化付きwhile文(従来のwhile文)](#SS_19_9_5_2)
-- [初期化付きif文](#SS_19_9_5_3)
-- [初期化付きswitch文](#SS_19_9_5_4)
+- [初期化付きfor文(従来のfor文)](#SS_19_9_4_1)
+- [初期化付きwhile文(従来のwhile文)](#SS_19_9_4_2)
+- [初期化付きif文](#SS_19_9_4_3)
+- [初期化付きswitch文](#SS_19_9_4_4)
 
 
-#### 初期化付きfor文(従来のfor文) <a id="SS_19_9_5_1"></a>
+#### 初期化付きfor文(従来のfor文) <a id="SS_19_9_4_1"></a>
 下記の疑似コードは従来のfor文の構造を表す。
 
 ```cpp
@@ -5935,7 +6123,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     // ...
 ```
 
-#### 初期化付きwhile文(従来のwhile文) <a id="SS_19_9_5_2"></a>
+#### 初期化付きwhile文(従来のwhile文) <a id="SS_19_9_4_2"></a>
 下記の疑似コードこの節で説明しようとしているwhile文の構造を表す(従来からのwhile文)。
 
 ```cpp
@@ -5944,7 +6132,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     }
 ```
 
-[初期化付きif文](#SS_19_9_5_3)/[初期化付きswitch文](#SS_19_9_5_4)はC++17から導入されたシンタックスであるが、
+[初期化付きif文](#SS_19_9_4_3)/[初期化付きswitch文](#SS_19_9_4_4)はC++17から導入されたシンタックスであるが、
 それと同様のシンタックスはwhileには存在しないが、
 以下のコード例のように従来の記法は広く知られているため、念とため紹介する。
 
@@ -5957,7 +6145,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     // resultはスコープアウトする
 ```
 
-#### 初期化付きif文 <a id="SS_19_9_5_3"></a>
+#### 初期化付きif文 <a id="SS_19_9_4_3"></a>
 下記の疑似コードこの節で説明しようとしているif文の構造を表す。
 
 ```cpp
@@ -6019,7 +6207,7 @@ C++17で、if文とswitc文に初期化を行う構文が導入された。
     }
 ```
 
-#### 初期化付きswitch文 <a id="SS_19_9_5_4"></a>
+#### 初期化付きswitch文 <a id="SS_19_9_4_4"></a>
 下記の疑似コードはこの節で説明しようとしているswitch文の構造を表す。
 
 ```cpp
@@ -6728,7 +6916,7 @@ C++20から導入されたco_await、co_return、TaskとC++17以前の機能の�
     ASSERT_EQ(circl_1, circl_2);
 ```
 
-下記に示すように、[Polymorphic Memory Resource(pmr)](#SS_20_6)のpool_resourceの初期化には、
+下記に示すように、[Polymorphic Memory Resource(pmr)](#SS_20_7)のpool_resourceの初期化には、
 この機能を使うと可読性の改善が期待できる。
 
 ```cpp
@@ -8964,33 +9152,151 @@ XXXの識別子が使用できる。
 従って、usingディレクティブの使用は避けるべきである。
 
 
-## エクセプション安全性の保証 <a id="SS_19_13"></a>
-関数のエクセプション発生時の安全性の保証には以下の3つのレベルが規定されている。
+## エクセプション <a id="SS_19_13"></a>
+エクセプションは、プログラムの通常の制御フローを中断し、エラー条件や異常な状態を伝達するための機構である。
+C++では、[try-catch](#SS_19_13_1)構文や[エクセプションのthrow](#SS_19_13_3)文使用してエクセプション処理を実現する。
 
-* [no-fail保証](#SS_19_13_1)
-* [強い安全性の保証](#SS_19_13_2)
-* [基本的な安全性の保証](#SS_19_13_3)
+### try-catch <a id="SS_19_13_1"></a>
+try-catch構文は、エクセプション処理の基本的な枠組みを提供する構文である。
+tryブロック内でエクセプションが発生する可能性のあるコードを記述し、
+それに続くcatchブロックでエクセプションの種類ごとに処理を定義する。
 
-### no-fail保証 <a id="SS_19_13_1"></a>
-「no-fail保証」を満たす関数はエクセプションをthrowしない。
-no-failを保証する関数は、
-[noexcept](#SS_19_13_4)を使用してエクセプションを発生させないことを明示できる。
+```cpp
+    //  example/core_lang_spec/exception_ut.cpp 15
 
-標準テンプレートクラスのパラメータとして使用するクラスのメンバ関数には、
-正確にnoexceptの宣言をしないと、
-テンプレートクラスのメンバ関数によってはパフォーマンスを起こしてしまう可能性がある。
+    try {  // tryブロック
 
-### 強い安全性の保証 <a id="SS_19_13_2"></a>
-「強い保証」を満たす関数は、この関数がエクセプションによりスコープから外れた場合でも、
-この関数が呼ばれなかった状態と同じ(プログラムカウンタ以外の状態は同じ)であることを保証する。
-従って、この関数呼び出しは成功したか、完全な無効だったかのどちらかになる。
+        auto a = A(num);  // エクセプションが発生する可能性のあるコード
+        // 何らかの処理
+        // ...
+    }
+    catch (std::logic_error const& e) {
+        // エクセプション処理
+        // ...
+    }
+    catch (std::runtime_error const& e) {
+        /*
+        throw e;  ここでリカバリ処理ができない場合、再throwすることで外部にエラーを伝えることができるが、
+                  以下の記法の方が好ましい */
+        throw;  // ここではエクセプション処理が完了できない場合、再throw
+    }
+```
 
-### 基本的な安全性の保証 <a id="SS_19_13_3"></a>
-「基本的な安全性の保証」を満たす関数は、この関数がエクセプションによりスコープから外れた場合でも、
-メモリ等のリソースリークは起こさず、
-オブジェクトは(変更されたかもしれないが)引き続き使えることを保証する。
+tryブロック内でエクセプションが投げられると、制御はtryブロックを即座に抜け、マッチする最初のcatchブロックに移る。
+エクセプションがcatchされると、その後の処理が続行される。どのcatchブロックにもマッチしない場合、
+エクセプションはさらに外側のtry-catchブロック、または呼び出し元に伝播する。
 
-### noexcept <a id="SS_19_13_4"></a>
+エクセプションのtry-catchは[関数tryブロック](#SS_19_13_2)によっても実装できる。
+
+一般にエクセプションオブジェクトのcatchには上記ののコード例のように`T const&`を使用することが好ましい。
+これにより、エクセプションオブジェクトの[スライシング](#SS_21_10_3)を避けることができる。
+
+### 関数tryブロック <a id="SS_19_13_2"></a>
+関数tryブロックとはtry-catchを本体とした下記のような関数のブロックを指す。
+
+```cpp
+    //  example/core_lang_spec/exception_ut.cpp 40
+
+    void function_try_block(int num)
+    try {  // 関数tryブロック
+
+        auto a = A(num);  // エクセプションが発生する可能性のあるコード
+        // 何らかの処理
+        // ...
+    }
+    catch (std::length_error const& e) {  // 関数tryブロックのエクセプションハンドラ
+        // エクセプション処理
+        // ...
+    }
+    catch (std::logic_error const&) {  // 関数tryブロックのエクセプションハンドラ
+        throw;                         // ここではエクセプション処理が完了できない場合、再throw
+    }
+```
+
+### エクセプションのthrow <a id="SS_19_13_3"></a>
+throwキーワードを使用して、任意の型のオブジェクトをエクセプションとして投げる(throw)ことができるが、
+throwのオペランドには、慣習的に[std::exception](#SS_20_3_1)の派生クラスのインスタンスを用いることが多い。
+
+```cpp
+    //  example/core_lang_spec/exception_ut.cpp 61
+
+    int divide(int a, int b)
+    {
+        if (b == 0) {
+            throw std::invalid_argument("b must be not ZERO");  // 0除算によるエクセプション
+        }
+        return a / b;
+    }
+```
+```cpp
+    //  example/core_lang_spec/exception_ut.cpp 77
+
+    try {  // tryブロック
+
+        auto solution = divide(a, b);
+        // 何らかの処理
+        // ...
+    }
+    catch (std::exception const& e) {
+        // エクセプション処理
+        // ...
+    }
+```
+
+### エクセプションの再throw <a id="SS_19_13_4"></a>
+catchブロック内でエクセプション処理を完了できない場合、エクセプションを上位の呼び出し元に伝播させる必要がある。
+このような場合、オペランドなしのthrow;文を用いることで、catchしたエクセプションオブジェクトをそのまま再送出できる。
+これを再throw（rethrow）と呼ぶ。
+
+```cpp
+    //  example/core_lang_spec/exception_ut.cpp 15
+
+    try {  // tryブロック
+
+        auto a = A(num);  // エクセプションが発生する可能性のあるコード
+        // 何らかの処理
+        // ...
+    }
+    catch (std::logic_error const& e) {
+        // エクセプション処理
+        // ...
+    }
+    catch (std::runtime_error const& e) {
+        /*
+        throw e;  ここでリカバリ処理ができない場合、再throwすることで外部にエラーを伝えることができるが、
+                  以下の記法の方が好ましい */
+        throw;  // ここではエクセプション処理が完了できない場合、再throw
+    }
+```
+
+再throwには`throw;`と`throw e;`の2つの記法があるが、上記のように`throw;`を使用すべきである。
+`throw e;`では、元のエクセプションオブジェクトが[スライシング](#SS_21_10_3)される可能性があるためである。
+`throw;`は元のエクセプションオブジェクトをそのまま保持して再送出する。
+
+### catch-all <a id="SS_19_13_5"></a>
+すべての型のエクセプションを一括して捕捉したい場合、省略記号（...）を用いたcatch-all構文を使用する。
+この構文は、どのcatchブロックにもマッチしなかったエクセプションを捕捉する。
+
+```cpp
+    //  example/core_lang_spec/exception_ut.cpp 92
+
+    try {  // tryブロック
+
+        auto solution = divide(a, b);
+        // 何らかの処理
+        // ...
+    }
+    catch (std::exception const& e) {
+        // エクセプション処理
+        // ...
+    }
+    catch (...) {  // すべてのエクセプションをcatch（catch-all）
+        // エクセプション処理
+        // ...
+    }
+```
+
+### noexcept <a id="SS_19_13_6"></a>
 C++11で導入されたnoexceptキーワードには、以下の2つの意味がある。
 
 * C++03までのthrowキーワードによるエクセプション仕様の代替。
@@ -9005,7 +9311,7 @@ C++11で導入されたnoexceptキーワードには、以下の2つの意味が
 以下に上記のコード例を示す。
 
 ```cpp
-    //  example/core_lang_spec/noexcept_ut.cpp 11
+    //  example/core_lang_spec/exception_ut.cpp 113
 
     std::string f_noexcept() noexcept  // エクセプションを発生させない
     {
@@ -9028,7 +9334,7 @@ C++11で導入されたnoexceptキーワードには、以下の2つの意味が
     }
 ```
 ```cpp
-    //  example/core_lang_spec/noexcept_ut.cpp 37
+    //  example/core_lang_spec/exception_ut.cpp 139
 
     static_assert(noexcept(f_noexcept()));  // エクセプションを発生させる可能性の確認
     static_assert(!noexcept(f_except()));   // エクセプションを発生させない可能性の確認
@@ -9042,7 +9348,7 @@ C++11で導入されたnoexceptキーワードには、以下の2つの意味が
 演算子としてのnoexceptはテンプレートで頻繁に使用されるため、以下にそのような例を示す。
 
 ```cpp
-    //  example/core_lang_spec/noexcept_ut.cpp 50
+    //  example/core_lang_spec/exception_ut.cpp 152
 
     class PossiblyThrow {  // オブジェクト生成でエクセプションの発生可能性あり
     public:
@@ -9057,7 +9363,7 @@ C++11で導入されたnoexceptキーワードには、以下の2つの意味が
     }
 ```
 ```cpp
-    //  example/core_lang_spec/noexcept_ut.cpp 67
+    //  example/core_lang_spec/exception_ut.cpp 169
 
     auto i = int{};
     auto p = PossiblyThrow{};
@@ -9068,7 +9374,34 @@ C++11で導入されたnoexceptキーワードには、以下の2つの意味が
     static_assert(!noexcept(t_f(p)));
 ```
 
-### exception-unfriendly <a id="SS_19_13_5"></a>
+### エクセプション安全性の保証 <a id="SS_19_13_7"></a>
+関数のエクセプション発生時の安全性の保証には以下の3つのレベルが規定されている。
+
+* [no-fail保証](#SS_19_13_7_1)
+* [強い安全性の保証](#SS_19_13_7_2)
+* [基本的な安全性の保証](#SS_19_13_7_3)
+
+#### no-fail保証 <a id="SS_19_13_7_1"></a>
+「no-fail保証」を満たす関数はエクセプションをthrowしない。
+no-failを保証する関数は、
+[noexcept](#SS_19_13_6)を使用してエクセプションを発生させないことを明示できる。
+
+標準テンプレートクラスのパラメータとして使用するクラスのメンバ関数には、
+正確にnoexceptの宣言をしないと、
+テンプレートクラスのメンバ関数によってはパフォーマンスを起こしてしまう可能性がある。
+
+#### 強い安全性の保証 <a id="SS_19_13_7_2"></a>
+「強い保証」を満たす関数は、この関数がエクセプションによりスコープから外れた場合でも、
+この関数が呼ばれなかった状態と同じ(プログラムカウンタ以外の状態は同じ)であることを保証する。
+従って、この関数呼び出しは成功したか、完全な無効だったかのどちらかになる。
+
+#### 基本的な安全性の保証 <a id="SS_19_13_7_3"></a>
+「基本的な安全性の保証」を満たす関数は、この関数がエクセプションによりスコープから外れた場合でも、
+メモリ等のリソースリークは起こさず、
+オブジェクトは(変更されたかもしれないが)引き続き使えることを保証する。
+
+
+### exception-unfriendly <a id="SS_19_13_8"></a>
 以下のような関数  
 
 * 初期化に関連する関数やコンストラクタ
@@ -9386,58 +9719,61 @@ __この章の構成__
 &emsp;&emsp;&emsp; [std::is_copy_assignable](#SS_20_2_8)  
 &emsp;&emsp;&emsp; [std::is_move_assignable](#SS_20_2_9)  
 
-&emsp;&emsp; [並列処理](#SS_20_3)  
-&emsp;&emsp;&emsp; [std::thread](#SS_20_3_1)  
-&emsp;&emsp;&emsp; [std::mutex](#SS_20_3_2)  
-&emsp;&emsp;&emsp; [std::atomic](#SS_20_3_3)  
-&emsp;&emsp;&emsp; [std::condition_variable](#SS_20_3_4)  
+&emsp;&emsp; [標準エクセプションクラス](#SS_20_3)  
+&emsp;&emsp;&emsp; [std::exception](#SS_20_3_1)  
 
-&emsp;&emsp; [ロック所有ラッパー](#SS_20_4)  
-&emsp;&emsp;&emsp; [std::lock_guard](#SS_20_4_1)  
-&emsp;&emsp;&emsp; [std::unique_lock](#SS_20_4_2)  
-&emsp;&emsp;&emsp; [std::scoped_lock](#SS_20_4_3)  
+&emsp;&emsp; [並列処理](#SS_20_4)  
+&emsp;&emsp;&emsp; [std::thread](#SS_20_4_1)  
+&emsp;&emsp;&emsp; [std::mutex](#SS_20_4_2)  
+&emsp;&emsp;&emsp; [std::atomic](#SS_20_4_3)  
+&emsp;&emsp;&emsp; [std::condition_variable](#SS_20_4_4)  
 
-&emsp;&emsp; [スマートポインタ](#SS_20_5)  
-&emsp;&emsp;&emsp; [std::unique_ptr](#SS_20_5_1)  
-&emsp;&emsp;&emsp;&emsp; [std::make_unique](#SS_20_5_1_1)  
+&emsp;&emsp; [ロック所有ラッパー](#SS_20_5)  
+&emsp;&emsp;&emsp; [std::lock_guard](#SS_20_5_1)  
+&emsp;&emsp;&emsp; [std::unique_lock](#SS_20_5_2)  
+&emsp;&emsp;&emsp; [std::scoped_lock](#SS_20_5_3)  
 
-&emsp;&emsp;&emsp; [std::shared_ptr](#SS_20_5_2)  
-&emsp;&emsp;&emsp;&emsp; [std::make_shared](#SS_20_5_2_1)  
-&emsp;&emsp;&emsp;&emsp; [std::enable_shared_from_this](#SS_20_5_2_2)  
+&emsp;&emsp; [スマートポインタ](#SS_20_6)  
+&emsp;&emsp;&emsp; [std::unique_ptr](#SS_20_6_1)  
+&emsp;&emsp;&emsp;&emsp; [std::make_unique](#SS_20_6_1_1)  
 
-&emsp;&emsp;&emsp; [std::weak_ptr](#SS_20_5_3)  
-&emsp;&emsp;&emsp; [std::auto_ptr](#SS_20_5_4)  
+&emsp;&emsp;&emsp; [std::shared_ptr](#SS_20_6_2)  
+&emsp;&emsp;&emsp;&emsp; [std::make_shared](#SS_20_6_2_1)  
+&emsp;&emsp;&emsp;&emsp; [std::enable_shared_from_this](#SS_20_6_2_2)  
 
-&emsp;&emsp; [Polymorphic Memory Resource(pmr)](#SS_20_6)  
-&emsp;&emsp;&emsp; [std::pmr::memory_resource](#SS_20_6_1)  
-&emsp;&emsp;&emsp; [std::pmr::polymorphic_allocator](#SS_20_6_2)  
-&emsp;&emsp;&emsp; [pool_resource](#SS_20_6_3)  
+&emsp;&emsp;&emsp; [std::weak_ptr](#SS_20_6_3)  
+&emsp;&emsp;&emsp; [std::auto_ptr](#SS_20_6_4)  
 
-&emsp;&emsp; [コンテナ](#SS_20_7)  
-&emsp;&emsp;&emsp; [シーケンスコンテナ(Sequence Containers)](#SS_20_7_1)  
-&emsp;&emsp;&emsp;&emsp; [std::forward_list](#SS_20_7_1_1)  
+&emsp;&emsp; [Polymorphic Memory Resource(pmr)](#SS_20_7)  
+&emsp;&emsp;&emsp; [std::pmr::memory_resource](#SS_20_7_1)  
+&emsp;&emsp;&emsp; [std::pmr::polymorphic_allocator](#SS_20_7_2)  
+&emsp;&emsp;&emsp; [pool_resource](#SS_20_7_3)  
 
-&emsp;&emsp;&emsp; [連想コンテナ(Associative Containers)](#SS_20_7_2)  
-&emsp;&emsp;&emsp; [無順序連想コンテナ(Unordered Associative Containers)](#SS_20_7_3)  
-&emsp;&emsp;&emsp;&emsp; [std::unordered_set](#SS_20_7_3_1)  
-&emsp;&emsp;&emsp;&emsp; [std::unordered_map](#SS_20_7_3_2)  
-&emsp;&emsp;&emsp;&emsp; [std::type_index](#SS_20_7_3_3)  
+&emsp;&emsp; [コンテナ](#SS_20_8)  
+&emsp;&emsp;&emsp; [シーケンスコンテナ(Sequence Containers)](#SS_20_8_1)  
+&emsp;&emsp;&emsp;&emsp; [std::forward_list](#SS_20_8_1_1)  
 
-&emsp;&emsp;&emsp; [コンテナアダプタ(Container Adapters)](#SS_20_7_4)  
-&emsp;&emsp;&emsp; [特殊なコンテナ](#SS_20_7_5)  
+&emsp;&emsp;&emsp; [連想コンテナ(Associative Containers)](#SS_20_8_2)  
+&emsp;&emsp;&emsp; [無順序連想コンテナ(Unordered Associative Containers)](#SS_20_8_3)  
+&emsp;&emsp;&emsp;&emsp; [std::unordered_set](#SS_20_8_3_1)  
+&emsp;&emsp;&emsp;&emsp; [std::unordered_map](#SS_20_8_3_2)  
+&emsp;&emsp;&emsp;&emsp; [std::type_index](#SS_20_8_3_3)  
 
-&emsp;&emsp; [std::optional](#SS_20_8)  
-&emsp;&emsp;&emsp; [戻り値の無効表現](#SS_20_8_1)  
-&emsp;&emsp;&emsp; [オブジェクトの遅延初期化](#SS_20_8_2)  
+&emsp;&emsp;&emsp; [コンテナアダプタ(Container Adapters)](#SS_20_8_4)  
+&emsp;&emsp;&emsp; [特殊なコンテナ](#SS_20_8_5)  
 
-&emsp;&emsp; [std::variant](#SS_20_9)  
-&emsp;&emsp; [オブジェクトの比較](#SS_20_10)  
-&emsp;&emsp;&emsp; [std::rel_ops](#SS_20_10_1)  
-&emsp;&emsp;&emsp; [std::tuppleを使用した比較演算子の実装方法](#SS_20_10_2)  
+&emsp;&emsp; [std::optional](#SS_20_9)  
+&emsp;&emsp;&emsp; [戻り値の無効表現](#SS_20_9_1)  
+&emsp;&emsp;&emsp; [オブジェクトの遅延初期化](#SS_20_9_2)  
 
-&emsp;&emsp; [その他](#SS_20_11)  
-&emsp;&emsp;&emsp; [SSO(Small String Optimization)](#SS_20_11_1)  
-&emsp;&emsp;&emsp; [heap allocation elision](#SS_20_11_2)  
+&emsp;&emsp; [std::variant](#SS_20_10)  
+&emsp;&emsp; [オブジェクトの比較](#SS_20_11)  
+&emsp;&emsp;&emsp; [std::rel_ops](#SS_20_11_1)  
+&emsp;&emsp;&emsp; [std::tuppleを使用した比較演算子の実装方法](#SS_20_11_2)  
+
+&emsp;&emsp; [その他](#SS_20_12)  
+&emsp;&emsp;&emsp; [SSO(Small String Optimization)](#SS_20_12_1)  
+&emsp;&emsp;&emsp; [heap allocation elision](#SS_20_12_2)  
   
   
 
@@ -9785,9 +10121,38 @@ Tが[MoveAssignable要件](#SS_21_5_4)を満たすためには`std::is_move_assi
 その逆が成立するとは限らない。
 
 
-## 並列処理 <a id="SS_20_3"></a>
+## 標準エクセプションクラス <a id="SS_20_3"></a>
+C++標準ライブラリは、`<exception>`と`<stdexcept>`定義される標準エクセプションクラスを提供する。
 
-### std::thread <a id="SS_20_3_1"></a>
+### std::exception <a id="SS_20_3_1"></a>
+exceptionクラスは、標準ライブラリが提供する全てのエクセプションクラスの基底クラスである。
+標準ライブラリによって送出されるエクセプションオブジェクトのクラスは全て、このクラスから派生する。
+したがって、標準のエクセプションは全てこのクラスで捕捉できる。
+
+標準ライブラリによって送出されるエクセプションオブジェクトの派生の系譜を以下に示す。
+
+
+```cpp
+    // 標準ライブラリによって送出されるエクセプションオブジェクトの派生の系譜
+
+    std::exception                      // すべての標準エクセプションの基底クラス
+    ├── std::bad_alloc                  // メモリ確保の失敗
+    ├── std::bad_cast                   // 不正なキャスト
+    ├── std::bad_typeid                 // 不正なtypeid
+    ├── std::bad_exception              // 予期しないエクセプション
+    └── std::logic_error                // 論理エラー
+        ├── std::invalid_argument
+        ├── std::domain_error
+        ├── std::length_error
+        ├── std::out_of_range
+        └── std::runtime_error          // 実行時エラー
+            ├── std::range_error
+            ├── std::overflow_error
+            └── std::underflow_error
+```
+
+## 並列処理 <a id="SS_20_4"></a>
+### std::thread <a id="SS_20_4_1"></a>
 クラスthread は、新しい実行のスレッドの作成/待機/その他を行う機構を提供する。
 
 ```cpp
@@ -9825,7 +10190,7 @@ Tが[MoveAssignable要件](#SS_21_5_4)を満たすためには`std::is_move_assi
     ASSERT_NE(c.count_, expected);
 ```
 
-### std::mutex <a id="SS_20_3_2"></a>
+### std::mutex <a id="SS_20_4_2"></a>
 mutex は、スレッド間で使用する共有リソースを排他制御するためのクラスである。 
 
 | メンバ関数 | 動作説明                                                                                    |
@@ -9880,12 +10245,12 @@ mutex は、スレッド間で使用する共有リソースを排他制御す�
 
 lock()を呼び出した状態で、unlock()を呼び出さなかった場合、デッドロックを引き起こしてしまうため、
 永久に処理が完了しないバグの元となり得る。このような問題を避けるために、
-mutexは通常、[std::lock_guard](#SS_20_4_1)と組み合わせて使われる。
+mutexは通常、[std::lock_guard](#SS_20_5_1)と組み合わせて使われる。
 
-### std::atomic <a id="SS_20_3_3"></a>
+### std::atomic <a id="SS_20_4_3"></a>
 atomicクラステンプレートは、型Tをアトミック操作するためのものである。
 [組み込み型](#SS_19_1_2)に対する特殊化が提供されており、それぞれに特化した演算が用意されている。
-[std::mutex](#SS_20_3_2)で示したような単純なコードではstd::atomicを使用して下記のように書く方が一般的である。
+[std::mutex](#SS_20_4_2)で示したような単純なコードではstd::atomicを使用して下記のように書く方が一般的である。
 
 ```cpp
     //  example/stdlib_and_concepts/thread_ut.cpp 92
@@ -9925,7 +10290,7 @@ atomicクラステンプレートは、型Tをアトミック操作するため�
     ASSERT_EQ(c.count_, expected);
 ```
 
-### std::condition_variable <a id="SS_20_3_4"></a>
+### std::condition_variable <a id="SS_20_4_4"></a>
 condition_variable は、特定のイベントが発生するまでスレッドの待ち合わせを行うためのクラスである。
 最も単純な使用例を以下に示す(「[Spurious Wakeup](#SS_21_12_11)」参照)。
 ```cpp
@@ -9964,15 +10329,15 @@ condition_variable は、特定のイベントが発生するまでスレッド�
     t2.join();
 ```
 
-## ロック所有ラッパー <a id="SS_20_4"></a>
+## ロック所有ラッパー <a id="SS_20_5"></a>
 ロック所有ラッパーとはミューテックスのロックおよびアンロックを管理するための以下のクラスを指す。
 
-- [std::lock_guard](#SS_20_4_1)
-- [std::unique_lock](#SS_20_4_2)
-- [std::scoped_lock](#SS_20_4_3)
+- [std::lock_guard](#SS_20_5_1)
+- [std::unique_lock](#SS_20_5_2)
+- [std::scoped_lock](#SS_20_5_3)
 
 
-### std::lock_guard <a id="SS_20_4_1"></a>
+### std::lock_guard <a id="SS_20_5_1"></a>
 std::lock_guardを使わない問題のあるコードを以下に示す。
 
 ```cpp
@@ -10047,7 +10412,7 @@ std::lock_guardを使用して、このような問題に対処したコード�
     }  // lockオブジェクトのデストラクタでmtx_.unlock()が呼ばれる
 ```
 
-### std::unique_lock <a id="SS_20_4_2"></a>
+### std::unique_lock <a id="SS_20_5_2"></a>
 std::unique_lockとは、ミューテックスのロック管理を柔軟に行えるロックオブジェクトである。
 std::lock_guardと異なり、ロックの手動解放や再取得が可能であり、特にcondition_variable::wait()と組み合わせて使用される。
 wait()は内部でロックを一時的に解放し、通知受信後に再取得する。
@@ -10055,7 +10420,7 @@ wait()は内部でロックを一時的に解放し、通知受信後に再取�
 下記の例では、IntQueue::push()、 IntQueue::pop_ng()、
 IntQueue::pop_ok()の中で行われるIntQueue::q_へのアクセスで発生する競合を回避するためにIntQueue::mtx_を使用する。
 
-下記のコード例では、[std::lock_guard](#SS_20_4_1)の説明で述べたようにmutex::lock()、mutex::unlock()を直接呼び出すのではなく、
+下記のコード例では、[std::lock_guard](#SS_20_5_1)の説明で述べたようにmutex::lock()、mutex::unlock()を直接呼び出すのではなく、
 std::unique_lockやstd::lock_guardによりmutexを使用する。
 
 ```cpp
@@ -10181,7 +10546,7 @@ std::unique_lockやstd::lock_guardによりmutexを使用する。
     }
 ```
 
-### std::scoped_lock <a id="SS_20_4_3"></a>
+### std::scoped_lock <a id="SS_20_5_3"></a>
 std::scoped_lockとは、複数のミューテックスを同時にロックするためのロックオブジェクトである。
 C++17で導入され、デッドロックを回避しながら複数のミューテックスを安全にロックできる。
 
@@ -10291,7 +10656,7 @@ transfer_ng()がデッドロックを引き起こすシナリオは、以下の�
     }
 ```
 
-## スマートポインタ <a id="SS_20_5"></a>
+## スマートポインタ <a id="SS_20_6"></a>
 スマートポインタは、C++標準ライブラリが提供するメモリ管理クラス群を指す。
 生のポインタの代わりに使用され、リソース管理を容易にし、
 メモリリークや二重解放といった問題を防ぐことを目的としている。
@@ -10299,40 +10664,40 @@ transfer_ng()がデッドロックを引き起こすシナリオは、以下の�
 スマートポインタは通常、所有権とスコープに基づいてメモリの解放を自動的に行う。
 C++標準ライブラリでは、主に以下の3種類のスマートポインタが提供されている。
 
-* [std::unique_ptr](#SS_20_5_1)
-    - [std::make_unique](#SS_20_5_1_1)
-* [std::shared_ptr](#SS_20_5_2)
-    - [std::make_shared](#SS_20_5_2_1)
-    - [std::enable_shared_from_this](#SS_20_5_2_2)
-    - [std::weak_ptr](#SS_20_5_3)
-* [std::auto_ptr](#SS_20_5_4)
+* [std::unique_ptr](#SS_20_6_1)
+    - [std::make_unique](#SS_20_6_1_1)
+* [std::shared_ptr](#SS_20_6_2)
+    - [std::make_shared](#SS_20_6_2_1)
+    - [std::enable_shared_from_this](#SS_20_6_2_2)
+    - [std::weak_ptr](#SS_20_6_3)
+* [std::auto_ptr](#SS_20_6_4)
 
-### std::unique_ptr <a id="SS_20_5_1"></a>
+### std::unique_ptr <a id="SS_20_6_1"></a>
 std::unique_ptrは、C++11で導入されたスマートポインタの一種であり、std::shared_ptrとは異なり、
 [オブジェクトの排他所有](#SS_21_4_1)を表すために用いられる。所有権は一つのunique_ptrインスタンスに限定され、
 他のポインタと共有することはできない。ムーブ操作によってのみ所有権を移譲でき、
 スコープを抜けると自動的にリソースが解放されるため、メモリ管理の安全性と効率性が向上する。
 
-#### std::make_unique <a id="SS_20_5_1_1"></a>
+#### std::make_unique <a id="SS_20_6_1_1"></a>
 [std::make_unique\<T\>(Args...)](https://cpprefjp.github.io/reference/memory/make_unique.html)は、
 クラスTをダイナミックに生成し、そのポインタを保持するshared_ptrオブジェクトを生成する。
 
 使用例については、「[オブジェクトの排他所有](#SS_21_4_1)」を参照せよ。
 
-### std::shared_ptr <a id="SS_20_5_2"></a>
+### std::shared_ptr <a id="SS_20_6_2"></a>
 std::shared_ptrは、同じくC++11で導入されたスマートポインタであり、[オブジェクトの共有所有](#SS_21_4_2)を表すために用いられる。
 複数のshared_ptrインスタンスが同じリソースを参照でき、
 内部の参照カウントによって最後の所有者が破棄された時点でリソースが解放される。
-[std::weak_ptr](#SS_20_5_3)は、shared_ptrと連携して使用されるスマートポインタであり、オブジェクトの非所有参照を表す。
+[std::weak_ptr](#SS_20_6_3)は、shared_ptrと連携して使用されるスマートポインタであり、オブジェクトの非所有参照を表す。
 参照カウントには影響せず、循環参照を防ぐために用いられる。weak_ptrから一時的にshared_ptrを取得するにはlock()を使用する。
 
-#### std::make_shared <a id="SS_20_5_2_1"></a>
+#### std::make_shared <a id="SS_20_6_2_1"></a>
 [std::make_shared\<T\>(Args...)](https://cpprefjp.github.io/reference/memory/make_shared.html)は、
 クラスTをダイナミックに生成し、そのポインタを保持するshared_ptrオブジェクトを生成する。
 
 使用例については、「[オブジェクトの共有所有](#SS_21_4_2)」を参照せよ。
 
-#### std::enable_shared_from_this <a id="SS_20_5_2_2"></a>
+#### std::enable_shared_from_this <a id="SS_20_6_2_2"></a>
 `std::enable_shared_from_this`は、`shared_ptr`で管理されているオブジェクトが、
 自分自身への`shared_ptr`を安全に取得するための仕組みである。
 
@@ -10400,7 +10765,7 @@ shared_ptrのコンストラクタがenable_shared_from_thisの存在を検出�
 **[使用上の注意点]**
 
 1. コンストラクタ内での使用禁止  
-   コンストラクタ内でshared_from_this()を呼び出してはならない。なぜなら、コンストラクタ実行時点ではまだshared_ptrによる管理が完了しておらず、内部のweak_ptrが初期化されていないためである。この場合、std::bad_weak_ptr例外がスローされる。
+   コンストラクタ内でshared_from_this()を呼び出してはならない。なぜなら、コンストラクタ実行時点ではまだshared_ptrによる管理が完了しておらず、内部のweak_ptrが初期化されていないためである。この場合、std::bad_weak_ptrエクセプションがスローされる。
 2. shared_ptrでの管理が必須  
    オブジェクトがshared_ptrで管理されていない状態(例えばスタック上のオブジェクトや生のnew)でshared_from_this()を呼び出すと、std::bad_weak_ptr例外がスローされるか、未定義動作となる。
 3. make_sharedの使用推奨  
@@ -10409,10 +10774,10 @@ shared_ptrのコンストラクタがenable_shared_from_thisの存在を検出�
 C++17以降では、`weak_from_this()`メソッドも提供されている。これはshared_from_this()と同様の仕組みだが、
 weak_ptrを返すため[オブジェクトの循環所有](#SS_21_4_3)を避けたい場合に有用である。
 
-### std::weak_ptr <a id="SS_20_5_3"></a>
+### std::weak_ptr <a id="SS_20_6_3"></a>
 std::weak_ptrは、スマートポインタの一種である。
 
-std::weak_ptrは参照カウントに影響を与えず、[std::shared_ptr](#SS_20_5_2)とオブジェクトを共有所有するのではなく、
+std::weak_ptrは参照カウントに影響を与えず、[std::shared_ptr](#SS_20_6_2)とオブジェクトを共有所有するのではなく、
 その`shared_ptr`インスタンスとの関連のみを保持するのため、[オブジェクトの循環所有](#SS_21_4_3)の問題を解決できる。
 
 [オブジェクトの循環所有](#SS_21_4_3)で示した問題のあるクラスの修正版を以下に示す
@@ -10490,7 +10855,7 @@ Xオブジェクトにアクセスする必要があるときに、
 下記のY::WhoIsWith()関数の内部処理のようにすることで、`std::weak_ptr<X>`オブジェクトから、
 それと紐づいた`std::shared_ptr<X>`オブジェクトを生成できる。
 
-なお、上記コードは[初期化付きif文](#SS_19_9_5_3)を使うことで、
+なお、上記コードは[初期化付きif文](#SS_19_9_4_3)を使うことで、
 生成した`std::shared_ptr<X>`オブジェクトのスコープを最小に留めている。
 
 ```cpp
@@ -10572,16 +10937,16 @@ Xと修正版Yの単体テストによりメモリーリークが修正された
 - 必要に応じて`lock()`でオブジェクトにアクセスできる
 - オブジェクトが既に解放されている場合は`lock()`が空の`shared_ptr`を返すため、安全に処理できる
 
-### std::auto_ptr <a id="SS_20_5_4"></a>
+### std::auto_ptr <a id="SS_20_6_4"></a>
 `std::auto_ptr`はC++11以前に導入された初期のスマートポインタであるが、異常な[copyセマンティクス](#SS_21_5_2)を持つため、
 多くの誤用を生み出し、C++11から非推奨とされ、C++17から規格から排除された。
 
 
-## Polymorphic Memory Resource(pmr) <a id="SS_20_6"></a>
+## Polymorphic Memory Resource(pmr) <a id="SS_20_7"></a>
 Polymorphic Memory Resource(pmr)は、
 動的メモリ管理の柔軟性と効率性を向上させるための、C++17から導入された仕組みである。
 
-[std::pmr::polymorphic_allocator](#SS_20_6_2)はC++17で導入された標準ライブラリのクラスで、
+[std::pmr::polymorphic_allocator](#SS_20_7_2)はC++17で導入された標準ライブラリのクラスで、
 C++のメモリリソース管理を抽象化するための機能を提供する。
 
 例えば、std::vectorは以下のように宣言されていた。
@@ -10618,14 +10983,14 @@ std::pmrは以下のようなメモリ管理のカスタマイズを可能にす
 
 std::pmrの主要なコンポーネントは以下の通りである。
 
-* [std::pmr::memory_resource](#SS_20_6_1)  
-* [std::pmr::polymorphic_allocator](#SS_20_6_2)  
-* [pool_resource](#SS_20_6_3)
+* [std::pmr::memory_resource](#SS_20_7_1)  
+* [std::pmr::polymorphic_allocator](#SS_20_7_2)  
+* [pool_resource](#SS_20_7_3)
 
-### std::pmr::memory_resource <a id="SS_20_6_1"></a>
+### std::pmr::memory_resource <a id="SS_20_7_1"></a>
 std::pmr::memory_resourceは、
 ユーザー定義のメモリリソースをカスタマイズし、
-[std::pmr::polymorphic_allocator](#SS_20_6_2)を通じて利用可能にする[インターフェースクラス](#SS_19_4_11)である。
+[std::pmr::polymorphic_allocator](#SS_20_7_2)を通じて利用可能にする[インターフェースクラス](#SS_19_4_11)である。
 
 std::pmr::memory_resourceから派生した具象クラスの実装を以下に示す。
 
@@ -10735,15 +11100,15 @@ std::pmr::memory_resourceから派生した具象クラスの実装を以下に�
     };
 ```
 
-### std::pmr::polymorphic_allocator <a id="SS_20_6_2"></a>
+### std::pmr::polymorphic_allocator <a id="SS_20_7_2"></a>
 std::pmr::polymorphic_allocatorはC++17で導入された標準ライブラリのクラスで、
 C++のメモリリソース管理を抽象化するための機能を提供する。
-[std::pmr::memory_resource](#SS_20_6_1)を基盤とし、
+[std::pmr::memory_resource](#SS_20_7_1)を基盤とし、
 コンテナやアルゴリズムにカスタムメモリアロケーション戦略を容易に適用可能にする。
 std::allocatorと異なり、型に依存せず、
 ポリモーフィズムを活用してメモリリソースを切り替えられる点が特徴である。
 
-すでに示したmemory_resource_variable([std::pmr::memory_resource](#SS_20_6_1))の単体テストを以下に示すことにより、
+すでに示したmemory_resource_variable([std::pmr::memory_resource](#SS_20_7_1))の単体テストを以下に示すことにより、
 polymorphic_allocatorの使用例とする。
 
 ```cpp
@@ -10783,8 +11148,8 @@ polymorphic_allocatorの使用例とする。
     ASSERT_GE(max, mrv.get_count());  // 解放後のメモリの回復のテスト
 ```
 
-### pool_resource <a id="SS_20_6_3"></a>
-pool_resourceは[std::pmr::memory_resource](#SS_20_6_1)を基底とする下記の2つの具象クラスである。
+### pool_resource <a id="SS_20_7_3"></a>
+pool_resourceは[std::pmr::memory_resource](#SS_20_7_1)を基底とする下記の2つの具象クラスである。
 
 * std::pmr::synchronized_pool_resourceは下記のような特徴を持つメモリプールである。
     * 非同期のメモリプールリソース
@@ -10848,17 +11213,17 @@ pool_resourceは[std::pmr::memory_resource](#SS_20_6_1)を基底とする下記�
 ```
 
 
-## コンテナ <a id="SS_20_7"></a>
+## コンテナ <a id="SS_20_8"></a>
 データを格納し、
 効率的に操作するための汎用的なデータ構造を提供するC++標準ライブラリの下記のようなクラス群である。
 
-* [シーケンスコンテナ(Sequence Containers)](#SS_20_7_1)
+* [シーケンスコンテナ(Sequence Containers)](#SS_20_8_1)
 * [連想コンテナ(Associative Containers)(---)
-* [無順序連想コンテナ(Unordered Associative Containers)](#SS_20_7_3)
-* [コンテナアダプタ(Container Adapters)](#SS_20_7_4)
-* [特殊なコンテナ](#SS_20_7_5)
+* [無順序連想コンテナ(Unordered Associative Containers)](#SS_20_8_3)
+* [コンテナアダプタ(Container Adapters)](#SS_20_8_4)
+* [特殊なコンテナ](#SS_20_8_5)
 
-### シーケンスコンテナ(Sequence Containers) <a id="SS_20_7_1"></a>
+### シーケンスコンテナ(Sequence Containers) <a id="SS_20_8_1"></a>
 データが挿入順に保持され、順序が重要な場合に使用する。
 
 | コンテナ                 | 説明                                                                |
@@ -10866,11 +11231,11 @@ pool_resourceは[std::pmr::memory_resource](#SS_20_6_1)を基底とする下記�
 | `std::vector`            | 動的な配列で、ランダムアクセスが高速。末尾への挿入/削除が効率的     |
 | `std::deque`             | 両端に効率的な挿入/削除が可能な動的配列                             |
 | `std::list`              | 双方向リスト。要素の順序を維持し、中間の挿入/削除が効率的           |
-| [std::forward_list](#SS_20_7_1_1) | 単方向リスト。軽量だが、双方向の操作はできない                      |
+| [std::forward_list](#SS_20_8_1_1) | 単方向リスト。軽量だが、双方向の操作はできない                      |
 | `std::array`             | 固定長配列で、サイズがコンパイル時に決まる                          |
 | `std::string`            | 可変長の文字列を管理するクラス(厳密には`std::basic_string`の特殊化) |
 
-#### std::forward_list <a id="SS_20_7_1_1"></a>
+#### std::forward_list <a id="SS_20_8_1_1"></a>
 
 ```cpp
     //  example/stdlib_and_concepts/container_ut.cpp 14
@@ -10888,7 +11253,7 @@ pool_resourceは[std::pmr::memory_resource](#SS_20_6_1)を基底とする下記�
     EXPECT_EQ(*++it, 3);
 ```
 
-### 連想コンテナ(Associative Containers) <a id="SS_20_7_2"></a>
+### 連想コンテナ(Associative Containers) <a id="SS_20_8_2"></a>
 データがキーに基づいて自動的にソートされ、検索が高速である。
 
 | コンテナ           | 説明                                             |
@@ -10898,18 +11263,18 @@ pool_resourceは[std::pmr::memory_resource](#SS_20_6_1)を基底とする下記�
 | `std::map`         | ソートされたキーと値のペアを保持。キーは一意     |
 | `std::multimap`    | ソートされたキーと値のペアを保持。キーは重複可能 |
 
-### 無順序連想コンテナ(Unordered Associative Containers) <a id="SS_20_7_3"></a>
+### 無順序連想コンテナ(Unordered Associative Containers) <a id="SS_20_8_3"></a>
 ハッシュテーブルを基盤としたコンテナで、順序を保証しないが高速な検索を提供する。
 
 | コンテナ                  | 説明                                                   |
 |---------------------------|--------------------------------------------------------|
-| [std::unordered_set](#SS_20_7_3_1) | ハッシュテーブルベースの集合。重複は許されない         |
+| [std::unordered_set](#SS_20_8_3_1) | ハッシュテーブルベースの集合。重複は許されない         |
 | `std::unordered_multiset` | ハッシュテーブルベースの集合。重複が許される           |
-| [std::unordered_map](#SS_20_7_3_2) | ハッシュテーブルベースのキーと値のペア。キーは一意     |
+| [std::unordered_map](#SS_20_8_3_2) | ハッシュテーブルベースのキーと値のペア。キーは一意     |
 | `std::unordered_multimap` | ハッシュテーブルベースのキーと値のペア。キーは重複可能 |
-| [std::type_index](#SS_20_7_3_3)    | 型情報型を連想コンテナのキーとして使用するためのクラス |
+| [std::type_index](#SS_20_8_3_3)    | 型情報型を連想コンテナのキーとして使用するためのクラス |
 
-#### std::unordered_set <a id="SS_20_7_3_1"></a>
+#### std::unordered_set <a id="SS_20_8_3_1"></a>
 
 ```cpp
     //  example/stdlib_and_concepts/container_ut.cpp 32
@@ -10929,7 +11294,7 @@ pool_resourceは[std::pmr::memory_resource](#SS_20_6_1)を基底とする下記�
     EXPECT_EQ(uset.size(), 5);
 ```
 
-#### std::unordered_map <a id="SS_20_7_3_2"></a>
+#### std::unordered_map <a id="SS_20_8_3_2"></a>
 
 ```cpp
     //  example/stdlib_and_concepts/container_ut.cpp 52
@@ -10951,7 +11316,7 @@ pool_resourceは[std::pmr::memory_resource](#SS_20_6_1)を基底とする下記�
     EXPECT_EQ(umap.find(4), umap.end());
 ```
 
-#### std::type_index <a id="SS_20_7_3_3"></a>
+#### std::type_index <a id="SS_20_8_3_3"></a>
 std::type_indexはコンテナではないが、
 型情報型を連想コンテナのキーとして使用するためのクラスであるため、この場所に掲載する。
 
@@ -10975,7 +11340,7 @@ std::type_indexはコンテナではないが、
 ```
 
 
-### コンテナアダプタ(Container Adapters) <a id="SS_20_7_4"></a>
+### コンテナアダプタ(Container Adapters) <a id="SS_20_8_4"></a>
 特定の操作のみを公開するためのラッパーコンテナ。
 
 | コンテナ              | 説明                                     |
@@ -10984,7 +11349,7 @@ std::type_indexはコンテナではないが、
 | `std::queue`          | FIFO(先入れ先出し)操作を提供するアダプタ |
 | `std::priority_queue` | 優先度に基づく操作を提供するアダプタ     |
 
-### 特殊なコンテナ <a id="SS_20_7_5"></a>
+### 特殊なコンテナ <a id="SS_20_8_5"></a>
 上記したようなコンテナとは一線を画すが、特定の用途や目的のために設計された一種のコンテナ。
 
 | コンテナ             | 説明                                                       |
@@ -10993,7 +11358,7 @@ std::type_indexはコンテナではないが、
 | `std::bitset`        | 固定長のビット集合を管理するクラス                         |
 | `std::basic_string`  | カスタム文字型をサポートする文字列コンテナ                 |
 
-## std::optional <a id="SS_20_8"></a>
+## std::optional <a id="SS_20_9"></a>
 C++17から導入されたstd::optionalには、以下のような2つの用途がある。
 以下の用途2から、
 このクラスがオブジェクトのダイナミックなメモリアロケーションを行うような印象を受けるが、
@@ -11001,11 +11366,11 @@ C++17から導入されたstd::optionalには、以下のような2つの用途�
 このクラスがオブジェクトのダイナミックな生成が必要になった場合、プレースメントnewを実行する。
 ただし、std::optionalが保持する型自身がnewを実行する場合は、この限りではない。
 
-1. 関数の任意の型の[戻り値の無効表現](#SS_20_8_1)を持たせる
-2. [オブジェクトの遅延初期化](#SS_20_8_2)する(初期化処理が重く、
+1. 関数の任意の型の[戻り値の無効表現](#SS_20_9_1)を持たせる
+2. [オブジェクトの遅延初期化](#SS_20_9_2)する(初期化処理が重く、
    条件によってはそれが無駄になる場合にこの機能を使う)
 
-### 戻り値の無効表現 <a id="SS_20_8_1"></a>
+### 戻り値の無効表現 <a id="SS_20_9_1"></a>
 ```cpp
     //  example/stdlib_and_concepts/optional_ut.cpp 11
 
@@ -11036,7 +11401,7 @@ C++17から導入されたstd::optionalには、以下のような2つの用途�
     ASSERT_THROW(ret1.value(), std::bad_optional_access);  // 値非保持の場合、エクセプション発生
 ```
 
-### オブジェクトの遅延初期化 <a id="SS_20_8_2"></a>
+### オブジェクトの遅延初期化 <a id="SS_20_9_2"></a>
 ```cpp
     //  example/stdlib_and_concepts/optional_ut.cpp 43
 
@@ -11077,7 +11442,7 @@ C++17から導入されたstd::optionalには、以下のような2つの用途�
     ASSERT_EQ(0xdeadbeaf, (*resource)[0]);
 ```
 
-## std::variant <a id="SS_20_9"></a>
+## std::variant <a id="SS_20_10"></a>
 std::variantは、C++17で導入された型安全なunionである。
 このクラスは複数の型のうち1つの値を保持することができ、
 従来のunionに伴う低レベルな操作の安全性の問題を解消するために設計された。
@@ -11140,8 +11505,8 @@ std::variantとstd::visit([Visitor](#SS_4_1)パターンの実装の一種)を�
     ASSERT_EQ("42|3.14|Hello, world!", oss.str());
 ```
 
-## オブジェクトの比較 <a id="SS_20_10"></a>
-### std::rel_ops <a id="SS_20_10_1"></a>
+## オブジェクトの比較 <a id="SS_20_11"></a>
+### std::rel_ops <a id="SS_20_11_1"></a>
 クラスに`operator==`と`operator<`の2つの演算子が定義されていれば、
 それがメンバか否かにかかわらず、他の比較演算子 !=、<=、>、>= はこれらを基に自動的に導出できる。
 std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を機械的に生成する仕組みが提供されている。
@@ -11192,7 +11557,7 @@ std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を�
 なお、std::rel_opsはC++20から導入された[<=>演算子](#SS_19_6_4_1)により不要になったため、
 非推奨とされた。
 
-### std::tuppleを使用した比較演算子の実装方法 <a id="SS_20_10_2"></a>
+### std::tuppleを使用した比較演算子の実装方法 <a id="SS_20_11_2"></a>
 クラスのメンバが多い場合、[==演算子](#SS_19_6_3)で示したような方法は、
 可読性、保守性の問題が発生する場合が多い。下記に示す方法はこの問題を幾分緩和する。
 
@@ -11223,8 +11588,8 @@ std::rel_opsでは`operator==`と`operator<=` を基に他の比較演算子を�
     ASSERT_FALSE(a > b);
 ```
 
-## その他 <a id="SS_20_11"></a>
-### SSO(Small String Optimization) <a id="SS_20_11_1"></a>
+## その他 <a id="SS_20_12"></a>
+### SSO(Small String Optimization) <a id="SS_20_12_1"></a>
 一般にstd::stringで文字列を保持する場合、newしたメモリが使用される。
 64ビット環境であれば、newしたメモリのアドレスを保持する領域は8バイトになる。
 std::stringで保持する文字列が終端の'\0'も含め8バイト以下である場合、
@@ -11233,7 +11598,7 @@ std::stringで保持する文字列が終端の'\0'も含め8バイト以下で�
 
 SOOとはこのような最適化を指す。
 
-### heap allocation elision <a id="SS_20_11_2"></a>
+### heap allocation elision <a id="SS_20_12_2"></a>
 C++11までの仕様では、new式によるダイナミックメモリアロケーションはコードに書かれた通りに、
 実行されなければならず、ひとまとめにしたり省略したりすることはできなかった。
 つまり、ヒープ割り当てに対する最適化は認められなかった。
@@ -11774,7 +12139,7 @@ std::lock_guard<>によってunlockを行うことで、同様の効果が得ら
 
 コード内のコメントで示したように、このコードには以下のような問題がある。
 
-* copy代入演算子には、[エクセプション安全性の保証](#SS_19_13)がない。
+* copy代入演算子には、[エクセプション安全性の保証](#SS_19_13_7)がない。
 * 上記4関数は似ているにも関わらず、微妙な違いがあるためコードクローンとなっている。
 
 ここで紹介するCopy-And-Swapはこのような問題を解決するためのイデオムである。
@@ -11849,7 +12214,7 @@ std::lock_guard<>によってunlockを行うことで、同様の効果が得ら
 また、CopyAndSwap::Swapに関してもstd::vector等が持つswapと同様のものである。
 このイデオムの特徴は、copy代入演算子、
 move代入演算子が各コンストラクタとSwap関数により実装されている所にある。
-これにより[エクセプション安全性の保証](#SS_19_13)を持つ4関数をコードクローンすることなく実装できる。
+これにより[エクセプション安全性の保証](#SS_19_13_7)を持つ4関数をコードクローンすることなく実装できる。
 
 
 ### CRTP(curiously recurring template pattern) <a id="SS_21_1_4"></a>
@@ -11909,7 +12274,7 @@ CRTPとは、
     ASSERT_EQ(2, DerivedClass_Count);  // a1のスコープアウトによりインスタンスが減少
 ```
 
-なお、このパターンは、[std::enable_shared_from_this](#SS_20_5_2_2)の使用において前提知識となっている。
+なお、このパターンは、[std::enable_shared_from_this](#SS_20_6_2_2)の使用において前提知識となっている。
 
 ### Accessor <a id="SS_21_1_5"></a>
 publicメンバ変数とそれにアクセスするソースコードは典型的なアンチパターンであるため、
@@ -14646,7 +15011,7 @@ moveセマンティクスとは以下を満たすようなセマンティクス�
      move代入後にはそのリソースはcに移動していることが一般的である(「[rvalue](#SS_19_7_1_2)」参照)
 
 * エクセプション安全性  
-    [no-fail保証](#SS_19_13_1)をする(noexceptと宣言し、エクセプションをthrowしない)
+    [no-fail保証](#SS_19_13_7_1)をする(noexceptと宣言し、エクセプションをthrowしない)
 
 moveセマンティクスは、使用後に破棄されるオブジェクト(主にrvalue)からの代入処理の実行コストを削減するために導入された。
 
@@ -14819,7 +15184,8 @@ CopyAssignable要件は、C++において型がcopy代入をサポートする�
 
 [注] Xは任意の型  
 
-[注] `templat<typename T> f(T&&)`の`T&&`は[forwardingリファレンス](#SS_19_8_3)である。  
+[注]
+`templat<typename T> f(T&&)`の`T&&`は[forwardingリファレンス](#SS_19_8_3)である。  
 
 [注] 以下のような引数型は避けるべきである。  
 
@@ -15873,7 +16239,7 @@ C/C++プログラミングにおける重要なスキルの一つである。
 
 ### スレッドセーフ <a id="SS_21_12_2"></a>
 スレッドセーフとは「複数のスレッドから同時にアクセスされても、
-排他制御などの機構([std::mutex](#SS_20_3_2))により共有データの整合性が保たれ、正しく動作する性質」である。
+排他制御などの機構([std::mutex](#SS_20_4_2))により共有データの整合性が保たれ、正しく動作する性質」である。
 
 ### リエントラント <a id="SS_21_12_3"></a>
 リエントラントとは「実行中に同じ関数が再度呼び出されても、グローバル変数や静的変数に依存せず、
@@ -15885,7 +16251,7 @@ C/C++プログラミングにおける重要なスキルの一つである。
 ### クリティカルセクション <a id="SS_21_12_4"></a>
 複数のスレッドから同時にアクセスされると競合状態を引き起こす可能性があるコード領域をクリティカルセクションと呼ぶ。
 典型的には、共有変数や共有データ構造を読み書きするコード部分がこれに該当する。
-クリティカルセクションは、[std::mutex](#SS_20_3_2)等の排他制御機構によって保護し、
+クリティカルセクションは、[std::mutex](#SS_20_4_2)等の排他制御機構によって保護し、
 一度に一つのスレッドのみが実行できるようにする必要がある。
 
 ### スピンロック <a id="SS_21_12_5"></a>
@@ -15894,7 +16260,7 @@ C/C++プログラミングにおける重要なスキルの一つである。
 スリープを伴わずカーネルを呼び出さないため、短時間の競合では高速に動作するが、
 長時間の待機ではCPUを浪費しやすい。リアルタイム処理や割り込み制御に適する。
 
-C++11では、スピンロックは[std::atomic](#SS_20_3_3)を使用して以下のように定義できる。
+C++11では、スピンロックは[std::atomic](#SS_20_4_3)を使用して以下のように定義できる。
 
 ```cpp
     //  h/spin_lock.h 3
@@ -15918,8 +16284,8 @@ C++11では、スピンロックは[std::atomic](#SS_20_3_3)を使用して以�
     };
 ```
 
-以下の単体テスト(「[std::mutex](#SS_20_3_2)」の単体テストを参照)
-に示したように[std::scoped_lock](#SS_20_4_3)のテンプレートパラメータとして使用できる。
+以下の単体テスト(「[std::mutex](#SS_20_4_2)」の単体テストを参照)
+に示したように[std::scoped_lock](#SS_20_5_3)のテンプレートパラメータとして使用できる。
 
 ```cpp
     //  example/cpp_idioms/spin_lock_ut.cpp 11

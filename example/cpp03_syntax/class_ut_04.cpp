@@ -34,9 +34,12 @@ Person::Person(char const* family_name, char const* first_name, uint32_t height_
     // clang-format on
     // コンストラクタの中身は省略
     // @@@ ignore begin
-    // メンバ変数の初期化などの処理はここに通常の関数の中に入れることができる
-    assert(family_name && first_name);  // 本来ならエクセプションの送出すべきだが
-    assert(height_cm != 0);             // 本来ならエクセプションの送出すべきだが
+    if ((family_name == NULL) || (first_name == NULL)) {
+        throw std::invalid_argument("name must be not NULL");  // エラーの通知
+    }
+    if (height_cm == 0) {
+        throw std::logic_error("height_cm must be not zero");  // エラーの通知
+    }
     // @@@ ignore end
 }
 

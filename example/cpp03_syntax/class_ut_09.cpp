@@ -7,6 +7,7 @@
 
 namespace cpp_style_9 {
 // @@@ sample begin 0:0
+
 class Person {
 public:
     Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);
@@ -38,8 +39,12 @@ Person::Person(char const* family_name, char const* first_name, uint32_t height_
       height_cm_(height_cm),
       weight_kg_(weight_kg)
 {
-    assert(family_name_ && first_name_);
-    assert(height_cm_ != 0);
+    if ((family_name == NULL) || (first_name == NULL)) {
+        throw std::invalid_argument("name must be not NULL");  // エラーの通知
+    }
+    if (height_cm == 0) {
+        throw std::logic_error("height_cm must be not zero");  // エラーの通知
+    }
 }
 
 Person::Person(Person const& rhs)

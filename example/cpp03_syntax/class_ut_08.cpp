@@ -11,8 +11,10 @@ namespace cpp_style_8 {
 class Person {
 public:
     Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
-    Person(Person const& rhs);                                   // コピーコンストラクタ
-    Person& operator=(Person const& rhs);                        // コピー代入演算子
+
+    Person(Person const& rhs);             // コピーコンストラクタの宣言
+    Person& operator=(Person const& rhs);  // コピー代入演算子の宣言
+
     ~Person(void);                                               // デストラクタ
     uint32_t    calc_bmi(void);                                  // メンバ関数
     char const* get_full_name(void) const { return full_name; }  // クラス内部でのメンバ関数定義
@@ -24,6 +26,9 @@ private:  // メンバ変数への外部からのアクセスを禁止する
     uint32_t     height_cm;  // 身長 (cm単位と仮定)
     uint32_t     weight_kg;  // 体重 (kg単位と仮定)
 };
+// 以下省略
+// ...
+// @@@ sample end
 
 Person::Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg)
     // clang-format off
@@ -34,10 +39,12 @@ Person::Person(char const* family_name, char const* first_name, uint32_t height_
     // clang-format on
     // コンストラクタの中身は省略
     // @@@ ignore begin
-    // メンバ変数の初期化などの処理はここに通常の関数の中に入れることができる
-    assert(family_name && first_name);  // 本来ならエクセプションの送出すべきだが
-    assert(height_cm != 0);             // 本来ならエクセプションの送出すべきだが
-    assert(full_name != NULL);          // 本来ならエクセプションの送出すべきだが
+    if ((family_name == NULL) || (first_name == NULL)) {
+        throw std::invalid_argument("name must be not NULL");  // エラーの通知
+    }
+    if (height_cm == 0) {
+        throw std::logic_error("height_cm must be not zero");  // エラーの通知
+    }
     // @@@ ignore end
 }
 
@@ -69,8 +76,9 @@ Person::~Person(void)  // デストラクタの定義
         //      new[]で取得したメモリはdelete[]で解放する
     }
 }
+// @@@ sample begin 0:1
 
-// コピーコンストラクタ
+// コピーコンストラクタの実装
 Person::Person(Person const& rhs)
     : family_name(rhs.family_name),
       first_name(rhs.first_name),
@@ -79,8 +87,10 @@ Person::Person(Person const& rhs)
       weight_kg(rhs.weight_kg)
 {
 }
+// @@@ sample end
+// @@@ sample begin 0:2
 
-// コピー代入演算子
+// コピー代入演算子の実装
 Person& Person::operator=(Person const& rhs)
 {
     // 自己代入チェック
@@ -117,7 +127,7 @@ TEST(cpp03, class_exp8)
 {
     SUPPRESS_WARN_BEGIN;
     SUPPRESS_WARN_CLANG_SELF_ASSIGN_OVERLOADED;
-    // @@@ sample begin 0:1
+    // @@@ sample begin 1:0
 
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -146,6 +156,22 @@ TEST(cpp03, class_exp8)
 
     // @@@ sample end
     SUPPRESS_WARN_END;
+    // @@@ sample begin 1:1
+
+    Person p0("yamada", "taro", 173, 75);
+    Person p1("yamada", "jiro", 170, 70);
+    Person p2("yamada", "saburo", 170, 70);
+
+    ASSERT_STRNE(p0.get_full_name(), p1.get_full_name());  // p0、p1のフルネームが異なることの確認
+    ASSERT_STRNE(p1.get_full_name(), p2.get_full_name());  // p1、p2のフルネームが異なることの確認
+
+    p2 = p1 = p0;  // operator= の戻り値型がPerson&であるために可能になる
+    ASSERT_STREQ(p0.get_full_name(), p1.get_full_name());  // p0、p1のフルネームが等しいことの確認
+    ASSERT_STREQ(p1.get_full_name(), p2.get_full_name());  // p1、p2のフルネームが等しいことの確認
+
+    // p2 = p1 = p0;  を通常の関数呼び出しとして展開すると下記のようになる
+    p2.operator=(p1.operator=(p0));
+    // @@@ sample end
 
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
