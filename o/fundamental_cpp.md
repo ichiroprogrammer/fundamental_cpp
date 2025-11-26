@@ -111,17 +111,25 @@ __インデックス__
 &emsp;&emsp;&emsp; [constメンバ関数](#SS_2_1_10)  
 &emsp;&emsp;&emsp; [constメンバ変数](#SS_2_1_11)  
 &emsp;&emsp;&emsp; [Personのリファクタリング](#SS_2_1_12)  
-&emsp;&emsp;&emsp; [継承](#SS_2_1_13)  
-&emsp;&emsp;&emsp; [派生](#SS_2_1_14)  
-&emsp;&emsp;&emsp; [オーバライド](#SS_2_1_15)  
 
-&emsp;&emsp; [new/delete](#SS_2_2)  
-&emsp;&emsp;&emsp; [new演算子](#SS_2_2_1)  
-&emsp;&emsp;&emsp; [delete演算子](#SS_2_2_2)  
-&emsp;&emsp;&emsp; [new[]演算子](cpp03_syntax.md#SS_2_2_3)  
-&emsp;&emsp;&emsp; [delete[]演算子](cpp03_syntax.md#SS_2_2_4)  
+&emsp;&emsp; [標準ライブラリ](#SS_2_2)  
+&emsp;&emsp;&emsp; [std::stringの使用例 ](#SS_2_2_1)  
+&emsp;&emsp;&emsp; [コンテナ](#SS_2_2_2)  
 
-&emsp;&emsp; [オーバーロード](#SS_2_3)  
+&emsp;&emsp; [継承](#SS_2_3)  
+&emsp;&emsp;&emsp; [public継承](#SS_2_3_1)  
+&emsp;&emsp;&emsp; [protectd継承](#SS_2_3_2)  
+&emsp;&emsp;&emsp; [private継承](#SS_2_3_3)  
+&emsp;&emsp;&emsp; [派生](#SS_2_3_4)  
+&emsp;&emsp;&emsp; [オーバライド](#SS_2_3_5)  
+
+&emsp;&emsp; [new/delete](#SS_2_4)  
+&emsp;&emsp;&emsp; [new演算子](#SS_2_4_1)  
+&emsp;&emsp;&emsp; [delete演算子](#SS_2_4_2)  
+&emsp;&emsp;&emsp; [new[]演算子](cpp03_syntax.md#SS_2_4_3)  
+&emsp;&emsp;&emsp; [delete[]演算子](cpp03_syntax.md#SS_2_4_4)  
+
+&emsp;&emsp; [オーバーロード](#SS_2_5)  
   
   
 
@@ -154,7 +162,7 @@ Cでの`struct`は以下の点において、C++での`struct`と異なる。
 * [メンバ関数](#SS_2_1_1)の定義
 * デフォルトのメンバ変数の初期化(そのメンバ変数がデフォルトコンストラクタを持っている場合)
 * [アクセス指定子](#SS_2_1_5)
-* [継承](#SS_2_1_13)
+* [継承](#SS_2_3)
 
 ### メンバ関数 <a id="SS_2_1_1"></a>
 メンバ関数とは、クラスに属し、そのインスタンスを通じて呼び出される関数である。
@@ -1068,7 +1076,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 
 * [リファレンス](#SS_19_8)(型Tに対して、`T&`という形式)
 * [this](#SS_2_1_9)
-* [new/delete](#SS_2_2)
+* [new/delete](#SS_2_4)
 * [constメンバ関数](#SS_2_1_10)(宣言の末尾にconstがついているメンバ関数)
 
 
@@ -1273,25 +1281,222 @@ constメンバ変数は、オブジェクトの生存期間中、値が変更さ
 * メンバが適切にconst修飾されたことで可読性が向上した。
 * malloc/freeからnew/deleteへ統一され、C++らしいメモリ管理となった。
 
-### 継承 <a id="SS_2_1_13"></a>
-### 派生 <a id="SS_2_1_14"></a>
-### オーバライド <a id="SS_2_1_15"></a>
+## 標準ライブラリ <a id="SS_2_2"></a>
+標準ライブラリとは、C++言語仕様の一部として規定されている、再利用可能なクラスや関数の集合である。
+文字列処理、コンテナ、アルゴリズム、入出力、数値演算など、プログラム開発に必要な基本的な機能を提供する。
+標準ライブラリを使用することで、車輪の再発明を避け、移植性の高いコードを記述できる。
+すべての実装はstd名前空間に属しており、標準ヘッダファイルをインクルードすることで利用可能になる。
+主要な構成要素は以下の通りである。
+
+- 文字列処理: std::string、std::wstringなど
+- コンテナ: std::vector、std::list、std::mapなど
+- アルゴリズム: std::sort、std::find、std::copyなど
+- 入出力: std::cout、std::cin、ファイル入出力など
+- 反復子: コンテナの要素にアクセスするための統一インターフェース
+
+### std::stringの使用例  <a id="SS_2_2_1"></a>
+std::stringはC++標準ライブラリが提供する文字列クラスである。C言語の文字配列(char[])と比較して、
+メモリ管理が自動化されており、文字列操作が安全かつ容易になる。
+
+### コンテナ <a id="SS_2_2_2"></a>
+標準ライブラリのコンテナとは...
+
+
+
+## 継承 <a id="SS_2_3"></a>
+継承は既存のクラスを拡張して新しいクラスを定義する機構である。既存のクラスを基底クラス(base class)、
+新しく定義するクラスを派生クラス(derived class)と呼ぶ。
+派生クラスは基底クラスのメンバ変数とメンバ関数を引き継ぐため、コードの再利用性が高まる。
+
+以下の3種類の継承が規定されている。
+
+- [public継承](#SS_2_3_1)
+- [protectd継承](#SS_2_3_2)
+- [private継承](#SS_2_3_3)
+
+### public継承 <a id="SS_2_3_1"></a>
+public継承は最も一般的な継承方法であり、主に「[is-a](#SS_21_3_1)」関係を表現する際に使用される。
+基底クラスのpublicメンバは派生クラスでもpublic、protectedメンバはprotectedのまま継承される。
+
+```cpp
+    //  example/cpp03_syntax/derived_ut.cpp 7
+
+    class Base {
+    public:
+        int public_value_;
+
+    protected:
+        int protected_value_;
+
+    private:
+        int private_value_;
+    };
+
+    class Derived : public Base {
+    public:
+        void access()
+        {
+            public_value_    = 10;  // OK: publicメンバにアクセス可能
+            protected_value_ = 20;  // OK: protectedメンバにアクセス可能
+            /*
+            private_value_ = 30;      NG: privateメンバにはアクセス不可 */
+        }
+    };
+```
+```cpp
+    //  example/cpp03_syntax/derived_ut.cpp 34
+
+    Derived d;
+    d.public_value_ = 100;  // OK: 外部からpublicメンバにアクセス可能
+    /*
+    d.protected_value_ = 200;  NG: 外部からprotectedメンバにはアクセス不可 */
+```
+
+public継承では、
+以下のコードのように派生クラスのオブジェクトを基底クラスのポインタや[リファレンス](#SS_19_8)として扱うことができる。
+これによりポリモーフィズムが実現される。
+
+```cpp
+    //  example/cpp03_syntax/derived_ut.cpp 42
+
+    Base* b_ptr = &d;  // DerivedはBaseの一種であるめ、これが認められる
+    Base& b_ref = d;   // DerivedはBaseの一種であるめ、これも認められる
+```
+
+### protectd継承 <a id="SS_2_3_2"></a>
+protected継承は、基底クラスのpublicメンバとprotectedメンバがすべて派生クラスでprotectedになる。
+外部からは基底クラスのメンバにアクセスできなくなる。
+
+```cpp
+    //  example/cpp03_syntax/derived_ut.cpp 53
+    class Base {
+    public:
+        int public_value_;
+
+    protected:
+        int protected_value_;
+    };
+
+    class Derived : protected Base {
+    public:
+        void access()
+        {
+            public_value_    = 10;  // OK: protectedメンバとしてアクセス可能
+            protected_value_ = 20;  // OK: protectedメンバとしてアクセス可能
+        }
+    };
+```
+```cpp
+    //  example/cpp03_syntax/derived_ut.cpp 73
+
+    Derived d;
+    /*
+    d.public_value_ = 100;    外部からはアクセス不可 */
+
+    /*
+    Base* b_ptr = &d;  public継承とは異なり、これは認められない
+    Base& b_ref = d;   public継承とは異なり、これも認められない */
+```
+
+protected継承は実装の詳細を隠蔽しつつ、
+さらに派生したクラスには基底クラスのインターフェースを公開したい場合に使用される。使用頻度は低い。
+
+### private継承 <a id="SS_2_3_3"></a>
+private継承は、基底クラスのpublicメンバとprotectedメンバがすべて派生クラスでprivateになる。
+派生クラス内部でのみ基底クラスのメンバにアクセスでき、外部からも、さらに派生したクラスからもアクセスできない。
+
+```cpp
+    //  example/cpp03_syntax/derived_ut.cpp 89
+
+    class Base {
+    public:
+        int  public_value_;
+        void show() { printf("Base::show()\n"); }
+
+    protected:
+        int protected_value_;
+    };
+
+    class Derived : private Base {
+    public:
+        void access()
+        {
+            public_value_    = 10;  // OK: privateメンバとしてアクセス可能
+            protected_value_ = 20;  // OK: privateメンバとしてアクセス可能
+            show();                 // OK: privateメンバとしてアクセス可能
+        }
+    };
+
+    class MoreDerived : public Derived {
+    public:
+        void access()
+        {
+            // public_value_ = 30;   // NG: Baseのメンバにはアクセス不可
+        }
+    };
+
+```
+```cpp
+    //  example/cpp03_syntax/derived_ut.cpp 121
+    Derived d;
+
+    /*
+    d.public_value_ = 100;      外部からはアクセス不可
+    d.show();                   外部からはアクセス不可  */
+
+    /*
+    Base* b_ptr = &d;  public継承とは異なり、これは認められない
+    Base& b_ref = d;   public継承とは異なり、これも認められない */
+```
+
+private継承は「[has-a](#SS_21_3_2)関係」や「[is-implemented-in-terms-of](#SS_21_3_3)関係」を表現する際に使用されることがある。
+ただし、一般的にはメンバ変数として保持する方が意図が明確になるため、private継承の使用頻度は非常に低い。
+
+### 派生 <a id="SS_2_3_4"></a>
+派生とは、継承を使って既存のクラスから新しいクラスを作り出すことである。この過程で、基底クラスの機能を受け継ぎつつ、
+派生クラス独自の機能を追加したり、既存の機能を変更したりできる。
+
+**派生の主な目的**は以下の通りである。
+
+- 機能の拡張:  
+  基底クラスの機能をそのまま利用しつつ、新しいメンバ変数やメンバ関数を追加することで、
+  より特化した機能を持つクラスを定義できる。
+- 機能の特殊化:  
+  基底クラスの一般的な振る舞いを、派生クラスで特定の用途に合わせて変更できる。仮想関数のオーバライドにより、
+  同じインターフェースで異なる実装を提供することが可能になる。
+- コードの再利用:  
+    共通する機能を基底クラスにまとめることで、重複したコードを避けられる。
+    複数の派生クラスが同じ基底クラスを継承することで、保守性が向上する。
+
+派生は多段階に行うことができる。派生クラスをさらに基底クラスとして、別の派生クラスを定義することが可能である。
+これにより、クラスの階層構造を形成できる。階層が深くなると、
+下位の派生クラスは上位のすべての基底クラスのメンバを継承する。ただし、階層を深くしすぎると設計が複雑になり、
+保守性が低下する可能性があるため、適切な深さに抑えることが重要である。
+
+派生クラスを設計する際は、「[is-a](#SS_21_3_1)」関係が成立するかを確認する必要がある。
+派生クラスは基底クラスの一種であるという関係が自然に成り立つ場合に、public継承を使用するべきである。
+また、派生クラスは基底クラスのインターフェースを尊重し、[リスコフの置換原則(LSP)](#SS_4_4)に従うことが望ましい。
+これは、基底クラスのポインタや参照を通じて派生クラスのオブジェクトを操作しても、
+プログラムの正しさが保たれるという原則である。
+
+### オーバライド <a id="SS_2_3_5"></a>
+
 
 --- 
 
-## new/delete <a id="SS_2_2"></a>
+## new/delete <a id="SS_2_4"></a>
 Cの`malloc`/`free`と異なり、
 C++ではメモリアロケーションとオブジェクトの生成と破棄を適切に行うために、以下の演算子が定義されている。
 
-* [new演算子](#SS_2_2_1)/[delete演算子](#SS_2_2_2)
-* [new[]演算子](cpp03_syntax.md#SS_2_2_3)/[delete[]演算子](cpp03_syntax.md#SS_2_2_4)
+* [new演算子](#SS_2_4_1)/[delete演算子](#SS_2_4_2)
+* [new[]演算子](cpp03_syntax.md#SS_2_4_3)/[delete[]演算子](cpp03_syntax.md#SS_2_4_4)
 
 上記のnew演算子以外に[プレースメントnew](#SS_19_6_9)と[new (std::nothrow)](#SS_19_6_10)が定義されているが、
 これらの対となるdeleteは存在しない。
 
 
-### new演算子 <a id="SS_2_2_1"></a>
-### delete演算子 <a id="SS_2_2_2"></a>
+### new演算子 <a id="SS_2_4_1"></a>
+### delete演算子 <a id="SS_2_4_2"></a>
 `new`演算子は、ヒープ上にメモリを確保し、オブジェクトを構築する。  
 `delete`演算子は、`new`で確保したメモリを解放する前に、デストラクタを呼び出す。
 
@@ -1310,8 +1515,8 @@ C++ではメモリアロケーションとオブジェクトの生成と破棄�
     delete person;  // personのデストラクタを呼び出してからメモリを解放
 ```
 
-### new[]演算子 <a id="SS_2_2_3"></a>
-### delete[]演算子 <a id="SS_2_2_4"></a>
+### new[]演算子 <a id="SS_2_4_3"></a>
+### delete[]演算子 <a id="SS_2_4_4"></a>
 配列を動的に確保する場合は、new[]とdelete[]を使用する。
 
 
@@ -1332,7 +1537,7 @@ C++ではメモリアロケーションとオブジェクトの生成と破棄�
 * クラスTに対し`new T[N]`を実行するためにはTがデフォルトコンストラクタを持つ必要がある。
 * new[]でアロケートしたメモリはdelete[]で解放しなければならない。
 
-## オーバーロード <a id="SS_2_3"></a>
+## オーバーロード <a id="SS_2_5"></a>
 
 
 
