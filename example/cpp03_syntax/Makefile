@@ -1,7 +1,7 @@
 SRCS:=\
-	class_ut_00.cpp class_ut_01.cpp class_ut_02.cpp class_ut_03.cpp class_ut_04.cpp class_ut_05.cpp \
-	class_ut_06.cpp class_ut_07.cpp class_ut_08.cpp class_ut_09.cpp const_ut.cpp this_ut.cpp c_syle_ut.cpp \
-	new_delete_ut.cpp derived_ut.cpp std_lib_ut.cpp
+	class_00_ut.cpp class_01_ut.cpp class_02_ut.cpp class_03_ut.cpp class_04_ut.cpp class_05_ut.cpp \
+	class_06_ut.cpp class_07_ut.cpp class_08_ut.cpp class_09_ut.cpp const_ut.cpp this_ut.cpp c_syle_ut.cpp \
+    friend_ut.cpp new_delete_ut.cpp derived_ut.cpp std_lib_ut.cpp
 
 CPP_VER = c++20
 OBJDIR:=

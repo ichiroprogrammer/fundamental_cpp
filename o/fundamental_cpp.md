@@ -110,7 +110,9 @@ __インデックス__
 &emsp;&emsp;&emsp; [this](#SS_2_1_9)  
 &emsp;&emsp;&emsp; [constメンバ関数](#SS_2_1_10)  
 &emsp;&emsp;&emsp; [constメンバ変数](#SS_2_1_11)  
-&emsp;&emsp;&emsp; [Personのリファクタリング](#SS_2_1_12)  
+&emsp;&emsp;&emsp; [フレンド宣言](#SS_2_1_12)  
+&emsp;&emsp;&emsp; [等値比較演算子](#SS_2_1_13)  
+&emsp;&emsp;&emsp; [Personのリファクタリング](#SS_2_1_14)  
 
 &emsp;&emsp; [標準ライブラリ](#SS_2_2)  
 &emsp;&emsp;&emsp; [std::stringの使用例 ](#SS_2_2_1)  
@@ -172,7 +174,7 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 まずは、以下の構造体と関数の組み合わせのコード例について見ていこう。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_00.cpp 9
+    //  example/cpp03_syntax/class_00_ut.cpp 9
 
     struct Person {
         char const* family_name;
@@ -202,7 +204,7 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 以下にPersonとcalc_bmiの使用例を示す。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_00.cpp 36
+    //  example/cpp03_syntax/class_00_ut.cpp 36
 
     struct Person person = {
         "yamada",  // 姓
@@ -217,7 +219,7 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 C++では、上記のような場合、メンバ関数を使用して、下記のように記述する。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_01.cpp 9
+    //  example/cpp03_syntax/class_01_ut.cpp 9
 
     struct Person {
         char const* family_name;
@@ -244,7 +246,7 @@ C++では、上記のような場合、メンバ関数を使用して、下記�
 Person::calc_bmi()の使用方法は、以下のとおりである。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_01.cpp 35
+    //  example/cpp03_syntax/class_01_ut.cpp 35
 
     Person person = { // Cとは異なり、インスタンスの宣言にはstructの記述は不要
         "yamada",  // 姓
@@ -275,7 +277,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 以下のコードでは、前例のPersonにコンストラクタを定義する。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_02.cpp 12
+    //  example/cpp03_syntax/class_02_ut.cpp 12
 
     struct Person {
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
@@ -303,7 +305,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_02.cpp 39
+    //  example/cpp03_syntax/class_02_ut.cpp 39
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -324,7 +326,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 従って、メンバ変数の宣言の順で、初期化リストを並べるのがセオリーとなっている。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_02.cpp 67
+    //  example/cpp03_syntax/class_02_ut.cpp 67
 
     struct Person {
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
@@ -353,7 +355,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 ```
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_02.cpp 97
+    //  example/cpp03_syntax/class_02_ut.cpp 97
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -391,7 +393,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 * full_nameに保存したポインタを返す
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_03.cpp 10
+    //  example/cpp03_syntax/class_03_ut.cpp 10
 
     struct Person {
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
@@ -455,7 +457,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_03.cpp 82
+    //  example/cpp03_syntax/class_03_ut.cpp 82
 
     Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
 
@@ -473,7 +475,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_04.cpp 11
+    //  example/cpp03_syntax/class_04_ut.cpp 11
 
     struct Person {
         Person(char const* family_name, char const* first_name, uint32_t height_cm, uint32_t weight_kg);  // コンストラクタ
@@ -538,7 +540,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut_04.cpp 99
+    //  example/cpp03_syntax/class_04_ut.cpp 99
 
     {
         Person person("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -590,7 +592,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 [アクセス指定子](#SS_2_1_5)と`class`を使用し、以下のようにPersonのリファクタリングを行う。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_05.cpp 11
+    //  example/cpp03_syntax/class_05_ut.cpp 11
 
     class Person {
     public:
@@ -662,7 +664,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 通常のメンバ関数に比べて制限が多い分、可読性が向上する。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_06.cpp 11
+    //  example/cpp03_syntax/class_06_ut.cpp 11
 
     class Person {
     public:
@@ -724,7 +726,7 @@ publicなstaitcメンバへのクラス外でのアクセスには、
 下記コードの例のようにクラス名修飾(任意のクラス名Tに対してT::member)がに必要になる。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_06.cpp 113
+    //  example/cpp03_syntax/class_06_ut.cpp 113
 
     char* full_name = Person::make_full_name("yamada", "taro");
     //                      ^^^^^ static関数の呼び出しはクラス名修飾が必要
@@ -741,7 +743,7 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 * Person::make_full_nameをクラス内部での使用専用にするためにprivate化
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_06.cpp 138
+    //  example/cpp03_syntax/class_06_ut.cpp 138
 
     class Person {
     public:
@@ -796,7 +798,7 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 コードを修正した場合、それに合わせて単体テストも修正する必要がある。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_06.cpp 229
+    //  example/cpp03_syntax/class_06_ut.cpp 229
 
     ASSERT_EQ(Person::instance_counter, 0);  // staticな変数はデフォルト初期化される
 
@@ -881,7 +883,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下は二重解放バグの典型的なコード例である([staticメンバ](#SS_2_1_7)の例からメンバ変数を除いている)。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_07.cpp 15
+    //  example/cpp03_syntax/class_07_ut.cpp 15
 
     class Person {
     public:
@@ -925,7 +927,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
     }
 ```
 ```cpp
-    //  example/cpp03_syntax/class_ut_07.cpp 104
+    //  example/cpp03_syntax/class_07_ut.cpp 104
 
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -951,7 +953,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下にこの原則に従ったPersonを示す。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_08.cpp 9
+    //  example/cpp03_syntax/class_08_ut.cpp 9
 
     class Person {
     public:
@@ -978,7 +980,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下にコピーコンストラクタの実装を示す。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_08.cpp 79
+    //  example/cpp03_syntax/class_08_ut.cpp 79
 
     // コピーコンストラクタの実装
     Person::Person(Person const& rhs)
@@ -994,7 +996,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下にコピー代入演算子の実装を示す。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_08.cpp 91
+    //  example/cpp03_syntax/class_08_ut.cpp 91
 
     // コピー代入演算子の実装
     Person& Person::operator=(Person const& rhs)
@@ -1020,7 +1022,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下にコピーコンストラクタ/コピー代入演算子のテストを示す。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_08.cpp 130
+    //  example/cpp03_syntax/class_08_ut.cpp 130
 
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
@@ -1052,7 +1054,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 一般に、T型のコピー代入演算子の戻り値型を`T&`にすることで以下のようなコードを実現できる。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_08.cpp 159
+    //  example/cpp03_syntax/class_08_ut.cpp 159
 
     Person p0("yamada", "taro", 173, 75);
     Person p1("yamada", "jiro", 170, 70);
@@ -1133,7 +1135,7 @@ thisポインタ自体は常にconst（再代入不可）である。
 以下のPersonのコピー代入演算子のようにthisを使用し自己代入を避けることが一般的である。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_08.cpp 91
+    //  example/cpp03_syntax/class_08_ut.cpp 91
 
     // コピー代入演算子の実装
     Person& Person::operator=(Person const& rhs)
@@ -1241,15 +1243,71 @@ constメンバ変数は、オブジェクトの生存期間中、値が変更さ
 コード例については、[constメンバ関数](#SS_2_1_10)を参照せよ。
 
 
-### Personのリファクタリング <a id="SS_2_1_12"></a>
+### フレンド宣言 <a id="SS_2_1_12"></a>
+フレンド宣言とは、あるクラスのprivateおよびprotectedメンバーへのアクセス権を、
+特定の関数またはクラスに対して付与する宣言である。通常、クラスの非公開メンバーは外部からアクセスできないが、
+フレンド宣言を用いることで、信頼できる特定の対象に限定してアクセスを許可できる。
+
+```cpp
+    //  example/cpp03_syntax/friend_ut.cpp 13
+
+    class A {
+    private:
+        int data;
+
+        friend class Friend_A1;  // クラスのフレンド宣言
+        friend Friend_A2;        // C++11以降はclassキーワードを省略可能
+
+        friend void func(A& obj)  // 関数のフレンド宣言
+                                  // フレンド関数はクラス内部でも外部でも定義可能
+        {
+            obj.data = 0;  // フレンド宣言の効果でAのprivateにアクセスできる
+        }
+    };
+```
+
+__[特徴と注意点]__
+
+* 非対称性  
+  フレンド関係は一方向である。クラスAがクラスBをフレンドとして宣言しても、
+  BがAのメンバーにアクセスできるだけで、AがBのメンバーにアクセスできるわけではない。
+* 非推移性  
+  フレンド関係は推移しない。AがBをフレンドとし、BがCをフレンドとしても、CはAのメンバーにアクセスできない。
+* [継承]されない  
+  フレンド関係は継承されない。基底クラスのフレンドは、派生クラスの非公開メンバーにアクセスできない。
+* アクセス指定子との独立性  
+  フレンド宣言は、クラス定義内のどのアクセス指定子セクション(private、protected、public)に記述しても同じ効果を持つ。
+
+### 等値比較演算子 <a id="SS_2_1_13"></a>
+等値比較演算子(operator==)とは、2つのオブジェクトが等しいかどうかを判定するための演算子である。
+C++では、クラスに対してこの演算子をオーバーロードすることで、そのクラス特有の等値性の定義を実装できる。
+等値比較演算子は通常、メンバ関数ではなくフレンド関数または非メンバ関数として実装することが推奨される。
+これは、左辺と右辺のオペランドを対称的に扱えるようにするためである。
+メンバ関数として実装した場合、左辺が必ずそのクラスのオブジェクトでなければならないという制約が生じる。
+演算子の戻り値はbool型であり、2つのオブジェクトが等しい場合にtrueを、そうでない場合にfalseを返す。
+等値比較の実装においては、すべての意味のあるメンバ変数を比較対象に含める必要がある。
+ただし、キャッシュやミュータブルな一時データなど、
+オブジェクトの論理的な等価性に影響しないメンバは、通常、比較対象から除外する。
+等値比較演算子を実装する際には、不等比較演算子(operator!=)も合わせて実装するのが一般的である。
+C++20以降では、operator==のみを実装すればoperator!=は自動的に導出されるが、
+それ以前のC++では両方を明示的に実装する必要がある。
+また、等値比較演算子はや[コピーコンストラクタ/コピー代入演算子](#SS_2_1_8)は、
+[等価性のセマンティクス](#SS_21_5_1)を満たす必要がある。
+
+コード例は、次節で示す。
+
+
+### Personのリファクタリング <a id="SS_2_1_14"></a>
 これまで例示してきたPersonを以下の方針でリファクタリングを行う。
 
 * 可読性向上のために、[Trailing Underscore(末尾アンダースコア)](#SS_21_9_4)に従う。
 * メンバを適切にconst修飾することで、[constメンバ関数](#SS_2_1_10)/[constメンバ変数](#SS_2_1_11)へ変更する。
 * Cでは、引数を持たない関数funcは`func(void)`のように宣言するが、C++では通常、単に`func()`と書く。
+* 単体テストの利便性のためにPersonに[フレンド宣言](#SS_2_1_12)した[等値比較演算子](#SS_2_1_13)を追加する
+  (セオリーではリファクタリングで機能変更するべきではないが、ドキュメントの構成上の都合でこうする)。
 
 ```cpp
-    //  example/cpp03_syntax/class_ut_09.cpp 9
+    //  example/cpp03_syntax/class_09_ut.cpp 10
 
     class Person {
     public:
@@ -1270,9 +1328,40 @@ constメンバ変数は、オブジェクトの生存期間中、値が変更さ
 
         uint32_t height_cm_;
         uint32_t weight_kg_;
+
+        friend bool operator==(Person const& lhs, Person const& rhs);  // 等値比較演算子のフレンド宣言
+                                                                       // operator!=はフレンド宣言は不要
     };
-    // 関数の実装は省略
+
+    bool operator==(Person const& lhs, Person const& rhs)  // 等値比較演算子の定義
+    {
+        return std::strcmp(lhs.family_name_, rhs.family_name_) == 0 && std::strcmp(lhs.first_name_, rhs.first_name_) == 0
+               && lhs.height_cm_ == rhs.height_cm_ && lhs.weight_kg_ == rhs.weight_kg_;
+    }
+
+    bool operator!=(Person const& lhs, Person const& rhs) { return !(lhs == rhs); }
+
+    // 他の関数の実装は省略
     // ...
+```
+```cpp
+    //  example/cpp03_syntax/class_09_ut.cpp 123
+
+    Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
+    Person person1("sato", "jiro", 173, 70);    // オブジェクトの生成
+
+    ASSERT_STREQ(person0.get_full_name(), "yamada taro");  // 文字列として同値
+    ASSERT_STREQ(person1.get_full_name(), "sato jiro");    // 文字列として同値
+    ASSERT_EQ(25, person0.calc_bmi());
+
+    ASSERT_TRUE(person0 == person0);  // 等値比較演算子のテスト(同一オブジェクトでのテスト)
+    ASSERT_TRUE(person0 != person1);  // 等値比較演算子のテスト(!= テストも兼ねる)
+    // 通常、上記2テストは以下のように書く
+    ASSERT_EQ(person0, person0);
+    ASSERT_NE(person0, person1);
+
+    person0 = person1;            // コピー代入
+    ASSERT_EQ(person0, person1);  // 等値比較演算子とコピー代入演算子のテスト
 ```
 
 リファクタリングにより、以下の改善が実現された。

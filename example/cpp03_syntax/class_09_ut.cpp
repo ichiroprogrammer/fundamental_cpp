@@ -1,5 +1,6 @@
 #include <cassert>
 #include <cstdint>
+#include <cstring>
 
 #include "gtest_wrapper.h"
 
@@ -27,8 +28,20 @@ private:
 
     uint32_t height_cm_;
     uint32_t weight_kg_;
+
+    friend bool operator==(Person const& lhs, Person const& rhs);  // 等値比較演算子のフレンド宣言
+                                                                   // operator!=はフレンド宣言は不要
 };
-// 関数の実装は省略
+
+bool operator==(Person const& lhs, Person const& rhs)  // 等値比較演算子の定義
+{
+    return std::strcmp(lhs.family_name_, rhs.family_name_) == 0 && std::strcmp(lhs.first_name_, rhs.first_name_) == 0
+           && lhs.height_cm_ == rhs.height_cm_ && lhs.weight_kg_ == rhs.weight_kg_;
+}
+
+bool operator!=(Person const& lhs, Person const& rhs) { return !(lhs == rhs); }
+
+// 他の関数の実装は省略
 // ...
 // @@@ sample end
 
@@ -106,6 +119,26 @@ TEST(cpp03, class_exp9)
 {
     SUPPRESS_WARN_BEGIN;
     SUPPRESS_WARN_CLANG_SELF_ASSIGN_OVERLOADED;
+
+    // @@@ sample begin 0:1
+
+    Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
+    Person person1("sato", "jiro", 173, 70);    // オブジェクトの生成
+
+    ASSERT_STREQ(person0.get_full_name(), "yamada taro");  // 文字列として同値
+    ASSERT_STREQ(person1.get_full_name(), "sato jiro");    // 文字列として同値
+    ASSERT_EQ(25, person0.calc_bmi());
+
+    ASSERT_TRUE(person0 == person0);  // 等値比較演算子のテスト(同一オブジェクトでのテスト)
+    ASSERT_TRUE(person0 != person1);  // 等値比較演算子のテスト(!= テストも兼ねる)
+    // 通常、上記2テストは以下のように書く
+    ASSERT_EQ(person0, person0);
+    ASSERT_NE(person0, person1);
+
+    person0 = person1;            // コピー代入
+    ASSERT_EQ(person0, person1);  // 等値比較演算子とコピー代入演算子のテスト
+    // @@@ sample end
+
     {
         Person person0("yamada", "taro", 173, 75);  // オブジェクトの生成
 

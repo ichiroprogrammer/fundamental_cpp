@@ -73,27 +73,27 @@ Cとの比較の例を用いて、メンバ関数を導入する。
 まずは、以下の構造体と関数の組み合わせのコード例について見ていこう。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_00.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_00_ut.cpp #0:0 begin
 ```
 
 上記のcalc_bmiはPersonインスタンスからBMIを導き出す関数である。
 以下にPersonとcalc_bmiの使用例を示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_00.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_00_ut.cpp #0:1 begin -1
 ```
 
 C++では、上記のような場合、メンバ関数を使用して、下記のように記述する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_01.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_01_ut.cpp #0:0 begin
 ```
 
 なお、Person::calc_bmiは、 calc_bmiがPersonのメンバであることを表す。
 Person::calc_bmi()の使用方法は、以下のとおりである。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_01.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_01_ut.cpp #0:1 begin -1
 ```
 
 上記例でのPersonのインスタンスpersonは適切に初期化されているが、
@@ -115,13 +115,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 以下のコードでは、前例のPersonにコンストラクタを定義する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_02.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_02_ut.cpp #0:0 begin
 ```
 
 コンストラクタが定義されたクラスのインスタンス化は以下のように行う。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_02.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_02_ut.cpp #0:1 begin -1
 ```
 
 ### メンバ変数の初期化リスト
@@ -135,11 +135,11 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 従って、メンバ変数の宣言の順で、初期化リストを並べるのがセオリーとなっている。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_02.cpp #1:0 begin
+    // @@@ example/cpp03_syntax/class_02_ut.cpp #1:0 begin
 ```
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_02.cpp #1:1 begin -1
+    // @@@ example/cpp03_syntax/class_02_ut.cpp #1:1 begin -1
 ```
 
 コンストラクタは戻り値を持つことはできないため、引数がクラスの制限に収まらない場合、
@@ -155,13 +155,13 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 * full_nameに保存したポインタを返す
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_03.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_03_ut.cpp #0:0 begin
 ```
 
 クラスを修正した場合、当然それに合わせて単体テストコードも修正が必要である。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_03.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_03_ut.cpp #0:1 begin -1
 ```
 
 単体テストで示したようにこの関数は想定通り動作するが、メモリーリークを引き起こす。
@@ -173,10 +173,10 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_04.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_04_ut.cpp #0:0 begin
 ```
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_04.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_04_ut.cpp #0:1 begin -1
 ```
 
 ### アクセス指定子
@@ -219,7 +219,7 @@ C++では以下の3種類のアクセス指定子が存在する。
 [アクセス指定子](---)と`class`を使用し、以下のようにPersonのリファクタリングを行う。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_05.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_05_ut.cpp #0:0 begin
 ```
 
 ### staticメンバ
@@ -243,14 +243,14 @@ C++では以下の3種類のアクセス指定子が存在する。
 通常のメンバ関数に比べて制限が多い分、可読性が向上する。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_06.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_06_ut.cpp #0:0 begin
 ```
 
 publicなstaitcメンバへのクラス外でのアクセスには、
 下記コードの例のようにクラス名修飾(任意のクラス名Tに対してT::member)がに必要になる。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_06.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_06_ut.cpp #0:1 begin -1
 ```
 
 
@@ -261,13 +261,13 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 * Person::make_full_nameをクラス内部での使用専用にするためにprivate化
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_06.cpp #1:0 begin
+    // @@@ example/cpp03_syntax/class_06_ut.cpp #1:0 begin
 ```
 
 コードを修正した場合、それに合わせて単体テストも修正する必要がある。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_06.cpp #1:1 begin -1
+    // @@@ example/cpp03_syntax/class_06_ut.cpp #1:1 begin -1
 ```
 
 ### コピーコンストラクタ/コピー代入演算子
@@ -305,10 +305,10 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下は二重解放バグの典型的なコード例である([staticメンバ](---)の例からメンバ変数を除いている)。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_07.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_07_ut.cpp #0:0 begin
 ```
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_07.cpp #0:1 begin -1
+    // @@@ example/cpp03_syntax/class_07_ut.cpp #0:1 begin -1
 ```
 
 三の原則(Rule of Three)に従うことで上記の問題を避けることができる
@@ -321,31 +321,31 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 以下にこの原則に従ったPersonを示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_08.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_08_ut.cpp #0:0 begin
 ```
 
 以下にコピーコンストラクタの実装を示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_08.cpp #0:1 begin
+    // @@@ example/cpp03_syntax/class_08_ut.cpp #0:1 begin
 ```
 
 以下にコピー代入演算子の実装を示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_08.cpp #0:2 begin
+    // @@@ example/cpp03_syntax/class_08_ut.cpp #0:2 begin
 ```
 
 以下にコピーコンストラクタ/コピー代入演算子のテストを示す。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_08.cpp #1:0 begin -1
+    // @@@ example/cpp03_syntax/class_08_ut.cpp #1:0 begin -1
 ```
 
 一般に、T型のコピー代入演算子の戻り値型を`T&`にすることで以下のようなコードを実現できる。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_08.cpp #1:1 begin -1
+    // @@@ example/cpp03_syntax/class_08_ut.cpp #1:1 begin -1
 ```
 
 なお、コピーコンストラクタ/コピー代入演算子を追加する前のコードが持っていた単純なコピーを[シャローコピー](---)と呼び、
@@ -385,7 +385,7 @@ thisポインタ自体は常にconst（再代入不可）である。
 以下のPersonのコピー代入演算子のようにthisを使用し自己代入を避けることが一般的である。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_08.cpp #0:2 begin
+    // @@@ example/cpp03_syntax/class_08_ut.cpp #0:2 begin
 ```
 
 ### constメンバ関数
@@ -424,15 +424,60 @@ constメンバ変数は、オブジェクトの生存期間中、値が変更さ
 コード例については、[constメンバ関数](---)を参照せよ。
 
 
+### フレンド宣言
+フレンド宣言とは、あるクラスのprivateおよびprotectedメンバーへのアクセス権を、
+特定の関数またはクラスに対して付与する宣言である。通常、クラスの非公開メンバーは外部からアクセスできないが、
+フレンド宣言を用いることで、信頼できる特定の対象に限定してアクセスを許可できる。
+
+```cpp
+    // @@@ example/cpp03_syntax/friend_ut.cpp #0:0 begin
+```
+
+__[特徴と注意点]__
+
+* 非対称性  
+  フレンド関係は一方向である。クラスAがクラスBをフレンドとして宣言しても、
+  BがAのメンバーにアクセスできるだけで、AがBのメンバーにアクセスできるわけではない。
+* 非推移性  
+  フレンド関係は推移しない。AがBをフレンドとし、BがCをフレンドとしても、CはAのメンバーにアクセスできない。
+* [継承]されない  
+  フレンド関係は継承されない。基底クラスのフレンドは、派生クラスの非公開メンバーにアクセスできない。
+* アクセス指定子との独立性  
+  フレンド宣言は、クラス定義内のどのアクセス指定子セクション(private、protected、public)に記述しても同じ効果を持つ。
+
+### 等値比較演算子
+等値比較演算子(operator==)とは、2つのオブジェクトが等しいかどうかを判定するための演算子である。
+C++では、クラスに対してこの演算子をオーバーロードすることで、そのクラス特有の等値性の定義を実装できる。
+等値比較演算子は通常、メンバ関数ではなくフレンド関数または非メンバ関数として実装することが推奨される。
+これは、左辺と右辺のオペランドを対称的に扱えるようにするためである。
+メンバ関数として実装した場合、左辺が必ずそのクラスのオブジェクトでなければならないという制約が生じる。
+演算子の戻り値はbool型であり、2つのオブジェクトが等しい場合にtrueを、そうでない場合にfalseを返す。
+等値比較の実装においては、すべての意味のあるメンバ変数を比較対象に含める必要がある。
+ただし、キャッシュやミュータブルな一時データなど、
+オブジェクトの論理的な等価性に影響しないメンバは、通常、比較対象から除外する。
+等値比較演算子を実装する際には、不等比較演算子(operator!=)も合わせて実装するのが一般的である。
+C++20以降では、operator==のみを実装すればoperator!=は自動的に導出されるが、
+それ以前のC++では両方を明示的に実装する必要がある。
+また、等値比較演算子はや[コピーコンストラクタ/コピー代入演算子](---)は、
+[等価性のセマンティクス](---)を満たす必要がある。
+
+コード例は、次節で示す。
+
+
 ### Personのリファクタリング
 これまで例示してきたPersonを以下の方針でリファクタリングを行う。
 
 * 可読性向上のために、[Trailing Underscore(末尾アンダースコア)](---)に従う。
 * メンバを適切にconst修飾することで、[constメンバ関数](---)/[constメンバ変数](---)へ変更する。
 * Cでは、引数を持たない関数funcは`func(void)`のように宣言するが、C++では通常、単に`func()`と書く。
+* 単体テストの利便性のためにPersonに[フレンド宣言](---)した[等値比較演算子](---)を追加する
+  (セオリーではリファクタリングで機能変更するべきではないが、ドキュメントの構成上の都合でこうする)。
 
 ```cpp
-    // @@@ example/cpp03_syntax/class_ut_09.cpp #0:0 begin
+    // @@@ example/cpp03_syntax/class_09_ut.cpp #0:0 begin
+```
+```cpp
+    // @@@ example/cpp03_syntax/class_09_ut.cpp #0:1 begin -1
 ```
 
 リファクタリングにより、以下の改善が実現された。
