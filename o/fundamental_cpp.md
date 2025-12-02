@@ -116,7 +116,8 @@ __インデックス__
 
 &emsp;&emsp; [標準ライブラリ](#SS_2_2)  
 &emsp;&emsp;&emsp; [std::stringの使用例 ](#SS_2_2_1)  
-&emsp;&emsp;&emsp; [コンテナ](#SS_2_2_2)  
+&emsp;&emsp;&emsp; [入出力(stream)](#SS_2_2_2)  
+&emsp;&emsp;&emsp; [コンテナ](#SS_2_2_3)  
 
 &emsp;&emsp; [継承](#SS_2_3)  
 &emsp;&emsp;&emsp; [public継承](#SS_2_3_1)  
@@ -1375,19 +1376,136 @@ C++20以降では、operator==のみを実装すればoperator!=は自動的に�
 文字列処理、コンテナ、アルゴリズム、入出力、数値演算など、プログラム開発に必要な基本的な機能を提供する。
 標準ライブラリを使用することで、車輪の再発明を避け、移植性の高いコードを記述できる。
 すべての実装はstd名前空間に属しており、標準ヘッダファイルをインクルードすることで利用可能になる。
-主要な構成要素は以下の通りである。
+構成要素は膨大であるため、良く使用されるものの一部を以下に示す
+([cpprefjp.github.io](https://cpprefjp.github.io/reference.html))。
 
-- 文字列処理: std::string、std::wstringなど
-- コンテナ: std::vector、std::list、std::mapなど
-- アルゴリズム: std::sort、std::find、std::copyなど
-- 入出力: std::cout、std::cin、ファイル入出力など
-- 反復子: コンテナの要素にアクセスするための統一インターフェース
+| 標準ライブラリ| クラス等                                               |
+|:--------------|:------------------------------------------------------ |
+| 文字列処理    | std::string、std::wstringなど                          |
+| コンテナ      | std::vector、std::list、std::mapなど                   |
+| アルゴリズム  | std::sort、std::find、std::copyなど                    |
+| 入出力        | std::cout、std::cin、ファイル入出力など                |
+| 反復子        | コンテナの要素にアクセスするための統一インターフェース |
 
 ### std::stringの使用例  <a id="SS_2_2_1"></a>
 std::stringはC++標準ライブラリが提供する文字列クラスである。C言語の文字配列(char[])と比較して、
 メモリ管理が自動化されており、文字列操作が安全かつ容易になる。
 
-### コンテナ <a id="SS_2_2_2"></a>
+Cでの文字列の結合と比較は下記のように記述される。
+
+```cpp
+    //  example/cpp03_syntax/std_lib_ut.cpp 14
+
+    char const* hello = "Hello";
+    char const* world = "World";
+
+    size_t hello_len = strlen(hello);
+    size_t world_len = strlen(world);
+
+    // Cでの文字列の結合
+    char* hello_world = (char*)malloc(hello_len + 1 + world_len + 1);  // 間に1スペース入れる
+    strcpy(hello_world, hello);
+    hello_world[hello_len] = ' ';
+    strcpy(hello_world + hello_len + 1, world);
+
+    ASSERT_TRUE(strcmp(hello_world, "Hello World") == 0);  // 文字列の比較
+    ASSERT_STREQ(hello_world, "Hello World");              // googletestでは上記はこの行と等価
+
+    free(hello_world);  // これを忘れるとメモリリーク
+```
+
+C++では複雑な処理が、std::stringに押し込まれているため文字列の結合と比較は下記のように単純に記述できる。
+
+```cpp
+    //  example/cpp03_syntax/std_lib_ut.cpp 38
+
+    char const* hello = "Hello";
+    char const* world = "World";
+
+    // C++での文字列の結合
+    std::string str1 = hello;              // str1の初期化
+    std::string str2 = world;              // str2の初期化
+    std::string str3 = str1 + " " + str2;  // 文字列の連結
+    std::string exp  = "Hello World";
+
+    ASSERT_TRUE(exp == str3);  // std::stringは等値比較演算子が定義されているため、文字列の比較にstrcmpは不要
+    ASSERT_EQ(exp, str3);  // googletestでは上記はこの行と等価
+```
+
+### 入出力(stream) <a id="SS_2_2_2"></a>
+入出力(stream)とは、データの読み書きを抽象化した機能であり、C++標準ライブラリではiostreamライブラリとして提供される。
+ストリームは、キーボード入力、画面出力、ファイル入出力など、
+異なる入出力先を統一的なインターフェースで扱うことを可能にする。
+C言語のprintf/scanfと比較して、型安全性が高く、ユーザー定義型に対する入出力の拡張が容易である。
+
+```cpp
+    //  example/cpp03_syntax/std_lib_ut.cpp 58
+
+    int  age = 30;
+    char name[100];
+
+    // Cでの出力
+    printf("Age: %d\n", age);  // 型指定子(%d)を誤ると実行時エラー
+
+    // Cでの入力
+    scanf("%s", name);  // バッファオーバーフローのリスクあり
+```
+
+以下のストリームオブジェクトが定義されている。
+
+| ストリームオブジェクト | 機能                 |
+|:----------------------:|:-------------------- |
+| std::cin               | 標準入力を扱う       |
+| std::cout              | 標準出力を扱う       |
+| std::cerr              | 標準エラー出力を扱う |
+
+ストリームオブジェクトは以下のように使用する。
+
+```cpp
+    //  example/cpp03_syntax/std_lib_ut.cpp 75
+
+    int  age = 30;
+    char name[100];
+
+    // C++での出力
+    std::cout << "Age: " << age << std::endl;  // 型は自動判別される
+
+    // C++での入力
+    std::cin >> name;  // std::stringは自動的にメモリを管理
+```
+
+
+ファイル入出力にはstd::ifstream(入力)、std::ofstream(出力)、std::fstream(入出力)を使用する。
+
+```cpp
+    //  example/cpp03_syntax/std_lib_ut.cpp 86
+
+    // ファイル出力の例
+    std::ofstream ofs("output.txt");
+
+    if (ofs) {
+        ofs << "Name: " << name << ", Age: " << age << std::endl;
+    }
+```
+
+標準入出力やファイル入出力と同様に使用できるストリング入出力の使用例を以下に示す。
+
+```cpp
+    //  example/cpp03_syntax/std_lib_ut.cpp 100
+
+    int               age = 30;
+    std::string       name("Yamada Taro");
+    std::stringstream oss;  // 出力string
+
+    // stringstreamへの出力
+    oss << name << '(' << "Age:" << age << ')';  // 型は自動判別される
+
+    std::string exp("Yamada Taro(Age:30)");
+
+    ASSERT_EQ(exp, oss.str());  // oss.str()はossが出力された文字列を返す
+```
+
+### コンテナ <a id="SS_2_2_3"></a>
 標準ライブラリのコンテナとは...
 
 
