@@ -14,5 +14,5 @@ MDS:=fundamental_intro.md cpp03_syntax.md cpp_improve.md temp.md \
 
 INDEX_OPT:=--exclude $(addsuffix :1,$(MDS) sample_code.md)
 
-include deep/make/md.mk
+include essential/make/md.mk
 

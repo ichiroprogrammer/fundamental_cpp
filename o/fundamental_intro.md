@@ -55,7 +55,7 @@ __google test_のアサーションの簡単な説明__
 ## インデックス <a id="SS_1_3"></a>
 ___
 
-- [非モダンC++](cpp03_syntax.md#SS_2)
+- [レガシーC++](cpp03_syntax.md#SS_2)
 - [C++コア言語仕様](core_lang_spec.md#SS_19)
 - [標準ライブラリとプログラミングの概念](stdlib_and_concepts.md#SS_20)
 - [C++慣用語句](cpp_idioms.md#SS_21)
