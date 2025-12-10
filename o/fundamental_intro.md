@@ -26,7 +26,7 @@ __コード例について__
 * 「`// ...`」のような行は、ソースコードの省略を表す。
 * 特定の規則、法則、慣習等を説明するためのソースコードは、シンプルさを優先するため、
   その他の規則、法則、慣習に従っていない場合があるが、
-  [Trailing Underscore(末尾アンダースコア)](cpp_idioms.md#SS_21_9_4)には従っている。
+  [Trailing Underscore(末尾アンダースコア)](cpp_idioms.md#SS_10_9_4)には従っている。
   また、一般に標準ライブラリのコンテナクラスをnewする必要はないが、
   コードの動作を示すためにあえてそのようにする場合がある。
 * ソースコード内に動作説明のような本来不要なコメントがあるのは、
@@ -56,10 +56,10 @@ __google test_のアサーションの簡単な説明__
 ___
 
 - [レガシーC++](cpp03_syntax.md#SS_2)
-- [C++コア言語仕様](core_lang_spec.md#SS_19)
-- [標準ライブラリとプログラミングの概念](stdlib_and_concepts.md#SS_20)
-- [C++慣用語句](cpp_idioms.md#SS_21)
-- [Sample Code](sample_code.md#SS_22)
+- [C++コア言語仕様](core_lang_spec.md#SS_8)
+- [標準ライブラリとプログラミングの概念](stdlib_and_concepts.md#SS_9)
+- [C++慣用語句](cpp_idioms.md#SS_10)
+- [Sample Code](sample_code.md#SS_11)
 
 
 

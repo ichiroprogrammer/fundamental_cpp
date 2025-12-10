@@ -3,8 +3,8 @@
 このドキュメントでのレガシーC++とはC++03までのC++を指す。
 従って、C++から導入された以下のシンタックスや標準ライブラリは本章の対象外となる。
 
-- [スマートポインタ](stdlib_and_concepts.md#SS_20_6)(ダイナミックメモリアロケーションで生成されたオブジェクトの自動開放)
-- [rvalueリファレンス](core_lang_spec.md#SS_19_8_2)(右辺値参照)/ [moveセマンティクス](cpp_idioms.md#SS_21_5_3)
+- [スマートポインタ](stdlib_and_concepts.md#SS_9_6)(ダイナミックメモリアロケーションで生成されたオブジェクトの自動開放)
+- [rvalueリファレンス](core_lang_spec.md#SS_8_8_2)(右辺値参照)/ [moveセマンティクス](cpp_idioms.md#SS_10_5_3)
 - 範囲forループ
 - ラムダ式
 - auto/decltypeによる型推論
@@ -48,29 +48,36 @@ __インデックス__
 &emsp;&emsp;&emsp; [フレンド宣言](cpp03_syntax.md#SS_2_1_12)  
 &emsp;&emsp;&emsp; [等値比較演算子](cpp03_syntax.md#SS_2_1_13)  
 &emsp;&emsp;&emsp; [Personのリファクタリング](cpp03_syntax.md#SS_2_1_14)  
+&emsp;&emsp;&emsp; [演算子オーバーロード](cpp03_syntax.md#SS_2_1_15)  
 
 &emsp;&emsp; [オーバーロード](cpp03_syntax.md#SS_2_2)  
-&emsp;&emsp; [テンプレート](cpp03_syntax.md#SS_2_3)  
-&emsp;&emsp;&emsp; [クラステンプレート](cpp03_syntax.md#SS_2_3_1)  
-&emsp;&emsp;&emsp; [関数テンプレート](cpp03_syntax.md#SS_2_3_2)  
+&emsp;&emsp;&emsp; [オーバーロードの使用例](cpp03_syntax.md#SS_2_2_1)  
+&emsp;&emsp;&emsp; [オーバーロード解決の規則](cpp03_syntax.md#SS_2_2_2)  
+&emsp;&emsp;&emsp; [オーバーロードと型変換/曖昧性](cpp03_syntax.md#SS_2_2_3)  
 
-&emsp;&emsp; [標準ライブラリ](cpp03_syntax.md#SS_2_4)  
-&emsp;&emsp;&emsp; [std::stringの使用例 ](cpp03_syntax.md#SS_2_4_1)  
-&emsp;&emsp;&emsp; [入出力(stream)](cpp03_syntax.md#SS_2_4_2)  
-&emsp;&emsp;&emsp; [コンテナ](cpp03_syntax.md#SS_2_4_3)  
+&emsp;&emsp; [デフォルト引数](cpp03_syntax.md#SS_2_3)  
+&emsp;&emsp; [テンプレート](cpp03_syntax.md#SS_2_4)  
+&emsp;&emsp;&emsp; [クラステンプレート](cpp03_syntax.md#SS_2_4_1)  
+&emsp;&emsp;&emsp; [関数テンプレート](cpp03_syntax.md#SS_2_4_2)  
 
-&emsp;&emsp; [継承](cpp03_syntax.md#SS_2_5)  
-&emsp;&emsp;&emsp; [public継承](cpp03_syntax.md#SS_2_5_1)  
-&emsp;&emsp;&emsp; [protectd継承](cpp03_syntax.md#SS_2_5_2)  
-&emsp;&emsp;&emsp; [private継承](cpp03_syntax.md#SS_2_5_3)  
-&emsp;&emsp;&emsp; [派生](cpp03_syntax.md#SS_2_5_4)  
-&emsp;&emsp;&emsp; [オーバライド](cpp03_syntax.md#SS_2_5_5)  
+&emsp;&emsp; [名前空間](cpp03_syntax.md#SS_2_5)  
+&emsp;&emsp; [標準ライブラリ](cpp03_syntax.md#SS_2_6)  
+&emsp;&emsp;&emsp; [std::stringの使用例 ](cpp03_syntax.md#SS_2_6_1)  
+&emsp;&emsp;&emsp; [入出力(stream)](cpp03_syntax.md#SS_2_6_2)  
+&emsp;&emsp;&emsp; [コンテナ](cpp03_syntax.md#SS_2_6_3)  
 
-&emsp;&emsp; [new/delete](cpp03_syntax.md#SS_2_6)  
-&emsp;&emsp;&emsp; [new演算子](cpp03_syntax.md#SS_2_6_1)  
-&emsp;&emsp;&emsp; [delete演算子](cpp03_syntax.md#SS_2_6_2)  
-&emsp;&emsp;&emsp; [new[]演算子](cpp03_syntax.md#SS_2_6_3)  
-&emsp;&emsp;&emsp; [delete[]演算子](cpp03_syntax.md#SS_2_6_4)  
+&emsp;&emsp; [継承](cpp03_syntax.md#SS_2_7)  
+&emsp;&emsp;&emsp; [public継承](cpp03_syntax.md#SS_2_7_1)  
+&emsp;&emsp;&emsp; [protectd継承](cpp03_syntax.md#SS_2_7_2)  
+&emsp;&emsp;&emsp; [private継承](cpp03_syntax.md#SS_2_7_3)  
+&emsp;&emsp;&emsp; [派生](cpp03_syntax.md#SS_2_7_4)  
+&emsp;&emsp;&emsp; [オーバーライド](cpp03_syntax.md#SS_2_7_5)  
+
+&emsp;&emsp; [new/delete](cpp03_syntax.md#SS_2_8)  
+&emsp;&emsp;&emsp; [new演算子](cpp03_syntax.md#SS_2_8_1)  
+&emsp;&emsp;&emsp; [delete演算子](cpp03_syntax.md#SS_2_8_2)  
+&emsp;&emsp;&emsp; [new[]演算子](cpp03_syntax.md#SS_2_8_3)  
+&emsp;&emsp;&emsp; [delete[]演算子](cpp03_syntax.md#SS_2_8_4)  
   
   
 
@@ -103,7 +110,7 @@ Cでの`struct`は以下の点において、C++での`struct`と異なる。
 * [メンバ関数](cpp03_syntax.md#SS_2_1_1)の定義
 * デフォルトのメンバ変数の初期化(そのメンバ変数がデフォルトコンストラクタを持っている場合)
 * [アクセス指定子](cpp03_syntax.md#SS_2_1_5)
-* [継承](cpp03_syntax.md#SS_2_5)
+* [継承](cpp03_syntax.md#SS_2_7)
 
 ### メンバ関数 <a id="SS_2_1_1"></a>
 メンバ関数とは、クラスに属し、そのインスタンスを通じて呼び出される関数である。
@@ -321,7 +328,7 @@ Person::calc_bmi()のような一般のメンバ関数以外に用途が限定�
 
 コンストラクタは戻り値を持つことはできないため、引数がクラスの制限に収まらない場合、
 エラーを返すことができない。そのような場合、
-すでに示したコード例のように、[エクセプションのthrow](core_lang_spec.md#SS_19_13_3)によって呼び出し元にエラーを通知することができる。
+すでに示したコード例のように、[エクセプションのthrow](core_lang_spec.md#SS_8_13_3)によって呼び出し元にエラーを通知することができる。
 
 ### デストラクタ <a id="SS_2_1_4"></a>
 
@@ -767,8 +774,8 @@ staticメンバ変数を使用し、さらにPersonに以下のような変更�
 
 コピー代入演算子とは、
 
-* 型Tに対して、`operator =(T const&)`のようなシグネチャの[特殊メンバ関数](core_lang_spec.md#SS_19_6_1)である。
-* Tオブジェクトに別のTオブジェクトを代入するための[特殊メンバ関数](core_lang_spec.md#SS_19_6_1)である。
+* 型Tに対して、`operator =(T const&)`のようなシグネチャの[特殊メンバ関数](core_lang_spec.md#SS_8_6_1)である。
+* Tオブジェクトに別のTオブジェクトを代入するための[特殊メンバ関数](core_lang_spec.md#SS_8_6_1)である。
 * コピー代入演算子をユーザが定義しない場合、自動的に暗黙定義される。
 
 ```cpp
@@ -883,7 +890,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 ```
 
 三の原則(Rule of Three)に従うことで上記の問題を避けることができる
-(C++11ではこの原則は[五の原則(Rule of Five)](cpp_idioms.md#SS_21_7_2)に拡張された)。
+(C++11ではこの原則は[五の原則(Rule of Five)](cpp_idioms.md#SS_10_7_2)に拡張された)。
 
 * オブジェクト生成時にリソースを確保するようなクラスは、ユーザが定義したデストラクタを持つ必要がある。
 * ユーザが定義したデストラクタを持つクラスはコピーコンストラクタを持つ必要がある。
@@ -1010,14 +1017,14 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
     p2.operator=(p1.operator=(p0));
 ```
 
-なお、コピーコンストラクタ/コピー代入演算子を追加する前のコードが持っていた単純なコピーを[シャローコピー](cpp_idioms.md#SS_21_10_1)と呼び、
-このコード例のようなコピーを[ディープコピー](cpp_idioms.md#SS_21_10_2)と呼ぶ。
+なお、コピーコンストラクタ/コピー代入演算子を追加する前のコードが持っていた単純なコピーを[シャローコピー](cpp_idioms.md#SS_10_10_1)と呼び、
+このコード例のようなコピーを[ディープコピー](cpp_idioms.md#SS_10_10_2)と呼ぶ。
 
 上記コードには、C99には存在しない以下のようなシンタックスやキーワードを含む。
 
-* [リファレンス](core_lang_spec.md#SS_19_8)(型Tに対して、`T&`という形式)
+* [リファレンス](core_lang_spec.md#SS_8_8)(型Tに対して、`T&`という形式)
 * [this](cpp03_syntax.md#SS_2_1_9)
-* [new/delete](cpp03_syntax.md#SS_2_6)
+* [new/delete](cpp03_syntax.md#SS_2_8)
 * [constメンバ関数](cpp03_syntax.md#SS_2_1_10)(宣言の末尾にconstがついているメンバ関数)
 
 
@@ -1231,7 +1238,7 @@ C++では、クラスに対してこの演算子をオーバーロードする�
 C++20以降では、operator==のみを実装すればoperator!=は自動的に導出されるが、
 それ以前のC++では両方を明示的に実装する必要がある。
 また、等値比較演算子はや[コピーコンストラクタ/コピー代入演算子](cpp03_syntax.md#SS_2_1_8)は、
-[等価性のセマンティクス](cpp_idioms.md#SS_21_5_1)を満たす必要がある。
+[等価性のセマンティクス](cpp_idioms.md#SS_10_5_1)を満たす必要がある。
 
 コード例は、次節で示す。
 
@@ -1239,7 +1246,7 @@ C++20以降では、operator==のみを実装すればoperator!=は自動的に�
 ### Personのリファクタリング <a id="SS_2_1_14"></a>
 これまで例示してきたPersonを以下の方針でリファクタリングを行う。
 
-* 可読性向上のために、[Trailing Underscore(末尾アンダースコア)](cpp_idioms.md#SS_21_9_4)に従う。
+* 可読性向上のために、[Trailing Underscore(末尾アンダースコア)](cpp_idioms.md#SS_10_9_4)に従う。
 * メンバを適切にconst修飾することで、[constメンバ関数](cpp03_syntax.md#SS_2_1_10)/[constメンバ変数](cpp03_syntax.md#SS_2_1_11)へ変更する。
 * Cでは、引数を持たない関数funcは`func(void)`のように宣言するが、C++では通常、単に`func()`と書く。
 * 単体テストの利便性のためにPersonに[フレンド宣言](cpp03_syntax.md#SS_2_1_12)した[等値比較演算子](cpp03_syntax.md#SS_2_1_13)を追加する
@@ -1309,6 +1316,10 @@ C++20以降では、operator==のみを実装すればoperator!=は自動的に�
 * メンバが適切にconst修飾されたことで可読性が向上した。
 * malloc/freeからnew/deleteへ統一され、C++らしいメモリ管理となった。
 
+### 演算子オーバーロード <a id="SS_2_1_15"></a>
+工事中
+
+
 ## オーバーロード <a id="SS_2_2"></a>
 オーバーロードとは、同じ名前の関数を引数の型や個数を変えて複数定義できる機能である。
 C言語では関数名の重複は許されず、異なる型を扱う類似の関数には異なる名前を付ける必要がある。  
@@ -1318,6 +1329,7 @@ C言語では関数名の重複は許されず、異なる型を扱う類似の�
 
 C++では同じ操作に対して同じ関数名を使用でき、コンパイラが引数の型から適切な関数を選択する。
 
+### オーバーロードの使用例 <a id="SS_2_2_1"></a>
 オーバーロードの使用例を以下に示す。
 
 ```cpp
@@ -1335,13 +1347,68 @@ C++では同じ操作に対して同じ関数名を使用でき、コンパイ�
     ASSERT_EQ(200, max(100L, 200L));   // max #3が呼ばれる
 ```
 
+### オーバーロード解決の規則 <a id="SS_2_2_2"></a>
+コンパイラは関数のシグネチャ(関数名、引数の型、引数の個数)に基づいて、どの関数を呼び出すかを決定する。
+重要な点として、戻り値の型はオーバーロード解決に使用されない。
 
-## テンプレート <a id="SS_2_3"></a>
-### クラステンプレート <a id="SS_2_3_1"></a>
+```cpp
+    // これはエラー：戻り値の型だけが異なる
+    int getValue();
+    double getValue();  // コンパイルエラー
+```
 
-### 関数テンプレート <a id="SS_2_3_2"></a>
+引数の個数が異なる場合もオーバーロード可能である。
 
-## 標準ライブラリ <a id="SS_2_4"></a>
+```cpp
+    //  example/cpp03_syntax/overload_ut.cpp 23
+
+    int add(int a, int b) { return a + b; }                        // add #1
+    int add(int a, int b, int c) { return a + b + c; }             // add #1
+    int add(int a, int b, int c, int d) { return a + b + c + d; }  // add #1
+```
+```cpp
+    //  example/cpp03_syntax/overload_ut.cpp 32
+
+    ASSERT_EQ(2, add(1, 1));        // add #1が呼ばれる
+    ASSERT_EQ(3, add(1, 1, 1));     // add #2が呼ばれる
+    ASSERT_EQ(4, add(1, 1, 1, 1));  // add #2が呼ばれる
+```
+
+### オーバーロードと型変換/曖昧性 <a id="SS_2_2_3"></a>
+関数呼び出し時、完全に一致する関数が存在しない場合、コンパイラは型変換を考慮する。
+ただし、複数の候補が同等に適合する場合、曖昧性エラーとなる。
+
+```cpp
+    //  example/cpp03_syntax/overload_ut.cpp 40
+
+    int abs(int a) { return (a < 0) ? -a : a; }    // abs #1
+    int abs(float a) { return (a < 0) ? -a : a; }  // abs #2
+```
+```cpp
+    //  example/cpp03_syntax/overload_ut.cpp 48
+
+    abs(-1);     // abs #1が呼ばれる
+    abs(-3.0f);  // abs #2が呼ばれる
+
+    /* 3.0はdoubleであるため、
+    abs(-3.0);   //abs #1を呼ぶべきか、abs #2を呼ぶべきかは曖昧である
+    */
+```
+
+## デフォルト引数 <a id="SS_2_3"></a>
+工事中
+
+## テンプレート <a id="SS_2_4"></a>
+### クラステンプレート <a id="SS_2_4_1"></a>
+工事中
+
+### 関数テンプレート <a id="SS_2_4_2"></a>
+工事中
+
+## 名前空間 <a id="SS_2_5"></a>
+工事中
+
+## 標準ライブラリ <a id="SS_2_6"></a>
 標準ライブラリとは、C++言語仕様の一部として規定されている、再利用可能なクラスや関数の集合である。
 文字列処理、コンテナ、アルゴリズム、入出力、数値演算など、プログラム開発に必要な基本的な機能を提供する。
 標準ライブラリを使用することで、車輪の再発明を避け、移植性の高いコードを記述できる。
@@ -1357,7 +1424,7 @@ C++では同じ操作に対して同じ関数名を使用でき、コンパイ�
 | 入出力        | std::cout、std::cin、ファイル入出力など                |
 | 反復子        | コンテナの要素にアクセスするための統一インターフェース |
 
-### std::stringの使用例  <a id="SS_2_4_1"></a>
+### std::stringの使用例  <a id="SS_2_6_1"></a>
 std::stringはC++標準ライブラリが提供する文字列クラスである。C言語の文字配列(char[])と比較して、
 メモリ管理が自動化されており、文字列操作が安全かつ容易になる。
 
@@ -1402,7 +1469,7 @@ C++では複雑な処理が、std::stringに押し込まれているため文字
     ASSERT_EQ(exp, str3);  // googletestでは上記はこの行と等価
 ```
 
-### 入出力(stream) <a id="SS_2_4_2"></a>
+### 入出力(stream) <a id="SS_2_6_2"></a>
 入出力(stream)とは、データの読み書きを抽象化した機能であり、C++標準ライブラリではiostreamライブラリとして提供される。
 ストリームは、キーボード入力、画面出力、ファイル入出力など、
 異なる入出力先を統一的なインターフェースで扱うことを可能にする。
@@ -1475,24 +1542,24 @@ C言語のprintf/scanfと比較して、型安全性が高く、ユーザー定�
     ASSERT_EQ(exp, oss.str());  // oss.str()はossが出力された文字列を返す
 ```
 
-### コンテナ <a id="SS_2_4_3"></a>
+### コンテナ <a id="SS_2_6_3"></a>
+工事中
 標準ライブラリのコンテナとは...
 
 
-
-## 継承 <a id="SS_2_5"></a>
+## 継承 <a id="SS_2_7"></a>
 継承は既存のクラスを拡張して新しいクラスを定義する機構である。既存のクラスを基底クラス(base class)、
 新しく定義するクラスを派生クラス(derived class)と呼ぶ。
 派生クラスは基底クラスのメンバ変数とメンバ関数を引き継ぐため、コードの再利用性が高まる。
 
 以下の3種類の継承が規定されている。
 
-- [public継承](cpp03_syntax.md#SS_2_5_1)
-- [protectd継承](cpp03_syntax.md#SS_2_5_2)
-- [private継承](cpp03_syntax.md#SS_2_5_3)
+- [public継承](cpp03_syntax.md#SS_2_7_1)
+- [protectd継承](cpp03_syntax.md#SS_2_7_2)
+- [private継承](cpp03_syntax.md#SS_2_7_3)
 
-### public継承 <a id="SS_2_5_1"></a>
-public継承は最も一般的な継承方法であり、主に「[is-a](cpp_idioms.md#SS_21_3_1)」関係を表現する際に使用される。
+### public継承 <a id="SS_2_7_1"></a>
+public継承は最も一般的な継承方法であり、主に「[is-a](cpp_idioms.md#SS_10_3_1)」関係を表現する際に使用される。
 基底クラスのpublicメンバは派生クラスでもpublic、protectedメンバはprotectedのまま継承される。
 
 ```cpp
@@ -1530,7 +1597,7 @@ public継承は最も一般的な継承方法であり、主に「[is-a](cpp_idi
 ```
 
 public継承では、
-以下のコードのように派生クラスのオブジェクトを基底クラスのポインタや[リファレンス](core_lang_spec.md#SS_19_8)として扱うことができる。
+以下のコードのように派生クラスのオブジェクトを基底クラスのポインタや[リファレンス](core_lang_spec.md#SS_8_8)として扱うことができる。
 これによりポリモーフィズムが実現される。
 
 ```cpp
@@ -1540,7 +1607,7 @@ public継承では、
     Base& b_ref = d;   // DerivedはBaseの一種であるめ、これも認められる
 ```
 
-### protectd継承 <a id="SS_2_5_2"></a>
+### protectd継承 <a id="SS_2_7_2"></a>
 protected継承は、基底クラスのpublicメンバとprotectedメンバがすべて派生クラスでprotectedになる。
 外部からは基底クラスのメンバにアクセスできなくなる。
 
@@ -1578,7 +1645,7 @@ protected継承は、基底クラスのpublicメンバとprotectedメンバが�
 protected継承は実装の詳細を隠蔽しつつ、
 さらに派生したクラスには基底クラスのインターフェースを公開したい場合に使用される。使用頻度は低い。
 
-### private継承 <a id="SS_2_5_3"></a>
+### private継承 <a id="SS_2_7_3"></a>
 private継承は、基底クラスのpublicメンバとprotectedメンバがすべて派生クラスでprivateになる。
 派生クラス内部でのみ基底クラスのメンバにアクセスでき、外部からも、さらに派生したクラスからもアクセスできない。
 
@@ -1626,10 +1693,10 @@ private継承は、基底クラスのpublicメンバとprotectedメンバがす�
     Base& b_ref = d;   public継承とは異なり、これも認められない */
 ```
 
-private継承は「[has-a](cpp_idioms.md#SS_21_3_2)関係」や「[is-implemented-in-terms-of](cpp_idioms.md#SS_21_3_3)関係」を表現する際に使用されることがある。
+private継承は「[has-a](cpp_idioms.md#SS_10_3_2)関係」や「[is-implemented-in-terms-of](cpp_idioms.md#SS_10_3_3)関係」を表現する際に使用されることがある。
 ただし、一般的にはメンバ変数として保持する方が意図が明確になるため、private継承の使用頻度は非常に低い。
 
-### 派生 <a id="SS_2_5_4"></a>
+### 派生 <a id="SS_2_7_4"></a>
 派生とは、継承を使って既存のクラスから新しいクラスを作り出すことである。この過程で、基底クラスの機能を受け継ぎつつ、
 派生クラス独自の機能を追加したり、既存の機能を変更したりできる。
 
@@ -1650,30 +1717,30 @@ private継承は「[has-a](cpp_idioms.md#SS_21_3_2)関係」や「[is-implemente
 下位の派生クラスは上位のすべての基底クラスのメンバを継承する。ただし、階層を深くしすぎると設計が複雑になり、
 保守性が低下する可能性があるため、適切な深さに抑えることが重要である。
 
-派生クラスを設計する際は、「[is-a](cpp_idioms.md#SS_21_3_1)」関係が成立するかを確認する必要がある。
+派生クラスを設計する際は、「[is-a](cpp_idioms.md#SS_10_3_1)」関係が成立するかを確認する必要がある。
 派生クラスは基底クラスの一種であるという関係が自然に成り立つ場合に、public継承を使用するべきである。
 また、派生クラスは基底クラスのインターフェースを尊重し、[リスコフの置換原則(LSP)](temp.md#SS_4_4)に従うことが望ましい。
 これは、基底クラスのポインタや参照を通じて派生クラスのオブジェクトを操作しても、
 プログラムの正しさが保たれるという原則である。
 
-### オーバライド <a id="SS_2_5_5"></a>
-
+### オーバーライド <a id="SS_2_7_5"></a>
+工事中
 
 --- 
 
-## new/delete <a id="SS_2_6"></a>
+## new/delete <a id="SS_2_8"></a>
 Cの`malloc`/`free`と異なり、
 C++ではメモリアロケーションとオブジェクトの生成と破棄を適切に行うために、以下の演算子が定義されている。
 
-* [new演算子](cpp03_syntax.md#SS_2_6_1)/[delete演算子](cpp03_syntax.md#SS_2_6_2)
-* [new[]演算子](cpp03_syntax.md#SS_2_6_3)/[delete[]演算子](cpp03_syntax.md#SS_2_6_4)
+* [new演算子](cpp03_syntax.md#SS_2_8_1)/[delete演算子](cpp03_syntax.md#SS_2_8_2)
+* [new[]演算子](cpp03_syntax.md#SS_2_8_3)/[delete[]演算子](cpp03_syntax.md#SS_2_8_4)
 
-上記のnew演算子以外に[プレースメントnew](core_lang_spec.md#SS_19_6_9)と[new (std::nothrow)](core_lang_spec.md#SS_19_6_10)が定義されているが、
+上記のnew演算子以外に[プレースメントnew](core_lang_spec.md#SS_8_6_9)と[new (std::nothrow)](core_lang_spec.md#SS_8_6_10)が定義されているが、
 これらの対となるdeleteは存在しない。
 
 
-### new演算子 <a id="SS_2_6_1"></a>
-### delete演算子 <a id="SS_2_6_2"></a>
+### new演算子 <a id="SS_2_8_1"></a>
+### delete演算子 <a id="SS_2_8_2"></a>
 `new`演算子は、ヒープ上にメモリを確保し、オブジェクトを構築する。  
 `delete`演算子は、`new`で確保したメモリを解放する前に、デストラクタを呼び出す。
 
@@ -1692,8 +1759,8 @@ C++ではメモリアロケーションとオブジェクトの生成と破棄�
     delete person;  // personのデストラクタを呼び出してからメモリを解放
 ```
 
-### new[]演算子 <a id="SS_2_6_3"></a>
-### delete[]演算子 <a id="SS_2_6_4"></a>
+### new[]演算子 <a id="SS_2_8_3"></a>
+### delete[]演算子 <a id="SS_2_8_4"></a>
 配列を動的に確保する場合は、new[]とdelete[]を使用する。
 
 
@@ -1713,6 +1780,7 @@ C++ではメモリアロケーションとオブジェクトの生成と破棄�
 
 * クラスTに対し`new T[N]`を実行するためにはTがデフォルトコンストラクタを持つ必要がある。
 * new[]でアロケートしたメモリはdelete[]で解放しなければならない。
+
 
 
 
