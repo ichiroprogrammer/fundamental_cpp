@@ -113,36 +113,39 @@ __インデックス__
 &emsp;&emsp;&emsp; [フレンド宣言](#SS_2_1_12)  
 &emsp;&emsp;&emsp; [等値比較演算子](#SS_2_1_13)  
 &emsp;&emsp;&emsp; [Personのリファクタリング](#SS_2_1_14)  
-&emsp;&emsp;&emsp; [演算子オーバーロード](#SS_2_1_15)  
 
 &emsp;&emsp; [オーバーロード](#SS_2_2)  
 &emsp;&emsp;&emsp; [オーバーロードの使用例](#SS_2_2_1)  
 &emsp;&emsp;&emsp; [オーバーロード解決の規則](#SS_2_2_2)  
 &emsp;&emsp;&emsp; [オーバーロードと型変換/曖昧性](#SS_2_2_3)  
 
-&emsp;&emsp; [デフォルト引数](#SS_2_3)  
-&emsp;&emsp; [テンプレート](#SS_2_4)  
-&emsp;&emsp;&emsp; [クラステンプレート](#SS_2_4_1)  
-&emsp;&emsp;&emsp; [関数テンプレート](#SS_2_4_2)  
+&emsp;&emsp; [演算子オーバーロード](#SS_2_3)  
+&emsp;&emsp;&emsp; [演算子オーバーロードの構文](#SS_2_3_1)  
+&emsp;&emsp;&emsp; [演算子オーバーロードの指針](#SS_2_3_2)  
 
-&emsp;&emsp; [名前空間](#SS_2_5)  
-&emsp;&emsp; [標準ライブラリ](#SS_2_6)  
-&emsp;&emsp;&emsp; [std::stringの使用例 ](#SS_2_6_1)  
-&emsp;&emsp;&emsp; [入出力(stream)](#SS_2_6_2)  
-&emsp;&emsp;&emsp; [コンテナ](#SS_2_6_3)  
+&emsp;&emsp; [デフォルト引数](#SS_2_4)  
+&emsp;&emsp; [テンプレート](#SS_2_5)  
+&emsp;&emsp;&emsp; [クラステンプレート](#SS_2_5_1)  
+&emsp;&emsp;&emsp; [関数テンプレート](#SS_2_5_2)  
 
-&emsp;&emsp; [継承](#SS_2_7)  
-&emsp;&emsp;&emsp; [public継承](#SS_2_7_1)  
-&emsp;&emsp;&emsp; [protectd継承](#SS_2_7_2)  
-&emsp;&emsp;&emsp; [private継承](#SS_2_7_3)  
-&emsp;&emsp;&emsp; [派生](#SS_2_7_4)  
-&emsp;&emsp;&emsp; [オーバーライド](#SS_2_7_5)  
+&emsp;&emsp; [名前空間](#SS_2_6)  
+&emsp;&emsp; [標準ライブラリ](#SS_2_7)  
+&emsp;&emsp;&emsp; [std::stringの使用例 ](#SS_2_7_1)  
+&emsp;&emsp;&emsp; [入出力(stream)](#SS_2_7_2)  
+&emsp;&emsp;&emsp; [コンテナ](#SS_2_7_3)  
 
-&emsp;&emsp; [new/delete](#SS_2_8)  
-&emsp;&emsp;&emsp; [new演算子](#SS_2_8_1)  
-&emsp;&emsp;&emsp; [delete演算子](#SS_2_8_2)  
-&emsp;&emsp;&emsp; [new[]演算子](cpp03_syntax.md#SS_2_8_3)  
-&emsp;&emsp;&emsp; [delete[]演算子](cpp03_syntax.md#SS_2_8_4)  
+&emsp;&emsp; [継承](#SS_2_8)  
+&emsp;&emsp;&emsp; [public継承](#SS_2_8_1)  
+&emsp;&emsp;&emsp; [protectd継承](#SS_2_8_2)  
+&emsp;&emsp;&emsp; [private継承](#SS_2_8_3)  
+&emsp;&emsp;&emsp; [派生](#SS_2_8_4)  
+&emsp;&emsp;&emsp; [オーバーライド](#SS_2_8_5)  
+
+&emsp;&emsp; [new/delete](#SS_2_9)  
+&emsp;&emsp;&emsp; [new演算子](#SS_2_9_1)  
+&emsp;&emsp;&emsp; [delete演算子](#SS_2_9_2)  
+&emsp;&emsp;&emsp; [new[]演算子](cpp03_syntax.md#SS_2_9_3)  
+&emsp;&emsp;&emsp; [delete[]演算子](cpp03_syntax.md#SS_2_9_4)  
   
   
 
@@ -175,7 +178,7 @@ Cでの`struct`は以下の点において、C++での`struct`と異なる。
 * [メンバ関数](#SS_2_1_1)の定義
 * デフォルトのメンバ変数の初期化(そのメンバ変数がデフォルトコンストラクタを持っている場合)
 * [アクセス指定子](#SS_2_1_5)
-* [継承](#SS_2_7)
+* [継承](#SS_2_8)
 
 ### メンバ関数 <a id="SS_2_1_1"></a>
 メンバ関数とは、クラスに属し、そのインスタンスを通じて呼び出される関数である。
@@ -1089,7 +1092,7 @@ C++では、この挙動がそのまま「暗黙定義されたコピーコン�
 
 * [リファレンス](#SS_8_8)(型Tに対して、`T&`という形式)
 * [this](#SS_2_1_9)
-* [new/delete](#SS_2_8)
+* [new/delete](#SS_2_9)
 * [constメンバ関数](#SS_2_1_10)(宣言の末尾にconstがついているメンバ関数)
 
 
@@ -1291,12 +1294,14 @@ __[特徴と注意点]__
 
 ### 等値比較演算子 <a id="SS_2_1_13"></a>
 等値比較演算子(operator==)とは、2つのオブジェクトが等しいかどうかを判定するための演算子である。
-C++では、クラスに対してこの演算子をオーバーロードすることで、そのクラス特有の等値性の定義を実装できる。
+C++では、クラスに対して==に対する[演算子オーバーロード](#SS_2_3)を定義することで、そのクラス特有の等値性の定義を実装できる。
+
 等値比較演算子は通常、メンバ関数ではなくフレンド関数または非メンバ関数として実装することが推奨される。
 これは、左辺と右辺のオペランドを対称的に扱えるようにするためである。
 メンバ関数として実装した場合、左辺が必ずそのクラスのオブジェクトでなければならないという制約が生じる。
 演算子の戻り値はbool型であり、2つのオブジェクトが等しい場合にtrueを、そうでない場合にfalseを返す。
 等値比較の実装においては、すべての意味のあるメンバ変数を比較対象に含める必要がある。
+
 ただし、キャッシュやミュータブルな一時データなど、
 オブジェクトの論理的な等価性に影響しないメンバは、通常、比較対象から除外する。
 等値比較演算子を実装する際には、不等比較演算子(operator!=)も合わせて実装するのが一般的である。
@@ -1381,10 +1386,6 @@ C++20以降では、operator==のみを実装すればoperator!=は自動的に�
 * メンバが適切にconst修飾されたことで可読性が向上した。
 * malloc/freeからnew/deleteへ統一され、C++らしいメモリ管理となった。
 
-### 演算子オーバーロード <a id="SS_2_1_15"></a>
-工事中
-
-
 ## オーバーロード <a id="SS_2_2"></a>
 オーバーロードとは、同じ名前の関数を引数の型や個数を変えて複数定義できる機能である。
 C言語では関数名の重複は許されず、異なる型を扱う類似の関数には異なる名前を付ける必要がある。  
@@ -1460,20 +1461,305 @@ C++では同じ操作に対して同じ関数名を使用でき、コンパイ�
     */
 ```
 
-## デフォルト引数 <a id="SS_2_3"></a>
+## 演算子オーバーロード <a id="SS_2_3"></a>
+演算子オーバーロードとは、クラスに対して+や-などの演算子の動作を定義する機能である。
+C言語では構造体に対して演算子を使用することはできず、すべての操作は関数呼び出しで行う必要があった。
+
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 7
+
+    // C言語的なアプローチ
+    typedef struct Rational {
+        int num; /* 分子 */
+        int den; /* 分母 */
+    } Rational;
+
+    Rational rational_add(struct Rational a, struct Rational b)
+    {
+        Rational result;
+        result.num = a.num * b.den + b.num * a.den;
+        result.den = a.den * b.den;
+        return result;
+    }
+```
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 26
+
+    Rational r0 = {2, 3};
+    Rational r1 = {2, 4};
+
+    Rational r2 = rational_add(r0, r1);
+```
+
+C++では演算子オーバーロードにより、ユーザー定義型を[組み込み型](#SS_8_1_2)と同様の記法で扱えるようになる。
+
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 39
+
+    // C++での演算子オーバーロード
+    class Rational {
+    public:
+        int num;  // 分子
+        int den;  // 分母
+
+        Rational operator+(Rational const& other) const
+        {
+            Rational result;
+            result.num = num * other.den + other.num * den;
+            result.den = den * other.den;
+            return result;
+        }
+    };
+
+```
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 60
+
+    Rational r0(2, 3);
+    Rational r1(2, 4);
+
+    // 使用例
+    Rational r2 = r0 + r1;
+```
+
+
+### 演算子オーバーロードの構文 <a id="SS_2_3_1"></a>
+演算子オーバーロードはoperatorキーワードに続けて演算子記号を記述する。
+メンバ関数として定義する場合(非メンバ関数として定義する場合もある)、
+左辺のオペランドはthisポインタが指すオブジェクト自身となる。
+
+なお、例示したRationalのコンストラクタには[デフォルト引数](#SS_2_4)を用いて、利便性を向上させている。
+
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 74
+
+    class Rational {
+    public:
+        Rational(int n = 0, int d = 1) : num_(n), den_(d) { reduce(); /* reduce()は約分を行う*/ }
+        //                     ^^^^ デフォルト引数
+
+        int getNum() const { return num_; }
+        int getDen() const { return den_; }
+
+        // 単項マイナス演算子
+        Rational operator-() const { return Rational(-num_, den_); }
+
+        // 加算演算子
+        Rational operator+(Rational const& other) const { return Rational(num_ * other.den_ + other.num_ * den_, den_ * other.den_); }
+
+        // 減算演算子
+        Rational operator-(Rational const& other) const { return Rational(num_ * other.den_ - other.num_ * den_, den_ * other.den_); }
+
+        // 乗算演算子
+        Rational operator*(Rational const& other) const { return Rational(num_ * other.num_, den_ * other.den_); }
+
+        // 除算演算子
+        Rational operator/(Rational const& other) const { return Rational(num_ * other.den_, den_ * other.num_); }
+
+        // 複合代入演算子
+        Rational& operator+=(Rational const& other)
+        {
+            num_ = num_ * other.den_ + other.num_ * den_;
+            den_ = den_ * other.den_;
+            reduce();  // reduce()は約分を行う
+            return *this;
+        }
+
+        // 前置インクリメント演算子
+        Rational& operator++()
+        {
+            num_ += den_;
+            return *this;
+        }
+
+        // 後置インクリメント演算子（ダミーのint引数で区別）
+        Rational operator++(int)
+        {
+            Rational temp = *this;
+            num_ += den_;
+            return temp;
+        }
+
+    private:
+        int num_;  // 分子
+        int den_;  // 分母
+
+        void reduce()  // 約分
+        {
+            // ...
+        }
+
+        // ...
+
+        friend bool operator==(Rational const& lhs, Rational const& rhs);
+    };
+
+    bool operator==(Rational const& lhs, Rational const& rhs)  // 通常、等値比較演算子は非メンバ関数として定義する
+    {
+        return (lhs.num_ == rhs.num_) && (lhs.den_ == rhs.den_);
+    }
+```
+
+Rationalには
+
+|種類          |演算子  |実装方法                |
+|--------------|--------|------------------------|
+|二項演算子    |`+ - * `|メンバ関数              |
+|単項演算子    |`++ -`  |メンバ関数              |
+|複合代入      |`+= `   |メンバ関数              |
+|等値比較演算子|`==`    |非メンバ関数(friend関数)|
+
+が定義されている。下記に示したように、Rationalは通常の[整数型](#SS_8_1_5)と同様に使用できる。
+
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 172
+
+    Rational r1(2);  // デフォルト引数によりRational(2, 1)と書かずにRational(2)と簡素に記述できる
+    Rational r2(1, 3);  // 1/3を宣言するため、デフォルト引数不使用
+
+    Rational r3 = r1 + r2;  // 2/1 + 1/3 = 7/3
+
+    Rational exp0(7, 3);
+    ASSERT_TRUE(r3 == exp0);  //                    operator==(Rational const& lhs, Rational const& rhs)の呼び出し
+
+    Rational r4 = r1 * r2;  // 2/1 * 1/3 = 2/3      operator*(Rational const& other)の呼び出し
+    ASSERT_TRUE(r4 == Rational(2, 3));
+
+    Rational r5 = -r1;                // -2/1        operator+(Rational const& other)の呼び出し
+    ASSERT_TRUE(r5 == Rational(-2));  //             デフォルト引数によりRational(-12)と簡素に記述できる
+
+    r1 += r2;  // r1 = 5/6                          operator/(Rational const& other)の呼び出し
+    ASSERT_TRUE(r1 == Rational(7, 3));
+
+    ++r1;  // r1 = 11/6                             operator++(int)の呼び出し
+    ASSERT_TRUE(r1 == Rational(10, 3));
+```
+
+オーバーロード可能な演算子を以下のリストで示す。
+
+| 分類                        | 演算子                              |
+|:---------------------------:|:-----------------------------------:|
+| 算術演算子                  | + - * / %                           |
+| 比較演算子                  | == != < > <= >=                     |
+| 論理演算子                  | ! && ||                             |
+| ビット演算子                | & | ^ ~ << >>                       |
+| 代入演算子                  | `= += -= *= /= %= &= |= ^= <<= >>=` |
+| インクリメント/デクリメント | ++ --                               |
+| その他                      | `() [] -> ->*, new delete`          |
+
+以下の演算子はオーバーロードできない。
+
+- :: （スコープ解決演算子）
+- . （メンバアクセス演算子）
+- `.*` （メンバポインタアクセス演算子）
+- `?:` （三項演算子）
+- sizeof
+
+演算子オーバーロードには以下の制限がある。
+
+- 新しい演算子は定義できない: `**`（べき乗）のような独自の演算子記号は作成できない
+- 優先順位と結合規則は変更できない: `*`は常に+より優先される
+- オペランドの数は変更できない: 二項演算子を単項演算子として定義することはできない
+- 組み込み型に対する演算子は再定義できない: int同士の+演算を変更することはできない
+
+### 演算子オーバーロードの指針 <a id="SS_2_3_2"></a>
+演算子オーバーロードは強力な機能であるが、濫用するとコードの可読性を損なう。以下の指針に従うことが推奨される。
+
+- 直感的な意味を保つ: +演算子は加算や結合など、一般的に期待される動作を実装する
+- 対称性を保つ: ==を定義したら!=も定義する。<を定義したら>、<=、>=も定義する
+- 関連する演算子の一貫性: +と+=は同じ結果をもたらすべきである
+- 戻り値の型を適切に選択する: 代入演算子や複合代入演算子は参照を返し、連鎖を可能にする
+
+## デフォルト引数 <a id="SS_2_4"></a>
+デフォルト引数とは、関数呼び出し時に引数が省略された場合に使用される既定値を指定する機能である。
+C言語ではこの機能は存在せず、異なる引数の組み合わせに対応するには複数の関数を用意するか、
+呼び出し側で常にすべての引数を指定する必要があった。
+
+以下にデフォルト引数を持つ関数の定義例と、その使用例を示す。
+
+```cpp
+    //  example/cpp03_syntax/defaut_arg_ut.cpp 7
+
+    int func(int arg = 1)  // デフォルト引数
+    {
+        return arg;
+    }
+```
+```cpp
+    //  example/cpp03_syntax/defaut_arg_ut.cpp 17
+
+    ASSERT_EQ(1, func());   // funcはデフォルト引数を持つため、引数なしで呼び出せる
+    ASSERT_EQ(2, func(2));  // 引数を指定しても良いで呼び出せる
+```
+
+デフォルト引数は以下に示す通り、[リテラル](#SS_8_2)である必要はない。
+
+```cpp
+    //  example/cpp03_syntax/defaut_arg_ut.cpp 28
+
+    static int default_arg = 1;
+
+    int func(int arg = default_arg)  // デフォルト引数はリテラルでなくても良い
+    {
+        return arg;
+    }
+```
+```cpp
+    //  example/cpp03_syntax/defaut_arg_ut.cpp 40
+
+    ASSERT_EQ(1, func());  // funcはdefault_argをデフォルト引数とするため、引数なしで呼び出せる
+
+    default_arg = 2;
+    ASSERT_EQ(2, func());  // funcはdefault_argをデフォルト引数とするため、引数なしで呼び出せるが、
+                           // default_argの変更の影響を受ける
+```
+
+
+デフォルト引数は右側の引数から順に指定する必要があり、途中の引数だけにデフォルト値を設定することはできない。
+
+```cpp
+    //  example/cpp03_syntax/defaut_arg_ut.cpp 54
+
+    // 正しい：右側から順にデフォルト値を指定
+    int func1(int a, int b, int c = 30) { return a + b + c; }
+    int func2(int a, int b = 20, int c = 30) { return a + b + c; }
+    int func3(int a = 10, int b = 20, int c = 30) { return a + b + c; }
+
+    /* エラー：途中の引数だけにデフォルト値は指定できない
+    void func(int a, int b = 20, int c);        // コンパイルエラー
+    void func(int a = 10, int b, int c = 30);   // コンパイルエラー
+    */
+```
+[演算子オーバーロードの指針](#SS_2_3_2)で使用したクラスRationalのコンストラクタは以下のようにデフォルト引数を用いることで、
+自然な記述できるようにしている。
+
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 74
+
+    class Rational {
+    public:
+        Rational(int n = 0, int d = 1) : num_(n), den_(d) { reduce(); /* reduce()は約分を行う*/ }
+        //                     ^^^^ デフォルト引数
+        // 以下省略
+```
+```cpp
+    //  example/cpp03_syntax/operator_overload_ut.cpp 172
+
+    Rational r1(2);  // デフォルト引数によりRational(2, 1)と書かずにRational(2)と簡素に記述できる
+    Rational r2(1, 3);  // 1/3を宣言するため、デフォルト引数不使用
+```
+
+## テンプレート <a id="SS_2_5"></a>
+### クラステンプレート <a id="SS_2_5_1"></a>
 工事中
 
-## テンプレート <a id="SS_2_4"></a>
-### クラステンプレート <a id="SS_2_4_1"></a>
+### 関数テンプレート <a id="SS_2_5_2"></a>
 工事中
 
-### 関数テンプレート <a id="SS_2_4_2"></a>
+## 名前空間 <a id="SS_2_6"></a>
 工事中
 
-## 名前空間 <a id="SS_2_5"></a>
-工事中
-
-## 標準ライブラリ <a id="SS_2_6"></a>
+## 標準ライブラリ <a id="SS_2_7"></a>
 標準ライブラリとは、C++言語仕様の一部として規定されている、再利用可能なクラスや関数の集合である。
 文字列処理、コンテナ、アルゴリズム、入出力、数値演算など、プログラム開発に必要な基本的な機能を提供する。
 標準ライブラリを使用することで、車輪の再発明を避け、移植性の高いコードを記述できる。
@@ -1489,7 +1775,7 @@ C++では同じ操作に対して同じ関数名を使用でき、コンパイ�
 | 入出力        | std::cout、std::cin、ファイル入出力など                |
 | 反復子        | コンテナの要素にアクセスするための統一インターフェース |
 
-### std::stringの使用例  <a id="SS_2_6_1"></a>
+### std::stringの使用例  <a id="SS_2_7_1"></a>
 std::stringはC++標準ライブラリが提供する文字列クラスである。C言語の文字配列(char[])と比較して、
 メモリ管理が自動化されており、文字列操作が安全かつ容易になる。
 
@@ -1534,7 +1820,7 @@ C++では複雑な処理が、std::stringに押し込まれているため文字
     ASSERT_EQ(exp, str3);  // googletestでは上記はこの行と等価
 ```
 
-### 入出力(stream) <a id="SS_2_6_2"></a>
+### 入出力(stream) <a id="SS_2_7_2"></a>
 入出力(stream)とは、データの読み書きを抽象化した機能であり、C++標準ライブラリではiostreamライブラリとして提供される。
 ストリームは、キーボード入力、画面出力、ファイル入出力など、
 異なる入出力先を統一的なインターフェースで扱うことを可能にする。
@@ -1607,23 +1893,23 @@ C言語のprintf/scanfと比較して、型安全性が高く、ユーザー定�
     ASSERT_EQ(exp, oss.str());  // oss.str()はossが出力された文字列を返す
 ```
 
-### コンテナ <a id="SS_2_6_3"></a>
+### コンテナ <a id="SS_2_7_3"></a>
 工事中
 標準ライブラリのコンテナとは...
 
 
-## 継承 <a id="SS_2_7"></a>
+## 継承 <a id="SS_2_8"></a>
 継承は既存のクラスを拡張して新しいクラスを定義する機構である。既存のクラスを基底クラス(base class)、
 新しく定義するクラスを派生クラス(derived class)と呼ぶ。
 派生クラスは基底クラスのメンバ変数とメンバ関数を引き継ぐため、コードの再利用性が高まる。
 
 以下の3種類の継承が規定されている。
 
-- [public継承](#SS_2_7_1)
-- [protectd継承](#SS_2_7_2)
-- [private継承](#SS_2_7_3)
+- [public継承](#SS_2_8_1)
+- [protectd継承](#SS_2_8_2)
+- [private継承](#SS_2_8_3)
 
-### public継承 <a id="SS_2_7_1"></a>
+### public継承 <a id="SS_2_8_1"></a>
 public継承は最も一般的な継承方法であり、主に「[is-a](#SS_10_3_1)」関係を表現する際に使用される。
 基底クラスのpublicメンバは派生クラスでもpublic、protectedメンバはprotectedのまま継承される。
 
@@ -1672,7 +1958,7 @@ public継承では、
     Base& b_ref = d;   // DerivedはBaseの一種であるめ、これも認められる
 ```
 
-### protectd継承 <a id="SS_2_7_2"></a>
+### protectd継承 <a id="SS_2_8_2"></a>
 protected継承は、基底クラスのpublicメンバとprotectedメンバがすべて派生クラスでprotectedになる。
 外部からは基底クラスのメンバにアクセスできなくなる。
 
@@ -1710,7 +1996,7 @@ protected継承は、基底クラスのpublicメンバとprotectedメンバが�
 protected継承は実装の詳細を隠蔽しつつ、
 さらに派生したクラスには基底クラスのインターフェースを公開したい場合に使用される。使用頻度は低い。
 
-### private継承 <a id="SS_2_7_3"></a>
+### private継承 <a id="SS_2_8_3"></a>
 private継承は、基底クラスのpublicメンバとprotectedメンバがすべて派生クラスでprivateになる。
 派生クラス内部でのみ基底クラスのメンバにアクセスでき、外部からも、さらに派生したクラスからもアクセスできない。
 
@@ -1761,7 +2047,7 @@ private継承は、基底クラスのpublicメンバとprotectedメンバがす�
 private継承は「[has-a](#SS_10_3_2)関係」や「[is-implemented-in-terms-of](#SS_10_3_3)関係」を表現する際に使用されることがある。
 ただし、一般的にはメンバ変数として保持する方が意図が明確になるため、private継承の使用頻度は非常に低い。
 
-### 派生 <a id="SS_2_7_4"></a>
+### 派生 <a id="SS_2_8_4"></a>
 派生とは、継承を使って既存のクラスから新しいクラスを作り出すことである。この過程で、基底クラスの機能を受け継ぎつつ、
 派生クラス独自の機能を追加したり、既存の機能を変更したりできる。
 
@@ -1788,24 +2074,24 @@ private継承は「[has-a](#SS_10_3_2)関係」や「[is-implemented-in-terms-of
 これは、基底クラスのポインタや参照を通じて派生クラスのオブジェクトを操作しても、
 プログラムの正しさが保たれるという原則である。
 
-### オーバーライド <a id="SS_2_7_5"></a>
+### オーバーライド <a id="SS_2_8_5"></a>
 工事中
 
 --- 
 
-## new/delete <a id="SS_2_8"></a>
+## new/delete <a id="SS_2_9"></a>
 Cの`malloc`/`free`と異なり、
 C++ではメモリアロケーションとオブジェクトの生成と破棄を適切に行うために、以下の演算子が定義されている。
 
-* [new演算子](#SS_2_8_1)/[delete演算子](#SS_2_8_2)
-* [new[]演算子](cpp03_syntax.md#SS_2_8_3)/[delete[]演算子](cpp03_syntax.md#SS_2_8_4)
+* [new演算子](#SS_2_9_1)/[delete演算子](#SS_2_9_2)
+* [new[]演算子](cpp03_syntax.md#SS_2_9_3)/[delete[]演算子](cpp03_syntax.md#SS_2_9_4)
 
 上記のnew演算子以外に[プレースメントnew](#SS_8_6_9)と[new (std::nothrow)](#SS_8_6_10)が定義されているが、
 これらの対となるdeleteは存在しない。
 
 
-### new演算子 <a id="SS_2_8_1"></a>
-### delete演算子 <a id="SS_2_8_2"></a>
+### new演算子 <a id="SS_2_9_1"></a>
+### delete演算子 <a id="SS_2_9_2"></a>
 `new`演算子は、ヒープ上にメモリを確保し、オブジェクトを構築する。  
 `delete`演算子は、`new`で確保したメモリを解放する前に、デストラクタを呼び出す。
 
@@ -1824,8 +2110,8 @@ C++ではメモリアロケーションとオブジェクトの生成と破棄�
     delete person;  // personのデストラクタを呼び出してからメモリを解放
 ```
 
-### new[]演算子 <a id="SS_2_8_3"></a>
-### delete[]演算子 <a id="SS_2_8_4"></a>
+### new[]演算子 <a id="SS_2_9_3"></a>
+### delete[]演算子 <a id="SS_2_9_4"></a>
 配列を動的に確保する場合は、new[]とdelete[]を使用する。
 
 
@@ -1917,8 +2203,8 @@ ___
 |[委譲コンストラクタ](#SS_8_6_1_3)                                          |コンストラクタから他のコンストラクタに処理を委譲する          |
 |[NSDMI](#SS_8_6_7_1)                                                       |非staticメンバ変数の宣言と同時に初期値指定する                |
 |[継承コンストラクタ](#SS_8_6_1_2)                                          |基底クラスのコンストラクタの継承                              |
-|virtual関数のoverride/final宣言                                    |「[オーバーライド](#SS_2_7_5)」参照                                 |
-|変換演算子のオーバーロードの[explicit](#SS_8_6_2_1)宣言                    |「 [演算子オーバーロード](#SS_2_1_15)」参照                          |
+|virtual関数のoverride/final宣言                                    |「[オーバーライド](#SS_2_8_5)」参照                                 |
+|変換演算子のオーバーロードの[explicit](#SS_8_6_2_1)宣言                    |「 [演算子オーバーロード](#SS_2_3)」参照                          |
 |friend 宣言の対象を拡張                                            |テンプレートパラメータ、エイリアスfriend 宣言できるように     |
 |メンバ関数の[rvalue修飾](#SS_8_8_7_1)/[lvalue修飾](#SS_8_8_7_2)                    |オブジェクトのと値カテゴリでの呼び出し可能であることの指定    |
 |[スコープドenum](#SS_8_3_3)                           |スコープを持ち、型付の強いenum                                |
